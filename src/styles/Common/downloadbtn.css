@@ -1,0 +1,33 @@
+.download-btn{
+  cursor: pointer;
+  padding: 0.3rem 1.5rem;
+  transition: 0.3s;
+  border: 2px solid var(--color-primary1) !important;
+  background-color: var(--color-primary1);
+  z-index: 1000;
+}
+
+.download-btn:hover{
+  background-color: transparent;
+}
+
+.download-btn .download-text{
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: 0.3s;
+  color: var(--color-white);
+}
+
+.download-btn:hover .download-text{
+  color: var(--color-primary1);
+}
+
+@media (max-width:780px) {
+  .download-btn{
+    padding: 0.2rem 1.2rem;
+  }
+  .download-btn .download-text{
+    font-size: 0.7rem;
+  }
+}

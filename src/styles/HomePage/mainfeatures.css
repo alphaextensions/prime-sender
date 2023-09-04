@@ -1,0 +1,59 @@
+.main-feature-section{
+  width: 100vw;
+  min-height: 100vh;
+  background-size: cover;
+  background: linear-gradient(180deg, #e2effa 0%, #009A8888 100%);
+  padding: 6rem 2rem 6rem 2rem;
+}
+
+.main-features-content{
+  width: 90%;
+  margin: auto;
+}
+
+.main-features-content .title{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  gap: 20px;
+}
+
+.main-features-content .title img{
+  width: 70px;
+}
+
+.main-features-content .heading{
+  margin-bottom: 1.5rem;
+  width: fit-content;
+  margin: 0;
+}
+
+.features{
+  margin-top: 2rem;
+}
+
+.main-feature-section .slick-next::before,
+.main-feature-section .slick-prev::before{
+  color: var(--color-primary1) !important;
+  font-size: 30px;
+}
+
+.main-feature-section .slick-next::before{
+  margin-left: 10px;
+}
+.main-feature-section .slick-prev::before{
+  margin-left: -15px;
+}
+
+.main-feature-section .slick-next::before:hover{
+  color: var(--color-primary2) !important;
+}
+
+.main-feature-section .slick-dots li button:before{
+  color: #009A88 !important;
+  margin-top: 1rem;
+}
+
+.main-feature-section .slick-dots li.slick-active button:before{
+  scale: 1.6;
+}

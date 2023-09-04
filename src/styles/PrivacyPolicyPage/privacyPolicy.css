@@ -1,0 +1,31 @@
+.privacy-policy {
+  margin-top: 8rem;
+}
+
+.privacy-policy .heading {
+  margin: 40px 0px;
+}
+
+.policy-container {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  width: 85%;
+  flex-direction: column;
+  margin: 0px auto;
+}
+
+.policy-container .policy {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.policy-container .policy-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.policy-container .policy-content {
+  font-size: 16px;
+}

@@ -1,0 +1,36 @@
+.terms-of-use {
+  margin-top: 8rem;
+}
+
+.terms-of-use .heading {
+  margin: 40px 0px;
+}
+
+.terms-container {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  width: 85%;
+  flex-direction: column;
+  margin: 0px auto;
+}
+
+.terms-container .term {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.terms-container .term-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.terms-container .term-content {
+  font-size: 16px;
+}
+
+.terms-container .term-content a {
+  color: var(--color-primary1);
+  text-decoration: none;
+}

@@ -1,0 +1,236 @@
+.prime-sender-navbar {
+  top: 0;
+  height: max-content;
+  width: 100%;
+  z-index: 1000;
+  transition: 0.4s;
+  margin: auto;
+  position: fixed;
+}
+
+.navbar-fixed {
+  z-index: 1000;
+  background: linear-gradient(to bottom, var(--color-primary4), var(--color-primary4) 60%, #fff 90%);
+  border-radius: 0 0 30px 30px; /* Adjust the border-radius values as needed */
+  box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
+  transition: 0.4s ease-in-out;
+}
+
+.navbar-fixed .prime-sender-container{
+  padding: 1rem 2.8rem !important; 
+}
+
+.prime-sender-navbar .prime-sender-container {
+  transition: 0.4s;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem 2.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.prime-sender-navbar .brand {
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.prime-sender-navbar .brand img {
+  width: 3rem;
+}
+
+.prime-sender-navbar .brand p {
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0;
+  margin-left: 1rem;
+  font-size: 2rem;
+  color: var(--color-primary1);
+}
+
+.prime-sender-navbar .menu-icon {
+  display: none !important;
+  cursor: pointer;
+  margin-left: 1.2rem;
+  font-size: 1.5rem;
+  z-index: 1000;
+}
+
+.nav-links{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-elements ul {
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.nav-elements ul li {
+  margin-right: 2.5rem;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-elements ul a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: var(--color-primary2);
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s
+}
+
+.nav-elements ul a:hover{
+  color: var(--color-primary1);
+}
+
+.nav-elements ul a b{
+  font-weight: 900;
+}
+
+.prime-sender-navbar .nav-download-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prime-sender-navbar .download-icon {
+  display: none;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .navbar-fixed {
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+  }
+}
+
+@media (max-width: 1080px) {
+  .prime-sender-navbar .brand img {
+      width: 2.3rem;
+  }
+
+  .prime-sender-navbar .brand p {
+      font-size: 1.6rem;
+  }
+
+  .nav-elements ul li {
+    margin-right: 1rem;
+  }
+
+  .nav-elements ul a {
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .prime-sender-navbar .prime-sender-container {
+    width: 95%;
+    padding: 1rem 1.2rem;
+  }
+
+  .navbar-fixed .prime-sender-container{
+    padding: 1rem 1.2rem !important; 
+  }
+
+  .prime-sender-navbar .menu-icon {
+    display: block !important;
+  }
+  
+  .nav-elements {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: var(--color-primary4);
+      z-index: 900;
+      transition: 0.4s;
+      overflow: hidden;
+  }
+  
+  .nav-elements.active {
+      height: 200%;
+  }
+
+  .nav-elements ul {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+  }
+
+  .nav-elements ul li {
+      list-style: disc;
+      margin: 0.4rem 3.5rem;
+  }
+
+  .nav-elements ul a {
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 620px){
+  .prime-sender-navbar .prime-sender-container {
+    width: 100%;
+    padding: 1rem 1.2rem !important; 
+  }
+
+  .navbar-fixed .prime-sender-container{
+    padding: 1rem 1.2rem !important; 
+  }
+}
+
+@media (max-width: 520px){
+  .prime-sender-navbar .download-icon {
+    display: block;
+  }
+  .prime-sender-navbar .download-text {
+      display: none;
+  }
+  .prime-sender-navbar .download-btn:hover .download-icon{
+    filter: brightness(0) invert(1)
+  }
+  .prime-sender-navbar .button-round{
+    border-radius: 50%;
+    font-size: 1rem;
+    padding: 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prime-sender-navbar .prime-sender-container {
+    width: 100%;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .prime-sender-navbar .brand p {
+      margin-left: 0.6rem;
+      font-size: 1.3rem;
+  }
+
+  .prime-sender-navbar .menu-icon {
+      margin-left: 0.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .prime-sender-navbar .brand img {
+      width: 2rem;
+  }
+
+  .prime-sender-navbar .brand p {
+      font-size: 1.3rem;
+  }
+}

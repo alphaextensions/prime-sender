@@ -1,0 +1,247 @@
+.home-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+  background-image: url('/images/2.svg'), linear-gradient(180deg, rgba(212, 255, 252,0.6) 0%, rgba(234, 240, 255, 0.00) 100%);
+  background-repeat: repeat-x;
+  animation: animateBg 30s linear infinite alternate-reverse;
+}
+
+@keyframes animateBg {
+  from {
+      background-position: 0 0;
+  }
+
+  to {
+      background-position: 100% 0;
+  }
+}
+
+.home-content{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+  padding-top: 10rem;
+  flex-direction: column;
+  position: relative;
+}
+
+.chat-support {
+  position: fixed;
+  top: 93vh;
+  width: 35px;
+  right: 2vw;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 100000;
+}
+
+.chat-support img{
+  width: 100%;
+}
+
+/* .chat-support:hover {
+  transform: translateY(-5px); 
+} */
+
+.tooltip {
+  position: absolute;
+  top: 50%; 
+  right: 130%;
+  transform: translateY(-50%);
+  min-width: 12rem;
+  background-color: var(--color-primary1);
+  color: white;
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.chat-support:hover .tooltip, .show_tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.support-text{
+  position: relative;
+}
+
+.support-text::after {
+  content: '';
+  position: absolute;
+  left: 105%; /* Adjust the position to the right side */
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--color-primary1); /* Adjust the arrow color */
+}
+
+.support-text .close {
+  position: absolute;
+  top: -10px;
+  right: -4px;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+}
+
+.home-content .title{
+  font-size: 3.2rem;
+  color: #4b4b4b;
+  text-transform: capitalize;
+  font-weight: 900;
+  margin-bottom: .6rem;
+}
+
+.home-content .sub_title {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #6d6d6d;
+  text-transform: capitalize;
+}
+
+.home-content .offer{
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #585858;
+}
+
+.home-content .offer .purple{
+  color: var(--color-purple);
+}
+
+.home-content .download{
+  width: 50%;
+  margin: 20px auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 100 !important;
+}
+
+.home-content .howtousebtn{
+  color: var(--color-primary1);
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid var(--color-primary1) !important;
+  background-color: transparent;
+  z-index: 1000;
+  font-weight: 600;
+}
+
+.home-content .howtousebtn:hover{
+  background-color: var(--color-secondary4);
+  border: 2px solid var(--color-black) !important;
+  color: white;
+}
+
+.home-content .home-btn{
+  font-size: 1.2rem !important;
+}
+
+.home-content img{
+  margin-top: 20px;
+  width: min(50%, 600px);
+}
+
+
+@media (max-width: 1350px) {
+  .home-content .title{
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 1180px) {
+  .home-content .title{
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .home-content .title{
+    width: 80%;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  .home-content .download{
+    width: 90%;
+  }
+}
+
+@media (max-width: 860px) {
+  .home-content .download{
+    width: 80%;
+  }
+  .home-content .howtousebtn{
+    font-size: 0.8rem !important;
+  }
+  .home-content img{
+    width: 70%;
+  }
+}
+
+
+@media (max-width: 720px) {
+  .home-content {
+    width: 90%;
+  }
+  .chat-support {
+    top: auto;
+    bottom: 4vh;
+  }
+}
+
+@media (max-width: 580px) {
+  .home-content {
+    width: 100%;
+    padding-top: 8rem;
+  }
+  .home-content .title{
+    width: 90%;
+    font-size: 1.8rem;
+  }
+  .home-content .offer{
+    font-size: 0.8rem;
+  }
+  .home-content img{
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-content {
+    padding-top: 7rem;
+  }
+  .home-content .title{
+    font-size: 1.8rem;
+    width: 85%;
+  }
+  .home-content .download{
+    width: 100%;
+  }
+  .home-content .howtousebtn{
+    font-size: 12px !important;
+    padding: 5px 10px;
+  }
+  .home-content .download .download-btn{
+    padding: 6px 10px;
+  }
+  .home-content img{
+    width: 90%;
+  }
+}
