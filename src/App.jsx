@@ -8,6 +8,7 @@ import Blogs from "./components/Pages/Blogs";
 import TermsOfUse from "./components/Pages/TermsOfUse";
 import PrivacyPolicy from "./components/Pages/PrivacyPolicy"
 import Footer from "./components/Layouts/Footer";
+import ChatSupport from './components/common/ChatSupport';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
+      <ChatSupport />
     </Router>
     </>
   );
