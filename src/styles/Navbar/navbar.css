@@ -23,6 +23,7 @@
 .prime-sender-navbar .prime-sender-container {
   transition: 0.4s;
   width: 90%;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 2.8rem;
   display: flex;

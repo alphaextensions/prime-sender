@@ -113,11 +113,11 @@
 
 @media screen and (max-width:540px) {
   .feature-card{
-    padding: 1rem;
+    padding: 0.8rem;
     margin-bottom: 1.5rem !important;
   }
   .feature-img{
-    width: 90px;
+    width: 60px;
   }
 }
 

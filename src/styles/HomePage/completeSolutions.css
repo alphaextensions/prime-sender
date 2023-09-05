@@ -1,11 +1,14 @@
 .solutions_main {
-  width: 90%;
-  padding: 80px 60px;
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 80px 60px 10px;
   margin: auto;
 }
 
 .solutions_container {
-  width: 100%;
+  width: 90%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +35,7 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
   gap: 20px;
   text-align: center;
@@ -44,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   gap: 10px;
   padding: 20px 30px;
   flex-basis: 30%;
@@ -70,7 +73,7 @@
 }
 
 .solutions_card_upper img {
-  width: 200px;
+  width: min(100%, 200px);
 }
 
 .solutions_card_upper h1 {
@@ -87,6 +90,7 @@
   text-align: center;
   line-height: 25px;
   color: #757575;
+  width: min(90%, 300px);
 }
 
 @media screen and (max-width: 950px) {
@@ -101,5 +105,11 @@
   }
   .solutions_main {
     padding: 40px 0px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .solutions_main {
+    padding: 10px;
   }
 }

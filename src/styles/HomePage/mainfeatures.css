@@ -1,13 +1,13 @@
 .main-feature-section{
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
   background-size: cover;
   background: linear-gradient(180deg, #e2effa 0%, #009A8888 100%);
-  padding: 6rem 2rem 6rem 2rem;
+  padding: 4rem 2rem 4rem;
 }
 
 .main-features-content{
   width: 90%;
+  max-width: 1400px;
   margin: auto;
 }
 
@@ -56,4 +56,16 @@
 
 .main-feature-section .slick-dots li.slick-active button:before{
   scale: 1.6;
+}
+
+@media (max-width: 780px) {
+  .main-features-content .title img{
+    width: 60px;
+  }  
+}
+
+@media (max-width: 480px) {
+  .main-features-content .title img{
+    width: 40px;
+  }  
 }

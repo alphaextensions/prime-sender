@@ -61,10 +61,12 @@ const Footer = () => {
               <li><a href='/privacy-policy' > Privacy Policy </a></li>
             </ul>
           </div>
-          <div className="footer_contact footer_links">
+          <div className="footer_links">
             <h4 className='heading'>Contact With Us</h4>
-            <a className='large-text' href="mailto:primesenderextension@gmail.com">Email Us</a>
-            <a  className='large-text' href='https://wa.me/919160583572?text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender' target='_blank' >Chat on WhatsApp</a>
+            <ul className='large-text'>
+              <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
+              <li><a href='https://wa.me/919160583572?text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender' target='_blank' >Chat on WhatsApp</a></li>
+            </ul>
           </div>
         </div>
         

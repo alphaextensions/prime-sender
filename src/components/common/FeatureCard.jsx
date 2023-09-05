@@ -13,7 +13,7 @@ const FeatureCard = ({imgSrc,name,desc}) => {
             {name}
           </div>
         </div>
-        <div className="feature-desc sub-text">
+        <div className="feature-desc text">
           {desc}
         </div>
       </div>

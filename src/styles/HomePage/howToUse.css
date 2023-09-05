@@ -1,12 +1,15 @@
 .use_main {
-  width: 100vw;
+  width: 100%;
   padding: 30px;
   background: linear-gradient(180deg, #ffffff00 0%, #008373 20%, #008373 80%, #e2effa 100%);
   padding: 10rem 0;
+  margin-top: -3rem;
 }
 
 .use_container {
   width: 90%;
+  max-width: 1400px;
+  margin: auto;
   margin: 1rem auto 3rem;
   display: flex;
   justify-content: center;
@@ -28,6 +31,7 @@
   justify-content: center;
   margin: 0rem auto 3rem;
   gap: 20px;
+  width: 90%;
 }
 
 .use_heading .lightbulb {
@@ -87,15 +91,32 @@
 }
 
 .use_right_container {
-  background: #f4f4f4;
+  background: #ffffff;
   border-radius: 20px;
-  padding: 40px 30px;
-  margin-right: -50px;
+  margin-right: -40px;
+  padding: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  width: 100%;
 }
 
+.use_right_container img {
+  width: 100%;
+}
+
+@media screen and (max-width: 980px) {
+  .use_container {
+    flex-direction: column;
+    margin: auto;
+  }
+  .use_right_container {
+    margin: auto;
+    width: min(90%, 500px);
+    padding: 15px;
+    border-radius: 15px;
+  }
+}
 @media screen and (max-width: 840px) {
   .use_heading {
     margin: 2rem auto 4rem !important;
@@ -103,23 +124,23 @@
 }
 
 @media screen and (max-width: 780px) {
-  .use_container {
-    flex-direction: column;
-  }
-
   .use_feature_text p {
     line-height: 20px;
   }
-}
-
-@media screen and (max-width: 580px) {
-  .use_container {
-    width: 100%;
+  .use_heading .lightbulb {
+    width: 60px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .use_feature_text p {
     line-height: 10px;
+  }
+  .use_right_container {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .use_heading .lightbulb {
+    width: 40px;
   }
 }
