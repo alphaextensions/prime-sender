@@ -9,11 +9,11 @@ const FeatureCard = ({imgSrc,name,desc}) => {
           <div className="feature-img">
             <img src={imgSrc} />
           </div>
-          <div className="feature-name">
+          <div className="feature-name sub-heading">
             {name}
           </div>
         </div>
-        <div className="feature-desc">
+        <div className="feature-desc sub-text">
           {desc}
         </div>
       </div>

@@ -34,7 +34,7 @@ const MainFeatures = () => {
       <div className="main-features-content">
         <div className="title">
           <img src="/images/features-icon.png" alt="" />
-          <div className="heading"> Main Features </div>
+          <div className="title-text"> Main Features </div>
         </div>
         <div className="features" data-aos="fade-up" >
         <ScrollTrigger 

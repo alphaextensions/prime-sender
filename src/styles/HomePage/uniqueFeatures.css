@@ -17,7 +17,6 @@
 .unique_heading p {
   width: 100%;
   margin-top: 10px;
-  font-size: 20px;
   text-align: center;
   color: #757575;
 }
@@ -58,13 +57,11 @@
 
 .unique_card_text .sub_title {
   text-transform: uppercase;
-  font-size: 1.5rem;
   color: #6c757d;
   font-weight: bold;
 }
 
 .unique_card_text h1 {
-  font-size: 3rem;
   color: #353f4f;
 }
 
@@ -73,5 +70,4 @@
   gap: 20px;
   flex-direction: column;
   color: #6c757d;
-  font-size: 20px;
 }

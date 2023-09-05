@@ -35,8 +35,7 @@
 }
 
 .testimonial_upper h1 {
-  font-size: 40px;
-  font-weight: 600;
+  color: var(--color-white) !important;
   letter-spacing: 0em;
   text-align: center;
 }
@@ -44,8 +43,6 @@
 .testimonial_rating h1,
 .testimonial_users h1,
 .testimonial_rank h1 {
-  font-size: 50px;
-  font-weight: 600;
   letter-spacing: 0em;
   text-align: center;
 }
@@ -85,12 +82,10 @@
   width: 70px;
 }
 
-.testimonial_lower .heading{
+.testimonial_lower .title-text{
   margin: 0;
   width: auto;
-  text-align: center;
   color: var(--color-white) !important;
-  font-size: 40px !important;
 }
 
 .testimonial_cards{
@@ -147,7 +142,6 @@
 }
 
 .testimonial_card h2{
-  font-size: 1.5rem;
   margin-bottom: 15px;
   color: #353f4f;
   position: relative;
@@ -164,7 +158,6 @@
 
 .customer_review{
   text-transform: capitalize;
-  font-size: 1rem;
   line-height: 27px;
   margin-bottom: 15px;
 }
@@ -176,7 +169,6 @@
 }
 
 .customer_info .customer_name h4{
-  font-size: 1.25rem;
   color: #353f4f;
 }
 
@@ -208,12 +200,6 @@
 @media screen and (max-width: 950px) {
   .testimonial_container {
     width: 90%;
-  }
-
-  .testimonial_rating h1,
-  .testimonial_users h1,
-  .testimonial_rank h1 {
-    font-size: 50px;
   }
 
   .testimonial_cards{
@@ -276,36 +262,9 @@
   .testimonial_container {
     width: 100%;
   }
-
-  .testimonial_rating h1,
-  .testimonial_users h1,
-  .testimonial_rank h1 {
-    font-size: 35px;
-  }
-
-  .testimonial_rating p,
-  .testimonial_users p,
-  .testimonial_rank p {
-    font-size: 14px;
-  }
-
-  .testimonial_lower > h1 {
-    font-size: 20px;
-  }
 }
 
 @media screen and (max-width: 550px) {
-  .testimonial_upper > h1,
-  .testimonial_lower > h1 {
-    font-size: 15px;
-  }
-
-  .testimonial_rating h1,
-  .testimonial_users h1,
-  .testimonial_rank h1 {
-    font-size: 30px;
-  }
-
   .testimonial_lower {
     gap: 15px;
   }
@@ -318,20 +277,9 @@
     padding: 15px 20px 20px;
     margin-top: 2rem;
   }
-
-  .testimonial_card h2{
-    font-size: 1.2rem;
-  }
   
   .customer_review{
-    font-size: 14px;
     line-height: 23px;
-  }
-  .customer_info .customer_name h4{
-    font-size: 1rem;
-  }
-  .customer_info .customer_name p{
-    font-size: 0.8rem;
   }
   .customer_img{
     width: 40px;
@@ -346,20 +294,6 @@
   .testimonial_container {
     padding: 0 10px;
   }
-  .testimonial_upper > h1 {
-    font-size: 15px;
-  }
-  .testimonial_rating h1,
-  .testimonial_users h1,
-  .testimonial_rank h1 {
-    font-size: 20px;
-  }
-  .testimonial_rating p,
-  .testimonial_users p,
-  .testimonial_rank p {
-    font-size: 8px;
-  }
-
   .testimonial_lower {
     gap: 0;
   }

@@ -73,13 +73,11 @@
 }
 .feature-name{
   margin-top: 0.6rem;
-  font-size: 1.2rem;
   font-weight: 600
 }
 .feature-desc{
   text-align: center ;
   margin-top: 0.6rem;
-  font-size: 13px;
   font-weight: 400;
   color: var(--color-dark-grey);
 }
@@ -111,12 +109,6 @@
   .feature-card{
     margin: 2rem 5rem;
   }
-  .feature-name{
-    font-size: 1.3rem;
-  }
-  .feature-desc{
-    font-size: 0.98rem;
-  }
 }
 
 @media screen and (max-width:540px) {
@@ -126,13 +118,6 @@
   }
   .feature-img{
     width: 90px;
-  }
-  .feature-name{
-    font-size: 1.2rem;
-  }
-  .feature-desc{
-    font-size: 0.8rem;
-    margin-top: 0rem;
   }
 }
 
