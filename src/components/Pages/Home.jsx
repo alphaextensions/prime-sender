@@ -71,20 +71,7 @@ const Home = () => {
           <img src="/images/home-img-1.gif" alt="" />
         </div>
       </div>
-      <a
-        href="https://wa.me/919160583572?text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender"
-        target="_blank"
-        className="chat-support"
-        // onClick={handleChatClick}
-      >
-        <img src="./images/whatsapp.png" alt="Chat Support" />
-        {/* <div className={`tooltip ${showChatSupportTooltip ? 'show_tooltip' : ''}`}> */}
-        <div className={`tooltip`}>
-          <div className="support-text">
-            Hey! Can I help you?
-          </div>
-        </div>
-      </a>
+  
       <Companies />
       <CompleteSolutions />
       <HowToUse />
