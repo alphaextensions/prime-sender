@@ -1,0 +1,23 @@
+.request_feature_container{
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.request_feature_heading{
+    font-size: 28px;
+    text-align: center;
+    margin: 24px 0px;
+}
+
+.request_feature_frame{
+    margin: auto;
+    width: 100% !important;
+    max-width: 840px !important;
+    border: 0px;
+    min-height: 1000px;
+}

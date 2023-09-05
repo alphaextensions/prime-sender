@@ -1,0 +1,21 @@
+.blog_container{
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.blog_heading{
+    font-size: 28px;
+    text-align: center;
+    margin: 24px 0px;
+}
+
+.blog_frame{
+    margin: auto;
+    width: 100%;
+    max-width: 840px;
+}

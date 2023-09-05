@@ -100,7 +100,7 @@ const Testimonial = () => {
         </div>
       </div>
       <div className="view-more">
-        <a href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia" target="_blank" className="button-round view-more-btn"><span>View More</span> <FaArrowRightLong/></a>
+        <a href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia/reviews?hl=en" target="_blank" className="button-round view-more-btn"><span>View More</span> <FaArrowRightLong/></a>
       </div>
     </div>
   );
