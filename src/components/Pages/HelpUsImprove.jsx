@@ -1,34 +1,27 @@
+import '../../styles/HelpImprove/helpImprove.css';
+
+
 const HelpUsImprove = () => {
   return (
-    <section
-      style={{
-        margin: "0 auto",
-        padding: "0 32px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        marginTop: "100px",
-      }}
-    >
-      <h1 style={{ fontSize: "28px", textAlign: "center", margin: "24px 0px" }}>
+    <section className='improve_container'>
+      <h1 className='improve_heading'>
         Help us Improve
       </h1>
-      <p style={{ textAlign: "center", marginBottom: "36px" }}>
+      <p className='improve_para'>
         We strive to give you the best service possible but maybe there are
         certain things we need to catch up on.
       </p>
       <iframe
         src="https://docs.google.com/forms/d/e/1FAIpQLSf_dgPZ7qGtU7RER5Gq6fUg1MBf33kW2om3AMllAm9jT2URzw/viewform?embedded=true"
         height="1080"
-        style={{ margin: "auto", width: "100%", maxWidth: "840px" }}
+        className='improve_frame'
         frameBorder="0"
         marginHeight="0"
         marginWidth="0"
       >
         Loading…
       </iframe>
-      <p style={{ margin: "36px 0px" }}>
+      <p className='improve_para_2'>
         <strong>
           If you had a change of heart somehow and want to know how Web Sender
           works quickly in 3 steps, here :
