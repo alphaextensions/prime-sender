@@ -20,6 +20,7 @@
 
 .home-content{
   width: 80%;
+  max-width: 1400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +99,7 @@
 }
 
 .home-content .title{
-  font-size: 3.2rem;
+  width: 80%;
   color: #4b4b4b;
   text-transform: capitalize;
   font-weight: 900;
@@ -107,7 +108,6 @@
 
 .home-content .sub_title {
   width: 100%;
-  font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
   color: #6d6d6d;
@@ -115,7 +115,6 @@
 }
 
 .home-content .offer{
-  font-size: 0.8rem;
   font-weight: bold;
   color: #585858;
 }
@@ -125,13 +124,18 @@
 }
 
 .home-content .download{
-  width: 50%;
+  width: 100%;
   margin: 20px auto 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   z-index: 100 !important;
+}
+
+.home-content .btn {
+  padding: 8px 14px;
+  width: 200px;
 }
 
 .home-content .howtousebtn{
@@ -150,76 +154,47 @@
   color: white;
 }
 
-.home-content .home-btn{
-  font-size: 1.2rem !important;
-}
-
 .home-content img{
   margin-top: 20px;
   width: min(50%, 600px);
 }
 
 
-@media (max-width: 1350px) {
-  .home-content .title{
-    font-size: 2.8rem;
-  }
-}
-
-@media (max-width: 1180px) {
-  .home-content .title{
-    font-size: 2.5rem;
-  }
-}
-
 @media (max-width: 980px) {
   .home-content .title{
-    width: 80%;
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-  }
-  .home-content .download{
     width: 90%;
+    margin-bottom: 1rem;
   }
 }
 
 @media (max-width: 860px) {
-  .home-content .download{
-    width: 80%;
-  }
-  .home-content .howtousebtn{
-    font-size: 0.8rem !important;
-  }
-  .home-content img{
-    width: 70%;
-  }
-}
-
-
-@media (max-width: 720px) {
   .home-content {
     width: 90%;
+  }
+  .home-content .title{
+    width: 95%;
   }
   .chat-support {
     top: auto;
     bottom: 4vh;
   }
+  .home-content .btn{
+    width: 180px;
+  }
+  .home-content img{
+    width: 60%;
+  }
 }
 
 @media (max-width: 580px) {
   .home-content {
-    width: 100%;
     padding-top: 8rem;
   }
-  .home-content .title{
-    width: 90%;
-    font-size: 1.8rem;
-  }
-  .home-content .offer{
-    font-size: 0.8rem;
+  .home-content .btn{
+    width: 160px;
   }
   .home-content img{
-    width: 80%;
+    width: 70%;
   }
 }
 
@@ -227,21 +202,14 @@
   .home-content {
     padding-top: 7rem;
   }
-  .home-content .title{
-    font-size: 1.8rem;
-    width: 85%;
-  }
   .home-content .download{
-    width: 100%;
+    flex-direction: column;
   }
-  .home-content .howtousebtn{
-    font-size: 12px !important;
-    padding: 5px 10px;
-  }
-  .home-content .download .download-btn{
+  .home-content .btn{
     padding: 6px 10px;
+    width: max-content;
   }
   .home-content img{
-    width: 90%;
+    width: 95%;
   }
 }

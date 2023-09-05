@@ -40,25 +40,42 @@ body {
 
 /* utility classes */
 .sub-text {
-  font-size: 1rem !important;
+  font-size: 14px !important;
 }
 
 .text {
-  font-size: 1.2rem !important;
+  font-size: 16px !important;
+}
+
+.large-text {
+  font-size: 18px !important;
 }
 
 .sub-heading {
-  font-size: 2rem !important;
+  font-size: 20px !important;
   font-weight: bold !important;
 }
 
 .heading {
-  font-size: 3.5rem !important;
-  font-weight: 600 !important;
-  width: 100%;
-  margin: auto;
+  font-size: 24px !important;
+  font-weight: bold !important;
+}
+
+.large-heading {
+  font-size: 45px !important;
+  font-weight: bold !important;
+}
+
+.title-text {
   text-align: center;
+  font-size: 44px !important;
+  font-weight: bold !important;
   color: #333;
+}
+
+.sub-title-text {
+  text-align: center;
+  font-size: 22px !important;
 }
 
 .grid{
@@ -110,18 +127,40 @@ body {
 
 /* Media query for responsiveness */
 
-@media screen and (max-width:1290px) {
+@media screen and (max-width:1080px) {
   .sub-text {
-    font-size: 0.8rem !important;
+    font-size: 13px !important;
   }
+  
   .text {
-    font-size: 1rem !important;
+    font-size: 15px !important;
   }
+  
+  .large-text {
+    font-size: 17px !important;
+  }
+  
   .sub-heading {
-    font-size: 1.8rem !important;
+    font-size: 19px !important;
+    font-weight: bold !important;
   }
+  
   .heading {
-    font-size: 2.8rem !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+  }
+
+  .large-heading {
+    font-size: 42px !important;
+    font-weight: bold !important;
+  }
+
+  .title-text {
+    font-size: 42px !important;
+  }
+  
+  .sub-title-text {
+    font-size: 19px !important;
   }
 }
 
@@ -139,13 +178,180 @@ body {
 }
 
 @media  (max-width:780px) {
-  .heading{
-    font-size: 2.5rem !important;
+  .sub-text {
+    font-size: 12px !important;
+  }
+  
+  .text {
+    font-size: 14px !important;
+  }
+  
+  .large-text {
+    font-size: 16px !important;
+  }
+  
+  .sub-heading {
+    font-size: 17px !important;
+    font-weight: bold !important;
+  }
+  
+  .heading {
+    font-size: 21px !important;
+  }
+  
+  .large-heading {
+    font-size: 38px !important;
+    font-weight: bold !important;
+  }
+
+  .title-text {
+    font-size: 40px !important;
+  }
+  
+  .sub-title-text {
+    font-size: 18px !important;
+  }
+}
+
+@media  (max-width:580px) {
+  .sub-text {
+    font-size: 11px !important;
+  }
+  
+  .text {
+    font-size: 13px !important;
+  }
+  
+  .large-text {
+    font-size: 15px !important;
+  }
+  
+  .sub-heading {
+    font-size: 16px !important;
+    font-weight: bold !important;
+  }
+  
+  .heading {
+    font-size: 20px !important;
+  }
+
+  .large-heading {
+    font-size: 32px !important;
+    font-weight: bold !important;
+  }
+
+  .title-text {
+    font-size: 36px !important;
+  }
+  
+  .sub-title-text {
+    font-size: 16px !important;
   }
 }
 
 @media  (max-width:480px) {
-  .heading{
-    font-size: 2.2rem !important;
+  .sub-text {
+    font-size: 10px !important;
+  }
+  
+  .text {
+    font-size: 12px !important;
+  }
+  
+  .large-text {
+    font-size: 14px !important;
+  }
+  
+  .sub-heading {
+    font-size: 15px !important;
+    font-weight: bold !important;
+  }
+  
+  .heading {
+    font-size: 18px !important;
+  }
+
+  .large-heading {
+    font-size: 30px !important;
+    font-weight: bold !important;
+  }
+
+  .title-text {
+    font-size: 32px !important;
+  }
+  
+  .sub-title-text {
+    font-size: 14px !important;
+  }
+}
+
+@media  (max-width:380px) {
+  .sub-text {
+    font-size: 9px !important;
+  }
+  
+  .text {
+    font-size: 11px !important;
+  }
+  
+  .large-text {
+    font-size: 13px !important;
+  }
+  
+  .sub-heading {
+    font-size: 14px !important;
+    font-weight: bold !important;
+  }
+  
+  .heading {
+    font-size: 17px !important;
+  }
+
+  .large-heading {
+    font-size: 26px !important;
+    font-weight: bold !important;
+  }
+
+  .title-text {
+    font-size: 28px !important;
+  }
+  
+  .sub-title-text {
+    font-size: 12px !important;
+  }
+}
+
+@media  (max-width:280px) {
+  .sub-text {
+    font-size: 8px !important;
+  }
+  
+  .text {
+    font-size: 10px !important;
+  }
+  
+  .large-text {
+    font-size: 12px !important;
+  }
+  
+  .sub-heading {
+    font-size: 13px !important;
+  }
+  
+  .heading {
+    font-size: 16px !important;
+  }
+  
+  .large-heading {
+    font-size: 22px !important;
+    font-weight: bold !important;
+  }
+
+  .title-text {
+    font-size: 26px !important;
+  }
+  
+  .sub-title-text {
+    font-size: 11px !important;
   }
 }

@@ -6,8 +6,8 @@ const UniqueFeatures = () => {
     <div className="unique_main">
       <div className="unique_container">
         <div className="unique_heading">
-          <h1 className="heading">Unique Features</h1>
-          <p>Features that make your workflow effortless</p>
+          <h1 className="title-text">Unique Features</h1>
+          <p className="sub-title-text">Features that make your workflow effortless</p>
         </div>
         <div className="unique_features">
           <UniqueFeatureCard 

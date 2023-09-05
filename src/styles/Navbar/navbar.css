@@ -23,6 +23,7 @@
 .prime-sender-navbar .prime-sender-container {
   transition: 0.4s;
   width: 90%;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 2.8rem;
   display: flex;
@@ -108,6 +109,10 @@
   display: none;
 }
 
+.prime-sender-navbar .button-round{
+  padding: 0.3rem 0.4rem;
+}
+
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .navbar-fixed {
       -webkit-backdrop-filter: blur(15px);
@@ -190,6 +195,10 @@
   .navbar-fixed .prime-sender-container{
     padding: 1rem 1.2rem !important; 
   }
+
+  .prime-sender-navbar .brand p {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 520px){
@@ -231,6 +240,6 @@
   }
 
   .prime-sender-navbar .brand p {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
   }
 }

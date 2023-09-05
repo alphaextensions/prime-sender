@@ -57,17 +57,17 @@ const Home = () => {
     <>
       <div className="home-container">
         <div className="home-content">
-          <h1 className="title">
+          <h1 className="title large-heading">
             Best messaging and productivity tool for businesses and organisations
           </h1>
-          <p className="sub_title">chipest compared to global competitors</p>
+          <p className="sub_title sub-heading">chipest compared to global competitors</p>
           <div className="download">
-            <DownloadBtn homeBtn={true} />
-            <Link to="/#how-to-use" onClick={()=>{scrollToSection('how-to-use')}} className="howtousebtn button-round home-btn">
+            <DownloadBtn />
+            <Link to="/#how-to-use" onClick={()=>{scrollToSection('how-to-use')}} className="howtousebtn button-round large-text btn">
               How To Use
             </Link>
           </div>
-          <p className="offer"> <span className='purple'>Lifetime Offer :</span> Basic Features FREE FOREVER!</p>
+          <p className="offer text"> <span className='purple'>Lifetime Offer :</span> Basic Features FREE FOREVER!</p>
           <img src="/images/home-img-1.gif" alt="" />
         </div>
       </div>

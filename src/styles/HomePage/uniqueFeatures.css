@@ -1,6 +1,8 @@
 .unique_main {
   width: 100%;
-  padding: 60px 60px 30px;
+  max-width: 1400px;
+  margin: auto;
+  padding: 60px 10px 0px;
 }
 
 .unique_container {
@@ -17,7 +19,6 @@
 .unique_heading p {
   width: 100%;
   margin-top: 10px;
-  font-size: 20px;
   text-align: center;
   color: #757575;
 }
@@ -32,7 +33,7 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  min-height: 80vh;
+  margin-bottom: 80px;
 }
 
 .unique_card_reverse{
@@ -40,7 +41,7 @@
 }
 
 .unique_card_image{
-  flex-basis: 45%;
+  flex-basis: 40%;
 }
 
 .unique_card_image img {
@@ -58,13 +59,11 @@
 
 .unique_card_text .sub_title {
   text-transform: uppercase;
-  font-size: 1.5rem;
   color: #6c757d;
   font-weight: bold;
 }
 
 .unique_card_text h1 {
-  font-size: 3rem;
   color: #353f4f;
 }
 
@@ -73,5 +72,41 @@
   gap: 20px;
   flex-direction: column;
   color: #6c757d;
-  font-size: 20px;
 }
+
+@media screen and (max-width: 860px) {
+  .unique_card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .unique_card_image {
+    width: min(90%,400px);
+  }
+
+  .sub_title,
+  .unique_card_text {
+    width: 100%;
+    text-align: center !important;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .unique_card_image {
+    width: min(100%,300px);
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .unique_main {
+    padding: 0px 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .unique_card_image {
+    width: min(100%,250px);
+  }
+}
+

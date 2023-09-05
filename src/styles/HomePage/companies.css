@@ -3,10 +3,12 @@
   padding: 20px 0px !important;
   overflow-x: hidden !important;
   /* background-color: var(--color-secondary2); */
+  width: 100%;
 }
 
 .companies_container_content{
-  width: 80%;
+  width: 90%;
+  max-width: 1400px;
   margin: auto;
 }
 .company_logo {
@@ -17,6 +19,7 @@
   justify-content: center !important;
   transition: 0.4s;
   filter: grayscale(100%);
+  padding: 0px 10px !important;
 }
 
 .company_logo:hover{
