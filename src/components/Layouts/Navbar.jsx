@@ -26,28 +26,6 @@ function NavLinks({ onClick }) {
   }
 
   return (
-    // <ul>
-    //   <li>
-    //     <NavLink to='/' onClick={onClick}>
-    //       Home
-    //     </NavLink>
-    //   </li>
-    //   <li>
-    //     <Link to='main-features' onClick={onClick} >
-    //       Features
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <a href='https://prime-sender.com/pricing/' target='_blank' onClick={onClick}>
-    //       <b>Pricing</b>
-    //     </a>
-    //   </li>
-    //   <li>
-    //     <a href='https://prime-sender.com/blog/' target='_blank' onClick={onClick}>
-    //       Blogs
-    //     </a>
-    //   </li>
-    // </ul>
     <ul>
       <li>
         <Link to='/' onClick={onClick}>

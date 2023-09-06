@@ -3,10 +3,11 @@ import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import Companies from "../Sections/Companies";
+import pricingFeatures from "../Data/pricing-page-features-list"
 
 const Pricing = () => {
   const [pricingAnnual, setPricingAnnual] = useState("yearly");
-  const [currnetCountry, setCurrentCountry] = useState("india");
+  const [currentCountry, setCurrentCountry] = useState("india");
 
   const pricing = {
     india: {
@@ -73,11 +74,11 @@ const Pricing = () => {
 
   // links for the button to buy
   function getAdvanceButtonId() {
-    if (currnetCountry === "international") {
+    if (currentCountry === "international") {
       return pricingAnnual === "monthly"
         ? "https://buy.stripe.com/fZeeVe1ZM30Aeo88wL"
         : "https://buy.stripe.com/6oEcN6cEqat2gwg6or";
-    } else if (currnetCountry === "indonesia")
+    } else if (currentCountry === "indonesia")
       return pricingAnnual === "monthly"
         ? "https://buy.stripe.com/28ocN6gUGcBa7ZKdQX"
         : "https://buy.stripe.com/00g7sM7k6gRq3JufZ9";
@@ -87,11 +88,11 @@ const Pricing = () => {
   }
 
   function getBasicButtonId() {
-    if (currnetCountry === "international") {
+    if (currentCountry === "international") {
       return pricingAnnual === "monthly"
         ? "https://buy.stripe.com/4gwbJ25bYgRqa7S9AO"
         : "https://buy.stripe.com/7sI4gAcEqeJi3JudQW";
-    } else if (currnetCountry === "indonesia")
+    } else if (currentCountry === "indonesia")
       return pricingAnnual === "monthly"
         ? "https://buy.stripe.com/dR6dRa33Q7gQeo8eV2"
         : "https://buy.stripe.com/fZe28s8oaat2a7S8wJ";
@@ -104,19 +105,19 @@ const Pricing = () => {
   let advanceButtonLink = getAdvanceButtonId();
 
   let currentPrice;
-  if (currnetCountry == "india") {
+  if (currentCountry == "india") {
     if (pricingAnnual === "monthly") {
       currentPrice = pricing.india.monthly;
     } else if (pricingAnnual === "yearly") {
       currentPrice = pricing.india.yearly;
     }
-  } else if (currnetCountry == "indonesia") {
+  } else if (currentCountry == "indonesia") {
     if (pricingAnnual === "monthly") {
       currentPrice = pricing.indonesia.monthly;
     } else if (pricingAnnual === "yearly") {
       currentPrice = pricing.indonesia.yearly;
     }
-  } else if (currnetCountry == "international") {
+  } else if (currentCountry == "international") {
     if (pricingAnnual === "monthly") {
       currentPrice = pricing.international.monthly;
     } else if (pricingAnnual === "yearly") {
@@ -156,21 +157,21 @@ const Pricing = () => {
             <div className="pricing_country">
               <div className="pricing_country_switch">
                 <div
-                  className={`country_switch ${currnetCountry === "india" && "active_country_class"
+                  className={`country_switch ${currentCountry === "india" && "active_country_class"
                     }`}
                   onClick={() => setCurrentCountry("india")}
                 >
                   <p>India</p>
                 </div>
                 <div
-                  className={`country_switch ${currnetCountry === "indonesia" && "active_country_class"
+                  className={`country_switch ${currentCountry === "indonesia" && "active_country_class"
                     }`}
                   onClick={() => setCurrentCountry("indonesia")}
                 >
                   <p>Indonesia</p>
                 </div>
                 <div
-                  className={`country_switch ${currnetCountry === "international" && "active_country_class"
+                  className={`country_switch ${currentCountry === "international" && "active_country_class"
                     }`}
                   onClick={() => setCurrentCountry("international")}
                 >
@@ -190,14 +191,11 @@ const Pricing = () => {
               <p>Free</p>
             </div>
             <div className="pricing_card_price">
-              <p
-                className="pricing_cut_price"
-                dangerouslySetInnerHTML={{
-                  __html: `<span style="font-family: sans-serif">${currnetCountry === "india" ? "₹" : ""
-                    }</span><span style="text-decoration: line-through;">${currentPrice.basic}</span> / <p style="display: inline; text-decoration: line-through; white-space: nowrap">${currentPrice.basicOld}</p>
-                    `,
-                }}
-              />
+              <div className="pricing_cut_price">
+                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
+                <span style={{ textDecoration: "line-through" }}>{currentPrice.basic}</span> / 
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
+              </div>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
@@ -240,13 +238,11 @@ const Pricing = () => {
               <p>Basic</p>
             </div>
             <div className="pricing_card_price">
-              <p
-                className="pricing_cut_price"
-                dangerouslySetInnerHTML={{
-                  __html: `<span className="pricing_indian_logo" style="font-family: sans-serif">${currnetCountry === "india" ? "₹" : ""
-                    }</span><span>${currentPrice.basic}</span> / <p style="display: inline; text-decoration: line-through; white-space: nowrap">${currentPrice.basicOld}</p>`,
-                }}
-              />
+              <p className="pricing_cut_price" >
+                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
+                <span>{currentPrice.basic}</span> / 
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
+              </p>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
@@ -291,13 +287,11 @@ const Pricing = () => {
               <p>Advance</p>
             </div>
             <div className="pricing_card_price">
-              <p
-                className="pricing_cut_price"
-                dangerouslySetInnerHTML={{
-                  __html: `<span className="pricing_indian_logo" style="font-family: sans-serif">${currnetCountry === "india" ? "₹" : ""
-                    }</span><span>${currentPrice.advance}</span> / <p style="display: inline; text-decoration: line-through; white-space: nowrap">${currentPrice.advanceOld}</p>`,
-                }}
-              />
+              <p className="pricing_cut_price" >
+                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
+                <span>{currentPrice.advance}</span> / 
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.advanceOld}</p>
+              </p>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
@@ -341,7 +335,7 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_price">
               <p>
-                <span>$0</span> / forever
+                <span> <span className="rupee">{currentCountry==='india'?'₹':currentCountry==='indonesia'?'IDR ':'$'}</span>0</span> / Forever
               </p>
             </div>
             <div className="pricing_card_heading">
@@ -401,244 +395,14 @@ const Pricing = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Broadcasting</td>
-                  <th>
-                    <AiOutlineCheck />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
+              {pricingFeatures.map((feature, index) => (
+                <tr key={index}>
+                  <th>{feature.name}</th>
+                  <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                  <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                  <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                 </tr>
-                <tr>
-                  <td>Attachment</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Customisation</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Chat Support</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Caption</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Save Campaign Details</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Save Message Template</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Detailed Delivery Report</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Caption</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Priority Support</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Call Support</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>No minimum time gap</td>
-                  <th>
-                    <p style={{ fontSize: "15px", color: "#999" }}>Fixed 30 secs</p>
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Random time gap</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Batching</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Stop Campaign</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Group Contacts Export</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Quick Replies</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Multiple Attachments</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Schedule</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Zoom Call Support</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Business Chat Link</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
+              ))}
               </tbody>
             </table>
           </div>

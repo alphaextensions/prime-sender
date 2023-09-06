@@ -228,14 +228,14 @@
 }
 
 .pricing_table {
-  width: 85%;
+  width: 90%;
   margin: auto;
 }
 
 .pricing_table th,
 .pricing_table td {
   border-bottom: 2px solid #ccc;
-  padding: 10px 20px;
+  padding: 10px 40px;
   font-size: 20px;
 }
 
@@ -246,14 +246,16 @@
   font-weight: 600 !important;
 }
 
-.pricing_table tbody td {
+.pricing_table tbody th {
   color: #212529;
   font-weight: 500 !important;
+  text-align: left !important;
 }
 
-.pricing_table tbody th {
+.pricing_table tbody td {
   font-size: 25px;
   color: #1680fb !important;
+  text-align: center !important;
 }
 
 .cross_icon {
