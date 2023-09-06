@@ -1,13 +1,43 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import Companies from "../Sections/Companies";
 import pricingFeatures from "../Data/pricing-page-features-list"
+import Slider from "../common/Slider";
 
 const Pricing = () => {
   const [pricingAnnual, setPricingAnnual] = useState("yearly");
   const [currentCountry, setCurrentCountry] = useState("india");
+  // const [userPlanPeriod, setUserPlanPeriod] = useState('annually');
+  // const [userLastPlan,setUserLastPlan] = useState(null)
+  // const [userCountry,setUserCountry] = useState('')
+  // const [userPlan,setUserPlan] = useState(null)
+
+  // const getParams = () => {
+  //   const urlParams = typeof window !== 'undefined' ? window.location.search : '';
+  //   const params = new URLSearchParams(urlParams);
+  //   if(params.size > 0){
+  //     const lastPlan = params.get('lastPlan');
+  //     const country = params.get('country');
+  //     const currentPlan = params.get('currentPlan')
+
+  //     setUserCountry(country)
+  //     setUserLastPlan(lastPlan)
+  //     setUserPlan(currentPlan)
+    
+  //     if (lastPlan || country || currentPlan) {
+  //       window.history.replaceState(null, '', window.location.pathname);
+  //       setTimeout(() => {
+  //         console.log(userLastPlan  + "  " + userCountry+ "  " + userPlan)
+  //       }, 5000);
+  //     }
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   getParams();
+  // }, [userCountry]);
 
   const pricing = {
     india: {
@@ -101,6 +131,10 @@ const Pricing = () => {
       : "https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view";
   }
 
+  function togglePeriod() {
+    pricingAnnual === "yearly" ? setPricingAnnual("monthly") : setPricingAnnual("yearly")
+  }
+
   let basicButtonLink = getBasicButtonId();
   let advanceButtonLink = getAdvanceButtonId();
 
@@ -133,27 +167,7 @@ const Pricing = () => {
             <h1>Simple, Flexible Pricing</h1>
           </div>
           <div className="pricing_switches">
-            <div
-              className="pricing_duration"
-              onClick={() =>
-                pricingAnnual === "yearly"
-                  ? setPricingAnnual("monthly")
-                  : setPricingAnnual("yearly")
-              }
-            >
-              <div>Bill Monthly</div>
-              <div className={`pricing_duration_switch`} style={pricingAnnual === 'yearly' ? { background: "#1680fb" } : { background: "#ccc" }}>
-                <div
-                  className={`pricing_duration_left ${pricingAnnual === "yearly" && "visibility_none"
-                    }`}
-                ></div>
-                <div
-                  className={`pricing_duration_right ${pricingAnnual === "monthly" && "visibility_none"
-                    }`}
-                ></div>
-              </div>
-              <div>Bill Yearly</div>
-            </div>
+          <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePeriod} />
             <div className="pricing_country">
               <div className="pricing_country_switch">
                 <div
@@ -238,18 +252,18 @@ const Pricing = () => {
               <p>Basic</p>
             </div>
             <div className="pricing_card_price">
-              <p className="pricing_cut_price" >
+              <div className="pricing_cut_price" >
                 <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
                 <span>{currentPrice.basic}</span> / 
                 <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
-              </p>
+              </div>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
             </div>
             <div className="pricing_card_button">
               <button>
-                <a href={basicButtonLink}>Subscribe</a>
+                <a href={basicButtonLink} target="_blank">Subscribe</a>
               </button>
             </div>
             <div className="pricing_card_text">
@@ -287,18 +301,18 @@ const Pricing = () => {
               <p>Advance</p>
             </div>
             <div className="pricing_card_price">
-              <p className="pricing_cut_price" >
+              <div className="pricing_cut_price" >
                 <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
                 <span>{currentPrice.advance}</span> / 
                 <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.advanceOld}</p>
-              </p>
+              </div>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
             </div>
             <div className="pricing_card_button">
               <button>
-                <a href={advanceButtonLink}>Subscribe</a>
+                <a href={advanceButtonLink} target="_blank">Subscribe</a>
               </button>
             </div>
             <div className="pricing_card_text">
