@@ -26,28 +26,6 @@ function NavLinks({ onClick }) {
   }
 
   return (
-    // <ul>
-    //   <li>
-    //     <NavLink to='/' onClick={onClick}>
-    //       Home
-    //     </NavLink>
-    //   </li>
-    //   <li>
-    //     <Link to='main-features' onClick={onClick} >
-    //       Features
-    //     </Link>
-    //   </li>
-    //   <li>
-    //     <a href='https://prime-sender.com/pricing/' target='_blank' onClick={onClick}>
-    //       <b>Pricing</b>
-    //     </a>
-    //   </li>
-    //   <li>
-    //     <a href='https://prime-sender.com/blog/' target='_blank' onClick={onClick}>
-    //       Blogs
-    //     </a>
-    //   </li>
-    // </ul>
     <ul>
       <li>
         <Link to='/' onClick={onClick}>
@@ -113,7 +91,7 @@ function Navbar() {
     <nav className={isFixed ? 'navbar-fixed prime-sender-navbar' : 'prime-sender-navbar'} style={{background: !isFixed && showMenu ? '#f2fffe' : ''}}>
       <div className='prime-sender-container'>
         <Link to='/' className='brand' onClick={openPage}>
-          <img src='images/logo-large.png' alt='logo' />
+          <img src='/images/logo-large.png' alt='logo' />
           <p> Prime Sender </p>
         </Link>
 

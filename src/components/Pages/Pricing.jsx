@@ -1,12 +1,43 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import Companies from "../Sections/Companies";
+import pricingFeatures from "../Data/pricing-page-features-list"
+import Slider from "../common/Slider";
 
 const Pricing = () => {
-  const [pricingAnnual, setPricingAnnual] = useState("yearly");
-  const [currnetCountry, setCurrentCountry] = useState("india");
+  const [planPeriod, setPlanPeriod] = useState("yearly");
+  const [currentCountry, setCurrentCountry] = useState("india");
+  // const [userPlanPeriod, setUserPlanPeriod] = useState('annually');
+  // const [userLastPlan,setUserLastPlan] = useState(null)
+  // const [userCountry,setUserCountry] = useState('')
+  // const [userPlan,setUserPlan] = useState(null)
+
+  // const getParams = () => {
+  //   const urlParams = typeof window !== 'undefined' ? window.location.search : '';
+  //   const params = new URLSearchParams(urlParams);
+  //   if(params.size > 0){
+  //     const lastPlan = params.get('lastPlan');
+  //     const country = params.get('country');
+  //     const currentPlan = params.get('currentPlan')
+
+  //     setUserCountry(country)
+  //     setUserLastPlan(lastPlan)
+  //     setUserPlan(currentPlan)
+    
+  //     if (lastPlan || country || currentPlan) {
+  //       window.history.replaceState(null, '', window.location.pathname);
+  //       setTimeout(() => {
+  //         console.log(userLastPlan  + "  " + userCountry+ "  " + userPlan)
+  //       }, 5000);
+  //     }
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   getParams();
+  // }, [userCountry]);
 
   const pricing = {
     india: {
@@ -73,53 +104,57 @@ const Pricing = () => {
 
   // links for the button to buy
   function getAdvanceButtonId() {
-    if (currnetCountry === "international") {
-      return pricingAnnual === "monthly"
+    if (currentCountry === "international") {
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/fZeeVe1ZM30Aeo88wL"
         : "https://buy.stripe.com/6oEcN6cEqat2gwg6or";
-    } else if (currnetCountry === "indonesia")
-      return pricingAnnual === "monthly"
+    } else if (currentCountry === "indonesia")
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/28ocN6gUGcBa7ZKdQX"
         : "https://buy.stripe.com/00g7sM7k6gRq3JufZ9";
-    return pricingAnnual === "monthly"
+    return planPeriod === "monthly"
       ? "https://buy.stripe.com/fZe7sMawi30Acg0bIZ"
       : "https://razorpay.com/payment-button/pl_HyuXVKKhpfe28k/view";
   }
 
   function getBasicButtonId() {
-    if (currnetCountry === "international") {
-      return pricingAnnual === "monthly"
+    if (currentCountry === "international") {
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/4gwbJ25bYgRqa7S9AO"
         : "https://buy.stripe.com/7sI4gAcEqeJi3JudQW";
-    } else if (currnetCountry === "indonesia")
-      return pricingAnnual === "monthly"
+    } else if (currentCountry === "indonesia")
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/dR6dRa33Q7gQeo8eV2"
         : "https://buy.stripe.com/fZe28s8oaat2a7S8wJ";
-    return pricingAnnual === "monthly"
+    return planPeriod === "monthly"
       ? "https://buy.stripe.com/00g7sMawi30A3JucN2"
       : "https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view";
+  }
+
+  function togglePeriod() {
+    planPeriod === "yearly" ? setPlanPeriod("monthly") : setPlanPeriod("yearly")
   }
 
   let basicButtonLink = getBasicButtonId();
   let advanceButtonLink = getAdvanceButtonId();
 
   let currentPrice;
-  if (currnetCountry == "india") {
-    if (pricingAnnual === "monthly") {
+  if (currentCountry == "india") {
+    if (planPeriod === "monthly") {
       currentPrice = pricing.india.monthly;
-    } else if (pricingAnnual === "yearly") {
+    } else if (planPeriod === "yearly") {
       currentPrice = pricing.india.yearly;
     }
-  } else if (currnetCountry == "indonesia") {
-    if (pricingAnnual === "monthly") {
+  } else if (currentCountry == "indonesia") {
+    if (planPeriod === "monthly") {
       currentPrice = pricing.indonesia.monthly;
-    } else if (pricingAnnual === "yearly") {
+    } else if (planPeriod === "yearly") {
       currentPrice = pricing.indonesia.yearly;
     }
-  } else if (currnetCountry == "international") {
-    if (pricingAnnual === "monthly") {
+  } else if (currentCountry == "international") {
+    if (planPeriod === "monthly") {
       currentPrice = pricing.international.monthly;
-    } else if (pricingAnnual === "yearly") {
+    } else if (planPeriod === "yearly") {
       currentPrice = pricing.international.yearly;
     }
   }
@@ -132,45 +167,27 @@ const Pricing = () => {
             <h1>Simple, Flexible Pricing</h1>
           </div>
           <div className="pricing_switches">
-            <div
-              className="pricing_duration"
-              onClick={() =>
-                pricingAnnual === "yearly"
-                  ? setPricingAnnual("monthly")
-                  : setPricingAnnual("yearly")
-              }
-            >
-              <div>Bill Monthly</div>
-              <div className={`pricing_duration_switch`} style={pricingAnnual === 'yearly' ? { background: "#1680fb" } : { background: "#ccc" }}>
-                <div
-                  className={`pricing_duration_left ${pricingAnnual === "yearly" && "visibility_none"
-                    }`}
-                ></div>
-                <div
-                  className={`pricing_duration_right ${pricingAnnual === "monthly" && "visibility_none"
-                    }`}
-                ></div>
-              </div>
-              <div>Bill Yearly</div>
+            <div className="pricing-slider">
+              <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePeriod} />
             </div>
             <div className="pricing_country">
               <div className="pricing_country_switch">
                 <div
-                  className={`country_switch ${currnetCountry === "india" && "active_country_class"
+                  className={`country_switch ${currentCountry === "india" && "active_country_class"
                     }`}
                   onClick={() => setCurrentCountry("india")}
                 >
                   <p>India</p>
                 </div>
                 <div
-                  className={`country_switch ${currnetCountry === "indonesia" && "active_country_class"
+                  className={`country_switch ${currentCountry === "indonesia" && "active_country_class"
                     }`}
                   onClick={() => setCurrentCountry("indonesia")}
                 >
                   <p>Indonesia</p>
                 </div>
                 <div
-                  className={`country_switch ${currnetCountry === "international" && "active_country_class"
+                  className={`country_switch ${currentCountry === "international" && "active_country_class"
                     }`}
                   onClick={() => setCurrentCountry("international")}
                 >
@@ -190,14 +207,11 @@ const Pricing = () => {
               <p>Free</p>
             </div>
             <div className="pricing_card_price">
-              <p
-                className="pricing_cut_price"
-                dangerouslySetInnerHTML={{
-                  __html: `<span style="font-family: sans-serif">${currnetCountry === "india" ? "₹" : ""
-                    }</span><span style="text-decoration: line-through;">${currentPrice.basic}</span> / <p style="display: inline; text-decoration: line-through; white-space: nowrap">${currentPrice.basicOld}</p>
-                    `,
-                }}
-              />
+              <div className="pricing_cut_price">
+                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
+                <span style={{ textDecoration: "line-through" }}>{currentPrice.basic}</span> / 
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
+              </div>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
@@ -240,20 +254,18 @@ const Pricing = () => {
               <p>Basic</p>
             </div>
             <div className="pricing_card_price">
-              <p
-                className="pricing_cut_price"
-                dangerouslySetInnerHTML={{
-                  __html: `<span className="pricing_indian_logo" style="font-family: sans-serif">${currnetCountry === "india" ? "₹" : ""
-                    }</span><span>${currentPrice.basic}</span> / <p style="display: inline; text-decoration: line-through; white-space: nowrap">${currentPrice.basicOld}</p>`,
-                }}
-              />
+              <div className="pricing_cut_price" >
+                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
+                <span>{currentPrice.basic}</span> / 
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
+              </div>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
             </div>
             <div className="pricing_card_button">
               <button>
-                <a href={basicButtonLink}>Subscribe</a>
+                <a href={basicButtonLink} target="_blank">Subscribe</a>
               </button>
             </div>
             <div className="pricing_card_text">
@@ -291,20 +303,18 @@ const Pricing = () => {
               <p>Advance</p>
             </div>
             <div className="pricing_card_price">
-              <p
-                className="pricing_cut_price"
-                dangerouslySetInnerHTML={{
-                  __html: `<span className="pricing_indian_logo" style="font-family: sans-serif">${currnetCountry === "india" ? "₹" : ""
-                    }</span><span>${currentPrice.advance}</span> / <p style="display: inline; text-decoration: line-through; white-space: nowrap">${currentPrice.advanceOld}</p>`,
-                }}
-              />
+              <div className="pricing_cut_price" >
+                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
+                <span>{currentPrice.advance}</span> / 
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.advanceOld}</p>
+              </div>
             </div>
             <div className="pricing_card_heading">
               <p>For professionals getting started with small projects</p>
             </div>
             <div className="pricing_card_button">
               <button>
-                <a href={advanceButtonLink}>Subscribe</a>
+                <a href={advanceButtonLink} target="_blank">Subscribe</a>
               </button>
             </div>
             <div className="pricing_card_text">
@@ -341,7 +351,7 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_price">
               <p>
-                <span>$0</span> / forever
+                <span> <span className="rupee">{currentCountry==='india'?'₹':currentCountry==='indonesia'?'IDR ':'$'}</span>0</span> / Forever
               </p>
             </div>
             <div className="pricing_card_heading">
@@ -401,244 +411,14 @@ const Pricing = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Broadcasting</td>
-                  <th>
-                    <AiOutlineCheck />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
+              {pricingFeatures.map((feature, index) => (
+                <tr key={index}>
+                  <th>{feature.name}</th>
+                  <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                  <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                  <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                 </tr>
-                <tr>
-                  <td>Attachment</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Customisation</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Chat Support</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Caption</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Save Campaign Details</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Save Message Template</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Detailed Delivery Report</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Caption</td>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Priority Support</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Call Support</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>No minimum time gap</td>
-                  <th>
-                    <p style={{ fontSize: "15px", color: "#999" }}>Fixed 30 secs</p>
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Random time gap</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Batching</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Stop Campaign</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Group Contacts Export</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Quick Replies</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Multiple Attachments</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Schedule</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Zoom Call Support</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
-                <tr>
-                  <td>Business Chat Link</td>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <RxCross2 className="cross_icon" />                  </th>
-                  <th>
-                    <AiOutlineCheck />
-                  </th>
-                </tr>
+              ))}
               </tbody>
             </table>
           </div>
