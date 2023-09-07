@@ -38,10 +38,14 @@
   width: 70px;
 }
 
-.use_heading>h1 {
+.use_heading .title-text {
   width: fit-content;
   margin: 0;
   color: var(--color-white);
+  background: linear-gradient(to right, #ffcc00, #e2effa 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .use_left_bottom {

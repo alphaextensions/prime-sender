@@ -113,13 +113,6 @@
   padding: 0.3rem 0.4rem;
 }
 
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .navbar-fixed {
-      -webkit-backdrop-filter: blur(15px);
-      backdrop-filter: blur(15px);
-  }
-}
-
 @media (max-width: 1080px) {
   .prime-sender-navbar .brand img {
       width: 2.3rem;

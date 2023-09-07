@@ -9,35 +9,32 @@ import Slider from "../common/Slider";
 const Pricing = () => {
   const [planPeriod, setPlanPeriod] = useState("yearly");
   const [currentCountry, setCurrentCountry] = useState("india");
-  // const [userPlanPeriod, setUserPlanPeriod] = useState('annually');
-  // const [userLastPlan,setUserLastPlan] = useState(null)
-  // const [userCountry,setUserCountry] = useState('')
-  // const [userPlan,setUserPlan] = useState(null)
+  const [userPlanPeriod, setUserPlanPeriod] = useState('annually');
+  const [userLastPlan,setUserLastPlan] = useState(null)
+  const [userCountry,setUserCountry] = useState(null)
+  const [userPlan,setUserPlan] = useState(null)
 
-  // const getParams = () => {
-  //   const urlParams = typeof window !== 'undefined' ? window.location.search : '';
-  //   const params = new URLSearchParams(urlParams);
-  //   if(params.size > 0){
-  //     const lastPlan = params.get('lastPlan');
-  //     const country = params.get('country');
-  //     const currentPlan = params.get('currentPlan')
+  const getParams = () => {
+    const urlParams = typeof window !== 'undefined' ? window.location.search : '';
+    const params = new URLSearchParams(urlParams);
+    if(params.size > 0){
+      const lastPlan = params.get('lastPlan');
+      const country = params.get('country');
+      const currentPlan = params.get('currentPlan')
 
-  //     setUserCountry(country)
-  //     setUserLastPlan(lastPlan)
-  //     setUserPlan(currentPlan)
+      setUserCountry(country)
+      setUserLastPlan(lastPlan)
+      setUserPlan(currentPlan)
     
-  //     if (lastPlan || country || currentPlan) {
-  //       window.history.replaceState(null, '', window.location.pathname);
-  //       setTimeout(() => {
-  //         console.log(userLastPlan  + "  " + userCountry+ "  " + userPlan)
-  //       }, 5000);
-  //     }
-  //   }
-  // };
+      if (lastPlan || country || currentPlan) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+  };
   
-  // useEffect(() => {
-  //   getParams();
-  // }, [userCountry]);
+  useEffect(() => {
+    getParams();
+  }, []);
 
   const pricing = {
     india: {
@@ -103,40 +100,44 @@ const Pricing = () => {
   };
 
   // links for the button to buy
-  function getAdvanceButtonId() {
-    if (currentCountry === "international") {
-      return planPeriod === "monthly"
-        ? "https://buy.stripe.com/fZeeVe1ZM30Aeo88wL"
-        : "https://buy.stripe.com/6oEcN6cEqat2gwg6or";
-    } else if (currentCountry === "indonesia")
-      return planPeriod === "monthly"
-        ? "https://buy.stripe.com/28ocN6gUGcBa7ZKdQX"
-        : "https://buy.stripe.com/00g7sM7k6gRq3JufZ9";
-    return planPeriod === "monthly"
-      ? "https://buy.stripe.com/fZe7sMawi30Acg0bIZ"
-      : "https://razorpay.com/payment-button/pl_HyuXVKKhpfe28k/view";
+  function getAdvanceButtonId(country,duration) {
+    if (country === 'international') {
+      return duration === 'monthly' ? 'https://buy.stripe.com/fZeeVe1ZM30Aeo88wL' : 'https://buy.stripe.com/6oEcN6cEqat2gwg6or';
+    }
+    else if (country === 'indonesia')
+      return duration === 'monthly' ? 'https://buy.stripe.com/28ocN6gUGcBa7ZKdQX' : 'https://buy.stripe.com/00g7sM7k6gRq3JufZ9';
+    return duration === 'monthly' ? 'https://buy.stripe.com/fZe7sMawi30Acg0bIZ' : 'https://razorpay.com/payment-button/pl_HyuXVKKhpfe28k/view';
   }
 
-  function getBasicButtonId() {
-    if (currentCountry === "international") {
-      return planPeriod === "monthly"
-        ? "https://buy.stripe.com/4gwbJ25bYgRqa7S9AO"
-        : "https://buy.stripe.com/7sI4gAcEqeJi3JudQW";
-    } else if (currentCountry === "indonesia")
-      return planPeriod === "monthly"
-        ? "https://buy.stripe.com/dR6dRa33Q7gQeo8eV2"
-        : "https://buy.stripe.com/fZe28s8oaat2a7S8wJ";
-    return planPeriod === "monthly"
-      ? "https://buy.stripe.com/00g7sMawi30A3JucN2"
-      : "https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view";
+  function getBasicButtonId(country,duration) {
+    if (country === 'international') {
+      return duration === 'monthly' ? 'https://buy.stripe.com/4gwbJ25bYgRqa7S9AO' : 'https://buy.stripe.com/7sI4gAcEqeJi3JudQW';
+    }
+    else if (country === 'indonesia')
+      return duration === 'monthly' ? 'https://buy.stripe.com/dR6dRa33Q7gQeo8eV2' : 'https://buy.stripe.com/fZe28s8oaat2a7S8wJ';
+    return duration === 'monthly' ? 'https://buy.stripe.com/00g7sMawi30A3JucN2' : 'https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view';
   }
 
-  function togglePeriod() {
+  function showButton(planType) {
+    const button_href = getBasicButtonId(currentCountry,planPeriod);
+    const button_text = planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy ' + planType
+    return (
+      <a
+        href={button_href}
+        target="_blank"
+        className="buy_button">
+        {button_text}
+      </a>
+    );
+  }
+
+  function togglePlanPeriod() {
     planPeriod === "yearly" ? setPlanPeriod("monthly") : setPlanPeriod("yearly")
   }
 
-  let basicButtonLink = getBasicButtonId();
-  let advanceButtonLink = getAdvanceButtonId();
+  function toggleUserPlanPeriod(sliderValue) {
+    sliderValue ? setUserPlanPeriod('annually') : setUserPlanPeriod('monthly');
+  }
 
   let currentPrice;
   if (currentCountry == "india") {
@@ -168,7 +169,7 @@ const Pricing = () => {
           </div>
           <div className="pricing_switches">
             <div className="pricing-slider">
-              <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePeriod} />
+              <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePlanPeriod} />
             </div>
             <div className="pricing_country">
               <div className="pricing_country_switch">
@@ -217,7 +218,7 @@ const Pricing = () => {
               <p>For professionals getting started with small projects</p>
             </div>
             <div className="pricing_card_button">
-              <button>Subscribe</button>
+              <button>{showButton('')}</button>
             </div>
             <div className="pricing_card_text">
               <p>No credit Card required</p>
@@ -265,7 +266,7 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_button">
               <button>
-                <a href={basicButtonLink} target="_blank">Subscribe</a>
+                {showButton('basic')}
               </button>
             </div>
             <div className="pricing_card_text">
@@ -314,7 +315,7 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_button">
               <button>
-                <a href={advanceButtonLink} target="_blank">Subscribe</a>
+                {showButton('advance')} 
               </button>
             </div>
             <div className="pricing_card_text">
@@ -358,7 +359,7 @@ const Pricing = () => {
               <p>For professionals getting started with small projects</p>
             </div>
             <div className="pricing_card_button">
-              <button>Subscribe</button>
+              <button>{showButton('')}</button>
             </div>
             <div className="pricing_card_text">
               <p>No credit Card required</p>
