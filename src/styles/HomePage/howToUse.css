@@ -125,7 +125,7 @@
 
 @media screen and (max-width: 780px) {
   .use_feature_text p {
-    line-height: 20px;
+    line-height: 15px;
   }
   .use_heading .lightbulb {
     width: 60px;
@@ -133,9 +133,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  .use_feature_text p {
-    line-height: 10px;
-  }
   .use_right_container {
     padding: 10px;
     border-radius: 10px;

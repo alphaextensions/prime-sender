@@ -3,6 +3,7 @@ import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 import { FaArrowRightLong } from 'react-icons/fa6' 
+import SectionTitle from "../Common/SectionTitle";
 
 const Testimonial = () => {
 
@@ -13,7 +14,7 @@ const Testimonial = () => {
     <div className="testimonial_main">
       <div className="testimonial_container">
         <div className="testimonial_upper">
-          <h1 className="title-text">Our Numbers Speak For Themselves</h1>
+          <SectionTitle gif="/gifs/testimonials-1.gif" title="Our Numbers Speak For Themselves" white/>
           <div className="testimonial_stats">
             <div className="testimonial_rating">
               <h1 className="large-heading">
@@ -43,10 +44,7 @@ const Testimonial = () => {
         <div className="testimonial_line_break" />
         <div className="testimonial_lower">
           <div id="testimonial">
-          <div className="testimonial_title">
-            <img src="/images/customer-img.png" alt="" />
-            <h1 className="title-text">What Customers Are Saying</h1>
-          </div>
+          <SectionTitle gif="/gifs/testimonials-2.gif" title="What Customers Are Saying" white/>
           <div className="testimonial_cards">
             <div className="testimonial_left">
                 <div className="testimonial_card">

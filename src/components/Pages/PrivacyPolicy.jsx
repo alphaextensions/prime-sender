@@ -1,17 +1,17 @@
 import React from 'react';
 import PrivacyPolicyData from '../Data/privacy-policy-data.js';
 import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
+import SectionTitle from "../Common/SectionTitle";
 
 function PrivacyPolicy() {
   return (
-    <div className="privacy-policy">
-      <h4 className="heading">Privacy Policy</h4>
-
-      <div className="policy-container">
+    <div className="main-section privacy-policy">
+      <SectionTitle gif="/gifs/privacy-policy.gif" title="Privacy Policy" />    
+      <div className="main-container policy-container">
         {PrivacyPolicyData.map((item, index) => (
           <div className="policy" key={index}>
-            <p className="policy-title">{item.title}</p>
-            <div className="policy-content">
+            <p className="policy-title sub-heading">{item.title}</p>
+            <div className="policy-content text">
               {Array.isArray(item.content) ? (
                 item.content.map((subItem, subIndex) => <p key={subIndex}>{subItem}</p>)
               ) : (

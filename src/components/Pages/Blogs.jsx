@@ -1,12 +1,11 @@
 import "../../styles/Blogs/blogs.css"
+import SectionTitle from "../Common/SectionTitle";
 
 const Blogs = () => {
   return (
-    <>
-      <section className="blog_container">
-        <h1 className="blog_heading">
-          Blogs
-        </h1>
+    <div className="main-section blog_section">
+      <SectionTitle gif="/gifs/blogs.gif" title="Blogs" />
+      <div className="main-container blog_container">
         <iframe
           src="https://primesender.blogspot.com/"
           className="blog_frame"
@@ -17,8 +16,8 @@ const Blogs = () => {
         >
           Loading…
         </iframe>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

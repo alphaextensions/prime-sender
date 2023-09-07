@@ -1,16 +1,14 @@
 .terms-of-use {
-  margin-top: 8rem;
-}
-
-.terms-of-use .heading {
-  margin: 40px 0px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 10rem auto 0px;
 }
 
 .terms-container {
   display: flex;
   align-items: start;
   justify-content: center;
-  width: 85%;
+  width: min(90%, 900px) !important;
   flex-direction: column;
   margin: 0px auto;
 }

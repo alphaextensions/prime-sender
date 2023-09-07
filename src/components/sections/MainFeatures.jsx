@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import featuresData from '../Data/features-data'
 import FeatureCard from '../Common/FeatureCard'
+import SectionTitle from '../Common/SectionTitle'
 import '../../styles/HomePage/mainfeatures.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -31,11 +32,8 @@ const MainFeatures = () => {
 
   return (
      <section className="main-feature-section" id='main-features'>
+      <SectionTitle gif="/gifs/main-features.gif" title="Main Features" />
       <div className="main-features-content">
-        <div className="title">
-          <img src="/images/features-icon.png" alt="" />
-          <div className="title-text"> Main Features </div>
-        </div>
         <div className="features" data-aos="fade-up" >
         <ScrollTrigger 
           onEnter={() => {

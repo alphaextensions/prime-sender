@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1400px;
   margin: auto;
-  padding: 80px 60px 10px;
+  padding: 2rem 10px;
   margin: auto;
 }
 
@@ -93,18 +93,12 @@
   width: min(90%, 300px);
 }
 
-@media screen and (max-width: 950px) {
-  .solutions_main {
-    padding: 60px 10px;
-  }
-}
-
 @media screen and (max-width: 750px) {
   .solutions_lower {
     flex-direction: column;
   }
   .solutions_main {
-    padding: 40px 0px;
+    padding: 1.5rem 0px;
   }
 }
 
