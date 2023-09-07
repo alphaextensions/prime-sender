@@ -91,7 +91,7 @@ function Navbar() {
     <nav className={isFixed ? 'navbar-fixed prime-sender-navbar' : 'prime-sender-navbar'} style={{background: !isFixed && showMenu ? '#f2fffe' : ''}}>
       <div className='prime-sender-container'>
         <Link to='/' className='brand' onClick={openPage}>
-          <img src='images/logo-large.png' alt='logo' />
+          <img src='/images/logo-large.png' alt='logo' />
           <p> Prime Sender </p>
         </Link>
 

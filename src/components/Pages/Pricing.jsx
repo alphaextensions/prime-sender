@@ -7,7 +7,7 @@ import pricingFeatures from "../Data/pricing-page-features-list"
 import Slider from "../common/Slider";
 
 const Pricing = () => {
-  const [pricingAnnual, setPricingAnnual] = useState("yearly");
+  const [planPeriod, setPlanPeriod] = useState("yearly");
   const [currentCountry, setCurrentCountry] = useState("india");
   // const [userPlanPeriod, setUserPlanPeriod] = useState('annually');
   // const [userLastPlan,setUserLastPlan] = useState(null)
@@ -105,34 +105,34 @@ const Pricing = () => {
   // links for the button to buy
   function getAdvanceButtonId() {
     if (currentCountry === "international") {
-      return pricingAnnual === "monthly"
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/fZeeVe1ZM30Aeo88wL"
         : "https://buy.stripe.com/6oEcN6cEqat2gwg6or";
     } else if (currentCountry === "indonesia")
-      return pricingAnnual === "monthly"
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/28ocN6gUGcBa7ZKdQX"
         : "https://buy.stripe.com/00g7sM7k6gRq3JufZ9";
-    return pricingAnnual === "monthly"
+    return planPeriod === "monthly"
       ? "https://buy.stripe.com/fZe7sMawi30Acg0bIZ"
       : "https://razorpay.com/payment-button/pl_HyuXVKKhpfe28k/view";
   }
 
   function getBasicButtonId() {
     if (currentCountry === "international") {
-      return pricingAnnual === "monthly"
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/4gwbJ25bYgRqa7S9AO"
         : "https://buy.stripe.com/7sI4gAcEqeJi3JudQW";
     } else if (currentCountry === "indonesia")
-      return pricingAnnual === "monthly"
+      return planPeriod === "monthly"
         ? "https://buy.stripe.com/dR6dRa33Q7gQeo8eV2"
         : "https://buy.stripe.com/fZe28s8oaat2a7S8wJ";
-    return pricingAnnual === "monthly"
+    return planPeriod === "monthly"
       ? "https://buy.stripe.com/00g7sMawi30A3JucN2"
       : "https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view";
   }
 
   function togglePeriod() {
-    pricingAnnual === "yearly" ? setPricingAnnual("monthly") : setPricingAnnual("yearly")
+    planPeriod === "yearly" ? setPlanPeriod("monthly") : setPlanPeriod("yearly")
   }
 
   let basicButtonLink = getBasicButtonId();
@@ -140,21 +140,21 @@ const Pricing = () => {
 
   let currentPrice;
   if (currentCountry == "india") {
-    if (pricingAnnual === "monthly") {
+    if (planPeriod === "monthly") {
       currentPrice = pricing.india.monthly;
-    } else if (pricingAnnual === "yearly") {
+    } else if (planPeriod === "yearly") {
       currentPrice = pricing.india.yearly;
     }
   } else if (currentCountry == "indonesia") {
-    if (pricingAnnual === "monthly") {
+    if (planPeriod === "monthly") {
       currentPrice = pricing.indonesia.monthly;
-    } else if (pricingAnnual === "yearly") {
+    } else if (planPeriod === "yearly") {
       currentPrice = pricing.indonesia.yearly;
     }
   } else if (currentCountry == "international") {
-    if (pricingAnnual === "monthly") {
+    if (planPeriod === "monthly") {
       currentPrice = pricing.international.monthly;
-    } else if (pricingAnnual === "yearly") {
+    } else if (planPeriod === "yearly") {
       currentPrice = pricing.international.yearly;
     }
   }
@@ -167,7 +167,9 @@ const Pricing = () => {
             <h1>Simple, Flexible Pricing</h1>
           </div>
           <div className="pricing_switches">
-          <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePeriod} />
+            <div className="pricing-slider">
+              <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePeriod} />
+            </div>
             <div className="pricing_country">
               <div className="pricing_country_switch">
                 <div
