@@ -5,6 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 import Companies from "../Sections/Companies";
 import pricingFeatures from "../Data/pricing-page-features-list"
 import Slider from "../common/Slider";
+import SectionTitle from "../Common/SectionTitle";
 
 const Pricing = () => {
   const [planPeriod, setPlanPeriod] = useState("yearly");
@@ -163,9 +164,7 @@ const Pricing = () => {
     <div className="pricing_container">
       <div className="pricing_main">
         <div className="pricing_top_section">
-          <div className="pricing_heading">
-            <h1>Simple, Flexible Pricing</h1>
-          </div>
+          <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Flexible Pricing" />
           <div className="pricing_switches">
             <div className="pricing-slider">
               <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePeriod} />
@@ -394,12 +393,11 @@ const Pricing = () => {
         <div style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
         <Companies />
         <div className="pricing_lower_section">
-          <div className="pricing_heading">
-            <h1>Compare Our Plans</h1>
-          </div>
-          <div className="pricing_lower_text">
-            <p>Complete list of features available in our pricing plans</p>
-          </div>
+          <SectionTitle 
+            gif="/gifs/compare-plans.gif" 
+            title="Compare Our Plans" 
+            subtitle="Complete list of features available in our pricing plans"
+          />
           <div className="pricing_table_section">
             <table className="pricing_table">
               <thead>

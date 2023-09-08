@@ -9,7 +9,7 @@ import Testimonial from '../Sections/Testimonial';
 import UniqueFeatures from '../Sections/UniqueFeatures';
 import FAQs from '../Sections/FAQs';
 import CompleteSolutions from '../Sections/CompleteSolutions';
-import EverythingInOne from '../Sections/EverythingInOne';
+// import EverythingInOne from '../Sections/EverythingInOne';
 
 const Home = () => {
 

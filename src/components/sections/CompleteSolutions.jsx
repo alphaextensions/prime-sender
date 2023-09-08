@@ -2,6 +2,7 @@ import "../../styles/HomePage/completeSolutions.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect} from "react";
+import SectionTitle from "../Common/SectionTitle";
 
 const CompleteSolutions = () => {
 
@@ -11,11 +12,12 @@ const CompleteSolutions = () => {
 
   return (
     <div className="solutions_main">
+      <SectionTitle 
+        gif="/gifs/complete-solutions.gif" 
+        title="Complete Marketing Solutions" 
+        subtitle="Connect With All Your Customers Instantly And Efficiently"
+      />
       <div className="solutions_container">
-        <div className="solutions_upper">
-          <h1 className="title-text">Complete Marketing Solutions</h1>
-          <p className="sub-title-text">Connect With All Your Customers Instantly And Efficiently</p>
-        </div>
         <div className="solutions_lower" data-aos="fade-up">
           <div className="solutions_card">
             <div className="solutions_card_upper">

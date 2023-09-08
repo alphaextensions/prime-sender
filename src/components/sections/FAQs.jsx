@@ -3,6 +3,7 @@ import '../../styles/HomePage/faqs.css'
 import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import SectionTitle from '../Common/SectionTitle';
 
 const FAQs = () => {
 
@@ -13,10 +14,7 @@ const FAQs = () => {
   return (
     <>
       <div className="faq_section">
-        <div className="faq_title">
-          <img src="/images/faq.png" alt="" />
-          <h1 className='title-text'>Frequently Asked Questions</h1>
-        </div>
+        <SectionTitle gif="/gifs/faq.gif" title="Frequently Asked Questions"/>
         <div className="questions" data-aos="fade-down">
           {
             faqs.map((item, index) => {
