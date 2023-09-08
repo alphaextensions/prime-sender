@@ -49,7 +49,7 @@ const Testimonial = () => {
             <div className="testimonial_left">
                 <div className="testimonial_card">
                   <h2 className="heading"><span className="quotation_mark">❛❛ </span>This is crazy</h2>
-                  <p className="customer_review text" > The Best Application, Really Helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you prime sender team. </p>
+                  <p className="customer_review text" > The best application, really helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you Prime Sender team. </p>
                   <div className="customer_info">
                     <div className="customer_img">
                       <img src="./images/user1.jpg" alt="user1" />
@@ -65,7 +65,7 @@ const Testimonial = () => {
               <div className="testimonial_right_upper">
                 <div className="testimonial_card">
                   <h2 className="heading"><span className="quotation_mark">❛❛ </span>Very Helpful</h2>
-                  <p className="customer_review text" > I Run a Small Business in Indonesia and this Helped me a Lot to get new Customers. Not Many Chrome Extensions are Useful but This one is Very Good, Thank You!</p>
+                  <p className="customer_review text" > I run a small business in Indonesia and this helped me a lot to get new customers. Not many chrome extensions are useful but this one is very good, Thank You!</p>
                   <div className="customer_info">
                     <div className="customer_img">
                       <img src="./images/user3.jpg" alt="user1" />
@@ -80,7 +80,7 @@ const Testimonial = () => {
               <div className="testimonial_right_lower">
                 <div className="testimonial_card">
                   <h2 className="heading"><span className="quotation_mark">❛❛ </span>Amazing</h2>
-                  <p className="customer_review text" > Very Easy to Understand and Use, Not Like other "software" Complicated. and What Surprise me is, during Operate, I Would Like To Know More, WA to their Support Team, get reply Very Quick. </p>
+                  <p className="customer_review text" > Very easy to understand and use, not like other "software" complicated. and what surprise me is, during operate, I would like to know more, WA to their support team, get reply very quick. </p>
                   <div className="customer_info">
                     <div className="customer_img">
                       <img src="./images/user2.jpg" alt="user1" />

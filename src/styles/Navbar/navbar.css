@@ -20,6 +20,14 @@
   padding: 1rem 2.8rem !important; 
 }
 
+.nav_img_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .prime-sender-navbar .prime-sender-container {
   transition: 0.4s;
   width: 90%;
@@ -107,17 +115,6 @@
 
 .prime-sender-navbar .download-icon {
   display: none;
-}
-
-.prime-sender-navbar .button-round{
-  padding: 0.3rem 0.4rem;
-}
-
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .navbar-fixed {
-      -webkit-backdrop-filter: blur(15px);
-      backdrop-filter: blur(15px);
-  }
 }
 
 @media (max-width: 1080px) {

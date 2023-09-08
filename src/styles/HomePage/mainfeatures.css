@@ -18,6 +18,10 @@
   gap: 20px;
 }
 
+.main-feature-section .title-image {
+  padding: 15px;
+}
+
 .main-features-content .title img{
   width: 70px;
 }
@@ -35,7 +39,7 @@
 .main-feature-section .slick-next::before,
 .main-feature-section .slick-prev::before{
   color: var(--color-primary1) !important;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .main-feature-section .slick-next::before{

@@ -15,7 +15,7 @@ const CompleteSolutions = () => {
       <SectionTitle 
         gif="/gifs/complete-solutions.gif" 
         title="Complete Marketing Solutions" 
-        subtitle="Connect With All Your Customers Instantly And Efficiently"
+        subtitle="Connect with all your customers instantly and efficiently"
       />
       <div className="solutions_container">
         <div className="solutions_lower" data-aos="fade-up">
@@ -25,7 +25,7 @@ const CompleteSolutions = () => {
               <h1 className="heading">Highly Trusted</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="large-text">More Then 50,000 Businesses Trust Us To Connect With Their Customers</p>
+              <p className="text">More then 50,000 businesses trust us to connect with their customers</p>
             </div>
           </div>{" "}
           <div className="solutions_card">
@@ -34,7 +34,7 @@ const CompleteSolutions = () => {
               <h1 className="heading">Friendly Interface</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="large-text">The Design Is Fairly Intuitive And Easy To Understand</p>
+              <p className="text">The design is fairly intuitive and easy to understand</p>
             </div>
           </div>{" "}
           <div className="solutions_card">
@@ -43,7 +43,7 @@ const CompleteSolutions = () => {
               <h1 className="heading">Lowest Prices</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="large-text">Apart From a Few Features Available In  Lowest Prices, Other Features Are Completely Free</p>
+              <p className="text">Apart from a few features available in  lowest prices, other features are completely free</p>
             </div>
           </div>
         </div>

@@ -8,6 +8,8 @@ import Slider from "../common/Slider";
 import SectionTitle from "../Common/SectionTitle";
 
 const Pricing = () => {
+  document.title = 'Pricing | Prime Sender';
+  
   const [planPeriod, setPlanPeriod] = useState("yearly");
   const [currentCountry, setCurrentCountry] = useState("india");
   // const [userPlanPeriod, setUserPlanPeriod] = useState('annually');

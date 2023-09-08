@@ -2,6 +2,8 @@ import "../../styles/Blogs/blogs.css"
 import SectionTitle from "../Common/SectionTitle";
 
 const Blogs = () => {
+  document.title = 'Blogs | Prime Sender';
+  
   return (
     <div className="main-section blog_section">
       <SectionTitle gif="/gifs/blogs.gif" title="Blogs" />

@@ -2,6 +2,8 @@ import '../../styles/HelpImprove/helpImprove.css';
 import SectionTitle from '../Common/SectionTitle';
 
 const HelpUsImprove = () => {
+  document.title = 'Help Us Improve | Prime Sender';
+
   return (
     <div className='main-section'>
       <SectionTitle

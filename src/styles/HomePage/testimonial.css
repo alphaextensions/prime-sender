@@ -35,9 +35,16 @@
   margin: 0px auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 15px 25px;
+}
+
+.testimonial_stats .large-heading {
+  zoom: 1.5;
+}
+.testimonial_stats .large-text {
+  zoom: 1.4;
 }
 
 .testimonial_upper h1 {
@@ -75,6 +82,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 30px;
+  margin-top: 2rem;
 }
 
 .testimonial_cards{
@@ -145,7 +153,6 @@
 }
 
 .customer_review{
-  text-transform: capitalize;
   line-height: 27px;
   margin-bottom: 15px;
 }
@@ -173,7 +180,7 @@
 }
 
 .view-more-btn{
-  margin-top: 5rem;
+  margin-top: 7rem;
   transition: 0.4s;
 }
 
@@ -182,7 +189,7 @@
 }
 
 .view-more-btn:hover{
-  background-color: var(--color-secondary1);
+  background-color: var(--color-secondary4);
 }
 
 @media screen and (max-width: 950px) {

@@ -148,8 +148,11 @@
   filter: hue-rotate(200deg) saturate(2) contrast(5) !important;
 }
 
-.use_main .title-image {
-  filter: invert(1) hue-rotate(250deg) saturate(2) contrast(5) !important;
+.use_main .title-text {
+  background: linear-gradient(to right,#ffcc00, #fff 100%); /* Gradient background color */
+  -webkit-background-clip: text !important; /* Apply the background to the text only */
+  background-clip: text !important;  
+  -webkit-text-fill-color: transparent; 
 }
 
 .faq_section .title-image {
