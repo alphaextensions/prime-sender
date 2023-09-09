@@ -6,9 +6,9 @@ function TermsOfUse() {
   document.title = 'Terms Of Service | Prime Sender';
 
   return (
-    <div className="terms-of-use">
+    <div className="terms-of-use main-section">
       <SectionTitle gif="/gifs/terms-of-service.gif" title="Terms of Service" />
-      <div className="terms-container">
+      <div className="terms-container main-container">
         <div className='term'>
           <p className="term-content text">Please read these terms of use carefully before using Prime Sender (hereinafter 'Prime Sender'). Terms of use (hereinafter 'terms of use') govern your access to and use of Prime Sender. Prime Sender is available for your use only on the condition that you agree to the terms of use set forth below. If you do not agree to all of the terms of use, do not access or use Prime Sender. By accessing or using Prime Sender, you and the entity you are authorized to represent (hereinafter 'you' or 'your') signify your agreement to be bound by the terms of use.</p>
         </div>

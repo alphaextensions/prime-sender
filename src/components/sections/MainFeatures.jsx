@@ -31,8 +31,8 @@ const MainFeatures = () => {
   }, []);
 
   return (
-     <section className="main-feature-section" id='main-features'>
-      <SectionTitle gif="/gifs/main-features.gif" title="Main Features" />
+     <section className="main-feature-section">
+      <SectionTitle id="main-features" gif="/gifs/main-features.gif" title="Main Features" />
       <div className="main-features-content">
         <div className="features" data-aos="fade-up" >
         <ScrollTrigger 

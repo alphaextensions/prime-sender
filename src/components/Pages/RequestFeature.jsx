@@ -1,4 +1,3 @@
-import '../../styles/RequestFeature/requestFeatures.css';
 import SectionTitle from "../Common/SectionTitle";
 
 const RequestFeature = () => {
@@ -11,7 +10,7 @@ const RequestFeature = () => {
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLScexPaMhkIuM4j_8qo1FRA40BUatLfeGZVD_SKF9Gcbgla1fw/viewform?embedded=true"
           height={1000}
-          className='request_feature_frame'
+          className='main-iframe'
         >
           Loading…
         </iframe>

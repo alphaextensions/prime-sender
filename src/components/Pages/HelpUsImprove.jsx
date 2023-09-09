@@ -1,4 +1,3 @@
-import '../../styles/HelpImprove/helpImprove.css';
 import SectionTitle from '../Common/SectionTitle';
 
 const HelpUsImprove = () => {
@@ -15,7 +14,7 @@ const HelpUsImprove = () => {
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSf_dgPZ7qGtU7RER5Gq6fUg1MBf33kW2om3AMllAm9jT2URzw/viewform?embedded=true"
           height="1080"
-          className='improve_frame'
+          className='main-iframe'
           frameBorder="0"
           marginHeight="0"
           marginWidth="0"
