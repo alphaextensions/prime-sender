@@ -1,6 +1,6 @@
 export default [
   {
-    question: "1. Does it work in Desktop App?",
+    question: "1. Does it work in the Desktop App?",
     answer: "No, it is a chrome extension and it works only on Google Chrome (Mac, Windows, and Linux)."
   },
   {
@@ -9,7 +9,7 @@ export default [
   },
   {
     question: "3. How to Send Clickable Links through Prime Sender?",
-    answer: "You can send a clickable link to anyone who <br> - Either has your number saved in his phone book  <br> - Or has replied to you at least once."
+    answer: "You can send a clickable link to anyone who <br> - Either has your number saved in their phone book  <br> - Or has replied to you at least once."
   },
   {
     question: "4. How to Correctly Format the Numbers Column in CSV File?",

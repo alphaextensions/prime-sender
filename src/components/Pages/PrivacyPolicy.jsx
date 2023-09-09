@@ -4,6 +4,8 @@ import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
 import SectionTitle from "../Common/SectionTitle";
 
 function PrivacyPolicy() {
+  document.title = 'Privacy Policy | Prime Sender';
+
   return (
     <div className="main-section privacy-policy">
       <SectionTitle gif="/gifs/privacy-policy.gif" title="Privacy Policy" />    

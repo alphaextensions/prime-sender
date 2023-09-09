@@ -1,14 +1,8 @@
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import {useEffect} from "react";
 import "../../styles/Footer/footer.css";
 import { Link , useNavigate} from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    AOS.init({duration: 1000});
-  }, []);
 
   function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
@@ -29,7 +23,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="footer_main" data-aos="fade-up" >
+    <div className="footer_main" >
       <div className="footer_container">
       <hr className='divider' />
         <div className="footer_row">
@@ -57,7 +51,7 @@ const Footer = () => {
           <div className="footer_links">
             <h4 className='heading'>Legal</h4>
             <ul className='large-text'>
-              <li><a href='/terms-of-service' > Terms of Use </a></li>
+              <li><a href='/terms-of-service' > Terms of Service </a></li>
               <li><a href='/privacy-policy' > Privacy Policy </a></li>
             </ul>
           </div>

@@ -3,7 +3,6 @@
   padding: 30px;
   background: linear-gradient(180deg, #ffffff00 0%, #008373 20%, #008373 80%, #e2effa 100%);
   padding: 10rem 0;
-  margin-top: -3rem;
 }
 
 .use_container {
@@ -32,10 +31,6 @@
   margin: 0rem auto 3rem;
   gap: 20px;
   width: 90%;
-}
-
-.use_heading .lightbulb {
-  width: 70px;
 }
 
 .use_heading>h1 {

@@ -2,6 +2,8 @@ import '../../styles/RequestFeature/requestFeatures.css';
 import SectionTitle from "../Common/SectionTitle";
 
 const RequestFeature = () => {
+  document.title = 'Feature Request | Prime Sender';
+
   return (
     <div className="main-section">
       <SectionTitle gif="/gifs/feature-request.gif" title="Feature Request" />

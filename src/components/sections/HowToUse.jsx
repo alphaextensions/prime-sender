@@ -12,7 +12,7 @@ const HowToUse = () => {
 
   return (
     <div className="use_main" id="how-to-use">
-      <SectionTitle gif="/gifs/how-to-use.gif" title="How to Use" white/>
+      <SectionTitle gif="/images/lightbulb.png" title="How to Use" white/>
       <div className="use_container">
         {/* left container */}
         <div className="use_left" data-aos="fade-right" >
@@ -63,7 +63,7 @@ const HowToUse = () => {
         {/* right container */}
         <div className="use_right" data-aos="flip-right" >
           <div className="use_right_container">
-            <img src="/images/how-to-use.jpg" alt="How to use" />
+            <img src="/images/how-to-use.png" alt="How to use" />
           </div>
         </div>
       </div>
