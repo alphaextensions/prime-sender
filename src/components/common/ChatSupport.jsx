@@ -10,7 +10,7 @@ const ChatSupport = () => {
       target="_blank"
       className="chat-support"
     >
-      <img src="./images/whatsapp.png" alt="Chat Support" />
+      <img src="/images/whatsapp.png" alt="Chat Support" />
       <div className="tooltip">
         <div className="support-text">Hey! Can I help you?</div>
       </div>

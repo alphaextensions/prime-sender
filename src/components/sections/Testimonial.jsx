@@ -54,7 +54,7 @@ const Testimonial = () => {
                   <p className="customer_review text" > The Best Application, Really Helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you prime sender team. </p>
                   <div className="customer_info">
                     <div className="customer_img">
-                      <img src="./images/user1.jpg" alt="user1" />
+                      <img src="/images/user1.jpg" alt="user1" />
                     </div>
                     <div className="customer_name">
                       <h4 className="sub-heading">EKO WICAKSONO</h4>
@@ -70,7 +70,7 @@ const Testimonial = () => {
                   <p className="customer_review text" > I Run a Small Business in Indonesia and this Helped me a Lot to get new Customers. Not Many Chrome Extensions are Useful but This one is Very Good, Thank You!</p>
                   <div className="customer_info">
                     <div className="customer_img">
-                      <img src="./images/user3.jpg" alt="user1" />
+                      <img src="/images/user3.jpg" alt="user1" />
                     </div>
                     <div className="customer_name">
                       <h4 className="sub-heading">David</h4>
@@ -85,7 +85,7 @@ const Testimonial = () => {
                   <p className="customer_review text" > Very Easy to Understand and Use, Not Like other "software" Complicated. and What Surprise me is, during Operate, I Would Like To Know More, WA to their Support Team, get reply Very Quick. </p>
                   <div className="customer_info">
                     <div className="customer_img">
-                      <img src="./images/user2.jpg" alt="user1" />
+                      <img src="/images/user2.jpg" alt="user1" />
                     </div>
                     <div className="customer_name">
                       <h4 className="sub-heading">Joel Peterson</h4>

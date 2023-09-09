@@ -78,6 +78,10 @@ body {
   font-size: 22px !important;
 }
 
+.text-bold{
+  font-weight: 900;
+}
+
 .grid{
   display: grid;
 }

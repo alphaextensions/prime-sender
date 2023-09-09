@@ -34,6 +34,10 @@
   border-radius: 34px;
 }
 
+.switch:hover{
+  background: rgb(1, 112, 99);
+}
+
 .switch:before {
   position: absolute;
   content: "";

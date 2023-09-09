@@ -2,17 +2,16 @@ import { useState , useEffect } from "react";
 import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import Companies from "../Sections/Companies";
 import pricingFeatures from "../Data/pricing-page-features-list"
 import Slider from "../common/Slider";
 
 const Pricing = () => {
-  const [planPeriod, setPlanPeriod] = useState("yearly");
+  const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");
-  const [userPlanPeriod, setUserPlanPeriod] = useState('annually');
-  const [userLastPlan,setUserLastPlan] = useState(null)
-  const [userCountry,setUserCountry] = useState(null)
-  const [userPlan,setUserPlan] = useState(null)
+  const [popupPlanPeriod, setPopupPlanPeriod] = useState('annually');
+  const [popupLastPlan,setPopupLastPlan] = useState(null);
+  const [popupCountry,setPopupCountry] = useState(null);
+  const [popupPlan,setPopupPlan] = useState(null);
 
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
@@ -22,9 +21,9 @@ const Pricing = () => {
       const country = params.get('country');
       const currentPlan = params.get('currentPlan')
 
-      setUserCountry(country)
-      setUserLastPlan(lastPlan)
-      setUserPlan(currentPlan)
+      setPopupCountry(country)
+      setPopupLastPlan(lastPlan)
+      setPopupPlan(currentPlan)
     
       if (lastPlan || country || currentPlan) {
         window.history.replaceState(null, '', window.location.pathname);
@@ -36,94 +35,113 @@ const Pricing = () => {
     getParams();
   }, []);
 
+  const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=919160583572&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
+
   const pricing = {
     india: {
       monthly: {
-        free: "0",
-        basic: "699",
-        basicOld: "999",
-        advance: "849",
-        advanceOld: "1199",
-        basicLimited: "489",
-        advanceLimited: "594",
-        basicLimitedLink: "https://buy.stripe.com/00g7sMawi30A3JucN2",
-        advanceLimitedLink: "https://buy.stripe.com/fZe7sMawi30Acg0bIZ",
+        free: "₹0",
+        basic: "₹699",
+        basicSlash: "₹999",
+        advance: "₹849",
+        advanceSlash: "₹1199",
+        basicOffer: "₹489",
+        advanceOffer: "₹594"
       },
-      yearly: {
-        free: "0",
-        basic: "6999",
-        basicOld: "9999",
-        advance: "8499",
-        advanceOld: "11999",
+      annually: {
+        free: "₹0",
+        basic: "₹6999",
+        basicSlash: "₹9999",
+        advance: "₹8499",
+        advanceSlash: "₹11999",
       },
     },
     indonesia: {
       monthly: {
         free: "IDR 0",
         basic: "IDR 79000",
-        basicOld: "IDR 109000",
+        basicSlash: "IDR 109000",
         advance: "IDR 99000",
-        advanceOld: "IDR 139000",
-        basicLimited: "IDR 55300",
-        advanceLimited: "IDR 69300",
-        basicLimitedLink: "https://buy.stripe.com/dR6dRa33Q7gQeo8eV2",
-        advanceLimitedLink: "https://buy.stripe.com/28ocN6gUGcBa7ZKdQX",
+        advanceSlash: "IDR 139000",
+        basicOffer: "IDR 55300",
+        advanceOffer: "IDR 69300"
       },
-      yearly: {
+      annually: {
         free: "IDR 0",
         basic: "IDR 790000",
-        basicOld: "IDR 1090000",
+        basicSlash: "IDR 1090000",
         advance: "IDR 990000",
-        advanceOld: "IDR 1390000",
+        advanceSlash: "IDR 1390000",
       },
     },
     international: {
       monthly: {
         free: "$0",
         basic: "$12.99",
-        basicOld: " $16.99",
+        basicSlash: "$16.99",
         advance: "$15.99",
-        advanceOld: "$20.99",
-        basicLimited: "$9.09",
-        advanceLimited: "$11.19",
-        basicLimitedLink: "https://buy.stripe.com/4gwbJ25bYgRqa7S9AO",
-        advanceLimitedLink: "https://buy.stripe.com/fZeeVe1ZM30Aeo88wL",
+        advanceSlash: "$20.99",
+        basicOffer: "$9.09",
+        advanceOffer: "$11.19"
       },
-      yearly: {
+      annually: {
         free: "$0",
         basic: "$129.99",
-        basicOld: " $169.99",
+        basicSlash: "$169.99",
         advance: "$159.99",
-        advanceOld: "$209.99",
+        advanceSlash: "$209.99",
       },
     },
   };
 
+  const pricing_links = {
+    india: {
+      monthly: {
+          basic: 'https://buy.stripe.com/00g7sMawi30A3JucN2',
+          advance: 'https://buy.stripe.com/fZe7sMawi30Acg0bIZ'
+      },
+      annually: {
+          basic: 'https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view',
+          advance: 'https://razorpay.com/payment-button/pl_HyuXVKKhpfe28k/view'
+      }
+    },
+    international: {
+      monthly: {
+          basic: 'https://buy.stripe.com/4gwbJ25bYgRqa7S9AO',
+          advance: 'https://buy.stripe.com/fZeeVe1ZM30Aeo88wL'
+      },
+      annually: {
+          basic: 'https://buy.stripe.com/7sI4gAcEqeJi3JudQW',
+          advance: 'https://buy.stripe.com/6oEcN6cEqat2gwg6or'
+      }
+    },
+    indonesia: {
+      monthly: {
+          basic: 'https://buy.stripe.com/dR6dRa33Q7gQeo8eV2',
+          advance: 'https://buy.stripe.com/28ocN6gUGcBa7ZKdQX'
+      },
+      annually: {
+          basic: 'https://buy.stripe.com/fZe28s8oaat2a7S8wJ',
+          advance: 'https://buy.stripe.com/00g7sM7k6gRq3JufZ9'
+      }
+    }
+  };
+
   // links for the button to buy
-  function getAdvanceButtonId(country,duration) {
-    if (country === 'international') {
-      return duration === 'monthly' ? 'https://buy.stripe.com/fZeeVe1ZM30Aeo88wL' : 'https://buy.stripe.com/6oEcN6cEqat2gwg6or';
-    }
-    else if (country === 'indonesia')
-      return duration === 'monthly' ? 'https://buy.stripe.com/28ocN6gUGcBa7ZKdQX' : 'https://buy.stripe.com/00g7sM7k6gRq3JufZ9';
-    return duration === 'monthly' ? 'https://buy.stripe.com/fZe7sMawi30Acg0bIZ' : 'https://razorpay.com/payment-button/pl_HyuXVKKhpfe28k/view';
+  function getButtonLink(country, duration, type) {
+    return pricing_links[country][duration][type]
   }
 
-  function getBasicButtonId(country,duration) {
-    if (country === 'international') {
-      return duration === 'monthly' ? 'https://buy.stripe.com/4gwbJ25bYgRqa7S9AO' : 'https://buy.stripe.com/7sI4gAcEqeJi3JudQW';
-    }
-    else if (country === 'indonesia')
-      return duration === 'monthly' ? 'https://buy.stripe.com/dR6dRa33Q7gQeo8eV2' : 'https://buy.stripe.com/fZe28s8oaat2a7S8wJ';
-    return duration === 'monthly' ? 'https://buy.stripe.com/00g7sMawi30A3JucN2' : 'https://razorpay.com/payment-button/pl_HyuSnC8BpjlWV7/view';
-  }
-
-  function showButton(planType) {
-    const button_href = getBasicButtonId(currentCountry,planPeriod);
-    const button_text = planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy ' + planType
+  function showButton(isPopup,planType) {
+    const button_link = !isPopup ? 
+        planType === 'basic' ? getButtonLink(currentCountry,planPeriod,'basic') : getButtonLink(currentCountry,planPeriod,'advance') :
+        popupPlan === 'basic' ? getButtonLink(popupCountry,popupPlanPeriod,'basic') : getButtonLink(popupCountry,popupPlanPeriod,'advance');
+    const button_text = !isPopup ? 
+        planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy ' + planType : 
+        popupPlanPeriod ==='annually' ? 'Buy' : 'Subscribe'
     return (
       <a
-        href={button_href}
+        href={button_link}
         target="_blank"
         className="buy_button">
         {button_text}
@@ -132,73 +150,167 @@ const Pricing = () => {
   }
 
   function togglePlanPeriod() {
-    planPeriod === "yearly" ? setPlanPeriod("monthly") : setPlanPeriod("yearly")
+    planPeriod === "annually" ? setPlanPeriod("monthly") : setPlanPeriod("annually")
   }
 
-  function toggleUserPlanPeriod(sliderValue) {
-    sliderValue ? setUserPlanPeriod('annually') : setUserPlanPeriod('monthly');
+  function togglePopupPlanPeriod() {
+    popupPlanPeriod==='monthly' ? setPopupPlanPeriod('annually') : setPopupPlanPeriod('monthly');
   }
 
   let currentPrice;
   if (currentCountry == "india") {
     if (planPeriod === "monthly") {
       currentPrice = pricing.india.monthly;
-    } else if (planPeriod === "yearly") {
-      currentPrice = pricing.india.yearly;
+    } else if (planPeriod === "annually") {
+      currentPrice = pricing.india.annually;
     }
   } else if (currentCountry == "indonesia") {
     if (planPeriod === "monthly") {
       currentPrice = pricing.indonesia.monthly;
-    } else if (planPeriod === "yearly") {
-      currentPrice = pricing.indonesia.yearly;
+    } else if (planPeriod === "annually") {
+      currentPrice = pricing.indonesia.annually;
     }
   } else if (currentCountry == "international") {
     if (planPeriod === "monthly") {
       currentPrice = pricing.international.monthly;
-    } else if (planPeriod === "yearly") {
-      currentPrice = pricing.international.yearly;
+    } else if (planPeriod === "annually") {
+      currentPrice = pricing.international.annually;
     }
+  }
+
+  function generatePricingPopup() {
+    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1)
+    return (
+      <>
+        <div className="pricing-popup-overlay"></div>
+        <div className="pricing-popup" style={popupLastPlan === 'planExpired'  ? { background: '#EDF9F3' } : null}>
+          <div className="pricing-popup-header">
+            <img src='/images/logo-large.png' alt="Prime-Sender" />
+            <h1>Prime Sender <b>{capitalPlanName} Plan</b></h1>
+          </div>
+          <hr />
+          <div className='pricing-recommendation-msg'>
+            <img src="/images/stars.png" alt="starts" />
+            <div className="recommendation-msg-content">Recommended - Value for Money</div>
+          </div>
+          <div className="pricing-popup-slider">
+            {
+              popupPlan==='basic' ? 
+              <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod}/> :
+              <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod}/>
+            }
+          </div>
+          <div className="pricing-popup-content">
+            <div className="monthly-price">
+              <span className={popupLastPlan==='freeTrial' ? 'pricing-popup-slash-price' : ''}>
+                  {
+                    popupCountry !== 'india' ? <span>
+                    { popupPlan==='basic' ? pricing[popupCountry].monthly.basic : pricing[popupCountry].monthly.advance }
+                    </span> : <span>
+                    <span className="rupee"> { popupPlan==='basic' ? pricing[popupCountry].monthly.basic.substring(0,1) : pricing[popupCountry].monthly.advance.substring(0,1)}</span>
+                    <span>{ popupPlan==='basic' ? pricing[popupCountry].monthly.basic.substring(1) : pricing[popupCountry].monthly.advance.substring(1) }</span>
+                    </span>
+                  }
+                  /month</span>
+                   <br />
+                  { popupLastPlan==='freeTrial' && (
+                      <span className="pricing-popup-offer-price">
+                      {
+                        popupCountry !== 'india' ? <span>
+                        { popupPlan==='basic' ? pricing[popupCountry].monthly.basicOffer : pricing[popupCountry].monthly.advanceOffer }
+                      </span> :
+                      <span>
+                      <span className='rupee'>{ popupPlan==='basic' ? pricing[popupCountry].monthly.basicOffer.substring(0,1) : pricing[popupCountry].monthly.advanceOffer.substring(0,1) }</span>
+                      <span>{ popupPlan==='basic' ? pricing[popupCountry].monthly.basicOffer.substring(1) : pricing[popupCountry].monthly.advanceOffer.substring(1) }</span>
+                    </span>
+                      }
+                      */month
+                      </span>
+                  )}
+            </div>
+              {
+                popupCountry === 'indonesia' ?
+                <div className="annual-price-indonesia" >
+                  <span>
+                    {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}({
+                      (popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 4) : pricing[popupCountry].annually.advance.substring(0, 4)) +
+                      Math.floor((popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(4) : pricing[popupCountry].annually.advance.substring(4)) / 12)
+                    }/month)</span> 
+                </div> :
+                <div className="annual-price" >
+                  <span> 
+                    <span className={popupCountry==='india' ? 'rupee': ''}>
+                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0,1) : pricing[popupCountry].annually.advance.substring(0,1)}
+                    </span>
+                    <span>
+                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(1) : pricing[popupCountry].annually.advance.substring(1)}
+                    </span>
+                    (
+                      <span className={popupCountry==='india' ? 'rupee': ''}>
+                      {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 1) : pricing[popupCountry].annually.advance.substring(0, 1))}
+                      </span>{
+                      Math.floor((popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(1) : pricing[popupCountry].annually.advance.substring(1)) / 12)
+                    }
+                    /month)</span>
+              </div>
+              }
+          </div>
+          <div className="pricing-popup-btn">
+            <button>{showButton(true,popupPlan)}</button>
+          </div>
+          <div className="pricing-popup-footer">
+            <div className="pricing-popup-footer-icon"><span>i</span></div>
+            <div className="pricing-popup-footer-content">
+              <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan==='freeTrial' ? "*Discount applicable for the first month" : ""}</span>
+              {
+                popupPlanPeriod === 'monthly' ?
+                <span>
+                  By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
+                </span>:
+                <span>
+                  By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return (
     <div className="pricing_container">
+      {popupLastPlan && generatePricingPopup()}
       <div className="pricing_main">
         <div className="pricing_top_section">
           <div className="pricing_heading">
-            <h1>Simple, Flexible Pricing</h1>
+            <h1>Simple, Affordable Pricing</h1>
           </div>
           <div className="pricing_switches">
             <div className="pricing-slider">
-              <Slider onTextHeader="Monthly" offTextHeader="Annually" setValue={togglePlanPeriod} />
+              <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
             </div>
             <div className="pricing_country">
               <div className="pricing_country_switch">
-                <div
-                  className={`country_switch ${currentCountry === "india" && "active_country_class"
-                    }`}
-                  onClick={() => setCurrentCountry("india")}
-                >
-                  <p>India</p>
+                <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
+                  <p className="country_current_switch">
+                    <img src="/images/india.png" alt="" />
+                    India
+                  </p>
                 </div>
-                <div
-                  className={`country_switch ${currentCountry === "indonesia" && "active_country_class"
-                    }`}
-                  onClick={() => setCurrentCountry("indonesia")}
-                >
-                  <p>Indonesia</p>
+                <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class" }`} onClick={() => setCurrentCountry("indonesia")} >
+                  <p className="country_current_switch">
+                    <img src="/images/indonesia.svg" alt="" />
+                    Indonesia</p>
                 </div>
-                <div
-                  className={`country_switch ${currentCountry === "international" && "active_country_class"
-                    }`}
-                  onClick={() => setCurrentCountry("international")}
-                >
-                  <p>International</p>
+                <div className={`country_switch ${currentCountry === "international" && "active_country_class" }`} onClick={() => setCurrentCountry("international")}> 
+                  <p className="country_current_switch">🌎 International</p>
                 </div>
               </div>
             </div>
           </div>
           <div className="pricing_discount_text">
-            Early Bird Offer For New User - Extra 30% OFF. Use Code ‘NEWUSER30’
+          Early bird offer for new user - <span style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF`</span>. Use code <img src="/images/coupon.png" alt="" />
           </div>
         </div>
         <div className="pricing_cards_container">
@@ -208,192 +320,217 @@ const Pricing = () => {
               <p>Free</p>
             </div>
             <div className="pricing_card_price">
-              <div className="pricing_cut_price">
-                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
-                <span style={{ textDecoration: "line-through" }}>{currentPrice.basic}</span> / 
-                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
+              <div className="free_pricing_div">
+                <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                  {currentCountry === 'indonesia' ? currentPrice.basic.toString().substring(0,4) : currentPrice.basic.toString().substring(0,1)}</span>
+                <span>0</span>
+                <br />
+                <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", visibility: "hidden" }}>{currentCountry === "india" ? "₹" : currentCountry === 'indonesia' ? "IDR " : "$"}</p>
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap", visibility: "hidden" }}>{planPeriod === 'monthly' ? currentPrice.basicSlash : (currentPrice.basicSlash / 12).toFixed(2)}</p>
               </div>
             </div>
-            <div className="pricing_card_heading">
-              <p>For professionals getting started with small projects</p>
-            </div>
+            {planPeriod === 'annually' &&
+              <div className="pricing_card_heading">
+                <p>Free Forever</p>
+                <p style={{ visibility: "hidden" }}>{` a`}</p>
+              </div>
+            }
             <div className="pricing_card_button">
-              <button>{showButton('')}</button>
+              <button>
+                <a
+                  href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
+                  target="_blank"
+                  className="buy_button">
+                    Try Now
+                </a>
+              </button>
             </div>
-            <div className="pricing_card_text">
-              <p>No credit Card required</p>
-            </div>
+
             <div className="pricing_card_features">
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text">Attachment</p>
+                <p className="pricing_card_feature_text">Attachment</p>
               </div>
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text">
+                <p className="pricing_card_feature_text">
                   {" "}
                   Customization
                 </p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Caption</p>
+                <p className="pricing_card_feature_text"> Caption</p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Save Campaing Details</p>
+                <p className="pricing_card_feature_text"> Save Campaing Details</p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Detailed Delivery Report</p>
+                <p className="pricing_card_feature_text"> Detailed Delivery Report</p>
               </div>
             </div>
           </div>
           {/* basic card */}
-          <div className="pricing_card">
+          <div className="pricing_card premium_card">
             <div className="pricing_card_type">
               <p>Basic</p>
             </div>
             <div className="pricing_card_price">
-              <div className="pricing_cut_price" >
-                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
-                <span>{currentPrice.basic}</span> / 
-                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.basicOld}</p>
+              <div className="pricing_cut_price">
+                <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
+                </span>
+                {
+                  currentCountry === 'indonesia' ?
+                  <span>{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : (currentPrice.basic.substring(4) / 12).toFixed(2)}</span> :
+                  <span>{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : (currentPrice.basic.substring(1) / 12).toFixed(2)}</span>
+                }
+                <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
+                <br />
+                <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
+                {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
+                </p>
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                {
+                  currentCountry === 'indonesia' ?
+                  planPeriod === 'monthly' ? currentPrice.basicSlash.substring(4) : (currentPrice.basicSlash.substring(4) / 12).toFixed(2):
+                  planPeriod === 'monthly' ? currentPrice.basicSlash.substring(1) : (currentPrice.basicSlash.substring(1) / 12).toFixed(2)
+                }
+                </p>
               </div>
             </div>
-            <div className="pricing_card_heading">
-              <p>For professionals getting started with small projects</p>
-            </div>
+            {planPeriod === 'annually' &&
+              <div className="pricing_card_heading">
+                <span>Billed&nbsp;
+                  <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                    {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
+                  </span>
+                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months per account
+                </span>
+              </div>
+            }
             <div className="pricing_card_button">
               <button>
-                {showButton('basic')}
+                {showButton(false, 'basic')}
               </button>
             </div>
-            <div className="pricing_card_text">
-              <p>No credit Card required</p>
-            </div>
+
             <div className="pricing_card_features">
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text">All Free Features</p>
+                <p className="pricing_card_feature_text" style={{fontWeight:"bold"}}>All Free Features</p>
               </div>
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text">
+                <p className="pricing_card_feature_text">
                   {" "}
                   Call Support
                 </p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> No minimum time gap</p>
+                <p className="pricing_card_feature_text"> No minimum time gap</p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Batching</p>
+                <p className="pricing_card_feature_text"> Batching</p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Quick Replies</p>
+                <p className="pricing_card_feature_text"> Quick Replies</p>
               </div>
             </div>
           </div>
           {/* advance card */}
-          <div className="pricing_card">
+          <div className="pricing_card premium_card">
+            <img className="recommended_tag" src="/images/recommended_tag.png" alt="" />
             <div className="pricing_card_type">
               <p>Advance</p>
             </div>
             <div className="pricing_card_price">
-              <div className="pricing_cut_price" >
-                <span className={currentCountry==='india'?'rupee':''}>{currentCountry === "india" ? "₹" : ""}</span>
-                <span>{currentPrice.advance}</span> / 
-                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>{currentPrice.advanceOld}</p>
+              <div className="pricing_cut_price">
+                <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
+                </span>
+                {
+                  currentCountry === 'indonesia' ?
+                  <span>{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : (currentPrice.advance.substring(4) / 12).toFixed(2)}</span> :
+                  <span>{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : (currentPrice.advance.substring(1) / 12).toFixed(2)}</span>
+                }
+                <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
+                <br />
+                <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
+                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
+                </p>
+                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                {
+                  currentCountry === 'indonesia' ?
+                  planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(4) : (currentPrice.advanceSlash.substring(4) / 12).toFixed(2):
+                  planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(1) : (currentPrice.advanceSlash.substring(1) / 12).toFixed(2)
+                }  
+                </p>
               </div>
             </div>
-            <div className="pricing_card_heading">
-              <p>For professionals getting started with small projects</p>
-            </div>
+            {planPeriod === 'annually' &&
+              <div className="pricing_card_heading">
+                <span>Billed&nbsp;
+                  <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                    {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
+                  </span>
+                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months per account
+                </span>
+              </div>
+            }
             <div className="pricing_card_button">
               <button>
-                {showButton('advance')} 
+                {showButton(false, 'advance')}
               </button>
             </div>
-            <div className="pricing_card_text">
-              <p>No credit Card required</p>
-            </div>
+
             <div className="pricing_card_features">
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text">All Basic Features</p>
+                <p className="pricing_card_feature_text"  style={{fontWeight:"bold"}}>All Basic Features</p>
               </div>
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text">
+                <p className="pricing_card_feature_text">
                   Multiple Attachments
                 </p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Schedule</p>
+                <p className="pricing_card_feature_text"> Schedule</p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Zoom Call Support</p>
+                <p className="pricing_card_feature_text"> Zoom Call Support</p>
               </div>{" "}
               <div className="pricing_card_feature">
                 <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Business Chat Link</p>
+                <p className="pricing_card_feature_text"> Business Chat Link</p>
               </div>
             </div>
           </div>
-          <div className="pricing_card">
-            <div className="pricing_card_type">
-              <p>Free</p>
+          <div className="pricing_card multiple_user_card">
+            <div className="multiple_card_type">
+              <p>Need multiple accounts?</p>
             </div>
-            <div className="pricing_card_price">
-              <p>
-                <span> <span className="rupee">{currentCountry==='india'?'₹':currentCountry==='indonesia'?'IDR ':'$'}</span>0</span> / Forever
-              </p>
-            </div>
+
             <div className="pricing_card_heading">
-              <p>For professionals getting started with small projects</p>
+              Purchase premium plan for multiple users for your organisation at a discounted rate
             </div>
             <div className="pricing_card_button">
-              <button>{showButton('')}</button>
-            </div>
-            <div className="pricing_card_text">
-              <p>No credit Card required</p>
-            </div>
-            <div className="pricing_card_features">
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_fature_text">2 free projects</p>
-              </div>
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_fature_text">
-                  {" "}
-                  1 GB of cloud storage
-                </p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> For personal use</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> Weekly data backup</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_fature_text"> 12/5 email support</p>
-              </div>
+              <button>
+                <a href={whatsappRedirectUrl} target="_blank" className="buy_button">Talk to Us</a>
+              </button>
             </div>
           </div>
         </div>
         <div colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
         <div style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
-        <Companies />
         <div className="pricing_lower_section">
           <div className="pricing_heading">
             <h1>Compare Our Plans</h1>
