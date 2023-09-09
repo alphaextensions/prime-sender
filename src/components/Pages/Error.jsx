@@ -3,6 +3,7 @@ import '../../styles/Error/error.css'
 import {NavLink} from 'react-router-dom'
 
 const Error = () => {
+  document.title = '404 - Page Not Found | Prime Sender'
   return (
     <div id='error' className='error'>
       <div className="error-img">

@@ -1,6 +1,6 @@
 .policy-container {
   display: flex;
-  align-items: start;
+  align-items: start !important;
   justify-content: center;
   width: min(90%, 900px) !important;
   flex-direction: column;

@@ -21,11 +21,11 @@
 }
 
 .nav_img_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  place-items: center;
 }
 
 .prime-sender-navbar .prime-sender-container {
@@ -48,17 +48,7 @@
 }
 
 .prime-sender-navbar .brand img {
-  width: 3rem;
-}
-
-.prime-sender-navbar .brand p {
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bold;
-  margin: 0;
-  margin-left: 1rem;
-  font-size: 2rem;
-  color: var(--color-primary1);
+  width: 100%;
 }
 
 .prime-sender-navbar .menu-icon {
@@ -127,12 +117,8 @@
 }
 
 @media (max-width: 1080px) {
-  .prime-sender-navbar .brand img {
-      width: 2.3rem;
-  }
-
-  .prime-sender-navbar .brand p {
-      font-size: 1.6rem;
+  .nav_img_container {
+    width: 250px;
   }
 
   .nav-elements ul li {
@@ -217,16 +203,16 @@
     padding: 1rem 1.2rem !important; 
   }
 
-  .prime-sender-navbar .brand p {
-    font-size: 1.5rem;
-  }
-
   .nav-download-btn .button-round {
     padding: 0.4rem 1.2rem;
   }
 }
 
 @media (max-width: 520px){
+  .nav_img_container {
+    width: 230px;
+  }
+
   .prime-sender-navbar .download-icon {
     display: block;
   }
@@ -244,14 +230,13 @@
 }
 
 @media (max-width: 480px) {
+  .nav_img_container {
+    width: 210px;
+  }
+
   .prime-sender-navbar .prime-sender-container {
     width: 100%;
     padding: 0.6rem 1.5rem;
-  }
-
-  .prime-sender-navbar .brand p {
-      margin-left: 0.6rem;
-      font-size: 1.3rem;
   }
 
   .prime-sender-navbar .menu-icon {
@@ -260,11 +245,13 @@
 }
 
 @media (max-width: 380px) {
-  .prime-sender-navbar .brand img {
-      width: 2rem;
+  .nav_img_container {
+    width: 160px;
   }
+}
 
-  .prime-sender-navbar .brand p {
-      font-size: 1.1rem;
+@media (max-width: 280px) {
+  .nav_img_container {
+    width: 130px;
   }
 }
