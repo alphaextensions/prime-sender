@@ -1,51 +1,31 @@
 import React, { useState ,useEffect} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { MdFileDownload,MdClose,MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
 import DownloadBtn from '../Common/DownloadBtn'
 
-function NavLinks({ onClick }) {
-  const navigate = useNavigate();
-
-  function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  function handleFeatureClick() {
-    if (window.location.pathname === '/') {
-      scrollToSection('main-features');
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        scrollToSection('main-features');
-      }, 1000);
-    }
-  }
-
+function NavLinks({ onClick }) {  
   return (
     <ul>
       <li>
-        <Link to='/' onClick={onClick}>
+        <NavLink to='/' onClick={onClick} className='large-text'>
           Home
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to='/#main-features' onClick={handleFeatureClick} >
+        <Link to='/#main-features' onClick={onClick} className='large-text' id='main-features-btn'>
           Features
         </Link>
       </li>
       <li>
-        <a href='/pricing' onClick={onClick}>
-          <b>Pricing</b>
-        </a>
+        <NavLink to='/pricing' onClick={onClick} className='large-text'>
+          Pricing
+        </NavLink>
       </li>
       <li>
-        <Link to='/blogs' onClick={onClick}>
+        <NavLink to='/blogs' onClick={onClick} className='large-text'>
           Blogs
-        </Link>
+        </NavLink>
       </li>
     </ul>
   );
@@ -54,6 +34,7 @@ function NavLinks({ onClick }) {
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const navigate = useNavigate();
 
   const handleScroll = () => {
     const navbarHeight = document.querySelector('.prime-sender-navbar').offsetHeight;
@@ -73,13 +54,37 @@ function Navbar() {
     document.body.style.overflow = 'auto';
   }
 
-  function openPage() {
+  function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 80;
+      const offset = element.offsetTop - navbarHeight;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  }
+
+  function handleFeatureClick() {
+    if (window.location.pathname === '/') {
+      scrollToSection('main-features');
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        scrollToSection('main-features');
+      }, 1000);
+    }
+  }
+
+  function openPage(e) {
+    let btnId = e.target.id;
+
     setShowMenu(false);
     document.body.style.overflow = 'auto';
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+
+    if(btnId === 'main-features-btn') {
+      handleFeatureClick();
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   function openMenu() {
@@ -88,15 +93,15 @@ function Navbar() {
   }
 
   return (
-    <nav className={isFixed ? 'navbar-fixed prime-sender-navbar' : 'prime-sender-navbar'} style={{background: !isFixed && showMenu ? '#f2fffe' : ''}}>
+    <nav className={`prime-sender-navbar ${isFixed && 'navbar-fixed '} ${showMenu && 'active'}`} style={{background: !isFixed && showMenu ? '#f2fffe' : ''}}>
       <div className='prime-sender-container'>
-        <Link to='/' className='brand' onClick={openPage}>
+        <NavLink to='/' className='brand' onClick={openPage}>
           <div className='nav_img_container'>
-            <img src="images/ps-logo-bottom.png" alt="logo" />
-            <img src='images/ps-logo-top.png' alt='logo' />
+            <img src="/images/ps-logo-bottom.png" alt="logo" />
+            <img src='/images/ps-logo-top.png' alt='logo' />
           </div>
           <p> Prime Sender </p>
-        </Link>
+        </NavLink>
 
         <div className='nav-links' >
           <div className={`nav-elements  ${showMenu && 'active'}`}>

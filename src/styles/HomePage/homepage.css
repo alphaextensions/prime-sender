@@ -137,8 +137,8 @@
     top: auto;
     bottom: 4vh;
   }
-  .home-content .btn{
-    width: 180px;
+  .home-content .left-col .btn{
+    width: 200px;
   }
   .home-content img{
     width: 60%;
@@ -149,7 +149,7 @@
   .home-content {
     padding-top: 8rem;
   }
-  .home-content .btn{
+  .home-content .left-col .btn {
     width: 160px;
   }
   .home-content img{
@@ -164,8 +164,8 @@
   .home-content .home-btns{
     flex-direction: column;
   }
-  .home-content .btn{
-    padding: 6px 10px;
+  .home-content .left-col .btn{
+    padding: 6px 12px;
     width: max-content;
   }
   .home-content img{

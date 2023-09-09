@@ -57,7 +57,7 @@
   }
 
   .sub-title-text {
-    font-size: 18px !important;
+    font-size: 19px !important;
   }
 }
 
@@ -71,6 +71,7 @@
   }
 
   .section-title {
+    grid-template-columns: 1fr auto auto;
     gap: 10px;
   }
 
@@ -79,7 +80,7 @@
   }
 
   .sub-title-text {
-    font-size: 16px !important;
+    font-size: 18px !important;
   }
 }
 
@@ -93,7 +94,7 @@
   }
 
   .sub-title-text {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
 }
 
@@ -111,7 +112,7 @@
   }
 
   .sub-title-text {
-    font-size: 13px !important;
+    font-size: 15px !important;
   }
 }
 
@@ -125,7 +126,7 @@
   }
 
   .sub-title-text {
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 }
 
@@ -139,13 +140,14 @@
   }
 
   .sub-title-text {
-    font-size: 11px !important;
+    font-size: 12px !important;
   }
 }
 
 /* Making GIF Colorfull */
 .main-feature-section .title-image {
   filter: hue-rotate(200deg) saturate(2) contrast(5) !important;
+  padding: 13px !important;
 }
 
 .use_main .title-text {

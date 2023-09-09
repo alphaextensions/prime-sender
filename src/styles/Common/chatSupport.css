@@ -1,7 +1,7 @@
 
 .chat-support {
   position: fixed;
-  top: 93vh;
+  bottom: 3vh;
   width: 35px;
   right: 2vw;
   transition: transform 0.3s ease-in-out;
@@ -14,6 +14,12 @@
 
 .chat-support img{
   width: 100%;
+  filter: drop-shadow(1px 4px 3px gray);
+}
+
+.chat-support img:hover {
+  width: 110%;
+  filter: drop-shadow(1px 1px 2px var(--color-primary1));
 }
 
 .tooltip {

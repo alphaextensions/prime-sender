@@ -7,7 +7,9 @@ const Footer = () => {
   function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navbarHeight = 80;
+      const offset = element.offsetTop - navbarHeight;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   }
 
@@ -29,7 +31,8 @@ const Footer = () => {
         <div className="footer_row">
           <div className="footer_info">
             <div className="footer_logo">
-              <img src="/images/logo-large.png" alt="" /> 
+              <img src="/images/ps-logo-bottom.png" alt="logo" />
+              <img src='/images/ps-logo-top.png' alt='logo' />
             </div>
             <h2 className='heading'>Prime Sender</h2>
           </div>
