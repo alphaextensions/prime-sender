@@ -3,7 +3,7 @@ import { Link , useNavigate} from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
-  
+
   function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="footer_links">
             <h4 className='heading'>Legal</h4>
             <ul className='large-text'>
-              <li><a href='/terms-of-service' > Terms of Use </a></li>
+              <li><a href='/terms-of-service' > Terms of Service </a></li>
               <li><a href='/privacy-policy' > Privacy Policy </a></li>
             </ul>
           </div>

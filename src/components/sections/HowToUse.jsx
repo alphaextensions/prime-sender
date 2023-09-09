@@ -2,6 +2,7 @@ import "../../styles/HomePage/howToUse.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect} from "react";
+import SectionTitle from "../Common/SectionTitle";
 
 const HowToUse = () => {
 
@@ -11,10 +12,7 @@ const HowToUse = () => {
 
   return (
     <div className="use_main" id="how-to-use">
-      <div className="use_heading">
-        <img className="lightbulb" src="/images/lightbulb.png" alt="" />
-        <h1 className="title-text">How To Use</h1>
-      </div>
+      <SectionTitle gif="/images/lightbulb.png" title="How to Use" white/>
       <div className="use_container">
         {/* left container */}
         <div className="use_left" data-aos="fade-right" >
@@ -65,7 +63,7 @@ const HowToUse = () => {
         {/* right container */}
         <div className="use_right" data-aos="flip-right" >
           <div className="use_right_container">
-            <img src="/images/how-to-use.jpg" alt="How to use" />
+            <img src="/images/how-to-use.png" alt="How to use" />
           </div>
         </div>
       </div>

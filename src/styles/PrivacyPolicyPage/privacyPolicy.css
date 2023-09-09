@@ -1,16 +1,8 @@
-.privacy-policy {
-  margin-top: 8rem;
-}
-
-.privacy-policy .heading {
-  margin: 40px 0px;
-}
-
 .policy-container {
   display: flex;
   align-items: start;
   justify-content: center;
-  width: 85%;
+  width: min(90%, 900px) !important;
   flex-direction: column;
   margin: 0px auto;
 }

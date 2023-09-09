@@ -3,7 +3,6 @@
   padding: 30px;
   background: linear-gradient(180deg, #ffffff00 0%, #008373 20%, #008373 80%, #e2effa 100%);
   padding: 10rem 0;
-  margin-top: -3rem;
 }
 
 .use_container {
@@ -34,18 +33,10 @@
   width: 90%;
 }
 
-.use_heading .lightbulb {
-  width: 70px;
-}
-
-.use_heading .title-text {
+.use_heading>h1 {
   width: fit-content;
   margin: 0;
   color: var(--color-white);
-  background: linear-gradient(to right, #ffcc00, #e2effa 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .use_left_bottom {
@@ -129,7 +120,7 @@
 
 @media screen and (max-width: 780px) {
   .use_feature_text p {
-    line-height: 20px;
+    line-height: 15px;
   }
   .use_heading .lightbulb {
     width: 60px;
@@ -137,9 +128,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  .use_feature_text p {
-    line-height: 10px;
-  }
   .use_right_container {
     padding: 10px;
     border-radius: 10px;

@@ -1,19 +1,21 @@
 import UniqueFeatureCard from "../Common/UniqueFeatureCard";
 import '../../styles/HomePage/uniqueFeatures.css'
+import SectionTitle from "../Common/SectionTitle";
 
 const UniqueFeatures = () => {
   return (
     <div className="unique_main">
+      <SectionTitle 
+        gif="/gifs/unique-features.gif" 
+        title="Unique Features"
+        subtitle="Features that make your workflow effortless"
+      />
       <div className="unique_container">
-        <div className="unique_heading">
-          <h1 className="title-text">Unique Features</h1>
-          <p className="sub-title-text">Features that make your workflow effortless</p>
-        </div>
         <div className="unique_features">
           <UniqueFeatureCard 
           imgSrc={'/images/translate.gif'}
           order={1}
-          subTitle={'Available in regional language'}
+          subTitle={'Available in Your regional language'}
           title={'Easily Translate chats with customers and features inside the extension'}
           featureText={`With single click users can translate messages recived from customers and understand it in their regional language. No need to open Google translate everytime you recieve a message from a different language. The features inside the extension are also available in your regional language.`}
           />
