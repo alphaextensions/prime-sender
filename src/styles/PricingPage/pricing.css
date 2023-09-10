@@ -23,7 +23,7 @@
   top: 55%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 45vw;
+  width: min(90%,700px);
   height: fit-content;
   background:white;
   border: 4px solid #009A88;
@@ -541,4 +541,13 @@
 
 .multiple_user_card {
   flex: 0.75;
+}
+
+@media (max-width:520px) {
+ .pricing-popup{
+  display: none;
+ } 
+ .pricing-popup-overlay{
+  display: none;
+ }
 }
