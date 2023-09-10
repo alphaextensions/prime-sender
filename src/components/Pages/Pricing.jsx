@@ -140,7 +140,7 @@ const Pricing = () => {
         planType === 'basic' ? getButtonLink(currentCountry,planPeriod,'basic') : getButtonLink(currentCountry,planPeriod,'advance') :
         popupPlan === 'basic' ? getButtonLink(popupCountry,popupPlanPeriod,'basic') : getButtonLink(popupCountry,popupPlanPeriod,'advance');
     const button_text = !isPopup ? 
-        planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy ' + planType : 
+        planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy Advance' : 
         popupPlanPeriod ==='annually' ? 'Buy' : 'Subscribe'
     return (
       <a
@@ -310,9 +310,11 @@ const Pricing = () => {
               </div>
             </div>
           </div>
-          <div className="pricing_discount_text">
-          Early bird offer for new user - <span style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF`</span>. Use code <img src="/images/coupon.png" alt="" />
-          </div>
+          {
+            planPeriod === 'monthly' && <div className="pricing_discount_text">
+            Early bird offer for new user - <span style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF</span>. Use code <img src="/images/coupon.png" alt="" />
+            </div>
+          }
         </div>
         <div className="pricing_cards_container">
           {/* free card */}
@@ -356,7 +358,7 @@ const Pricing = () => {
                 <AiOutlineCheck />
                 <p className="pricing_card_feature_text">
                   {" "}
-                  Customization
+                  Translate Conversations
                 </p>
               </div>{" "}
               <div className="pricing_card_feature">
@@ -408,7 +410,7 @@ const Pricing = () => {
                   <span className={currentCountry === 'india' ? 'rupee' : ''}>
                     {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
                   </span>
-                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months per account
+                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months' service per account
                 </span>
               </div>
             }
@@ -480,7 +482,7 @@ const Pricing = () => {
                   <span className={currentCountry === 'india' ? 'rupee' : ''}>
                     {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
                   </span>
-                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months per account
+                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months' service per account
                 </span>
               </div>
             }

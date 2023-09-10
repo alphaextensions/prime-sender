@@ -25,15 +25,17 @@ const HelpUsImprove = () => {
           <p className='sub-heading'>If you had a change of heart somehow and want to know how Web Sender
             works quickly in 3 steps, here :</p>
           <br />
-          <p className='text'>1. Enter the numbers you want to send the message to, separated by comma</p>
-          <p className='text'>2. Enter the message that {`you'd`} like to send. You could also add an attachment.</p>
-          <p className='text'>Click on {"Add Attachment"} {`>>`} Click on {"Image/Video/Document"}{" "}
-            {`>>`} Select the file {`you'd`} like to send {`>>`} The first message
-            would be sent to you itself {`>>`} Once it is sent, open the extension
-            and click on {"Send Message"}. The messages along with the file will be
-            sent one by one.</p>
-          <p className='text'>3.Download the delivery report by clicking on {`'Delivery`} {`Report'`}{" "}
-            to view the delivery status of the messages and the attachment sent
+          <p className='text'>1. Enter the numbers you want to send the message to, separated by comma.</p>
+          <p className='text'>2. Enter the message you'd like to send. You could also add attachments 📁.</p>
+          <p className='text' style={{marginLeft: '2rem'}}>
+            <ul>
+              <li>Click on the icon of 📎 Attachment inside the text box inside the extension</li>
+              <li>Select files you'd like to send. You can select multiple files.</li>
+              <li>You can click on Add Caption to add caption to your attachment</li>
+              <li> Click on Send button inside the extension.</li>
+            </ul>         
+          </p>
+          <p className='text'>3. Download the delivery report by clicking on Delivery Report to view the delivery status of the messages and the attachment sent.
           </p>
         </div>
       </div>
