@@ -140,7 +140,7 @@ const Pricing = () => {
         planType === 'basic' ? getButtonLink(currentCountry,planPeriod,'basic') : getButtonLink(currentCountry,planPeriod,'advance') :
         popupPlan === 'basic' ? getButtonLink(popupCountry,popupPlanPeriod,'basic') : getButtonLink(popupCountry,popupPlanPeriod,'advance');
     const button_text = !isPopup ? 
-        planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy ' + planType : 
+        planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy Advance' : 
         popupPlanPeriod ==='annually' ? 'Buy' : 'Subscribe'
     return (
       <a
@@ -311,7 +311,7 @@ const Pricing = () => {
             </div>
           </div>
           <div className="pricing_discount_text">
-          Early bird offer for new user - <span style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF`</span>. Use code <img src="/images/coupon.png" alt="" />
+          Early bird offer for new user - <span style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF</span>. Use code <img src="/images/coupon.png" alt="" />
           </div>
         </div>
         <div className="pricing_cards_container">
@@ -356,7 +356,7 @@ const Pricing = () => {
                 <AiOutlineCheck />
                 <p className="pricing_card_feature_text">
                   {" "}
-                  Customization
+                  Translate Conversations
                 </p>
               </div>{" "}
               <div className="pricing_card_feature">

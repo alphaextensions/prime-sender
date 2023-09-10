@@ -281,7 +281,7 @@
 
 .pricing_discount_text img {
   margin-left: 10px;
-  width: 140px;
+  width: 100px;
 }
 
 .pricing_cards_container {
@@ -370,7 +370,7 @@
 
 .pricing_card_heading {
   color: #6c757d;
-  font-size: 18px;
+  font-size: 17px;
   width: 100%;
   display: flex;
   justify-content: center;

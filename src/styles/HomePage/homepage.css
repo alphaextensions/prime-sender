@@ -22,7 +22,7 @@
   width: 80%;
   max-width: 1400px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin: auto;
   text-align: center;
@@ -33,6 +33,7 @@
 .home-content .left-col{
   flex-basis: 40%;
   text-align: left;
+  padding: 4rem 0;
 }
 
 .home-content .right-col{
@@ -50,6 +51,7 @@
   font-weight: 600;
   color: #8b8b8b;
   text-transform: capitalize;
+  margin-top: 1rem;
 }
 
 .home-content .left-col .offer{
@@ -64,7 +66,7 @@
 
 .home-content .left-col .home-btns{
   width: 100%;
-  margin: 40px auto 15px;
+  margin: 45px auto 15px;
   display: flex;
   align-items: center;
   justify-content: start;
