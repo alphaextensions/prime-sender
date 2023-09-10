@@ -23,7 +23,7 @@
   top: 55%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 44vw;
+  width: 45vw;
   height: fit-content;
   background:white;
   border: 4px solid #009A88;
@@ -158,12 +158,46 @@
   padding: 6px 30px;
   color: #fff;
 }
-.pricing-popup-footer{
+.pricing-popup-bottom{
+  position: relative;
   width: 90%;
-  margin: 35px auto 10px;
+  margin: 2rem auto 0;
+  height: 300px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(128, 212, 167, 0.60) 0%, rgba(128, 212, 167, 0.05) 100%);
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-direction: column;
+}
+
+.pricing-popup-features{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1.2rem;
+  gap: 0.5rem 1rem;
+}
+
+.pricing-popup-features .feature-item{
+  color: var(--color-primary1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: .9rem;
+}
+
+.pricing-popup-features .feature-item .check_icon{
+  width: 16px;
+  margin-right: 5px;
+}
+
+.pricing-popup-footer{
+  padding: 0 1rem;
+  position: absolute;
+  bottom: 0;
+  margin: 2rem auto 0.6rem;
+  display: flex;
+  align-items: center;
 }
 .pricing-popup-footer .footer-instruction{
   font-size:12px;
@@ -180,7 +214,7 @@
   width: 18px;
   height: 18px;
   font-weight: 500;
-  margin: 0 15px 0 0px;
+  margin: 0 10px 0 0px;
   cursor: pointer;
   display: flex;
   align-items: center;
