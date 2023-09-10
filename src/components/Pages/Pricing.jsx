@@ -3,7 +3,7 @@ import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import pricingFeatures from "../Data/pricing-page-features-list"
-import Slider from "../common/Slider";
+import Slider from "../Common/Slider";
 import SectionTitle from "../Common/SectionTitle";
 
 const Pricing = () => {
@@ -286,7 +286,7 @@ const Pricing = () => {
       {popupLastPlan && generatePricingPopup()}
       <div className="pricing_main">
         <div className="pricing_top_section">
-          <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Flexible Pricing" />
+          <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
           <div className="pricing_switches">
             <div className="pricing-slider">
               <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />

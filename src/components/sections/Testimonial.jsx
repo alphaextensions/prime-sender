@@ -43,8 +43,7 @@ const Testimonial = () => {
         </div>
         <div className="testimonial_line_break" />
         <div className="testimonial_lower">
-          <div id="testimonial">
-          <SectionTitle gif="/gifs/testimonials-2.gif" title="What Customers Are Saying" white/>
+          <SectionTitle id="testimonial" gif="/gifs/testimonials-2.gif" title="What Customers Are Saying" white/>
           <div className="testimonial_cards">
             <div className="testimonial_left">
                 <div className="testimonial_card">
@@ -93,7 +92,6 @@ const Testimonial = () => {
                 </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

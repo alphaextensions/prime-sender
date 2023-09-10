@@ -13,13 +13,26 @@ const Footer = () => {
     }
   }
 
-  function  handleReviewClick() {
+  function handleFeatureClick() {
     if (window.location.pathname === '/') {
-      scrollToSection('testimonial');
+      scrollToSection('main-features');
     } else {
       navigate('/');
       setTimeout(() => {
-        scrollToSection('testimonial')
+        scrollToSection('main-features');
+      }, 1000);
+    }
+  }
+
+  function handleSectionClick(e) {
+    let href = e.target.href;
+    let sectionId = href.split('#')[1];
+    if (window.location.pathname === '/') {
+      scrollToSection(sectionId);
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        scrollToSection(sectionId);
       }, 1000);
     }
   }
@@ -29,18 +42,16 @@ const Footer = () => {
       <div className="footer_container">
       <hr className='divider' />
         <div className="footer_row">
-          <div className="footer_info">
-            <div className="footer_logo">
-              <img src="/images/ps-logo-bottom.png" alt="logo" />
-              <img src='/images/ps-logo-top.png' alt='logo' />
-            </div>
-            <h2 className='heading'>Prime Sender</h2>
+          <div className="footer_logo">
+            <img src="/images/logo-img.png" alt="logo"/>
+            <img src="/images/logo-text.png" alt="logo"/>
           </div>
           <div className="footer_links">
             <h4 className='heading'>Company</h4>
             <ul className='large-text'>
+              <li><a href='/' > Home </a></li>
+              <li><Link to='/#how-to-use' onClick={handleSectionClick}> How to Use </Link></li>
               <li><a href='/blogs' > Blog </a></li>
-              <li><a href='/help-us-improve' > Help Us Improve </a></li>
             </ul>
           </div>
           <div className="footer_links">
@@ -48,7 +59,7 @@ const Footer = () => {
             <ul className='large-text'>
               <li><a href='/pricing' >Pricing</a></li>
               <li><a href='/request-feature' > Request a Feature </a></li>
-              <li><Link to='/#testimonial' onClick={ handleReviewClick}>Reviews</Link></li>
+              <li><Link to='/#testimonial' onClick={handleSectionClick}>Reviews</Link></li>
             </ul>
           </div>
           <div className="footer_links">

@@ -48,6 +48,12 @@ export default [
     advance: true,
   },
   {
+    name: 'Translate Conversation',
+    free: true,
+    basic: true,
+    advance: true,
+  },
+  {
     name: 'Priority Support',
     free: false,
     basic: true,

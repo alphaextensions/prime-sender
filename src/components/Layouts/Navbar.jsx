@@ -97,10 +97,9 @@ function Navbar() {
       <div className='prime-sender-container'>
         <NavLink to='/' className='brand' onClick={openPage}>
           <div className='nav_img_container'>
-            <img src="/images/ps-logo-bottom.png" alt="logo" />
-            <img src='/images/ps-logo-top.png' alt='logo' />
+            <img src="/images/logo-img.png" alt="logo"/>
+            <img src="/images/logo-text.png" alt="logo"/>
           </div>
-          <p> Prime Sender </p>
         </NavLink>
 
         <div className='nav-links' >

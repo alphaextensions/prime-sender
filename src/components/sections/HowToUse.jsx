@@ -11,8 +11,8 @@ const HowToUse = () => {
   }, [])
 
   return (
-    <div className="use_main" id="how-to-use">
-      <SectionTitle gif="/images/lightbulb.png" title="How to Use" white/>
+    <div className="use_main">
+      <SectionTitle id="how-to-use" gif="/images/lightbulb.png" title="How to Use" white/>
       <div className="use_container">
         {/* left container */}
         <div className="use_left" data-aos="fade-right" >

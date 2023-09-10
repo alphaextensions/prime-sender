@@ -10,6 +10,7 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy"
 import Footer from "./components/Layouts/Footer";
 import ChatSupport from './components/common/ChatSupport';
 import Error from './components/Pages/Error';
+import Success from './components/Pages/success';
 
 const App = () => {
   return (
@@ -24,6 +25,8 @@ const App = () => {
         <Route exact path="/blogs" element={<Blogs />} />
         <Route exact path="/terms-of-service" element={<TermsOfUse />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route exact path="/basic-success" element={<Success plan="basic" />} />
+        <Route exact path="/advance-success" element={<Success plan="advance" />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

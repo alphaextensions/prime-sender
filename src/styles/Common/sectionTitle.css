@@ -157,6 +157,10 @@
   -webkit-text-fill-color: transparent; 
 }
 
+.unique_main .section-title {
+  gap: 10px !important;
+}
+
 .faq_section .title-image {
   filter: hue-rotate(100deg) saturate(2) contrast(5) !important;
 }
