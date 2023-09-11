@@ -312,18 +312,18 @@ const Pricing = () => {
             <div className="pricing_country">
               <div className="pricing_country_switch">
                 <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
-                  <p className="country_current_switch">
+                  <p className="country_current_switch heading">
                     <img src="/images/india.png" alt="" />
                     India
                   </p>
                 </div>
                 <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class" }`} onClick={() => setCurrentCountry("indonesia")} >
-                  <p className="country_current_switch">
+                  <p className="country_current_switch heading">
                     <img src="/images/indonesia.svg" alt="" />
                     Indonesia</p>
                 </div>
                 <div className={`country_switch ${currentCountry === "international" && "active_country_class" }`} onClick={() => setCurrentCountry("international")}> 
-                  <p className="country_current_switch">🌎 International</p>
+                  <p className="country_current_switch heading">🌎 International</p>
                 </div>
               </div>
             </div>
@@ -342,9 +342,9 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_price">
               <div className="free_pricing_div">
-                <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
                   {currentCountry === 'indonesia' ? currentPrice.basic.toString().substring(0,4) : currentPrice.basic.toString().substring(0,1)}</span>
-                <span>0</span>
+                <span className="heading">0</span>
                 <br />
                 <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", visibility: "hidden" }}>{currentCountry === "india" ? "₹" : currentCountry === 'indonesia' ? "IDR " : "$"}</p>
                 <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap", visibility: "hidden" }}>{planPeriod === 'monthly' ? currentPrice.basicSlash : (currentPrice.basicSlash / 12).toFixed(2)}</p>
@@ -400,13 +400,13 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_price">
               <div className="pricing_cut_price">
-                <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
                   {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
                 </span>
                 {
                   currentCountry === 'indonesia' ?
-                  <span>{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : (currentPrice.basic.substring(4) / 12).toFixed(2)}</span> :
-                  <span>{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : (currentPrice.basic.substring(1) / 12).toFixed(2)}</span>
+                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : (currentPrice.basic.substring(4) / 12).toFixed(2)}</span> :
+                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : (currentPrice.basic.substring(1) / 12).toFixed(2)}</span>
                 }
                 <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                 <br />
@@ -472,13 +472,13 @@ const Pricing = () => {
             </div>
             <div className="pricing_card_price">
               <div className="pricing_cut_price">
-                <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
                   {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
                 </span>
                 {
                   currentCountry === 'indonesia' ?
-                  <span>{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : (currentPrice.advance.substring(4) / 12).toFixed(2)}</span> :
-                  <span>{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : (currentPrice.advance.substring(1) / 12).toFixed(2)}</span>
+                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : (currentPrice.advance.substring(4) / 12).toFixed(2)}</span> :
+                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : (currentPrice.advance.substring(1) / 12).toFixed(2)}</span>
                 }
                 <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                 <br />
@@ -550,8 +550,8 @@ const Pricing = () => {
             </div>
           </div>
         </div>
-        <div colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
-        <div style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
+        <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
+        <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
         <div className="pricing_lower_section">
           <SectionTitle 
             gif="/gifs/compare-plans.gif" 
