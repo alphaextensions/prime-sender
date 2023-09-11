@@ -40,6 +40,9 @@ const Pricing = () => {
 
   const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=919160583572&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
+  const trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report"];
+  const premium_features = ["Schedule (Advance)", 'Business Chat Link (Advance)', 'Meet/Zoom Support (Advance)', "Multiple Attachments (Advance)"];
+
   const pricing = {
     india: {
       monthly: {
@@ -261,19 +264,34 @@ const Pricing = () => {
           <div className="pricing-popup-btn">
             <button>{showButton(true,popupPlan)}</button>
           </div>
-          <div className="pricing-popup-footer">
-            <div className="pricing-popup-footer-icon"><span>i</span></div>
-            <div className="pricing-popup-footer-content">
-              <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan==='freeTrial' ? "*Discount applicable for the first month" : ""}</span>
+          <div className="pricing-popup-bottom">
+            <div className="pricing-popup-features">
               {
-                popupPlanPeriod === 'monthly' ?
-                <span>
-                  By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
-                </span>:
-                <span>
-                  By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
-                </span>
+                premium_features.map((item,index)=>{
+                  return <div className="feature-item text-bold" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item}</div>
+                })
               }
+              {
+                trial_features.map((item,index)=>{
+                  return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item}</div>
+                })
+              }
+            </div>
+
+            <div className="pricing-popup-footer">
+              <div className="pricing-popup-footer-icon"><span>i</span></div>
+              <div className="pricing-popup-footer-content">
+                <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan==='freeTrial' ? "*Discount applicable for the first month" : ""}</span>
+                {
+                  popupPlanPeriod === 'monthly' ?
+                  <span>
+                    By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
+                  </span>:
+                  <span>
+                    By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
+                  </span>
+                }
+              </div>
             </div>
           </div>
         </div>
