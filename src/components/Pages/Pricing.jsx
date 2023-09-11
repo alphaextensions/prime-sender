@@ -329,8 +329,14 @@ const Pricing = () => {
             </div>
           </div>
           {
-            planPeriod === 'monthly' && <div className="pricing_discount_text">
-            Early bird offer for new user - <span style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF</span>. Use code <img src="/images/coupon.png" alt="" />
+            planPeriod === 'monthly' && 
+            <div className="pricing_discount_text ">
+              <div className="text">
+                Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF.</span> 
+              </div>
+              <div className="discount-img text" >
+                Use code <img src="/images/coupon.png" alt="" />
+              </div>
             </div>
           }
         </div>
