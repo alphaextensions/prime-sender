@@ -9,7 +9,7 @@
 
 :root {
   --color-primary1: #009A88;
-  --color-primary2: #02c5ae;
+    --color-primary2: #02c5ae;
   --color-primary3: #00FFE1;
   --color-primary4: #f2fffe;
   --color-primary5: #d4fffc;
@@ -114,10 +114,7 @@ body {
 .main-iframe {
   margin: 0px auto;
   width: min(900px, 100%);
-}
-
-.main-iframe .RVEQke {
-  background-color: var(--color-primary2) !important;
+  border: 0;
 }
 
 /* Scrollbar styles */
