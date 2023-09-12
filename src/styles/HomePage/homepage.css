@@ -41,7 +41,7 @@
 }
 
 .home-content .left-col .title{
-  color: #4b4b4b;
+  color: var(--color-secondary5);
   text-transform: capitalize;
   font-weight: 900;
   margin-bottom: .6rem;
@@ -49,7 +49,7 @@
 
 .home-content .left-col .sub_title {
   font-weight: 600;
-  color: #8b8b8b;
+  color: var(--color-dark-grey);
   text-transform: capitalize;
   margin-top: 1rem;
 }
@@ -57,7 +57,7 @@
 .home-content .left-col .offer{
   margin-top: .6rem;
   font-weight: 500;
-  color: #585858;
+  color: var(--color-secondary5);
 }
 
 .home-content .left-col .offer .purple{
@@ -92,7 +92,7 @@
 .home-content .left-col .howtousebtn:hover{
   background-color: var(--color-secondary4);
   border: 2px solid var(--color-black) !important;
-  color: white;
+  color: var(--color-white);
 }
 /* 
 .home-content .right-col img{

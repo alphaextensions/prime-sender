@@ -48,7 +48,7 @@
 }
 
 .success-container .cross-icon {
-  color: #999 !important;
+  color: var(--color-secondary3) !important;
 }
 
 @media (max-width:480px) {

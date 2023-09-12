@@ -88,7 +88,7 @@
 .testimonial_cards{
   width: 80%;
   margin: 6rem auto 2rem;
-  background-color: #f2fffe66;
+  background-color: var(--color-secondary3);
   /* background: linear-gradient(180deg,  rgba(234, 240, 255, 0.0)  0%, rgba(234, 240, 255, 0.0) 100%); */
   position: relative;
   display: flex;
@@ -104,13 +104,13 @@
   background: linear-gradient(to bottom, #d9fefb, #f2fffe);
   min-height: 20vh;
   margin-left: -30px;
-  color: #6c757d;
+  color: var(--color-dark-grey);
   border-radius: 8px;
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, .5);
 }
 
 .testimonial_right{
-  color: #6c757d;
+  color: var(--color-dark-grey);
   flex-basis: 60%;
   min-height: 20vh;
   margin-right: -30px;
@@ -139,7 +139,7 @@
 
 .testimonial_card h2{
   margin-bottom: 15px;
-  color: #353f4f;
+  color: var(--color-secondary4);
   position: relative;
 }
 
@@ -147,7 +147,7 @@
   font-size: 5rem;
   position: absolute;
   top: -120%;
-  color: #6c757d;
+  color: var(--color-dark-grey);
   opacity: .12;
   left: 0;
 }
@@ -164,7 +164,7 @@
 }
 
 .customer_info .customer_name h4{
-  color: #353f4f;
+  color: var(--color-secondary4);
 }
 
 .customer_img{
@@ -269,6 +269,7 @@
   }
   .customer_img{
     width: 40px;
+    height: 40px ;
   }
   .quotation_mark{
     font-size: 4.5rem;

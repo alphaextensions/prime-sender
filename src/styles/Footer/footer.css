@@ -44,25 +44,25 @@
 
 .footer_links li a{
   text-decoration: none;
-  color: #6c757d;
+  color: var(--color-dark-grey);
 }
 
 .footer_links h4{
   margin-bottom: 20px;
-  color: #353f4f;
+  color: var(--color-secondary4)
 }
 
 .footer_links li {
   list-style: none;
   cursor: pointer;
   margin-bottom: 15px;
-  color: #6c757d;
+  color: var(--color-dark-grey);
   transition: .3s;
   text-decoration: none;
 }
 
 .footer_links li a:hover {
-  color: #353f4f;
+  color: var(--color-secondary4);
 }
 
 .footer_container .divider {
@@ -78,7 +78,7 @@
 
 .footer_copyright {
   text-align: center;
-  color: #6c757d;
+  color: var(--color-dark-grey);
   line-height: 16px;
 }
 

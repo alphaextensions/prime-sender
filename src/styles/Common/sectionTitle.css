@@ -30,7 +30,7 @@
 .sub-title-text {
   text-align: center;
   font-size: 22px !important;
-  color: #6d6d6d;
+  color: var(--color-dark-grey);
 }
 
 @media screen and (max-width:1080px) {

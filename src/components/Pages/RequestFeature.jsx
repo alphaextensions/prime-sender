@@ -1,10 +1,14 @@
+import HelmetHeader from "../Common/HelmetHeader";
 import SectionTitle from "../Common/SectionTitle";
 
 const RequestFeature = () => {
-  document.title = 'Feature Request | Prime Sender';
-
   return (
-    <div className="main-section">
+    <>
+      <HelmetHeader
+        title={'Feature Request | Prime Sender'}
+        description={'Submit your request for adding new features to Prime Sender'}
+      />
+      <div className="main-section">
       <SectionTitle gif="/gifs/feature-request.gif" title="Feature Request" />
       <div className='main-container request_feature_container'>
         <iframe
@@ -16,6 +20,7 @@ const RequestFeature = () => {
         </iframe>
       </div>
     </div>
+    </>
   );
 };
 

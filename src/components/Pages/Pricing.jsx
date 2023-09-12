@@ -5,10 +5,9 @@ import { RxCross2 } from "react-icons/rx";
 import pricingFeatures from "../Data/pricing-page-features-list"
 import Slider from "../Common/Slider";
 import SectionTitle from "../Common/SectionTitle";
+import HelmetHeader from "../Common/HelmetHeader";
 
-const Pricing = () => {
-  document.title = 'Pricing | Prime Sender';
-  
+const Pricing = () => {  
   const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");
   const [popupPlanPeriod, setPopupPlanPeriod] = useState('annually');
@@ -300,295 +299,301 @@ const Pricing = () => {
   }
 
   return (
-    <div className="pricing_container">
-      {popupLastPlan && generatePricingPopup()}
-      <div className="pricing_main">
-        <div className="pricing_top_section">
-          <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
-          <div className="pricing_switches">
-            <div className="pricing-slider">
-              <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
-            </div>
-            <div className="pricing_country">
-              <div className="pricing_country_switch">
-                <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
-                  <p className="country_current_switch heading">
-                    <img src="/images/india.png" alt="" />
-                    India
-                  </p>
+    <>
+      <HelmetHeader 
+        title={'Pricing | Prime Sender'}
+        description={'Pricing for Prime Sender'}
+      />
+      <div className="pricing_container">
+        {popupLastPlan && generatePricingPopup()}
+        <div className="pricing_main">
+          <div className="pricing_top_section">
+            <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
+            <div className="pricing_switches">
+              <div className="pricing-slider">
+                <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
+              </div>
+              <div className="pricing_country">
+                <div className="pricing_country_switch">
+                  <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
+                    <p className="country_current_switch heading">
+                      <img src="/images/india.png" alt="" />
+                      India
+                    </p>
+                  </div>
+                  <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class" }`} onClick={() => setCurrentCountry("indonesia")} >
+                    <p className="country_current_switch heading">
+                      <img src="/images/indonesia.svg" alt="" />
+                      Indonesia</p>
+                  </div>
+                  <div className={`country_switch ${currentCountry === "international" && "active_country_class" }`} onClick={() => setCurrentCountry("international")}> 
+                    <p className="country_current_switch heading">🌎 International</p>
+                  </div>
                 </div>
-                <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class" }`} onClick={() => setCurrentCountry("indonesia")} >
-                  <p className="country_current_switch heading">
-                    <img src="/images/indonesia.svg" alt="" />
-                    Indonesia</p>
+              </div>
+            </div>
+            {
+              planPeriod === 'monthly' && 
+              <div className="pricing_discount_text ">
+                <div className="text">
+                  Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF.</span> 
                 </div>
-                <div className={`country_switch ${currentCountry === "international" && "active_country_class" }`} onClick={() => setCurrentCountry("international")}> 
-                  <p className="country_current_switch heading">🌎 International</p>
+                <div className="discount-img text" >
+                  Use code <img src="/images/coupon.png" alt="" />
                 </div>
-              </div>
-            </div>
-          </div>
-          {
-            planPeriod === 'monthly' && 
-            <div className="pricing_discount_text ">
-              <div className="text">
-                Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF.</span> 
-              </div>
-              <div className="discount-img text" >
-                Use code <img src="/images/coupon.png" alt="" />
-              </div>
-            </div>
-          }
-        </div>
-        <div className="pricing_cards_container">
-          {/* free card */}
-          <div className="pricing_card">
-            <div className="pricing_card_type">
-              <p>Free</p>
-            </div>
-            <div className="pricing_card_price">
-              <div className="free_pricing_div">
-                <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
-                  {currentCountry === 'indonesia' ? currentPrice.basic.toString().substring(0,4) : currentPrice.basic.toString().substring(0,1)}</span>
-                <span className="heading">0</span>
-                <br />
-                <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", visibility: "hidden" }}>{currentCountry === "india" ? "₹" : currentCountry === 'indonesia' ? "IDR " : "$"}</p>
-                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap", visibility: "hidden" }}>{planPeriod === 'monthly' ? currentPrice.basicSlash : (currentPrice.basicSlash / 12).toFixed(2)}</p>
-              </div>
-            </div>
-            {planPeriod === 'annually' &&
-              <div className="pricing_card_heading">
-                <p>Free Forever</p>
-                <p style={{ visibility: "hidden" }}>{` a`}</p>
               </div>
             }
-            <div className="pricing_card_button">
-              <button>
-                <a
-                  href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
-                  target="_blank"
-                  className="buy_button">
-                    Try Now
-                </a>
-              </button>
-            </div>
-
-            <div className="pricing_card_features">
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text">Attachment</p>
-              </div>
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text">
-                  {" "}
-                  Translate Conversations
-                </p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Caption</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Save Campaing Details</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Detailed Delivery Report</p>
-              </div>
-            </div>
           </div>
-          {/* basic card */}
-          <div className="pricing_card premium_card">
-            <div className="pricing_card_type">
-              <p>Basic</p>
-            </div>
-            <div className="pricing_card_price">
-              <div className="pricing_cut_price">
-                <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
-                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
-                </span>
-                {
-                  currentCountry === 'indonesia' ?
-                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : (currentPrice.basic.substring(4) / 12).toFixed(2)}</span> :
-                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : (currentPrice.basic.substring(1) / 12).toFixed(2)}</span>
-                }
-                <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
-                <br />
-                <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
-                {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
-                </p>
-                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
-                {
-                  currentCountry === 'indonesia' ?
-                  planPeriod === 'monthly' ? currentPrice.basicSlash.substring(4) : (currentPrice.basicSlash.substring(4) / 12).toFixed(2):
-                  planPeriod === 'monthly' ? currentPrice.basicSlash.substring(1) : (currentPrice.basicSlash.substring(1) / 12).toFixed(2)
-                }
-                </p>
+          <div className="pricing_cards_container">
+            {/* free card */}
+            <div className="pricing_card">
+              <div className="pricing_card_type">
+                <p>Free</p>
+              </div>
+              <div className="pricing_card_price">
+                <div className="free_pricing_div">
+                  <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
+                    {currentCountry === 'indonesia' ? currentPrice.basic.toString().substring(0,4) : currentPrice.basic.toString().substring(0,1)}</span>
+                  <span className="heading">0</span>
+                  <br />
+                  <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", visibility: "hidden" }}>{currentCountry === "india" ? "₹" : currentCountry === 'indonesia' ? "IDR " : "$"}</p>
+                  <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap", visibility: "hidden" }}>{planPeriod === 'monthly' ? currentPrice.basicSlash : (currentPrice.basicSlash / 12).toFixed(2)}</p>
+                </div>
+              </div>
+              {planPeriod === 'annually' &&
+                <div className="pricing_card_heading">
+                  <p>Free Forever</p>
+                  <p style={{ visibility: "hidden" }}>{` a`}</p>
+                </div>
+              }
+              <div className="pricing_card_button">
+                <button>
+                  <a
+                    href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
+                    target="_blank"
+                    className="buy_button">
+                      Try Now
+                  </a>
+                </button>
+              </div>
+
+              <div className="pricing_card_features">
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text">Attachment</p>
+                </div>
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text">
+                    {" "}
+                    Translate Conversations
+                  </p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Caption</p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Save Campaing Details</p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Detailed Delivery Report</p>
+                </div>
               </div>
             </div>
-            {planPeriod === 'annually' &&
-              <div className="pricing_card_heading">
-                <span>Billed&nbsp;
-                  <span className={currentCountry === 'india' ? 'rupee' : ''}>
+            {/* basic card */}
+            <div className="pricing_card premium_card">
+              <div className="pricing_card_type">
+                <p>Basic</p>
+              </div>
+              <div className="pricing_card_price">
+                <div className="pricing_cut_price">
+                  <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
                     {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
                   </span>
-                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months' service per account
-                </span>
+                  {
+                    currentCountry === 'indonesia' ?
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : (currentPrice.basic.substring(4) / 12).toFixed(2)}</span> :
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : (currentPrice.basic.substring(1) / 12).toFixed(2)}</span>
+                  }
+                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
+                  <br />
+                  <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
+                  {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
+                  </p>
+                  <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                  {
+                    currentCountry === 'indonesia' ?
+                    planPeriod === 'monthly' ? currentPrice.basicSlash.substring(4) : (currentPrice.basicSlash.substring(4) / 12).toFixed(2):
+                    planPeriod === 'monthly' ? currentPrice.basicSlash.substring(1) : (currentPrice.basicSlash.substring(1) / 12).toFixed(2)
+                  }
+                  </p>
+                </div>
               </div>
-            }
-            <div className="pricing_card_button">
-              <button>
-                {showButton(false, 'basic')}
-              </button>
-            </div>
+              {planPeriod === 'annually' &&
+                <div className="pricing_card_heading">
+                  <span>Billed&nbsp;
+                    <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                      {currentCountry === 'indonesia' ? currentPrice.basic.substring(0,4) : currentPrice.basic.substring(0,1)}
+                    </span>
+                    {currentCountry === 'indonesia' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months' service per account
+                  </span>
+                </div>
+              }
+              <div className="pricing_card_button">
+                <button>
+                  {showButton(false, 'basic')}
+                </button>
+              </div>
 
-            <div className="pricing_card_features">
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text" style={{fontWeight:"bold"}}>All Free Features</p>
-              </div>
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text">
-                  {" "}
-                  Call Support
-                </p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> No minimum time gap</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Batching</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Quick Replies</p>
-              </div>
-            </div>
-          </div>
-          {/* advance card */}
-          <div className="pricing_card premium_card">
-            <img className="recommended_tag" src="/images/recommended_tag.png" alt="" />
-            <div className="pricing_card_type">
-              <p>Advance</p>
-            </div>
-            <div className="pricing_card_price">
-              <div className="pricing_cut_price">
-                <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
-                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
-                </span>
-                {
-                  currentCountry === 'indonesia' ?
-                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : (currentPrice.advance.substring(4) / 12).toFixed(2)}</span> :
-                  <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : (currentPrice.advance.substring(1) / 12).toFixed(2)}</span>
-                }
-                <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
-                <br />
-                <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
-                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
-                </p>
-                <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
-                {
-                  currentCountry === 'indonesia' ?
-                  planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(4) : (currentPrice.advanceSlash.substring(4) / 12).toFixed(2):
-                  planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(1) : (currentPrice.advanceSlash.substring(1) / 12).toFixed(2)
-                }  
-                </p>
+              <div className="pricing_card_features">
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text" style={{fontWeight:"bold"}}>All Free Features</p>
+                </div>
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text">
+                    {" "}
+                    Call Support
+                  </p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> No minimum time gap</p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Batching</p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Quick Replies</p>
+                </div>
               </div>
             </div>
-            {planPeriod === 'annually' &&
-              <div className="pricing_card_heading">
-                <span>Billed&nbsp;
-                  <span className={currentCountry === 'india' ? 'rupee' : ''}>
+            {/* advance card */}
+            <div className="pricing_card premium_card">
+              <img className="recommended_tag" src="/images/recommended_tag.png" alt="" />
+              <div className="pricing_card_type">
+                <p>Advance</p>
+              </div>
+              <div className="pricing_card_price">
+                <div className="pricing_cut_price">
+                  <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
                     {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
                   </span>
-                  {currentCountry === 'indonesia' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months' service per account
-                </span>
+                  {
+                    currentCountry === 'indonesia' ?
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : (currentPrice.advance.substring(4) / 12).toFixed(2)}</span> :
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : (currentPrice.advance.substring(1) / 12).toFixed(2)}</span>
+                  }
+                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
+                  <br />
+                  <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
+                    {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
+                  </p>
+                  <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                  {
+                    currentCountry === 'indonesia' ?
+                    planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(4) : (currentPrice.advanceSlash.substring(4) / 12).toFixed(2):
+                    planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(1) : (currentPrice.advanceSlash.substring(1) / 12).toFixed(2)
+                  }  
+                  </p>
+                </div>
               </div>
-            }
-            <div className="pricing_card_button">
-              <button>
-                {showButton(false, 'advance')}
-              </button>
-            </div>
+              {planPeriod === 'annually' &&
+                <div className="pricing_card_heading">
+                  <span>Billed&nbsp;
+                    <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                      {currentCountry === 'indonesia' ? currentPrice.advance.substring(0,4) : currentPrice.advance.substring(0,1)}
+                    </span>
+                    {currentCountry === 'indonesia' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months' service per account
+                  </span>
+                </div>
+              }
+              <div className="pricing_card_button">
+                <button>
+                  {showButton(false, 'advance')}
+                </button>
+              </div>
 
-            <div className="pricing_card_features">
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"  style={{fontWeight:"bold"}}>All Basic Features</p>
+              <div className="pricing_card_features">
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"  style={{fontWeight:"bold"}}>All Basic Features</p>
+                </div>
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text">
+                    Multiple Attachments
+                  </p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Schedule</p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Zoom Call Support</p>
+                </div>{" "}
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Business Chat Link</p>
+                </div>
               </div>
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text">
-                  Multiple Attachments
-                </p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Schedule</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Zoom Call Support</p>
-              </div>{" "}
-              <div className="pricing_card_feature">
-                <AiOutlineCheck />
-                <p className="pricing_card_feature_text"> Business Chat Link</p>
+            </div>
+            <div className="pricing_card multiple_user_card">
+              <div className="multiple_card_type">
+                <p>Need multiple accounts?</p>
+              </div>
+
+              <div className="pricing_card_heading">
+                Purchase premium plan for multiple users for your organisation at a discounted rate
+              </div>
+              <div className="pricing_card_button">
+                <button>
+                  <a href={whatsappRedirectUrl} target="_blank" className="buy_button">Talk to Us</a>
+                </button>
               </div>
             </div>
           </div>
-          <div className="pricing_card multiple_user_card">
-            <div className="multiple_card_type">
-              <p>Need multiple accounts?</p>
+          <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
+          <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
+          <div className="pricing_lower_section">
+            <SectionTitle 
+              gif="/gifs/compare-plans.gif" 
+              title="Compare Our Plans" 
+              subtitle="Complete list of features available in our pricing plans"
+            />
+            <div className="pricing_table_section">
+              <table className="pricing_table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Free</th>
+                    <th>Basic</th>
+                    <th>Advance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {pricingFeatures.map((feature, index) => (
+                  <tr key={index}>
+                    <th>{feature.name}</th>
+                    <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                    <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                    <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                  </tr>
+                ))}
+                </tbody>
+              </table>
             </div>
-
-            <div className="pricing_card_heading">
-              Purchase premium plan for multiple users for your organisation at a discounted rate
-            </div>
-            <div className="pricing_card_button">
-              <button>
-                <a href={whatsappRedirectUrl} target="_blank" className="buy_button">Talk to Us</a>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
-        <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
-        <div className="pricing_lower_section">
-          <SectionTitle 
-            gif="/gifs/compare-plans.gif" 
-            title="Compare Our Plans" 
-            subtitle="Complete list of features available in our pricing plans"
-          />
-          <div className="pricing_table_section">
-            <table className="pricing_table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Free</th>
-                  <th>Basic</th>
-                  <th>Advanace</th>
-                </tr>
-              </thead>
-              <tbody>
-              {pricingFeatures.map((feature, index) => (
-                <tr key={index}>
-                  <th>{feature.name}</th>
-                  <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
-                  <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
-                  <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
-                </tr>
-              ))}
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
