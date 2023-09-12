@@ -14,7 +14,7 @@
 
 .chat-support img{
   width: 100%;
-  filter: drop-shadow(1px 4px 3px gray);
+  filter: drop-shadow(1px 4px 3px var(--color-dark-grey));
 }
 
 .chat-support img:hover {
@@ -29,7 +29,7 @@
   transform: translateY(-50%);
   min-width: 12rem;
   background-color: var(--color-primary1);
-  color: white;
+  color: var(--color-white);
   padding: 8px 10px;
   text-align: center;
   font-size: 14px;
@@ -65,5 +65,5 @@
   right: -4px;
   cursor: pointer;
   font-size: 13px;
-  color: white;
+  color: var(--color-white);
 }

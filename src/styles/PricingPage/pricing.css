@@ -26,7 +26,7 @@
   width: min(90%,700px);
   height: fit-content;
   background:white;
-  border: 4px solid #009A88;
+  border: 4px solid var(--color-primary1);
   border-radius: 8px;
   z-index: 1000000000;
   padding: 10px;
@@ -54,13 +54,13 @@
 .pricing-popup-header h1{
   font-size: 25px;
   font-weight: 400;
-  color: #009A88;
+  color: var(--color-primary1);
   margin-left: 15px;
   min-width: fit-content;
 }
 .pricing-popup hr{
   height: 5px;
-  background-color: #009A88;
+  background-color: var(--color-primary1);
   width: 90%;
   margin: 5px auto;
 }
@@ -114,7 +114,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #009A88;
+  color: var(--color-primary1);
   font-size: 16px;
   position: relative;
 }
@@ -137,7 +137,7 @@
   text-decoration: line-through;
 }
 .pricing-popup-offer-price{
-  color: #616FF0;
+  color: var(--color-purple);
 }
 .pricing-popup-btn{
   width: 90%;
@@ -150,13 +150,13 @@
   border: 0;
 }
 .pricing-popup-btn button a{
-  background: #009A88;
+  background: var(--color-primary1);
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
   padding: 6px 30px;
-  color: #fff;
+  color: var(--color-white)
 }
 .pricing-popup-bottom{
   position: relative;
@@ -201,15 +201,15 @@
 }
 .pricing-popup-footer .footer-instruction{
   font-size:12px;
-  color: #616FF0;
+  color: var(--color-purple);
 }
 .pricing-popup-footer a{
-  color: #000 !important;
+  color: var(--color-black) !important;
 }
 .pricing-popup-footer-icon span{
   flex-basis: 10%;
-  border: 1px solid #000;
-  color: #000;
+  border: 1px solid var(--color-black);;
+  color: var(--color-black);;
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -241,13 +241,6 @@
   align-items: center;
 }
 
-.pricing_heading {
-  color: #353f4f;
-  font-size: 30px;
-  margin-bottom: 30px;
-  opacity: 0.9;
-}
-
 .pricing_switches {
   display: flex;
   flex-direction: column;
@@ -263,7 +256,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #009a88;
+  background: var(--color-primary1);
   border-radius: 16px;
   padding: 5px;
 }
@@ -281,7 +274,7 @@
   padding: 8px 30px;
   font-size: 25px;
   font-weight: bold;
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -298,12 +291,12 @@
 }
 
 .active_country_class,.country_switch:hover.active_country_class {
-  color: #353f4f;
-  background: #fff;
+  color: var(--color-secondary4);
+  background: var(--color-white);
 }
 
 .country_switch:hover{
-  background: rgb(1, 112, 99);;
+  background: rgb(1, 112, 99);
 }
 
 .pricing_discount_text {
@@ -334,7 +327,7 @@
   padding: 40px;
 }
 .pricing_card {
-  background-color: #fff;
+  background-color: var(--color-white);
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
   border-radius: 15px;
   padding: 20px 20px;
@@ -353,7 +346,7 @@
     to bottom,
     var(--color-primary4),
     var(--color-primary4) 60%,
-    #fff 90%
+    var(--color-white) 90%
   );
 }
 
@@ -371,7 +364,7 @@
 
 .pricing_card_type {
   font-size: 40px;
-  color: #353f4f;
+  color: var(--color-secondary4);
   font-weight: 700;
   width: 100%;
   display: flex;
@@ -381,7 +374,7 @@
 
 .multiple_card_type {
   font-size: 25px !important;
-  color: #353f4f;
+  color: var(--color-secondary4);
   font-weight: 700;
   width: 100%;
   display: flex;
@@ -391,7 +384,7 @@
 
 .pricing_card_price {
   font-size: 18px;
-  color: #6c757d;
+  color: var(--color-dark-grey);
   font-weight: 400 !important;
   width: 100%;
   display: flex;
@@ -401,7 +394,7 @@
 
 .pricing_card_price span {
   zoom: 1.2;
-  color: #009a88;
+  color: var(--color-primary1);
   font-weight: 700;
 }
 
@@ -410,7 +403,7 @@
 }
 
 .pricing_card_heading {
-  color: #6c757d;
+  color: var(--color-dark-grey);
   font-size: 17px;
   width: 100%;
   display: flex;
@@ -424,7 +417,7 @@
 }
 
 .pricing_card_button {
-  background: #009a88;
+  background: var(--color-primary1);
   width: 80%;
   margin: auto;
   border-radius: 15px;
@@ -435,11 +428,11 @@
 
 .pricing_card_button:hover {
   background: transparent;
-  border: 2px solid #009a88;
+  border: 2px solid var(--color-primary1);
 }
 
 .pricing_card_button:hover .buy_button {
-  color: #009a88 !important;
+  color: var(--color-primary1) !important;
 }
 
 .pricing_card_button button {
@@ -448,7 +441,7 @@
   background: transparent;
   border: none;
   width: 100%;
-  color: #fff;
+  color: var(--color-white);
   font-size: 20px;
 }
 
@@ -462,7 +455,7 @@
 }
 
 .pricing_card_text {
-  color: #6c757d;
+  color: var(--color-dark-grey);
   font-size: 16px;
   text-align: center;
   width: 100%;
@@ -477,7 +470,7 @@
   align-items: flex-start;
   margin-top: 20px;
   font-size: 17px;
-  color: #353f4f;
+  color: var(--color-secondary4);
   font-weight: 500;
 }
 
@@ -502,7 +495,7 @@
 
 .pricing_lower_text {
   font-size: 24px;
-  color: #6c757d;
+  color: var(--color-dark-grey);
 }
 
 .pricing_table_section {
@@ -518,32 +511,32 @@
 
 .pricing_table th,
 .pricing_table td {
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid var(--color-light-grey);
   padding: 10px 40px;
   font-size: 20px;
 }
 
 .pricing_table thead th,
 .pricing_table thead td {
-  color: #212529;
+  color: var(--color-secondary4);
   font-size: 22px;
   font-weight: 600 !important;
 }
 
 .pricing_table tbody th {
-  color: #212529;
+  color: var(--color-secondary4);
   font-weight: 500 !important;
   text-align: left !important;
 }
 
 .pricing_table tbody td {
   font-size: 25px;
-  color: #009a88 !important;
+  color: var(--color-primary1) !important;
   text-align: center !important;
 }
 
 .cross_icon {
-  color: #999 !important;
+  color: var(--color-dark-grey) !important;
 }
 
 @media (max-width: 1280px) {
@@ -649,6 +642,9 @@
   .pricing_switches .country_switch{
     width: 100%;
     min-height: 35px;
+  }
+  .country_current_switch{
+    justify-content: left;
   }
 }
 

@@ -13,17 +13,6 @@ const Footer = () => {
     }
   }
 
-  function handleFeatureClick() {
-    if (window.location.pathname === '/') {
-      scrollToSection('main-features');
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        scrollToSection('main-features');
-      }, 1000);
-    }
-  }
-
   function handleSectionClick(e) {
     let href = e.target.href;
     let sectionId = href.split('#')[1];
@@ -35,6 +24,10 @@ const Footer = () => {
         scrollToSection(sectionId);
       }, 1000);
     }
+  }
+
+  function scrollToTop(e) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
@@ -49,24 +42,24 @@ const Footer = () => {
           <div className="footer_links">
             <h4 className='heading'>Company</h4>
             <ul className='large-text'>
-              <li><a href='/' > Home </a></li>
+              <li><Link to='/' onClick={scrollToTop}> Home </Link></li>
               <li><Link to='/#how-to-use' onClick={handleSectionClick}> How to Use </Link></li>
-              <li><a href='/blogs' > Blog </a></li>
+              <li><Link to='/blogs' onClick={scrollToTop}> Blog </Link></li>
             </ul>
           </div>
           <div className="footer_links">
             <h4 className='heading'>Product</h4>
             <ul className='large-text'>
-              <li><a href='/pricing' >Pricing</a></li>
-              <li><a href='/request-feature' > Request a Feature </a></li>
+              <li><Link to='/pricing' onClick={scrollToTop}>Pricing</Link></li>
+              <li><Link to='/feature-request' onClick={scrollToTop}> Request a Feature </Link></li>
               <li><Link to='/#testimonial' onClick={handleSectionClick}>Reviews</Link></li>
             </ul>
           </div>
           <div className="footer_links">
             <h4 className='heading'>Legal</h4>
             <ul className='large-text'>
-              <li><a href='/terms-of-service' > Terms of Service </a></li>
-              <li><a href='/privacy-policy' > Privacy Policy </a></li>
+              <li><Link to='/terms-of-service' onClick={scrollToTop}> Terms of Service </Link></li>
+              <li><Link to='/privacy-policy' onClick={scrollToTop}> Privacy Policy </Link></li>
             </ul>
           </div>
           <div className="footer_links">

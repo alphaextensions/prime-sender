@@ -9,8 +9,8 @@
 
 :root {
   --color-primary1: #009A88;
-  --color-primary2: #02c5ae;
-  --color-primary3: #00FFE1;
+  --color-primary2: #00d4bb;
+  --color-primary3: #017063;
   --color-primary4: #f2fffe;
   --color-primary5: #d4fffc;
   --color-primary6: #e3f8f5;
@@ -18,9 +18,10 @@
   --color-secondary2: #eae8e8;
   --color-secondary3: #f2fffe6c;
   --color-secondary4: #303030;
+  --color-secondary5: #4b4b4b;
   --color-black: #000;
   --color-white: #fff;
-  --color-light-grey: #eeeeee;
+  --color-light-grey: #dadada;
   --color-dark-grey: #6b6b6b;
   --color-purple: #7829f9;
 }

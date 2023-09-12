@@ -9,10 +9,10 @@ import Testimonial from '../Sections/Testimonial';
 import UniqueFeatures from '../Sections/UniqueFeatures';
 import FAQs from '../Sections/FAQs';
 import CompleteSolutions from '../Sections/CompleteSolutions';
+import HelmetHeader from "../Common/HelmetHeader";
 // import EverythingInOne from '../Sections/EverythingInOne';
 
 const Home = () => {
-
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
 
   // const showTooltip = ()=>{
@@ -55,6 +55,10 @@ const Home = () => {
 
   return (
     <>
+      <HelmetHeader 
+        title={'Prime Sender - Best Web Extension for Sending Messages'}
+        description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'} 
+      />
       <div className="home-container">
         <div className="home-content">
           <div className="left-col">

@@ -16,21 +16,6 @@
   gap: 50px;
 }
 
-.solutions_upper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.solutions_upper p {
-  width: 100%;
-  text-align: center;
-  color: #757575;
-}
-
 .solutions_lower {
   width: 100%;
   display: flex;
@@ -89,7 +74,7 @@
 .solutions_card_lower p {
   text-align: center;
   line-height: 25px;
-  color: #757575;
+  color: var(--color-dark-grey);
   width: min(90%, 300px);
 }
 

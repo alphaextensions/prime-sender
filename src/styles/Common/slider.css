@@ -1,7 +1,7 @@
 .slider {
   display: flex;
   align-items: center;
-  color: #009A88;
+  color: var(--color-primary1);
 }
 
 .slider-text {
@@ -30,12 +30,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #009A88;
+  background: var(--color-primary1);
   border-radius: 34px;
 }
 
 .switch:hover{
-  background: rgb(1, 112, 99);
+  background: var(--color-primary3)
 }
 
 .switch:before {
@@ -45,7 +45,7 @@
   width: 23px;
   left: 4px;
   bottom: 4px;
-  background: #fff;
+  background: var(--color-white);
   transition: 0.2s;
   border-radius: 50%;
 }

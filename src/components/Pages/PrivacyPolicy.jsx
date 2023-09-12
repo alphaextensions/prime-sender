@@ -2,12 +2,16 @@ import React from 'react';
 import PrivacyPolicyData from '../Data/privacy-policy-data.js';
 import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
 import SectionTitle from "../Common/SectionTitle";
+import HelmetHeader from "../Common/HelmetHeader";
 
 function PrivacyPolicy() {
-  document.title = 'Privacy Policy | Prime Sender';
-
   return (
-    <div className="main-section privacy-policy">
+    <>
+      <HelmetHeader
+        title={'Privacy Policy | Prime Sender'}
+        description={'Privacy Policy for Prime Sender'}
+      />
+      <div className="main-section privacy-policy">
       <SectionTitle gif="/gifs/privacy-policy.gif" title="Privacy Policy" />    
       <div className="main-container policy-container">
         {PrivacyPolicyData.map((item, index) => (
@@ -24,6 +28,7 @@ function PrivacyPolicy() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 
