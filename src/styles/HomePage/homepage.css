@@ -41,7 +41,7 @@
 }
 
 .home-content .left-col .title{
-  color: var(--color-secondary5);
+  color: var(--color-secondary4);
   text-transform: capitalize;
   font-weight: 900;
   margin-bottom: .6rem;
@@ -57,7 +57,7 @@
 .home-content .left-col .offer{
   margin-top: .6rem;
   font-weight: 500;
-  color: var(--color-secondary5);
+  color: var(--color-secondary4);
 }
 
 .home-content .left-col .offer .purple{
@@ -90,7 +90,7 @@
 }
 
 .home-content .left-col .howtousebtn:hover{
-  background-color: var(--color-secondary4);
+  background-color: var(--color-secondary3);
   border: 2px solid var(--color-black) !important;
   color: var(--color-white);
 }

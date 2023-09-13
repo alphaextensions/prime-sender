@@ -55,7 +55,6 @@ const Testimonial = () => {
                     </div>
                     <div className="customer_name">
                       <h4 className="sub-heading">EKO WICAKSONO</h4>
-                      <p className="text">Internet Surfer</p>
                     </div>
                   </div>
                 </div>
@@ -67,11 +66,10 @@ const Testimonial = () => {
                   <p className="customer_review text" > I run a small business in Indonesia and this helped me a lot to get new customers. Not many chrome extensions are useful but this one is very good, Thank You!</p>
                   <div className="customer_info">
                     <div className="customer_img">
-                      <img src="/images/user3.jpg" alt="user1" />
+                      <img src="/images/user2.jpg" alt="user1" />
                     </div>
                     <div className="customer_name">
                       <h4 className="sub-heading">David</h4>
-                      <p className="text">Businessmen</p>
                     </div>
                   </div>
                 </div>
@@ -82,11 +80,10 @@ const Testimonial = () => {
                   <p className="customer_review text" > Very easy to understand and use, not like other "software" complicated. and what surprise me is, during operate, I would like to know more, WA to their support team, get reply very quick. </p>
                   <div className="customer_info">
                     <div className="customer_img">
-                      <img src="/images/user2.jpg" alt="user1" />
+                      <img src="/images/user3.jpg" alt="user1" />
                     </div>
                     <div className="customer_name">
                       <h4 className="sub-heading">Joel Peterson</h4>
-                      <p className="text">Software Developer</p>
                     </div>
                   </div>
                 </div>

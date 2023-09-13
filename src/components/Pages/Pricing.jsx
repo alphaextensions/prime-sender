@@ -190,8 +190,11 @@ const Pricing = () => {
         <div className="pricing-popup-overlay"></div>
         <div className="pricing-popup" style={popupLastPlan === 'planExpired'  ? { background: '#EDF9F3' } : null}>
           <div className="pricing-popup-header">
-            <img src='/images/logo-large.png' alt="Prime-Sender" />
-            <h1>Prime Sender <b>{capitalPlanName} Plan</b></h1>
+          <div className='pricing-popup-logo'>
+            <img src="/images/logo-img.png" alt="logo"/>
+            <img src="/images/logo-text.png" alt="logo"/>
+          </div>
+            <h1> <b>{capitalPlanName} Plan</b></h1>
           </div>
           <hr />
           <div className='pricing-recommendation-msg'>

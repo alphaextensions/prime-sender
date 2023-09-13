@@ -88,7 +88,7 @@
 .testimonial_cards{
   width: 80%;
   margin: 6rem auto 2rem;
-  background-color: var(--color-secondary3);
+  background-color: var(--color-secondary2);
   /* background: linear-gradient(180deg,  rgba(234, 240, 255, 0.0)  0%, rgba(234, 240, 255, 0.0) 100%); */
   position: relative;
   display: flex;
@@ -139,7 +139,7 @@
 
 .testimonial_card h2{
   margin-bottom: 15px;
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   position: relative;
 }
 
@@ -164,7 +164,7 @@
 }
 
 .customer_info .customer_name h4{
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
 }
 
 .customer_img{
@@ -189,7 +189,7 @@
 }
 
 .view-more-btn:hover{
-  background-color: var(--color-secondary4);
+  background-color: var(--color-secondary3);
 }
 
 @media screen and (max-width: 950px) {
