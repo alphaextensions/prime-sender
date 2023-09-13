@@ -155,6 +155,7 @@
 }
 .pricing-popup-btn button{
   border: 0;
+  background: transparent;
 }
 .pricing-popup-btn button a{
   background: var(--color-primary1);
@@ -164,6 +165,12 @@
   font-size: 18px;
   padding: 10px 40px;
   color: var(--color-white);
+  transition: 0.3s;
+  border: 2px solid var(--color-primary1);
+}
+.pricing-popup-btn button a:hover{
+  background: transparent;
+  color: var(--color-primary1);
 }
 .pricing-popup-bottom{
   position: relative;
