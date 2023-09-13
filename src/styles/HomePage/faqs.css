@@ -62,7 +62,7 @@
 }
 
 .question_card .question_title{
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   line-height: 1.35;
   margin-bottom: 5px;
 }

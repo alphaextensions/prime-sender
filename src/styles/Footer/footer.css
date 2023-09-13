@@ -49,7 +49,7 @@
 
 .footer_links h4{
   margin-bottom: 20px;
-  color: var(--color-secondary4)
+  color: var(--color-secondary3)
 }
 
 .footer_links li {
@@ -62,7 +62,7 @@
 }
 
 .footer_links li a:hover {
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
 }
 
 .footer_container .divider {

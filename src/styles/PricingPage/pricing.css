@@ -49,7 +49,14 @@
   padding: 10px 0;
 }
 .pricing-popup-header img{
-  width: 50px;
+  width: 100%;
+}
+.pricing-popup-logo{
+  gap: 10px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  place-items: center;
 }
 .pricing-popup-header h1{
   font-size: 25px;
@@ -67,7 +74,7 @@
 .pricing-recommendation-msg{
   font-family: inika;
   margin: 20px auto 0px;
-  width: 83%;
+  width: 75%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -102,7 +109,7 @@
 }
 .pricing-popup-slider .slider-text{
   font-size: 20px !important;
-  font-weight: normal;
+  font-weight: normal !important;
 }
 .pricing-popup-slider .slider{
   justify-content: center;
@@ -148,15 +155,22 @@
 }
 .pricing-popup-btn button{
   border: 0;
+  background: transparent;
 }
 .pricing-popup-btn button a{
   background: var(--color-primary1);
   border-radius: 8px;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  padding: 6px 30px;
-  color: var(--color-white)
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 40px;
+  color: var(--color-white);
+  transition: 0.3s;
+  border: 2px solid var(--color-primary1);
+}
+.pricing-popup-btn button a:hover{
+  background: transparent;
+  color: var(--color-primary1);
 }
 .pricing-popup-bottom{
   position: relative;
@@ -291,7 +305,7 @@
 }
 
 .active_country_class,.country_switch:hover.active_country_class {
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   background: var(--color-white);
 }
 
@@ -364,7 +378,7 @@
 
 .pricing_card_type {
   font-size: 40px;
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   font-weight: 700;
   width: 100%;
   display: flex;
@@ -374,7 +388,7 @@
 
 .multiple_card_type {
   font-size: 25px !important;
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   font-weight: 700;
   width: 100%;
   display: flex;
@@ -470,7 +484,7 @@
   align-items: flex-start;
   margin-top: 20px;
   font-size: 17px;
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   font-weight: 500;
 }
 
@@ -518,13 +532,13 @@
 
 .pricing_table thead th,
 .pricing_table thead td {
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   font-size: 22px;
   font-weight: 600 !important;
 }
 
 .pricing_table tbody th {
-  color: var(--color-secondary4);
+  color: var(--color-secondary3);
   font-weight: 500 !important;
   text-align: left !important;
 }
