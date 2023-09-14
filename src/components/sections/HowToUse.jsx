@@ -30,21 +30,18 @@ const HowToUse = () => {
               <div className="use_feature_text">
                 <h3 className="heading">Send Message</h3>
                 <p className="text">
-                  Enter the message you'd like to send. You could also add
-                  attachments 📁
+                  Enter the message you'd like to send. You could also add attachments 📁
                 </p>
                 <p className="text">
-                  1. Click on the icon of 📎 Attachment inside the text box
-                  inside the extension
+                  1. Click on the icon of <span className="text-white">📎 Attachment</span>  inside the text box inside the extension
                 </p>
                 <p className="text">
-                  2. Select files youd like to send. You can select multiple
+                  2. Select files you would like to send. You can select multiple
                 </p>
                 <p className="text">
-                  3. You can click on Add Caption to add caption to your
-                  attachment
+                  3. You can click on<span className="text-white"> Add Caption</span> to add caption to your attachment
                 </p>
-                <p className="text">4. Click on Send button inside the extension</p>
+                <p className="text">4. Click on <span className="text-white">Send button</span> inside the extension</p>
               </div>
             </div>
             <div className="use_feature_divider" />
@@ -53,7 +50,7 @@ const HowToUse = () => {
               <div className="use_feature_text">
                 <h3 className="heading">Download Report</h3>
                 <p className="text">
-                  Download the delivery report by clicking on Delivery Report to view the delivery status of the messages and the attachment
+                  Download the delivery report by clicking on<span className="text-white"> Delivery Report</span> to view the delivery status of the messages and the attachment
                   sent.
                 </p>
               </div>

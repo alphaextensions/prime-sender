@@ -72,12 +72,18 @@ body {
 .grid{
   display: grid;
 }
+
 .grid-two-col{
   grid-template-columns: 1fr 1fr;
 }
 
 .rupee{
   font-family: sans-serif;
+}
+
+.text-white{
+  color: var(--color-white);
+  font-weight: 600;
 }
 
 .button-round {

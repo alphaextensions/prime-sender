@@ -152,25 +152,39 @@
   display: grid;
   place-items: center;
   margin-top: 25px;
+  gap: 4px;
 }
 .pricing-popup-btn button{
   border: 0;
   background: transparent;
-}
-.pricing-popup-btn button a{
+  padding: 7px 35px;
   background: var(--color-primary1);
   border-radius: 8px;
+  border: 2px solid var(--color-primary1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.pricing-popup-btn button a{
   text-decoration: none;
   font-weight: 600;
-  font-size: 18px;
-  padding: 10px 40px;
+  font-size: 20px;
   color: var(--color-white);
   transition: 0.3s;
-  border: 2px solid var(--color-primary1);
 }
-.pricing-popup-btn button a:hover{
+.pricing-popup-btn button:hover{
   background: transparent;
+}
+.pricing-popup-btn button:hover a{
   color: var(--color-primary1);
+}
+.pricing-popup-btn .multiple-accounts-btn{
+  color: var(--color-primary1);
+  font-size: 13px;
+  line-height: 14px;
+  padding: 5px;
+}
+.pricing-popup-btn .multiple-accounts-btn:hover{
+  filter: brightness(1.2);
 }
 .pricing-popup-bottom{
   position: relative;
@@ -438,6 +452,7 @@
   margin-top: 10px;
   transition: all 0.3s ease-in;
   border: 2px solid transparent;
+  margin-bottom: 0;
 }
 
 .pricing_card_button:hover {
