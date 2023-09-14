@@ -560,9 +560,13 @@ const Pricing = () => {
                 <div>
                 Purchase premium plan for multiple users for your organization at a <span className="text-bold">discounted rate</span>
                 </div>
-                <div style={{visibility:'hidden'}}>
-                This is dummy text for alignment with some text
-                </div>
+                {
+                  planPeriod === 'annually' && (
+                    <div style={{visibility:'hidden'}}>
+                      This is dummy text for alignment with some text
+                    </div>
+                  )
+                }
               </div>
               <div className="pricing_card_button">
                 <button>
