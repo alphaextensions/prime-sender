@@ -265,6 +265,7 @@ const Pricing = () => {
           </div>
           <div className="pricing-popup-btn">
             <button>{showButton(true,popupPlan)}</button>
+            <a href={whatsappRedirectUrl} target="_blank" className="multiple-accounts-btn">Purchase for multiple users</a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
@@ -313,9 +314,6 @@ const Pricing = () => {
           <div className="pricing_top_section">
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
-              <div className="pricing-slider">
-                <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
-              </div>
               <div className="pricing_country">
                 <div className="pricing_country_switch">
                   <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
@@ -334,12 +332,15 @@ const Pricing = () => {
                   </div>
                 </div>
               </div>
+              <div className="pricing-slider">
+                <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
+              </div>
             </div>
             {
               planPeriod === 'monthly' && 
               <div className="pricing_discount_text ">
                 <div className="text">
-                  Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF.</span> 
+                  Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF. &nbsp; </span> 
                 </div>
                 <div className="discount-img text" >
                   Use code <img src="/images/coupon.png" alt="" />
@@ -383,26 +384,27 @@ const Pricing = () => {
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
+                  <p className="pricing_card_feature_text">Broadcasting</p>
+                </div>
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
                   <p className="pricing_card_feature_text">Attachment</p>
                 </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">
-                    {" "}
-                    Translate Conversations
-                  </p>
-                </div>{" "}
+                  <p className="pricing_card_feature_text">Message Customization</p>
+                </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Caption</p>
-                </div>{" "}
+                  <p className="pricing_card_feature_text">Chat Support</p>
+                </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Save Campaing Details</p>
-                </div>{" "}
+                  <p className="pricing_card_feature_text">Save Message Template</p>
+                </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Detailed Delivery Report</p>
+                  <p className="pricing_card_feature_text">Detailed Delivery Report</p>
                 </div>
               </div>
             </div>
@@ -458,22 +460,23 @@ const Pricing = () => {
                 </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">
-                    {" "}
-                    Call Support
-                  </p>
-                </div>{" "}
+                  <p className="pricing_card_feature_text">Call Support</p>
+                </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text"> No minimum time gap</p>
-                </div>{" "}
+                </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text"> Batching</p>
-                </div>{" "}
+                </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text"> Quick Replies</p>
+                </div>
+                <div className="pricing_card_feature">
+                  <AiOutlineCheck />
+                  <p className="pricing_card_feature_text"> Group Contacts Export</p>
                 </div>
               </div>
             </div>
@@ -554,7 +557,16 @@ const Pricing = () => {
               </div>
 
               <div className="pricing_card_heading">
-                Purchase premium plan for multiple users for your organisation at a discounted rate
+                <div>
+                Purchase premium plan for multiple users for your organization at a <span className="text-bold">discounted rate</span>
+                </div>
+                {
+                  planPeriod === 'annually' && (
+                    <div style={{visibility:'hidden'}}>
+                      This is dummy text for alignment with some text
+                    </div>
+                  )
+                }
               </div>
               <div className="pricing_card_button">
                 <button>
