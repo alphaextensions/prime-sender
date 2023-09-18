@@ -11,8 +11,16 @@ import Footer from "./components/Layouts/Footer";
 import ChatSupport from './components/common/ChatSupport';
 import Error from './components/Pages/Error';
 import Success from './components/Pages/success';
+import ReactGA from "react-ga4";
+import {useEffect} from 'react';
 
 const App = () => {
+
+  // initializing react-ga
+  useEffect(() => {
+    ReactGA.initialize("G-3KZPL7D3HB");
+  }, []);
+
   return (
     <>
     <Router>

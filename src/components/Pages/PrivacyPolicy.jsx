@@ -3,7 +3,9 @@ import PrivacyPolicyData from '../Data/privacy-policy-data.js';
 import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
+import ReactGA from "react-ga4";
 
+ReactGA.send({ hitType: "pageview", page: "/privacy-policy", title: "Privacy Policy Page" });
 function PrivacyPolicy() {
   return (
     <>

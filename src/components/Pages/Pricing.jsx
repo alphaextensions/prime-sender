@@ -6,7 +6,9 @@ import pricingFeatures from "../Data/pricing-page-features-list"
 import Slider from "../Common/Slider";
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
+import ReactGA from "react-ga4";
 
+ReactGA.send({ hitType: "pageview", page: "/pricing", title: "Pricing Page" });
 const Pricing = () => {  
   const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");
@@ -41,6 +43,15 @@ const Pricing = () => {
 
   const trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report"];
   const premium_features = ["Schedule (Advance)", 'Business Chat Link (Advance)', 'Meet/Zoom Support (Advance)', "Multiple Attachments (Advance)"];
+
+  const handleGaButtonClick=(type)=>{
+    ReactGA.event({
+      category: "Button Click",
+      action: `buy ${type} button click`,
+      label: `buy_${type}_btn_clicked`,
+    });
+    return;
+  }
 
   const pricing = {
     india: {
@@ -184,7 +195,16 @@ const Pricing = () => {
   }
 
   function generatePricingPopup() {
-    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1)
+    ReactGA.send({ hitType: "popupview", page: "/pricing", title: "Pricing Page Popup, Redirected from extension" });
+    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1);
+    const handlePopupGaButtonClick= ()=>{
+      ReactGA.event({
+        category: "Button Click",
+        action: `pricing popup buy ${popupPlan} button click`,
+        label: `buy_popup_${popupPlan}_btn_clicked`,
+      });
+      return;
+    }
     return (
       <>
         <div className="pricing-popup-overlay"></div>
@@ -264,7 +284,7 @@ const Pricing = () => {
               }
           </div>
           <div className="pricing-popup-btn">
-            <button>{showButton(true,popupPlan)}</button>
+            <button onClick={handlePopupGaButtonClick}>{showButton(true,popupPlan)}</button>
             <a href={whatsappRedirectUrl} target="_blank" className="multiple-accounts-btn">Purchase for multiple users</a>
           </div>
           <div className="pricing-popup-bottom">
@@ -375,7 +395,8 @@ const Pricing = () => {
                   <a
                     href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
                     target="_blank"
-                    className="buy_button">
+                    className="buy_button"
+                    onClick={handleGaButtonClick("free")}>
                       Try Now
                   </a>
                 </button>
@@ -448,7 +469,7 @@ const Pricing = () => {
                 </div>
               }
               <div className="pricing_card_button">
-                <button>
+                <button onClick={handleGaButtonClick("basic")}>
                   {showButton(false, 'basic')}
                 </button>
               </div>
@@ -521,7 +542,7 @@ const Pricing = () => {
                 </div>
               }
               <div className="pricing_card_button">
-                <button>
+                <button onClick={handleGaButtonClick("advance")}>
                   {showButton(false, 'advance')}
                 </button>
               </div>
@@ -569,7 +590,7 @@ const Pricing = () => {
                 }
               </div>
               <div className="pricing_card_button">
-                <button>
+                <button onClick={handleGaButtonClick("multiple_user")}>
                   <a href={whatsappRedirectUrl} target="_blank" className="buy_button">Talk to Us</a>
                 </button>
               </div>

@@ -1,6 +1,8 @@
 import SectionTitle from '../Common/SectionTitle';
 import HelmetHeader from "../Common/HelmetHeader";
+import ReactGA from "react-ga4";
 
+ReactGA.send({ hitType: "pageview", page: "/help-us-improve", title: "Help Us Improve Page" });
 const HelpUsImprove = () => {
   return (
     <>
