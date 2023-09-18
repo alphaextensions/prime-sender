@@ -318,13 +318,13 @@ const Pricing = () => {
                 <div className="pricing_country_switch">
                   <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
                     <p className="country_current_switch heading">
-                      <img src="/images/india.png" alt="" />
+                      <img src="/images/india.png" alt="India Flag" />
                       India
                     </p>
                   </div>
                   <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class" }`} onClick={() => setCurrentCountry("indonesia")} >
                     <p className="country_current_switch heading">
-                      <img src="/images/indonesia.svg" alt="" />
+                      <img src="/images/indonesia.png" alt="Indonesia Flag" />
                       Indonesia</p>
                   </div>
                   <div className={`country_switch ${currentCountry === "international" && "active_country_class" }`} onClick={() => setCurrentCountry("international")}> 
