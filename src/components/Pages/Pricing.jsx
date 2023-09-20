@@ -42,7 +42,7 @@ const Pricing = () => {
   const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=919160583572&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
   const trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report"];
-  const premium_features = ["Schedule (Advance)", 'Business Chat Link (Advance)', 'Meet/Zoom Support (Advance)', "Multiple Attachments (Advance)"];
+  const premium_features = ["Schedule", 'Business Chat Link', 'Meet/Zoom Support', "Multiple Attachments"];
 
   const handleGaButtonClick=(type)=>{
     ReactGA.event({
@@ -260,7 +260,8 @@ const Pricing = () => {
                 popupCountry === 'indonesia' ?
                 <div className="annual-price-indonesia" >
                   <span>
-                    {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}({
+                    {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}
+                    &nbsp;({
                       (popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 4) : pricing[popupCountry].annually.advance.substring(0, 4)) +
                       Math.floor((popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(4) : pricing[popupCountry].annually.advance.substring(4)) / 12)
                     }/month)</span> 
@@ -273,7 +274,7 @@ const Pricing = () => {
                     <span>
                       {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(1) : pricing[popupCountry].annually.advance.substring(1)}
                     </span>
-                    (
+                    &nbsp;(
                       <span className={popupCountry==='india' ? 'rupee': ''}>
                       {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 1) : pricing[popupCountry].annually.advance.substring(0, 1))}
                       </span>{
@@ -291,7 +292,7 @@ const Pricing = () => {
             <div className="pricing-popup-features">
               {
                 premium_features.map((item,index)=>{
-                  return <div className="feature-item text-bold" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item}</div>
+                  return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item} <span className="text-bold">&nbsp;(Advance)</span></div>
                 })
               }
               {
