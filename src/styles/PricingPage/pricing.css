@@ -20,7 +20,7 @@
 .pricing-popup{
   font-family: 'PT Sans Caption';
   position: fixed;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   width: min(90%,700px);
@@ -59,7 +59,7 @@
   place-items: center;
 }
 .pricing-popup-header h1{
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 400;
   color: var(--color-primary1);
   margin-left: 15px;

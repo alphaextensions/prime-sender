@@ -123,13 +123,13 @@ body {
 
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 11px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background: var(--color-secondary1) !important;
+  background: var(--color-primary1) !important;
+  border: 2px solid var(--color-white);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -142,6 +142,7 @@ body {
 
 ::-webkit-scrollbar-track {
   border-radius: 8px;
+  background-color: var(--color-white);
 }
 
 /* Media query for responsiveness */
