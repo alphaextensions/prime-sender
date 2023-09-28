@@ -1,10 +1,22 @@
 import React, { useState ,useEffect} from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { MdFileDownload,MdClose,MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
 import DownloadBtn from '../Common/DownloadBtn'
+import ReactGA from "react-ga4";
 
 function NavLinks({ onClick }) {  
+  const location = useLocation();
+  
+  useEffect(()=>{
+    ReactGA.send({ 
+      hitType: "pageview", 
+      page: `${location.pathname}`, 
+      title: `${location.pathname.substring(1)==='' ? 'Home' : location.pathname.substring(1)} Page` 
+    });
+    console.log(location.pathname); 
+  }, [location]);
+
   return (
     <ul>
       <li>

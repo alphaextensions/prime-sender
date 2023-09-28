@@ -1,8 +1,6 @@
 import HelmetHeader from "../Common/HelmetHeader";
 import SectionTitle from "../Common/SectionTitle";
-import ReactGA from "react-ga4";
 
-ReactGA.send({ hitType: "pageview", page: "/feature-request", title: "Feature Request Page" });
 const RequestFeature = () => {
   return (
     <>

@@ -13,7 +13,6 @@ import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
 // import EverythingInOne from '../Sections/EverythingInOne';
 
-ReactGA.send({ hitType: "pageview", page: "/", title: "Home Page" });
 const Home = () => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
 

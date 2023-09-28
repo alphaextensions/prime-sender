@@ -3,9 +3,7 @@ import HelmetHeader from '../Common/HelmetHeader';
 import featuresList from '../Data/pricing-page-features-list';
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import ReactGA from "react-ga4";
 
-ReactGA.send({ hitType: "pageview", page: "/success", title: "success Page" });
 const Success = ({ plan }) => {
   const successTitle = {basic: "Basic Success", advance: "Advance Success"}
 

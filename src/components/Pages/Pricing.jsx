@@ -8,7 +8,6 @@ import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
 
-ReactGA.send({ hitType: "pageview", page: "/pricing", title: "Pricing Page" });
 const Pricing = () => {  
   const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");

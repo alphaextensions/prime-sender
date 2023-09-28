@@ -2,9 +2,7 @@ import React from 'react';
 import '../../styles/TermsOfUsePage/termsOfUse.css';
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from '../Common/HelmetHeader';
-import ReactGA from "react-ga4";
 
-ReactGA.send({ hitType: "pageview", page: "/terms-of-service", title: "Terms of Service Page" });
 function TermsOfUse() {
   return (
     <>
