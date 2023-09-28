@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaArrowRightLong } from 'react-icons/fa6' 
 import SectionTitle from "../Common/SectionTitle";
 import ReactGA from "react-ga4";
+import TestimonialCard from "../common/TestimonialCard";
 
 const Testimonial = () => {
 
@@ -54,52 +55,77 @@ const Testimonial = () => {
         <div className="testimonial_line_break" />
         <div className="testimonial_lower">
           <SectionTitle id="testimonial" gif="/gifs/testimonials-2.gif" title="What Customers Are Saying" white/>
-          <div className="testimonial_cards">
-            <div className="testimonial_left">
-                <div className="testimonial_card">
-                  <h2 className="heading"><span className="quotation_mark">❛❛ </span>This is crazy</h2>
-                  <p className="customer_review text" > The best application, really helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you Prime Sender team. </p>
-                  <div className="customer_info">
-                    <div className="customer_img">
-                      <img src="/images/user1.jpg" alt="user1" />
-                    </div>
-                    <div className="customer_name">
-                      <h4 className="sub-heading">EKO WICAKSONO</h4>
-                    </div>
+          <div className="testimonial_cards_div">
+            <div className="testimonial_cards">
+              <div className="testimonial_left">
+                  <div className="testimonial_card">
+                    <TestimonialCard 
+                      heading={'This is crazy'}
+                      review={'The best application, really helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you Prime Sender team.'}
+                      imgSrc={'/images/user1.jpg'}
+                      customerName={'EKO WICAKSONO'}
+                    />
                   </div>
-                </div>
-            </div>
-            <div className="testimonial_right">
-              <div className="testimonial_right_upper">
-                <div className="testimonial_card">
-                  <h2 className="heading"><span className="quotation_mark">❛❛ </span>Very Helpful</h2>
-                  <p className="customer_review text" > I run a small business in Indonesia and this helped me a lot to get new customers. Not many chrome extensions are useful but this one is very good, Thank You!</p>
-                  <div className="customer_info">
-                    <div className="customer_img">
-                      <img src="/images/user2.jpg" alt="user1" />
-                    </div>
-                    <div className="customer_name">
-                      <h4 className="sub-heading">David</h4>
-                    </div>
-                  </div>
-                </div>
               </div>
-              <div className="testimonial_right_lower">
-                <div className="testimonial_card">
-                  <h2 className="heading"><span className="quotation_mark">❛❛ </span>Amazing</h2>
-                  <p className="customer_review text" > Very easy to understand and use, not like other "software" complicated. and what surprise me is, during operate, I would like to know more, WA to their support team, get reply very quick. </p>
-                  <div className="customer_info">
-                    <div className="customer_img">
-                      <img src="/images/user3.jpg" alt="user1" />
-                    </div>
-                    <div className="customer_name">
-                      <h4 className="sub-heading">Joel Peterson</h4>
-                    </div>
+              <div className="testimonial_right">
+                <div className="testimonial_right_upper">
+                  <div className="testimonial_card">
+                    <TestimonialCard 
+                      heading={'Very Helpful'}
+                      review={'I run a small business in Indonesia and this helped me a lot to get new customers. Not many chrome extensions are useful but this one is very good, Thank You!'}
+                      imgSrc={'/images/user2.jpg'}
+                      customerName={'David'}
+                    />
+                  </div>
+                </div>
+                <div className="testimonial_right_lower">
+                  <div className="testimonial_card">
+                    <TestimonialCard 
+                      heading={'Amazing'}
+                      review={'Very easy to understand and use, not like other "software" complicated. and what surprise me is, during operate, I would like to know more, WA to their support team, get reply very quick.'}
+                      imgSrc={'/images/user3.jpg'}
+                      customerName={'Joel Peterson'}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+
+            <div className="testimonial_cards testimonial_cards_second">
+              <div className="testimonial_right">
+                <div className="testimonial_right_upper">
+                  <div className="testimonial_card">
+                    <TestimonialCard 
+                      heading={'Highly Recommended!'}
+                      review={'So far, seems to be completely free. You can send a bulk message to hundreds of contacts very easily and quickly. Saves a ton of time!! Especially the function for importing contacts from a spreadsheet.'}
+                      imgSrc={'/images/user4.jpg'}
+                      customerName={'Phillipe Kenny'}
+                    />
+                  </div>
+                </div>
+                <div className="testimonial_right_lower">
+                  <div className="testimonial_card">
+                    <TestimonialCard 
+                      heading={'Thanks Prime Sender!'}
+                      review={'This extension is helping our company a lot to get in touch with many leads. Really helpful in mass messaging and offers announcement overall it is a perfect tool for mass sending messages i love it'}
+                      imgSrc={'/images/user5.jpg'}
+                      customerName={'Alexandre Farias'}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="testimonial_left">
+                  <div className="testimonial_card">
+                    <TestimonialCard 
+                      heading={'Thank you alpha'}
+                      review={'Premium features is great,the admin is very helpful,emails get responds within 24hrs. Adjustment request was done within few hours after sending in an email to alpha extensions.'}
+                      imgSrc={'/images/user6.jpg'}
+                      customerName={'Danush Rao'}
+                    />
+                  </div>
+              </div>
+            </div>
+        </div>
         </div>
       </div>
       <div className="view-more">
