@@ -16,7 +16,7 @@ const Success = ({ plan }) => {
       <div className="main-section">
       <div className="main-container success-container">
         <div className="success-texts-container">
-          <p className="heading">Congrats! You have successfully purchased PS Premium</p>
+          <p className="heading">Congrats! You have successfully purchased PS {plan[0].toUpperCase() + plan.substr(1)} Premium</p>
           <p className="text">Please reload WhatsApp Web after 10 minutes to activate Premium. You will receive a confirmation email soon.</p>
           <p className="sub-text">If Premium is not enabled, do not worry. Please click on 'Live Support' button on the top left of the extension.</p>
         </div>
