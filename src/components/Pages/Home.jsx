@@ -10,6 +10,7 @@ import UniqueFeatures from '../Sections/UniqueFeatures';
 import FAQs from '../Sections/FAQs';
 import CompleteSolutions from '../Sections/CompleteSolutions';
 import HelmetHeader from "../Common/HelmetHeader";
+import ReactGA from "react-ga4";
 // import EverythingInOne from '../Sections/EverythingInOne';
 
 const Home = () => {
@@ -47,6 +48,11 @@ const Home = () => {
   // };
 
   function scrollToSection(sectionId) {
+    ReactGA.event({
+      category: "Button Click",
+      action: "how to use button click",
+      label: "how_to_use_btn_clicked",
+    });
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

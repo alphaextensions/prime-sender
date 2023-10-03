@@ -4,11 +4,21 @@ import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 import { FaArrowRightLong } from 'react-icons/fa6' 
 import SectionTitle from "../Common/SectionTitle";
+import ReactGA from "react-ga4";
 
 const Testimonial = () => {
 
   const [counter,setCounter] = useState(true);
   const [counterOn,setCounterOn] = useState(false);
+
+  const handleViewMoreBtnClick = () => {
+    ReactGA.event({
+      category: "Button Click",
+      action: "view more button click",
+      label: "view_more_btn_clicked",
+    });
+    return;
+  }
 
   return (
     <div className="testimonial_main">
@@ -93,7 +103,7 @@ const Testimonial = () => {
         </div>
       </div>
       <div className="view-more">
-        <a href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia/reviews?hl=en" target="_blank" className="button-round view-more-btn"><span>View More</span> <FaArrowRightLong/></a>
+        <a href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia/reviews?hl=en" target="_blank" className="button-round view-more-btn" onClick={handleViewMoreBtnClick}><span>View More</span> <FaArrowRightLong/></a>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import pricingFeatures from "../Data/pricing-page-features-list"
 import Slider from "../Common/Slider";
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
+import ReactGA from "react-ga4";
 
 const Pricing = () => {  
   const [planPeriod, setPlanPeriod] = useState("annually");
@@ -40,7 +41,16 @@ const Pricing = () => {
   const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=919160583572&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
   const trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report"];
-  const premium_features = ["Schedule (Advance)", 'Business Chat Link (Advance)', 'Meet/Zoom Support (Advance)', "Multiple Attachments (Advance)"];
+  const premium_features = ["Schedule", 'Business Chat Link', 'Meet/Zoom Support', "Multiple Attachments"];
+
+  const handleGaButtonClick=(type)=>{
+    ReactGA.event({
+      category: "Button Click",
+      action: `buy ${type} button click`,
+      label: `buy_${type}_btn_clicked`,
+    });
+    return;
+  }
 
   const pricing = {
     india: {
@@ -184,7 +194,16 @@ const Pricing = () => {
   }
 
   function generatePricingPopup() {
-    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1)
+    ReactGA.send({ hitType: "popupview", page: "/pricing", title: "Pricing Page Popup, Redirected from extension" });
+    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1);
+    const handlePopupGaButtonClick= ()=>{
+      ReactGA.event({
+        category: "Button Click",
+        action: `pricing popup buy ${popupPlan} button click`,
+        label: `buy_popup_${popupPlan}_btn_clicked`,
+      });
+      return;
+    }
     return (
       <>
         <div className="pricing-popup-overlay"></div>
@@ -240,7 +259,8 @@ const Pricing = () => {
                 popupCountry === 'indonesia' ?
                 <div className="annual-price-indonesia" >
                   <span>
-                    {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}({
+                    {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}
+                    &nbsp;({
                       (popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 4) : pricing[popupCountry].annually.advance.substring(0, 4)) +
                       Math.floor((popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(4) : pricing[popupCountry].annually.advance.substring(4)) / 12)
                     }/month)</span> 
@@ -253,7 +273,7 @@ const Pricing = () => {
                     <span>
                       {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(1) : pricing[popupCountry].annually.advance.substring(1)}
                     </span>
-                    (
+                    &nbsp;(
                       <span className={popupCountry==='india' ? 'rupee': ''}>
                       {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 1) : pricing[popupCountry].annually.advance.substring(0, 1))}
                       </span>{
@@ -264,14 +284,14 @@ const Pricing = () => {
               }
           </div>
           <div className="pricing-popup-btn">
-            <button>{showButton(true,popupPlan)}</button>
+            <button onClick={handlePopupGaButtonClick}>{showButton(true,popupPlan)}</button>
             <a href={whatsappRedirectUrl} target="_blank" className="multiple-accounts-btn">Purchase for multiple users</a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
               {
                 premium_features.map((item,index)=>{
-                  return <div className="feature-item text-bold" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item}</div>
+                  return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item} <span className="text-bold">&nbsp;(Advance)</span></div>
                 })
               }
               {
@@ -375,7 +395,8 @@ const Pricing = () => {
                   <a
                     href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
                     target="_blank"
-                    className="buy_button">
+                    className="buy_button"
+                    onClick={handleGaButtonClick("free")}>
                       Try Now
                   </a>
                 </button>
@@ -448,7 +469,7 @@ const Pricing = () => {
                 </div>
               }
               <div className="pricing_card_button">
-                <button>
+                <button onClick={handleGaButtonClick("basic")}>
                   {showButton(false, 'basic')}
                 </button>
               </div>
@@ -521,7 +542,7 @@ const Pricing = () => {
                 </div>
               }
               <div className="pricing_card_button">
-                <button>
+                <button onClick={handleGaButtonClick("advance")}>
                   {showButton(false, 'advance')}
                 </button>
               </div>
@@ -569,7 +590,7 @@ const Pricing = () => {
                 }
               </div>
               <div className="pricing_card_button">
-                <button>
+                <button onClick={handleGaButtonClick("multiple_user")}>
                   <a href={whatsappRedirectUrl} target="_blank" className="buy_button">Talk to Us</a>
                 </button>
               </div>
