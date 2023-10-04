@@ -270,14 +270,11 @@
 }
 
 .pricing_switches {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .pricing_country {
@@ -294,6 +291,26 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+}
+
+.pricing_country_text {
+  background: #009a88;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #fff;
+  width: min(80%, 745px);
+  padding: 10px 0;
+}
+
+.pricing_country_text p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pricing_country_text img {
+  width: 30px;
+  margin: 0 10px;
 }
 
 .country_switch {
@@ -664,6 +681,12 @@
 }
 
 @media (max-width: 520px) {
+  .pricing-popup{
+    display: none;
+  } 
+  .pricing-popup-overlay{
+    display: none;
+  }
   .pricing_country_switch{
     flex-direction: column;
     padding: 5px;
@@ -675,6 +698,10 @@
   .country_current_switch{
     justify-content: left;
   }
+  .pricing_country_text{
+    width: 100% !important;
+    padding: 10px 20px;
+  } 
 }
 
 @media (max-width: 480px) {
@@ -684,6 +711,10 @@
   .slider .slider-text{
     font-size: 20px;
   }  
+  .pricing_country_text {
+    width: 100% !important;
+    border-radius: 8px !important;
+  }
   .pricing_table tbody th{
     font-size: 14px;
   }
@@ -693,11 +724,24 @@
   }
 }
 
-@media (max-width:520px) {
- .pricing-popup{
-  display: none;
- } 
- .pricing-popup-overlay{
-  display: none;
- }
+@media (max-width: 380px) {
+  .pricing_country_text img {
+    width: 20px !important;
+  }
+  .pricing_country_text p {
+    width: 100% !important;
+    border-radius: 8px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 310px) {
+  .pricing_country_text img {
+    width: 15px !important;
+  }
+  .pricing_country_text p {
+    width: 100% !important;
+    border-radius: 8px !important;
+    font-size: 10px !important;
+  }
 }
