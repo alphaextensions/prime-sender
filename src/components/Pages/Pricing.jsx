@@ -15,6 +15,8 @@ const Pricing = () => {
   const [popupLastPlan,setPopupLastPlan] = useState(null);
   const [popupCountry,setPopupCountry] = useState(null);
   const [popupPlan,setPopupPlan] = useState(null);
+  const [myLocation, setMyLocation] = useState(null);
+  const [flagIconSrc, setFlagIconSrc] = useState('');
 
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
@@ -36,7 +38,28 @@ const Pricing = () => {
   
   useEffect(() => {
     getParams();
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then((data) => {
+        let country = data.country_name.toLowerCase();
+        if (country != 'india' && country != 'indonesia') {
+          country = 'international';
+        }
+        setMyLocation({
+          country_name: data.country_name, pricing_country_name: country, country_code: data.country_code
+        });
+      })
+      .catch(err => console.log(err));
   }, []);
+
+  useEffect(() => {
+    if (myLocation && myLocation.country_code) {
+      setFlagIconSrc(`https://flagcdn.com/160x120/${myLocation.country_code.toLowerCase()}.webp`);
+    }
+    if (myLocation && myLocation.country_name) {
+      setCurrentCountry(myLocation.pricing_country_name.toLowerCase());
+    }
+  }, [myLocation]);
 
   const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=919160583572&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
@@ -322,6 +345,35 @@ const Pricing = () => {
     );
   }
 
+  const countrySwitchComponent = () => {
+    if (myLocation && myLocation.country_name) {
+      return <div className="pricing_country_text">
+        <p className="heading">Pricing curated just for you,
+          <img src={flagIconSrc} alt="" />
+          <span className="country_name">{myLocation.country_name}!</span>
+        </p>
+      </div>
+    }
+    return <div className="pricing_country">
+      <div className="pricing_country_switch">
+        <div className={`country_switch ${currentCountry === "india" && "active_country_class"}`} onClick={() => setCurrentCountry("india")} >
+          <p className="country_current_switch heading">
+            <img src="/images/india.png" alt="India Flag" />
+            India
+          </p>
+        </div>
+        <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class"}`} onClick={() => setCurrentCountry("indonesia")} >
+          <p className="country_current_switch heading">
+            <img src="/images/indonesia.png" alt="Indonesia Flag" />
+            Indonesia</p>
+        </div>
+        <div className={`country_switch ${currentCountry === "international" && "active_country_class"}`} onClick={() => setCurrentCountry("international")}>
+          <p className="country_current_switch heading">🌎 International</p>
+        </div>
+      </div>
+    </div>
+  }
+
   return (
     <>
       <HelmetHeader 
@@ -334,24 +386,7 @@ const Pricing = () => {
           <div className="pricing_top_section">
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
-              <div className="pricing_country">
-                <div className="pricing_country_switch">
-                  <div className={`country_switch ${currentCountry === "india" && "active_country_class" }`} onClick={() => setCurrentCountry("india")} >
-                    <p className="country_current_switch heading">
-                      <img src="/images/india.png" alt="India Flag" />
-                      India
-                    </p>
-                  </div>
-                  <div className={`country_switch ${currentCountry === "indonesia" && "active_country_class" }`} onClick={() => setCurrentCountry("indonesia")} >
-                    <p className="country_current_switch heading">
-                      <img src="/images/indonesia.png" alt="Indonesia Flag" />
-                      Indonesia</p>
-                  </div>
-                  <div className={`country_switch ${currentCountry === "international" && "active_country_class" }`} onClick={() => setCurrentCountry("international")}> 
-                    <p className="country_current_switch heading">🌎 International</p>
-                  </div>
-                </div>
-              </div>
+              {countrySwitchComponent()}
               <div className="pricing-slider">
                 <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
               </div>
