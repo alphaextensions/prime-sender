@@ -17,6 +17,7 @@ const Pricing = () => {
   const [popupPlan,setPopupPlan] = useState(null);
   const [myLocation, setMyLocation] = useState(null);
   const [flagIconSrc, setFlagIconSrc] = useState('');
+  const [loading, setLoading]= useState(false);
 
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
@@ -37,6 +38,7 @@ const Pricing = () => {
   };
   
   useEffect(() => {
+    setLoading(true);
     getParams();
     fetch('https://ipapi.co/json/')
       .then(res => res.json())
@@ -48,8 +50,12 @@ const Pricing = () => {
         setMyLocation({
           country_name: data.country_name, pricing_country_name: country, country_code: data.country_code
         });
+        setLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setLoading(false);
+        console.log(err)
+      });
   }, []);
 
   useEffect(() => {
@@ -92,6 +98,10 @@ const Pricing = () => {
         basicSlash: "₹9999",
         advance: "₹8499",
         advanceSlash: "₹11999",
+        monthlyBasicSlash: "₹999",
+        monthlyAdvanceSlash: "₹1199",
+        basicRoundedOffPrice: "₹584",
+        advanceRoundedOffPrice: "₹709"
       },
     },
     indonesia: {
@@ -110,6 +120,10 @@ const Pricing = () => {
         basicSlash: "IDR 1090000",
         advance: "IDR 990000",
         advanceSlash: "IDR 1390000",
+        monthlyBasicSlash: "IDR 109000",
+        monthlyAdvanceSlash: "IDR 139000",
+        basicRoundedOffPrice: "IDR 65850",
+        advanceRoundedOffPrice: "IDR 82500"
       },
     },
     international: {
@@ -128,9 +142,13 @@ const Pricing = () => {
         basicSlash: "$169.99",
         advance: "$159.99",
         advanceSlash: "$209.99",
+        monthlyBasicSlash: "$16.99",
+        monthlyAdvanceSlash: "$20.99",
+        basicRoundedOffPrice: "$10.8",
+        advanceRoundedOffPrice: "$13.3"
       },
     },
-  };
+  }; 
 
   const pricing_links = {
     india: {
@@ -386,7 +404,7 @@ const Pricing = () => {
           <div className="pricing_top_section">
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
-              {countrySwitchComponent()}
+              {!loading && countrySwitchComponent()}
               <div className="pricing-slider">
                 <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
               </div>
@@ -476,8 +494,8 @@ const Pricing = () => {
                   </span>
                   {
                     currentCountry === 'indonesia' ?
-                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : (currentPrice.basic.substring(4) / 12).toFixed(2)}</span> :
-                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : (currentPrice.basic.substring(1) / 12).toFixed(2)}</span>
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : currentPrice.basicRoundedOffPrice.substring(4)}</span> :
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : currentPrice.basicRoundedOffPrice.substring(1)}</span>
                   }
                   <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                   <br />
@@ -487,8 +505,8 @@ const Pricing = () => {
                   <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
                   {
                     currentCountry === 'indonesia' ?
-                    planPeriod === 'monthly' ? currentPrice.basicSlash.substring(4) : (currentPrice.basicSlash.substring(4) / 12).toFixed(2):
-                    planPeriod === 'monthly' ? currentPrice.basicSlash.substring(1) : (currentPrice.basicSlash.substring(1) / 12).toFixed(2)
+                    planPeriod === 'monthly' ? currentPrice.basicSlash.substring(4) : currentPrice.monthlyBasicSlash.substring(4):
+                    planPeriod === 'monthly' ? currentPrice.basicSlash.substring(1) : currentPrice.monthlyBasicSlash.substring(1)
                   }
                   </p>
                 </div>
@@ -549,8 +567,8 @@ const Pricing = () => {
                   </span>
                   {
                     currentCountry === 'indonesia' ?
-                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : (currentPrice.advance.substring(4) / 12).toFixed(2)}</span> :
-                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : (currentPrice.advance.substring(1) / 12).toFixed(2)}</span>
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : currentPrice.advanceRoundedOffPrice.substring(4)}</span> :
+                    <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : currentPrice.advanceRoundedOffPrice.substring(1)}</span>
                   }
                   <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                   <br />
@@ -560,8 +578,8 @@ const Pricing = () => {
                   <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
                   {
                     currentCountry === 'indonesia' ?
-                    planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(4) : (currentPrice.advanceSlash.substring(4) / 12).toFixed(2):
-                    planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(1) : (currentPrice.advanceSlash.substring(1) / 12).toFixed(2)
+                    planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(4) : currentPrice.monthlyAdvanceSlash.substring(4):
+                    planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(1) : currentPrice.monthlyAdvanceSlash.substring(1)
                   }  
                   </p>
                 </div>
