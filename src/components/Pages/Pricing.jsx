@@ -425,6 +425,7 @@ const Pricing = () => {
             {/* free card */}
             <div className="pricing_card">
               <div className="pricing_card_type">
+                <img src="/images/signal-free.png" alt="" />
                 <p>Free</p>
               </div>
               <div className="pricing_card_price">
@@ -485,6 +486,7 @@ const Pricing = () => {
             {/* basic card */}
             <div className="pricing_card premium_card">
               <div className="pricing_card_type">
+                <img src="/images/signal-basic.png" alt="" />
                 <p>Basic</p>
               </div>
               <div className="pricing_card_price">
@@ -558,6 +560,7 @@ const Pricing = () => {
             <div className="pricing_card premium_card">
               <img className="recommended_tag" src="/images/recommended_tag.png" alt="" />
               <div className="pricing_card_type">
+                <img src="/images/signal-advance.png" alt="" />
                 <p>Advance</p>
               </div>
               <div className="pricing_card_price">
@@ -632,7 +635,7 @@ const Pricing = () => {
 
               <div className="pricing_card_heading">
                 <div>
-                Purchase premium plan for multiple users for your organization at a <span className="text-bold">discounted rate</span> <span className="text-bold text-royal">upto 60%</span>
+                Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto 60%</span>
                 </div>
                 {
                   planPeriod === 'annually' && (
