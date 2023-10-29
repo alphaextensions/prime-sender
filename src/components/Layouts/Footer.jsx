@@ -65,6 +65,7 @@ const Footer = () => {
           <div className="footer_links">
             <h4 className='heading'>Contact With Us</h4>
             <ul className='large-text'>
+              <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
               <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
               <li><a href='https://wa.me/919160583572?text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender' target='_blank' >Chat on WhatsApp</a></li>
             </ul>

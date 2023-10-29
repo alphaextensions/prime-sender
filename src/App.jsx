@@ -13,6 +13,7 @@ import Error from './components/Pages/Error';
 import Success from './components/Pages/success';
 import ReactGA from "react-ga4";
 import {useEffect} from 'react';
+import ContactUs from './components/Pages/ContactUs';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route exact path="/feature-request" element={<RequestFeature />} />
         <Route exact path="/help-us-improve" element={<HelpUsImprove />} />
         <Route exact path="/blogs" element={<Blogs />} />
+        <Route exact path="/contactus" element={<ContactUs />} />
         <Route exact path="/terms-of-service" element={<TermsOfUse />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route exact path="/basic-success" element={<Success plan="basic" />} />
