@@ -1,0 +1,48 @@
+.contactus_section{
+  margin-top: 8rem !important;
+}
+.contactus_section .section-title{
+  grid-template-columns: 1fr auto;
+}
+.contact-form{
+  width: min(90%,600px);
+  margin: -1.5rem auto 2rem;
+  padding: 1rem 2rem;
+}
+.form-input{
+  margin: 10px auto;
+}
+.form-input label{
+  display: block;
+  margin-bottom: 4px;
+}
+.form-input input,.form-input textarea{
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 8px 10px;
+  outline: none;
+  resize: none;
+  background-color: var(--color-primary4);
+}
+.form-input input:focus,.form-input textarea:focus{
+  border-color: var(--color-primary2);
+}
+.form-btn button{
+  color: #fff;
+  border-radius: 8px;
+  border: 2px solid;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  width: max-content;
+  background-color: var(--color-primary1);
+  font-size: 16px;
+  transition: .3s;
+  outline: none;
+  width: min(180px,90%);
+  margin: auto;
+}
+.form-btn button:hover{
+  background-color: transparent;
+  color: var(--color-primary1);
+}

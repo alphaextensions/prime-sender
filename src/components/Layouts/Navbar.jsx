@@ -14,7 +14,6 @@ function NavLinks({ onClick }) {
       page: `${location.pathname}`, 
       title: `${location.pathname.substring(1)==='' ? 'Home' : location.pathname.substring(1)} Page` 
     });
-    console.log(location.pathname); 
   }, [location]);
 
   return (
