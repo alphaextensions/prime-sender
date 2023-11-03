@@ -1,6 +1,6 @@
 export default [
   {
-    name: 'Broadcasting',
+    name: 'Unlimited Broadcasting',
     free: true,
     basic: true,
     advance: true,
