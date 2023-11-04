@@ -1,7 +1,7 @@
 export default [
   {
     logo: '/images/broadcast.png',
-    name: "Broadcast message",
+    name: "Unlimited Broadcast message",
     desc: "Broadcast to multiple chats at once, effortlessly scaling your communication. No need for template approvals and extra fees.",
   },
   {

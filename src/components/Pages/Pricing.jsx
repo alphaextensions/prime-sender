@@ -459,7 +459,7 @@ const Pricing = () => {
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Broadcasting</p>
+                  <p className="pricing_card_feature_text">Unlimited Broadcasting</p>
                 </div>
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
