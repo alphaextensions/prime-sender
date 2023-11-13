@@ -1,0 +1,182 @@
+.section-title-container {
+  width: 98%;
+  max-width: 1400px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-title {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.title-image {
+  width: 80px;
+  justify-self: end;
+}
+
+.title-text {
+  text-align: center;
+  font-size: 44px !important;
+  font-weight: bold !important;
+}
+
+.sub-title-text {
+  text-align: center;
+  font-size: 22px !important;
+  color: var(--color-dark-grey);
+}
+
+@media screen and (max-width:1080px) {
+  .title-image {
+    width: 75px;
+  }
+
+  .section-title {
+    gap: 15px;
+  }
+
+  .title-text {
+    font-size: 42px !important;
+  }
+
+  .sub-title-text {
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (max-width:880px) {
+  .title-text {
+    font-size: 40px !important;
+  }
+
+  .sub-title-text {
+    font-size: 19px !important;
+  }
+}
+
+@media screen and (max-width:780px) {
+  .section-title-container {
+    margin: 30px auto;
+  }
+
+  .title-image {
+    width: 65px;
+  }
+
+  .section-title {
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+  }
+
+  .title-text {
+    font-size: 38px !important;
+  }
+
+  .sub-title-text {
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width:580px) {
+  .title-image {
+    width: 55px;
+  }
+
+  .title-text {
+    font-size: 34px !important;
+  }
+
+  .sub-title-text {
+    font-size: 16px !important;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .title-image {
+    width: 50px;
+  }
+
+  .section-title {
+    gap: 5px;
+  }
+
+  .title-text {
+    font-size: 30px !important;
+  }
+
+  .sub-title-text {
+    font-size: 15px !important;
+  }
+}
+
+@media screen and (max-width:380px) {
+  .title-image {
+    width: 45px;
+  }
+
+  .title-text {
+    font-size: 28px !important;
+  }
+
+  .sub-title-text {
+    font-size: 14px !important;
+  }
+}
+
+@media screen and (max-width:280px) {
+  .title-image {
+    width: 40px;
+  }
+
+  .title-text {
+    font-size: 26px !important;
+  }
+
+  .sub-title-text {
+    font-size: 12px !important;
+  }
+}
+
+/* Making GIF Colorfull */
+.main-feature-section .title-image {
+  filter: hue-rotate(200deg) saturate(2) contrast(5) !important;
+  padding: 13px !important;
+}
+
+.use_main .title-text {
+  background: linear-gradient(to right,#ffcc00, #fff 100%); /* Gradient background color */
+  -webkit-background-clip: text !important; /* Apply the background to the text only */
+  background-clip: text !important;  
+  -webkit-text-fill-color: transparent; 
+}
+
+.unique_main .section-title {
+  gap: 10px !important;
+}
+
+.faq_section .title-image {
+  filter: hue-rotate(100deg) saturate(2) contrast(5) !important;
+}
+
+.testimonial_upper .title-image {
+  filter: invert(1) hue-rotate(255deg) saturate(2) contrast(5) !important;
+}
+
+.testimonial_lower .title-image {
+  filter: invert(1) hue-rotate(150deg) saturate(2) contrast(5) !important;
+}
+
+.pricing_top_section .title-image {
+  filter: hue-rotate(350deg) saturate(1) contrast(1);
+}
+
+.pricing_lower_section .title-image {
+  filter: hue-rotate(300deg) saturate(2) contrast(2) !important;
+}

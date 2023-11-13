@@ -1,0 +1,131 @@
+.feature-card{
+  margin: 2rem 2.5rem 2rem 2.5rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-secondary2);
+  box-shadow: 0px 15px 35px 0px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+  text-align: center;
+  min-height: 275px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor:default;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  position: relative; 
+  overflow: hidden;
+}
+
+.feature-card::before,
+.feature-card::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  transition: width 0.3s ease;
+}
+
+.feature-card::before{
+  background: linear-gradient(to right, transparent 0%,#00b0a2 40%, #00544d 100%);
+}
+.feature-card::after{
+  background: linear-gradient(to left, transparent 0%,#00b0a2 40%, #00544d 100%);
+}
+
+.feature-card::before {
+  top: 0;
+  left: 0;
+}
+
+.feature-card::after {
+  bottom: 0;
+  right: 0;
+}
+
+.feature-card:hover::before,
+.feature-card:hover::after {
+  width: 100%;
+}
+
+.feature-card-head{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.feature-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0px 20px 37px 0px rgba(0, 0, 0, 0.1);
+}
+.feature-img{
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-img img{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.feature-card .feature-img img[src$=".gif"] {
+  width: 140%;
+  margin-bottom: 0;
+}
+.feature-name{
+  margin-top: 0.6rem;
+  font-weight: 600
+}
+.feature-desc{
+  text-align: center ;
+  margin-top: 0.6rem;
+  font-weight: 400;
+  color: var(--color-dark-grey);
+}
+
+@media screen and (max-width:1340px) {
+  .feature-card{
+    flex-basis: 40%;
+  }
+}
+
+@media screen and (max-width:790px) {
+  .feature-card{
+    flex-basis: 90%;
+    margin: 2rem 6rem;
+    padding: 2rem;
+  }
+  .feature-card-head{
+    margin: 1rem auto;
+  }
+  .feature-img{
+    width: 40px;
+  }
+  .feature-name{
+    margin: 0 0 0 0.6rem;
+  }
+}
+
+@media screen and (max-width:620px) {
+  .feature-card{
+    margin: 2rem 5rem;
+  }
+}
+
+@media screen and (max-width:540px) {
+  .feature-card{
+    padding: 0.8rem;
+    margin-bottom: 1.5rem !important;
+  }
+  .feature-img{
+    width: 60px;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .feature-card{
+    margin: 1rem;
+  }
+  .feature-name{
+    margin: 0 0 0 0.3rem;
+  }
+}

@@ -1,0 +1,17 @@
+.policy-container {
+  display: flex;
+  align-items: start !important;
+  justify-content: center;
+  width: min(90%, 900px) !important;
+  flex-direction: column;
+  margin: 0px auto;
+}
+
+.policy-container .policy {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.policy-container .policy-content {
+  font-size: 16px;
+}

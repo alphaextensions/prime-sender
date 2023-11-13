@@ -1,0 +1,142 @@
+.everything_main {
+  width: 100vw;
+  min-height: 90vh;
+  margin: -5rem auto 0;
+  background-image: url('/images/bg3.jpg');
+  position: relative;
+  padding-bottom: 13rem;
+}
+
+.custom-shape-divider-bottom-1692460225 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1692460225 svg {
+  position: relative;
+  display: block;
+  width: calc(127% + 1.3px);
+  height: 104px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1692460225 .shape-fill {
+  fill: #008373;
+}
+
+.everything_container {
+  padding: 8rem 0 2rem;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.everything_upper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.everything_upper .sub_heading {
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  color: var(--color-dark-grey);
+}
+
+.everything_lower {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.everything_card {
+  flex-basis: 23%;
+  border: 2px solid var(--color-light-grey);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 35px 20px 30px;
+  transition: 0.3s;
+}
+
+.everything_card:hover{
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.everything_card_upper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.everything_card_upper img {
+  width: 60px;
+}
+
+.everything_card_upper h1 {
+  font-size: 20px;
+}
+
+.everything_card_lower {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.everything_card_lower p {
+  text-align: center;
+  line-height: 25px;
+  color: var(--color-dark-grey);
+}
+
+@media screen and (max-width: 950px) {
+  .everything_main {
+    padding: 60px 30px;
+  }
+  .everythig_upper h1 {
+    font-size: 50px;
+  }
+  .everythig_upper p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .everything_upper h1 {
+    font-size: 45px !important;
+  }
+  .everything_upper p {
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  /* .everything_lower {
+    flex-direction: column;
+  } */
+
+  .everything_card {
+    width: 80%;
+  }
+}

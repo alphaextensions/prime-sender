@@ -1,0 +1,42 @@
+.main-feature-section{
+  width: 100%;
+  background-size: cover;
+  background: linear-gradient(180deg, #e2effa 0%, #009A8888 100%);
+  padding: 4rem 2rem 4rem;
+}
+
+.main-features-content{
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.features{
+  margin-top: 2rem;
+}
+
+.main-feature-section .slick-next::before,
+.main-feature-section .slick-prev::before{
+  color: var(--color-primary1) !important;
+  font-size: 40px;
+}
+
+.main-feature-section .slick-next::before{
+  margin-left: 10px;
+}
+.main-feature-section .slick-prev::before{
+  margin-left: -15px;
+}
+
+.main-feature-section .slick-next::before:hover{
+  color: var(--color-primary2) !important;
+}
+
+.main-feature-section .slick-dots li button:before{
+  color: var(--color-primary1) !important;
+  margin-top: 1rem;
+}
+
+.main-feature-section .slick-dots li.slick-active button:before{
+  scale: 1.6;
+}

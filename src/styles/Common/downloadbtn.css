@@ -1,0 +1,22 @@
+.download-btn{
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid var(--color-primary1) !important;
+  background-color: var(--color-primary1);
+  z-index: 1000;
+}
+
+.download-btn:hover{
+  background-color: transparent;
+}
+
+.download-btn p{
+  margin: 0 !important;
+  font-weight: 500 !important;
+  transition: 0.3s !important;
+  color: var(--color-white);
+}
+
+.download-btn:hover p{
+  color: var(--color-primary1);
+}
