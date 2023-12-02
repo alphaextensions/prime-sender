@@ -1,5 +1,9 @@
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
+import BlogCard from "../common/BlogCard";
+import '../../styles/blog/blog.css';
+import { BlogCardData } from "../Data/blogCard-data";
+
 
 const Blogs = () => {
   return (
@@ -10,18 +14,13 @@ const Blogs = () => {
       />
       <div className="main-section blog_section">
         <SectionTitle gif="/gifs/blogs.gif" title="Blogs" />
-        <div className="main-container blog_container">
-          <iframe
-            src="https://primesender.blogspot.com/"
-            className="main-iframe"
-            height="1080"
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
-          >
-            Loading…
-          </iframe>
-        </div>
+      </div>
+      <div className="blog_container">
+        {
+          BlogCardData.map((data) => (
+            <BlogCard key={data.title} title={data.title} date={data.date} imageUrl={data.imageUrl} step={data.step} redirectLink={data.redirectLink} />
+          ))
+        }
       </div>
     </>
   );
