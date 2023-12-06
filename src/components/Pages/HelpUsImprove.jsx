@@ -1,5 +1,6 @@
 import SectionTitle from '../Common/SectionTitle';
 import HelmetHeader from "../Common/HelmetHeader";
+import '../../styles/HelpUsImprovePage/helpusimprove.css';
 
 const HelpUsImprove = () => {
   return (
@@ -16,12 +17,12 @@ const HelpUsImprove = () => {
           />
         <div className="main-container improve_container">
           <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSf_dgPZ7qGtU7RER5Gq6fUg1MBf33kW2om3AMllAm9jT2URzw/viewform?embedded=true"
-            height="1080"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdAACp4FEHgEkv3o1T1fMMsY76pKv3KUUqp5wV5LT3gTEuhmQ/viewform?embedded=true"
+            height="auto"
             className='main-iframe'
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
           >
             Loading…
           </iframe>
