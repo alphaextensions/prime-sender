@@ -27,7 +27,7 @@ const HelpUsImprove = () => {
             Loading…
           </iframe>
           <div className='improve_para_2'>
-            <p className='sub-heading'>If you had a change of heart somehow and want to know how Web Sender
+            <p className='sub-heading'>If you had a change of heart somehow and want to know how Prime Sender
               works quickly in 3 steps, here :</p>
             <br />
             <p className='text'>1. Enter the numbers you want to send the message to, separated by comma.</p>
