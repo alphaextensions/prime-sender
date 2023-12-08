@@ -69,7 +69,7 @@ const Home = () => {
         <div className="home-content">
           <div className="left-col">
             <h1 className="title large-heading">
-              Best Message and Productivity Tool for your Organisation
+              Best Messaging and Productivity Tool for your Organisation
             </h1>
             <p className="sub_title sub-heading">cheapest compared to global competitors</p>
             <div className="home-btns">

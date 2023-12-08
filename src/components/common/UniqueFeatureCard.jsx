@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
 
-const UniqueFeatureCard = ({ imgSrc, subTitle, title, featureText, order }) => {
+const UniqueFeatureCard = ({ imgSrc, subTitle, featureTitle, featureText, order }) => {
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -18,7 +18,7 @@ const UniqueFeatureCard = ({ imgSrc, subTitle, title, featureText, order }) => {
         </div>
         <div className="unique_card_text" data-aos="fade-right" >
           <p className="sub_title heading">{subTitle}</p>
-          <h1 className="large-heading">{title}</h1>
+          <h1 className="large-heading">{featureTitle}</h1>
           <p className="feature_content large-text">{featureText}</p>
         </div>
       </div>
