@@ -59,6 +59,17 @@ const Home = () => {
     }
   }
 
+  const checkForScroll = () => {
+    let sectionToScroll = window.location.hash;
+    if(sectionToScroll === '#how-to-use'){
+      scrollToSection('how-to-use');
+    }
+  }
+
+  useEffect(()=>{
+    checkForScroll();
+  },[]);
+
   return (
     <>
       <HelmetHeader 
