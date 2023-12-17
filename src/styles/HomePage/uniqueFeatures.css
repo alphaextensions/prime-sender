@@ -26,7 +26,7 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .unique_card_reverse{
@@ -66,6 +66,39 @@
   flex-direction: column;
   color: var(--color-dark-grey);
 }
+
+.slick-slider{
+  width: 90%;
+  margin: auto;
+}
+
+
+.unique_main .slick-next::before,
+.unique_main .slick-prev::before{
+  color: var(--color-primary1) !important;
+  font-size: 40px;
+}
+
+.unique_main .slick-next::before{
+  margin-left: 10px;
+}
+.unique_main .slick-prev::before{
+  margin-left: -15px;
+}
+
+.unique_main .slick-next::before:hover{
+  color: var(--color-primary2) !important;
+}
+
+.unique_main .slick-dots li button:before{
+  color: var(--color-primary1) !important;
+  margin-top: 1rem;
+}
+
+.unique_main .slick-dots li.slick-active button:before{
+  scale: 1.6;
+}
+
 
 @media screen and (max-width: 860px) {
   .unique_card {

@@ -688,7 +688,7 @@ const Pricing = () => {
   return (
     <>
       <HelmetHeader 
-        title={'Pricing | Prime Sender'}
+        title={'Pricing | Prime Sender - Best Web Sender Extension'}
         description={'Pricing for Prime Sender'}
       />
       <div className="pricing_container">

@@ -14,8 +14,8 @@ const CompleteSolutions = () => {
     <div className="solutions_main">
       <SectionTitle 
         gif="/gifs/complete-solutions.gif" 
-        title="Complete Marketing Solutions" 
-        subtitle="Connect with all your customers instantly and efficiently"
+        title="Supercharge your communication for your business" 
+        subtitle="Unlock maximum efficiency using our web sender extension. Connect with all your customers instantly and efficiently"
       />
       <div className="solutions_container">
         <div className="solutions_lower" data-aos="fade-up">
@@ -25,7 +25,7 @@ const CompleteSolutions = () => {
               <h1 className="heading">Highly Trusted</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="text">More then 50,000 businesses trust us to connect with their customers</p>
+              <p className="text">More than 50,000 businesses use our chrome extension to connect with their customers</p>
             </div>
           </div>{" "}
           <div className="solutions_card">
@@ -34,16 +34,16 @@ const CompleteSolutions = () => {
               <h1 className="heading">Friendly Interface</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="text">The design is fairly intuitive and easy to understand</p>
+              <p className="text">Our web sender has an intuitive design to optimize your productivity</p>
             </div>
           </div>{" "}
           <div className="solutions_card">
             <div className="solutions_card_upper">
               <img src="/images/price.gif" alt="" />
-              <h1 className="heading">Lowest Prices</h1>
+              <h1 className="heading">Free to use</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="text">Apart from a few features available in  lowest prices, other features are completely free</p>
+              <p className="text">Our web sender chrome extension has basic features which are completely free to use</p>
             </div>
           </div>
         </div>

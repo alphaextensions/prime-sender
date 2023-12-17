@@ -9,7 +9,7 @@ const Blogs = () => {
   return (
     <>
       <HelmetHeader
-        title={'Blogs | Prime Sender'}
+        title={'Blogs | Prime Sender - Best Web Sender Extension'}
         description={'Blogs of Prime Sender'}
       />
       <div className="main-section blog_section">

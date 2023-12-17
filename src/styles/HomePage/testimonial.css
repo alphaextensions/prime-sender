@@ -1,6 +1,6 @@
 .testimonial_main {
   width: 100%;
-  background: linear-gradient(180deg, #ffffff00 0%, #008373 20%, #008373 80%, #e4dfff 100%);
+  background: linear-gradient(180deg, #ffffff00 0%, #008373 20%, #008373 80%, #ffffff 100%);
   color: var(--color-white);
   display: flex;
   justify-content: center;
@@ -200,7 +200,7 @@
 }
 
 .view-more-btn{
-  margin-top: 7rem;
+  margin-top: 4rem;
   transition: 0.4s;
 }
 
@@ -210,6 +210,32 @@
 
 .view-more-btn:hover{
   background-color: var(--color-secondary3);
+}
+
+.testimonial_main .slick-next::before,
+.testimonial_main .slick-prev::before{
+  color: var(--color-primary1) !important;
+  font-size: 40px;
+}
+
+.testimonial_main .slick-next::before{
+  margin-left: 10px;
+}
+.testimonial_main .slick-prev::before{
+  margin-left: -15px;
+}
+
+.testimonial_main .slick-next::before:hover{
+  color: var(--color-primary2) !important;
+}
+
+.testimonial_main .slick-dots li button:before{
+  color: var(--color-primary1) !important;
+  margin-top: 1rem;
+}
+
+.testimonial_main .slick-dots li.slick-active button:before{
+  scale: 1.6;
 }
 
 @media screen and (max-width: 950px) {

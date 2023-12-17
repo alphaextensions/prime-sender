@@ -5,7 +5,7 @@ const RequestFeature = () => {
   return (
     <>
       <HelmetHeader
-        title={'Feature Request | Prime Sender'}
+        title={'Feature Request | Prime Sender - Best Web Sender Extension'}
         description={'Submit your request for adding new features to Prime Sender'}
       />
       <div className="main-section">

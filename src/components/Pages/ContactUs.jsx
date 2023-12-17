@@ -76,7 +76,7 @@ const ContactUs = () => {
   return (
     <>
       <HelmetHeader
-        title={'Contact Us | Prime Sender'}
+        title={'Contact Us | Prime Sender - Best Web Sender Extension'}
         description={'Contact Us at Prime Sender'}
       />      
       {

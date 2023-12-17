@@ -7,7 +7,7 @@ function TermsOfUse() {
   return (
     <>
       <HelmetHeader 
-        title={'Terms Of Service | Prime Sender'}
+        title={'Terms Of Service | Prime Sender - Best Web Sender Extension'}
         description={'Terms Of Service for Prime Sender'}
       />
       <div className="terms-of-use main-section">
