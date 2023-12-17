@@ -4,24 +4,48 @@ import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SectionTitle from '../Common/SectionTitle';
+import { useState } from 'react';
+import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi'
+import { Helmet } from 'react-helmet';
 
 const FAQs = () => {
+
+  const [activeIndex, setActiveIndex] = useState([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  const toggleQuestion = (index) => {
+    if (activeIndex.includes(index)) {
+      const newActiveIndex = activeIndex.filter(item => item !== index);
+      setActiveIndex(newActiveIndex);
+    }
+    else {
+      setActiveIndex([...activeIndex, index]);
+    }
+  }
+
   return (
     <>
+      <Helmet
+        title={'FAQs | Prime Sender - Best Web Sender Extension'}
+        description={'FAQs of Prime Sender'}
+      />
       <div className="faq_section">
-        <SectionTitle gif="/gifs/faq.gif" title="Frequently Asked Questions"/>
+        <SectionTitle gif="/gifs/faq.gif" title="Frequently Asked Questions" />
         <div className="questions" data-aos="fade-down">
           {
             faqs.map((item, index) => {
               return (
-                <div className="question_card" key={index}>
-                  <h2 className='question_title heading'>{item.question}</h2>
-                  <p className='question_answer large-text' dangerouslySetInnerHTML={{ __html: item.answer }}></p>
+                <div className="accordion-item" key={index}>
+                  <button id="accordion-button-1" aria-expanded={activeIndex.includes(index) ? true : false} onClick={() => toggleQuestion(index)}>
+                    <span className="question_title large_text">{item.question}</span>
+                    <span className="question_icon" aria-hidden="true">{activeIndex.includes(index) ? <FiMinusCircle /> : <FiPlusCircle />}</span>
+                  </button>
+                  <div className="accordion-content">
+                    <p className='question_answer' dangerouslySetInnerHTML={{ __html: item.answer }} />
+                  </div>
                 </div>
               )
             })

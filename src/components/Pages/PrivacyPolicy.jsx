@@ -8,7 +8,7 @@ function PrivacyPolicy() {
   return (
     <>
       <HelmetHeader
-        title={'Privacy Policy | Prime Sender'}
+        title={'Privacy Policy | Prime Sender - Best Web Sender Extension'}
         description={'Privacy Policy for Prime Sender'}
       />
       <div className="main-section privacy-policy">

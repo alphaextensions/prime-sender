@@ -6,7 +6,7 @@ const HelpUsImprove = () => {
   return (
     <>
       <HelmetHeader 
-        title={'Help Us Improve | Prime Sender'}
+        title={'Help Us Improve | Prime Sender - Best Web Sender Extension'}
         description={'Submit your feedback to help us improve Prime Sender'}
       />
       <div className='main-section'>

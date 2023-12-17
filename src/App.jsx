@@ -15,6 +15,7 @@ import ReactGA from "react-ga4";
 import {useEffect} from 'react';
 import ContactUs from './components/Pages/ContactUs';
 import BlogPage from './components/Pages/BlogPage';
+import FAQs from './components/Sections/FAQs';
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route exact path="/help-us-improve" element={<HelpUsImprove />} />
         <Route exact path="/blogs" element={<Blogs />} />
         <Route exact path="/blogs/:id" element={<BlogPage />} />
+        <Route exact path="/faqs" element={<FAQs/>} />
         <Route exact path="/contactus" element={<ContactUs />} />
         <Route exact path="/terms-of-service" element={<TermsOfUse />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />

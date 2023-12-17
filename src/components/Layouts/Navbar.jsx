@@ -1,41 +1,42 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
-import { MdFileDownload,MdClose,MdMenu } from "react-icons/md";
+import { MdFileDownload, MdClose, MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
 import DownloadBtn from '../Common/DownloadBtn'
 import ReactGA from "react-ga4";
 
-function NavLinks({ onClick }) {  
+function NavLinks({ onClick }) {
   const location = useLocation();
-  
-  useEffect(()=>{
-    ReactGA.send({ 
-      hitType: "pageview", 
-      page: `${location.pathname}`, 
-      title: `${location.pathname.substring(1)==='' ? 'Home' : location.pathname.substring(1)} Page` 
+  const url = location.pathname;
+  const currPageId= window.location.href.split('#')[1];
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: `${location.pathname}`,
+      title: `${location.pathname.substring(1) === '' ? 'Home' : location.pathname.substring(1)} Page`
     });
   }, [location]);
 
   return (
     <ul>
-      <li>
+      {url == '/' ? <li>
+        <Link to='/#how-to-use' onClick={onClick} className={`large-text ${currPageId == 'how-to-use' && 'active'}`} id='how-to-use-btn'>
+          How To Use
+        </Link>
+      </li> : <li>
         <NavLink to='/' onClick={onClick} className='large-text'>
           Home
         </NavLink>
-      </li>
+      </li>}
       <li>
-        <Link to='/#main-features' onClick={onClick} className='large-text' id='main-features-btn'>
+        <Link to='/#main-features' onClick={onClick} className={`large-text ${currPageId == 'main-features' && 'active'}`} id='main-features-btn'>
           Features
         </Link>
       </li>
       <li>
         <NavLink to='/pricing' onClick={onClick} className='large-text'>
           Pricing
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to='/blogs' onClick={onClick} className='large-text'>
-          Blogs
         </NavLink>
       </li>
     </ul>
@@ -74,9 +75,9 @@ function Navbar() {
     }
   }
 
-  function handleFeatureClick() {
+  function handleFeatureClick(btnId) {
     if (window.location.pathname === '/') {
-      scrollToSection('main-features');
+      scrollToSection(btnId === 'main-features-btn' ? 'main-features' : 'how-to-use');
     } else {
       navigate('/');
       setTimeout(() => {
@@ -91,8 +92,8 @@ function Navbar() {
     setShowMenu(false);
     document.body.style.overflow = 'auto';
 
-    if(btnId === 'main-features-btn') {
-      handleFeatureClick();
+    if (btnId === 'main-features-btn' || btnId === 'how-to-use-btn') {
+      handleFeatureClick(btnId);
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -104,12 +105,12 @@ function Navbar() {
   }
 
   return (
-    <nav className={`prime-sender-navbar ${isFixed && 'navbar-fixed '} ${showMenu && 'active'}`} style={{background: !isFixed && showMenu ? '#f2fffe' : ''}}>
+    <nav className={`prime-sender-navbar ${isFixed && 'navbar-fixed '} ${showMenu && 'active'}`} style={{ background: !isFixed && showMenu ? '#f2fffe' : '' }}>
       <div className='prime-sender-container'>
         <NavLink to='/' className='brand' onClick={openPage}>
           <div className='nav_img_container'>
-            <img src="/images/logo-img.png" alt="logo"/>
-            <img src="/images/logo-text.png" alt="logo"/>
+            <img src="/images/logo-img.png" alt="logo" />
+            <img src="/images/logo-text.png" alt="logo" />
           </div>
         </NavLink>
 
@@ -119,7 +120,7 @@ function Navbar() {
           </div>
 
           <div className='nav-download-btn'>
-            <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />}/>
+            <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />} />
             {showMenu ? (
               <MdClose className='menu-icon' onClick={closeMenu} />
             ) : (

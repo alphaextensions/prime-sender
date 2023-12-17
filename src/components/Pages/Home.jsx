@@ -1,4 +1,4 @@
-import React, {useEffect , useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/HomePage/homepage.css';
 import DownloadBtn from '../Common/DownloadBtn';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Home = () => {
   //   const lastTooltipDate = localStorage.getItem('lastTooltipDate');
   //   const clickedChatSupport = localStorage.getItem('clickedChatSupport');
   //   const currentDate = new Date().toLocaleDateString();
-    
+
   //   if (!clickedChatSupport && (!lastTooltipDate || lastTooltipDate !== currentDate)) {
   //     setShowChatSupportTooltip(true);
   //     localStorage.setItem('lastTooltipDate', currentDate);
@@ -61,43 +61,58 @@ const Home = () => {
 
   const checkForScroll = () => {
     let sectionToScroll = window.location.hash;
-    if(sectionToScroll === '#how-to-use'){
+    if (sectionToScroll === '#how-to-use') {
       scrollToSection('how-to-use');
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     checkForScroll();
-  },[]);
+  }, []);
+
+  const promoText = ['Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender',]
+
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro' style={{ top: index * 6 + '%' }}>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <>
+    {...promoTextComponentGenerator()}
+  </>
 
   return (
     <>
-      <HelmetHeader 
+      <HelmetHeader
         title={'Prime Sender - Best Web Extension for Sending Messages'}
-        description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'} 
+        description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'}
       />
       <div className="home-container">
         <div className="home-content">
           <div className="left-col">
             <h1 className="title large-heading">
-              Best Messaging and Productivity Tool for your Organisation
+              Best Chrome Extension for Messaging and Productivity
             </h1>
-            <p className="sub_title sub-heading">cheapest compared to global competitors</p>
+            <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
             <div className="home-btns">
               <DownloadBtn />
-              <Link to="/#how-to-use" onClick={()=>{scrollToSection('how-to-use')}} className="howtousebtn button-round large-text btn">
+              <Link to="/#how-to-use" onClick={() => { scrollToSection('how-to-use') }} className="howtousebtn button-round large-text btn">
                 How To Use
               </Link>
             </div>
-            <p className="offer text"> <span className='purple'>Lifetime Offer :</span> Basic Features FREE FOREVER!</p>
           </div>
           <div className="right-col">
             <img className='girl' src="/images/main-1.gif" alt="" />
             <img className='objects' src="/images/main-2.svg" alt="" />
+            <div className='free_forever_div'>
+              <p className='free_green'>IT'S FREE. FOREVER.</p>
+            </div>
           </div>
         </div>
+        {promoTextComponent}
       </div>
-  
+
       <Companies />
       <CompleteSolutions />
       <HowToUse />
@@ -105,7 +120,6 @@ const Home = () => {
       <UniqueFeatures />
       {/* <EverythingInOne /> */}
       <Testimonial />
-      <FAQs />
     </>
   );
 };

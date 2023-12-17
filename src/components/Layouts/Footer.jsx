@@ -44,7 +44,8 @@ const Footer = () => {
             <ul className='large-text'>
               <li><Link to='/' onClick={scrollToTop}> Home </Link></li>
               <li><Link to='/#how-to-use' onClick={handleSectionClick}> How to Use </Link></li>
-              <li><Link to='/blogs' onClick={scrollToTop}> Blog </Link></li>
+              <li><Link to='/blogs' onClick={scrollToTop}> Blogs </Link></li>
+              <li><Link to='/faqs' onClick={scrollToTop}> FAQs </Link></li>
             </ul>
           </div>
           <div className="footer_links">
