@@ -11,6 +11,7 @@ import FAQs from '../Sections/FAQs';
 import CompleteSolutions from '../Sections/CompleteSolutions';
 import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
+import {promoText} from '../Data/seo-data.js';
 // import EverythingInOne from '../Sections/EverythingInOne';
 
 const Home = () => {
@@ -70,7 +71,6 @@ const Home = () => {
     checkForScroll();
   }, []);
 
-  const promoText = ['Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender', 'Prime Sender',]
 
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
