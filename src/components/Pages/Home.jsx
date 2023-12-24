@@ -85,7 +85,7 @@ const Home = () => {
   return (
     <>
       <HelmetHeader
-        title={'Prime Sender - Best Web Extension for Sending Messages'}
+        title={'Prime Sender - Best Web Sender Extension'}
         description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'}
       />
       <div className="home-container">
