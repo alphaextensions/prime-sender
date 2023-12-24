@@ -59,6 +59,7 @@
   font-weight: 600;
   position: absolute;
   color: transparent;
+  user-select: none;
 }
 
 promo_text_num1
