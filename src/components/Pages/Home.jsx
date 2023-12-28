@@ -11,7 +11,6 @@ import FAQs from '../Sections/FAQs';
 import CompleteSolutions from '../Sections/CompleteSolutions';
 import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
-import {promoText} from '../Data/seo-data.js';
 // import EverythingInOne from '../Sections/EverythingInOne';
 
 const Home = () => {
@@ -71,17 +70,6 @@ const Home = () => {
     checkForScroll();
   }, []);
 
-
-  const promoTextComponentGenerator = () => {
-    return promoText.map((text, index) => {
-      return <span key={index} className='white_promo_text pro' style={{ top: index * 6 + '%' }}>{text}</span>
-    })
-  }
-
-  const promoTextComponent = <>
-    {...promoTextComponentGenerator()}
-  </>
-
   return (
     <>
       <HelmetHeader
@@ -110,7 +98,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        {promoTextComponent}
       </div>
 
       <Companies />
