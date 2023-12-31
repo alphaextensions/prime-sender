@@ -4,6 +4,7 @@ import { MdFileDownload, MdClose, MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
 import DownloadBtn from '../Common/DownloadBtn'
 import ReactGA from "react-ga4";
+import { promoText } from '../Data/seo-data';
 
 function NavLinks({ onClick }) {
   const location = useLocation();
@@ -104,8 +105,19 @@ function Navbar() {
     document.body.style.overflow = 'hidden';
   }
 
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
+
   return (
     <nav className={`prime-sender-navbar ${isFixed && 'navbar-fixed '} ${showMenu && 'active'}`} style={{ background: !isFixed && showMenu ? '#f2fffe' : '' }}>
+      {promoTextComponent}
       <div className='prime-sender-container'>
         <NavLink to='/' className='brand' onClick={openPage}>
           <div className='nav_img_container'>
