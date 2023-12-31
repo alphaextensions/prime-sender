@@ -13,7 +13,7 @@ import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
 // import EverythingInOne from '../Sections/EverythingInOne';
 
-const Home = () => {
+const Home = ({ redirectToHowToUse }) => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
 
   // const showTooltip = ()=>{
@@ -67,8 +67,22 @@ const Home = () => {
   }
 
   useEffect(() => {
+    if(redirectToHowToUse=="true"){
+      scrollToSection('how-to-use');
+    }
     checkForScroll();
   }, []);
+
+
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro' style={{ top: index * 6 + '%' }}>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <>
+    {...promoTextComponentGenerator()}
+  </>
 
   return (
     <>
