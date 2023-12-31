@@ -14,7 +14,7 @@ import ReactGA from "react-ga4";
 import {promoText} from '../Data/seo-data.js';
 // import EverythingInOne from '../Sections/EverythingInOne';
 
-const Home = () => {
+const Home = ({ redirectToHowToUse }) => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
 
   // const showTooltip = ()=>{
@@ -68,9 +68,11 @@ const Home = () => {
   }
 
   useEffect(() => {
+    if(redirectToHowToUse=="true"){
+      scrollToSection('how-to-use');
+    }
     checkForScroll();
   }, []);
-
 
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
