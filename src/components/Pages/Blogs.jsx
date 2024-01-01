@@ -9,13 +9,13 @@ import { promoText } from "../Data/seo-data";
 const Blogs = () => {
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
-      return <span key={index} className='white_promo_text pro' style={{ top: index * 6 + '%' }}>{text}</span>
+      return <span key={index} className='white_promo_text pro'>{text}</span>
     })
   }
 
-  const promoTextComponent = <>
+  const promoTextComponent = <div className='promo_text_container'>
     {...promoTextComponentGenerator()}
-  </>
+  </div>
   return (
     <>
       <HelmetHeader

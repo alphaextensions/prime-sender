@@ -3,9 +3,19 @@ import HelmetHeader from "../Common/HelmetHeader";
 import '../../styles/blog/blog.css';
 import { useParams } from "react-router-dom";
 import { blogHtml } from "../../components/Data/blogs-html.jsx";
+import { promoText } from "../Data/seo-data.js";
 
 const BlogPage = () => {
   const { id } = useParams();
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
   return (
     <>
       <HelmetHeader
@@ -17,6 +27,7 @@ const BlogPage = () => {
         <div className="blog_page_container">
           {blogHtml[id]}
         </div>
+        {promoTextComponent}
       </div>
     </>
   );

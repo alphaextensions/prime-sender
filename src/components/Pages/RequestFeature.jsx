@@ -1,7 +1,17 @@
 import HelmetHeader from "../Common/HelmetHeader";
 import SectionTitle from "../Common/SectionTitle";
+import { promoText } from "../Data/seo-data";
 
 const RequestFeature = () => {
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
   return (
     <>
       <HelmetHeader
@@ -9,6 +19,7 @@ const RequestFeature = () => {
         description={'Submit your request for adding new features to Prime Sender'}
       />
       <div className="main-section">
+        {promoTextComponent}
       <SectionTitle gif="/gifs/feature-request.gif" title="Feature Request" />
       <div className='main-container request_feature_container'>
         <iframe

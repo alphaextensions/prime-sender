@@ -2,8 +2,18 @@ import React from 'react';
 import '../../styles/TermsOfUsePage/termsOfUse.css';
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from '../Common/HelmetHeader';
+import { promoText } from '../Data/seo-data';
 
 function TermsOfUse() {
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
   return (
     <>
       <HelmetHeader 
@@ -11,6 +21,7 @@ function TermsOfUse() {
         description={'Terms Of Service for Prime Sender'}
       />
       <div className="terms-of-use main-section">
+        {promoTextComponent}
         <SectionTitle gif="/gifs/terms-of-service.gif" title="Terms of Service" />
         <div className="terms-container main-container">
           <div className='term'>

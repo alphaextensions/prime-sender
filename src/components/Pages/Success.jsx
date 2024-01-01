@@ -3,9 +3,19 @@ import HelmetHeader from '../Common/HelmetHeader';
 import featuresList from '../Data/pricing-page-features-list';
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
+import { promoText } from '../Data/seo-data';
 
 const Success = ({ plan }) => {
   const successTitle = {basic: "Basic Success", advance: "Advance Success"}
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
 
   return (
     <>
@@ -14,6 +24,7 @@ const Success = ({ plan }) => {
         description={successTitle[plan] + ' for Prime Sender'}
       />
       <div className="main-section">
+        {promoTextComponent}
       <div className="main-container success-container">
         <div className="success-texts-container">
           <p className="heading">Congrats! You have successfully purchased PS {plan[0].toUpperCase() + plan.substr(1)} Premium</p>

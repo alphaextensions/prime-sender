@@ -7,8 +7,18 @@ import Slider from "../Common/Slider";
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
+import { promoText } from "../Data/seo-data";
 
 const Pricing = () => {  
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
   const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");
   const [popupPlanPeriod, setPopupPlanPeriod] = useState('annually');
@@ -692,6 +702,7 @@ const Pricing = () => {
         description={'Pricing for Prime Sender'}
       />
       <div className="pricing_container">
+        {promoTextComponent}
         {popupLastPlan && generatePricingPopup()}
         <div className="pricing_main">
           <div className="pricing_top_section">

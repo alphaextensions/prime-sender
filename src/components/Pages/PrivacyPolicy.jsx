@@ -3,8 +3,18 @@ import PrivacyPolicyData from '../Data/privacy-policy-data.js';
 import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
+import { promoText } from '../Data/seo-data.js';
 
 function PrivacyPolicy() {
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
   return (
     <>
       <HelmetHeader
@@ -12,6 +22,7 @@ function PrivacyPolicy() {
         description={'Privacy Policy for Prime Sender'}
       />
       <div className="main-section privacy-policy">
+        {promoTextComponent}
       <SectionTitle gif="/gifs/privacy-policy.gif" title="Privacy Policy" />    
       <div className="main-container policy-container">
         {PrivacyPolicyData.map((item, index) => (
