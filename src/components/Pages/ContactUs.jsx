@@ -4,6 +4,7 @@ import HelmetHeader from '../Common/HelmetHeader'
 import SectionTitle from '../Common/SectionTitle'
 import ContactUsSubmitConfirm from '../common/ContactUsSubmitConfirm'
 import ReactGA from 'react-ga4'
+import { promoText } from '../Data/seo-data'
 
 const ContactUs = () => {
   const [formSubmitted,setFormSubmitted] = useState(false);
@@ -72,6 +73,16 @@ const ContactUs = () => {
       setSubmitError(true);
     }
   }
+
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
 
   return (
     <>
@@ -148,6 +159,7 @@ const ContactUs = () => {
                   </div>
                   </form>
                 </div>
+                {promoTextComponent}
                 </div>
               )
           )

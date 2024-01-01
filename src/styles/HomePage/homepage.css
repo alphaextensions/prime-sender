@@ -60,6 +60,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1000;
 }
 
 .white_promo_text{
@@ -68,6 +69,8 @@
   color: transparent;
   user-select: none;
   margin-right: 15px;
+  position: relative;
+  z-index: -100;
 }
 
 promo_text_num1

@@ -1,8 +1,18 @@
 import SectionTitle from '../Common/SectionTitle';
 import HelmetHeader from "../Common/HelmetHeader";
 import '../../styles/HelpUsImprovePage/helpusimprove.css';
+import { promoText } from '../Data/seo-data';
 
 const HelpUsImprove = () => {
+  const promoTextComponentGenerator = () => {
+    return promoText.map((text, index) => {
+      return <span key={index} className='white_promo_text pro'>{text}</span>
+    })
+  }
+
+  const promoTextComponent = <div className='promo_text_container'>
+    {...promoTextComponentGenerator()}
+  </div>
   return (
     <>
       <HelmetHeader 
@@ -10,6 +20,7 @@ const HelpUsImprove = () => {
         description={'Submit your feedback to help us improve Prime Sender'}
       />
       <div className='main-section'>
+        {promoTextComponent}
         <SectionTitle
           gif="/gifs/help-us-improve.gif"
           title="Help us Improve"
