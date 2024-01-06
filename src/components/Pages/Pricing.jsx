@@ -8,6 +8,8 @@ import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
 import { promoText } from "../Data/seo-data";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
 
 const Pricing = () => {  
   const promoTextComponentGenerator = () => {
@@ -28,6 +30,10 @@ const Pricing = () => {
   const [myLocation, setMyLocation] = useState(null);
   const [flagIconSrc, setFlagIconSrc] = useState('');
   const [loading, setLoading]= useState(false);
+  const [featureDetailHover, setFeatureDetailHover] = useState(-1);
+  const [freeCardDetailHover, setFreeCardDetailHover] = useState(-1);
+  const [basicCardDetailHover, setBasicCardDetailHover] = useState(-1);
+  const [advanceCardDetailHover, setAdvanceCardDetailHover] = useState(-1);
 
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
@@ -761,30 +767,26 @@ const Pricing = () => {
               </div>
 
               <div className="pricing_card_features">
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Unlimited Broadcasting</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Attachment</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Message Customization</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Chat Support</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Save Message Template</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Detailed Delivery Report</p>
-                </div>
+                {
+                  FreeCardFeatures.map((item, index)=>{
+                    return <div className="pricing_card_feature" key={index}>
+                    <AiOutlineCheck />
+                    <div className="pricing_card_feature_text">
+                      {item.name}
+                    </div>
+                      <span className={`pricing_feature_info_container`} onMouseEnter={() => setFreeCardDetailHover(index)} onMouseLeave={() => setFreeCardDetailHover(-1)}>
+                        <IoIosInformationCircleOutline className="feature_info_class" />
+                        <div className="navigation_outer_box_down navigation_container" hidden={!(freeCardDetailHover == index)}>
+                          <div className="msg-box-down">
+                            <p>
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </span>
+                  </div>
+                  })
+                }
               </div>
             </div>
             {/* basic card */}
@@ -838,26 +840,26 @@ const Pricing = () => {
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text" style={{fontWeight:"bold"}}>All Free Features</p>
                 </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">Call Support</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> No minimum time gap</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Batching</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Quick Replies</p>
-                </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Group Contacts Export</p>
-                </div>
+                {
+                  basicCardFeatures.map((item, index) => {
+                    return <div key={index} className="pricing_card_feature">
+                      <AiOutlineCheck />
+                      <div className="pricing_card_feature_text">
+                        {item.name}
+                      </div>
+                      <span className={`pricing_feature_info_container`} onMouseEnter={() => setBasicCardDetailHover(index)} onMouseLeave={() => setBasicCardDetailHover(-1)}>
+                        <IoIosInformationCircleOutline className="feature_info_class" />
+                        <div className="navigation_outer_box_down navigation_container" hidden={!(basicCardDetailHover == index)}>
+                          <div className="msg-box-down">
+                            <p>
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </span>
+                    </div>
+                  })
+                }
               </div>
             </div>
             {/* advance card */}
@@ -912,24 +914,26 @@ const Pricing = () => {
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text"  style={{fontWeight:"bold"}}>All Basic Features</p>
                 </div>
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text">
-                    Multiple Attachments
-                  </p>
-                </div>{" "}
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Schedule</p>
-                </div>{" "}
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Zoom Call Support</p>
-                </div>{" "}
-                <div className="pricing_card_feature">
-                  <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"> Business Chat Link</p>
-                </div>
+                {
+                  advanceCardFeatures.map((item, index) => {
+                    return <div key={index} className="pricing_card_feature">
+                      <AiOutlineCheck />
+                      <div className="pricing_card_feature_text">
+                        {item.name}
+                      </div>
+                      <span className={`pricing_feature_info_container`} onMouseEnter={() => setAdvanceCardDetailHover(index)} onMouseLeave={() => setAdvanceCardDetailHover(-1)}>
+                        <IoIosInformationCircleOutline className="feature_info_class" />
+                        <div className="navigation_outer_box_down navigation_container advance_navigation_box" hidden={!(advanceCardDetailHover == index)}>
+                          <div className="msg-box-down">
+                            <p>
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </span>
+                    </div>
+                  })
+                }
               </div>
             </div>
             <div className="pricing_card multiple_user_card">
@@ -977,7 +981,20 @@ const Pricing = () => {
                 <tbody>
                 {pricingFeatures.map((feature, index) => (
                   <tr key={index}>
-                    <th>{feature.name}</th>
+                    <th>
+                      {feature.name}
+                      <span className={`pricing_feature_info_container`} onMouseEnter={() => setFeatureDetailHover(index)} onMouseLeave={() => setFeatureDetailHover(-1)}>
+                        <IoIosInformationCircleOutline className="feature_info_class" />
+                        <div className="navigation_outer_box_down navigation_container" hidden={!(featureDetailHover == index)}>
+                          <div className="msg-box-down">
+                            <p>
+                              {feature.description}
+                            </p>
+                            {/* <div className="arrow"></div> */}
+                          </div>
+                        </div>
+                      </span>
+                    </th>
                     <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                     <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                     <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>

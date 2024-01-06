@@ -25,7 +25,7 @@ const Success = ({ plan }) => {
       />
       <div className="main-section">
         {promoTextComponent}
-      <div className="main-container success-container">
+      <div className="main-container success-page-container">
         <div className="success-texts-container">
           <p className="heading">Congrats! You have successfully purchased PS {plan[0].toUpperCase() + plan.substr(1)} Premium</p>
           <p className="text">Please reload WhatsApp Web after 10 minutes to activate Premium. You will receive a confirmation email soon.</p>
