@@ -39,6 +39,11 @@ function NavLinks({ onClick }) {
           Pricing
         </NavLink>
       </li>
+      <li>
+        <NavLink to='/blogs' onClick={onClick} className='large-text'>
+          Blogs
+        </NavLink>
+      </li>
     </ul>
   );
 }
