@@ -16,6 +16,7 @@ import {useEffect} from 'react';
 import ContactUs from './components/Pages/ContactUs';
 import BlogPage from './components/Pages/BlogPage';
 import FAQs from './components/Sections/FAQs';
+import HowToUse from './components/Pages/HowToUse';
 
 const App = () => {
 
@@ -41,7 +42,7 @@ const App = () => {
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route exact path="/basic-success" element={<Success plan="basic" />} />
         <Route exact path="/advance-success" element={<Success plan="advance" />} />
-        <Route exact path="/how-to-use" element={<Home redirectToHowToUse="true"/>} />
+        <Route exact path="/how-to-use" element={<HowToUse />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
