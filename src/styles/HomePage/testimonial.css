@@ -91,6 +91,7 @@
   gap: 2rem;
   overflow-y: visible;
   scroll-behavior: smooth;
+  padding-bottom: 2rem;
 }
 
 .testimonial_cards{
@@ -277,6 +278,13 @@
   .testimonial_right_lower{
     margin-top: 2rem;
   }
+  .testimonial_cards_second .testimonial_right{
+    margin: 2rem;
+  }
+  
+  .testimonial_cards_second .testimonial_left{
+    margin :5rem 2rem -1rem;
+  }
   .testimonial_left{
     margin-bottom: 0;
   }
@@ -301,10 +309,6 @@
     gap: 15px;
   }
 
-  .testimonial_cards{
-    width: 88vw;
-  }
-
   .testimonial_card{
     padding: 15px 20px 20px;
     margin-top: 2rem;
@@ -313,10 +317,12 @@
   .customer_review{
     line-height: 23px;
   }
+
   .customer_img{
     width: 40px;
     height: 40px ;
   }
+
   .quotation_mark{
     font-size: 4.5rem;
     top: -150%;
@@ -333,11 +339,20 @@
   .testimonial_container {
     padding: 0 10px;
   }
+  .testimonial_cards{
+    width: 90%;
+  }
   .testimonial_lower {
     gap: 0;
   }
   .quotation_mark{
     font-size: 3.5rem;
     top: -100%;
+  }
+  .testimonial_main .slick-prev::before {
+      margin-left: 4px;
+  }
+  .testimonial_main .slick-next::before {
+      margin-left: -16px;
   }
 }
