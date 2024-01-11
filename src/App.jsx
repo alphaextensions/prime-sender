@@ -17,6 +17,7 @@ import ContactUs from './components/Pages/ContactUs';
 import BlogPage from './components/Pages/BlogPage';
 import FAQs from './components/Sections/FAQs';
 import HowToUse from './components/Pages/HowToUse';
+import MainFeatures from './components/Sections/MainFeatures';
 
 const App = () => {
 
@@ -43,6 +44,7 @@ const App = () => {
         <Route exact path="/basic-success" element={<Success plan="basic" />} />
         <Route exact path="/advance-success" element={<Success plan="advance" />} />
         <Route exact path="/how-to-use" element={<HowToUse />} />
+        <Route exact path="/main-features" element={<MainFeatures />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

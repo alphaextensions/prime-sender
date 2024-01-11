@@ -7,8 +7,8 @@ import ReactGA from "react-ga4";
 
 function NavLinks({ onClick }) {
   const location = useLocation();
-  const url = location.pathname;
-  const currPageId= window.location.href.split('#')[1];
+  // const url = location.pathname;
+  // const currPageId= window.location.href.split('#')[1];
 
   useEffect(() => {
     ReactGA.send({
@@ -20,19 +20,20 @@ function NavLinks({ onClick }) {
 
   return (
     <ul>
-      {url == '/' ? <li>
-        <Link to='/how-to-use' onClick={onClick} className={`large-text ${currPageId == 'how-to-use' && 'active'}`} id='how-to-use-btn'>
-          How To Use
-        </Link>
-      </li> : <li>
+      <li>
         <NavLink to='/' onClick={onClick} className='large-text'>
           Home
         </NavLink>
-      </li>}
+      </li>
       <li>
-        <Link to='/#main-features' onClick={onClick} className={`large-text ${currPageId == 'main-features' && 'active'}`} id='main-features-btn'>
+        <NavLink to='/how-to-use' onClick={onClick} className='large-text'>
+          How To Use
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to='/main-features' onClick={onClick} className='large-text' >
           Features
-        </Link>
+        </NavLink>
       </li>
       <li>
         <NavLink to='/pricing' onClick={onClick} className='large-text'>
@@ -51,7 +52,6 @@ function NavLinks({ onClick }) {
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const navigate = useNavigate();
 
   const handleScroll = () => {
     const navbarHeight = document.querySelector('.prime-sender-navbar').offsetHeight;
@@ -71,37 +71,36 @@ function Navbar() {
     document.body.style.overflow = 'auto';
   }
 
-  function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 80;
-      const offset = element.offsetTop - navbarHeight;
-      window.scrollTo({ top: offset, behavior: 'smooth' });
-    }
-  }
+  // function scrollToSection(sectionId) {
+  //   const element = document.getElementById(sectionId);
+  //   if (element) {
+  //     const navbarHeight = 80;
+  //     const offset = element.offsetTop - navbarHeight;
+  //     window.scrollTo({ top: offset, behavior: 'smooth' });
+  //   }
+  // }
 
-  function handleFeatureClick(btnId) {
-    if (window.location.pathname === '/') {
-      scrollToSection(btnId === 'main-features-btn' ? 'main-features' : 'how-to-use');
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        scrollToSection('main-features');
-      }, 1000);
-    }
-  }
+  // function handleFeatureClick(btnId) {
+  //   if (window.location.pathname === '/') {
+  //     scrollToSection(btnId === 'main-features-btn' ? 'main-features' : 'how-to-use');
+  //   } else {
+  //     navigate('/');
+  //     setTimeout(() => {
+  //       scrollToSection('main-features');
+  //     }, 1000);
+  //   }
+  // }
 
   function openPage(e) {
-    let btnId = e.target.id;
-
     setShowMenu(false);
     document.body.style.overflow = 'auto';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    if (btnId === 'main-features-btn' || btnId === 'how-to-use-btn') {
-      handleFeatureClick(btnId);
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // if (btnId === 'main-features-btn' || btnId === 'how-to-use-btn') {
+    //   handleFeatureClick(btnId);
+    // } else {
+    //   window.scrollTo({ top: 0, behavior: 'smooth' });
+    // }
   }
 
   function openMenu() {
