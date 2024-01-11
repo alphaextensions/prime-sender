@@ -99,7 +99,6 @@
   scale: 1.6;
 }
 
-
 @media screen and (max-width: 860px) {
   .unique_card {
     flex-direction: column;
@@ -115,6 +114,20 @@
   .unique_card_text {
     width: 100%;
     text-align: center !important;
+  }
+}
+
+@media screen and (max-width: 834px){
+  .unique_main .slick-next {
+    right: 5px;
+    z-index: 10000;
+  }
+  .unique_main .slick-prev {
+    left: 0px;
+    z-index: 10000;
+  }
+  .unique_card {
+    padding: 0rem 1.2rem;
   }
 }
 
