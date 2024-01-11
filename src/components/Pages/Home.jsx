@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/HomePage/homepage.css';
 import DownloadBtn from '../Common/DownloadBtn';
 import { Link } from 'react-router-dom';
-import HowToUse from '../Sections/HowToUse';
 import Companies from '../Sections/Companies';
 import MainFeatures from '../Sections/MainFeatures';
 import Testimonial from '../Sections/Testimonial';
@@ -12,9 +11,10 @@ import CompleteSolutions from '../Sections/CompleteSolutions';
 import HelmetHeader from "../Common/HelmetHeader";
 import ReactGA from "react-ga4";
 import { promoText } from '../Data/seo-data';
+import HowToUse from './HowToUse';
 // import EverythingInOne from '../Sections/EverythingInOne';
 
-const Home = ({ redirectToHowToUse }) => {
+const Home = () => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
 
   // const showTooltip = ()=>{
@@ -48,32 +48,39 @@ const Home = ({ redirectToHowToUse }) => {
   //   localStorage.setItem('clickedChatSupport', true)
   // };
 
-  function scrollToSection(sectionId) {
+  // function scrollToSection(sectionId) {
+  //   ReactGA.event({
+  //     category: "Button Click",
+  //     action: "how to use button click",
+  //     label: "how_to_use_btn_clicked",
+  //   });
+  //   const element = document.getElementById(sectionId);
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }
+
+  // const checkForScroll = () => {
+  //   let sectionToScroll = window.location.hash;
+  //   if (sectionToScroll === '#how-to-use') {
+  //     scrollToSection('how-to-use');
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if(redirectToHowToUse=="true"){
+  //     scrollToSection('how-to-use');
+  //   }
+  //   checkForScroll();
+  // }, []);
+
+  const HowToUseButtonClickHandle = () => {
     ReactGA.event({
       category: "Button Click",
       action: "how to use button click",
       label: "how_to_use_btn_clicked",
     });
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
   }
-
-  const checkForScroll = () => {
-    let sectionToScroll = window.location.hash;
-    if (sectionToScroll === '#how-to-use') {
-      scrollToSection('how-to-use');
-    }
-  }
-
-  useEffect(() => {
-    if(redirectToHowToUse=="true"){
-      scrollToSection('how-to-use');
-    }
-    checkForScroll();
-  }, []);
-
 
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
@@ -100,7 +107,7 @@ const Home = ({ redirectToHowToUse }) => {
             <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
             <div className="home-btns">
               <DownloadBtn />
-              <Link to="/#how-to-use" onClick={() => { scrollToSection('how-to-use') }} className="howtousebtn button-round large-text btn">
+              <Link to="/how-to-use" onClick={() => { HowToUseButtonClickHandle() }} className="howtousebtn button-round large-text btn">
                 How To Use
               </Link>
             </div>

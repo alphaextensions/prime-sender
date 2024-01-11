@@ -21,7 +21,7 @@ function NavLinks({ onClick }) {
   return (
     <ul>
       {url == '/' ? <li>
-        <Link to='/#how-to-use' onClick={onClick} className={`large-text ${currPageId == 'how-to-use' && 'active'}`} id='how-to-use-btn'>
+        <Link to='/how-to-use' onClick={onClick} className={`large-text ${currPageId == 'how-to-use' && 'active'}`} id='how-to-use-btn'>
           How To Use
         </Link>
       </li> : <li>
@@ -37,6 +37,11 @@ function NavLinks({ onClick }) {
       <li>
         <NavLink to='/pricing' onClick={onClick} className='large-text'>
           Pricing
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to='/blogs' onClick={onClick} className='large-text'>
+          Blogs
         </NavLink>
       </li>
     </ul>
