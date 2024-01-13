@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import '../../styles/ContactPage/contactus.css'
 import HelmetHeader from '../Common/HelmetHeader'
 import SectionTitle from '../Common/SectionTitle'
@@ -11,12 +11,33 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     name:'',
     email:'',
+    country_code: localStorage.getItem('user_country_code') || '+91',
     phone:'',
     message:''
   });
   const [isLoading,setIsLoading] = useState(false);
   const [submitError,setSubmitError] =  useState(false);
-  const { name, email, phone, message} = formData;
+  const { name, email, phone, message, country_code} = formData;
+  const [isPhoneValid,setIsPhoneValid] = useState(true);
+  const [phoneError,setPhoneError] = useState('')
+  const fetchCountryCode = async () => {
+      try {
+        const res = await fetch('https://ipapi.co/json');
+        const data = await res.json();
+        const user_country_code = data.country_calling_code.split('-')[0].substring(1)
+        if(user_country_code){
+          setFormData({ ...formData, country_code: '+' + user_country_code });
+          localStorage.setItem('user_country_code',user_country_code);
+        }
+      } catch (error) {
+        console.log(error);
+        setFormData({ ...formData, country_code: localStorage.getItem('user_country_code') || '+91' });
+      }
+    }
+
+  useEffect(()=>{
+    fetchCountryCode();
+  },[])
 
   async function translateMessage(text) {
     if (text === undefined || text === null || text.trim().length === 0)
@@ -35,7 +56,11 @@ const ContactUs = () => {
   }
   
   const handleInputChange = (e)=>{
-    setFormData({...formData, [e.target.name]:e.target.value});
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+      if(e.target.name === 'phone' && e.target.value.length >= 10){
+        setIsPhoneValid(true);
+        setPhoneError('');
+      }
   }
 
   const handleSubmit = async (e)=>{
@@ -45,6 +70,11 @@ const ContactUs = () => {
       action: "Contact Form Submit button clicked",
       label: "contact_form_submit_btn_clicked",
     });
+    if(document.getElementById('phone').value.length < 10){
+      setIsPhoneValid(false);
+      setPhoneError('Phone number must be at least 10 characters long');
+      return;
+    }
     try {
       setIsLoading(true);
       const TranslatedMessage = await translateMessage(message);
@@ -57,6 +87,7 @@ const ContactUs = () => {
           {
             "Name": name,
             "Email": email,
+            "Country Code": country_code,
             "Phone no": phone,
             "Message": message,
             "Translated Message" : TranslatedMessage,
@@ -67,7 +98,7 @@ const ContactUs = () => {
       setIsLoading(false);
       setFormSubmitted(true);
       setSubmitError(false);
-      setFormData({name: '',email: '',phone: '',message: ''});
+      setFormData({name: '',email: '',country_code: '',phone: '',message: ''});
     } catch (error) {
       setIsLoading(true);
       setSubmitError(true);
@@ -92,7 +123,7 @@ const ContactUs = () => {
       />      
       {
           formSubmitted && !isLoading ? 
-          <ContactUsSubmitConfirm setFormSubmitted={setFormSubmitted} isLoading={false}/> 
+          <ContactUsSubmitConfirm setFormSubmitted={setFormSubmitted} isLoading={false} fetchCountryCode={fetchCountryCode}/> 
           :
           (
             isLoading ?
@@ -133,15 +164,27 @@ const ContactUs = () => {
                       required/>
                   </div>
                   <div className="form-input">
-                    <label htmlFor="phone">Contact No:</label>
-                    <input 
-                      type="number" 
-                      name='phone' 
-                      id='phone' 
-                      value={formData.phone}
-                      onChange={handleInputChange} 
-                      autoComplete='off'/>
+                    <div className='phone_container'>
+                      <div className="left">
+                        <label htmlFor="phone">Country Code:</label>
+                        <input name="country_code" id="country_code" value={formData.country_code} onChange={handleInputChange}/>
+                      </div>
+                      <div className="right">
+                        <label htmlFor="phone">Contact No:</label>
+                        <input 
+                          type="number" 
+                          name='phone' 
+                          id='phone' 
+                          value={formData.phone}
+                          onChange={handleInputChange} 
+                          autoComplete='off'/>
+                      </div>
+                    </div>
                   </div>
+                  {
+                    !isPhoneValid &&
+                    <span className='phone-error extra-small-tex'>{phoneError}</span>
+                  }
                   <div className="form-input">
                     <label htmlFor="message">Message:</label> 
                     <textarea 

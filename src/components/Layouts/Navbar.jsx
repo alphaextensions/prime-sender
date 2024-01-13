@@ -20,11 +20,14 @@ function NavLinks({ onClick }) {
 
   return (
     <ul>
-      <li>
-        <NavLink to='/' onClick={onClick} className='large-text'>
-          Home
-        </NavLink>
-      </li>
+      {
+        location.pathname === '/' ? '' : 
+        <li>
+          <NavLink to='/' onClick={onClick} className='large-text'>
+            Home
+          </NavLink>
+        </li>
+      }
       <li>
         <NavLink to='/how-to-use' onClick={onClick} className='large-text'>
           How To Use

@@ -3,7 +3,7 @@ import '../../styles/Common/contactUsSubmitConfirm.css'
 import {useNavigate} from 'react-router'
 import ReactGA from 'react-ga4'
 
-const ContactUsSubmitConfirm = ({setFormSubmitted , isLoading, submitError, setSubmitError, setIsLoading}) => {
+const ContactUsSubmitConfirm = ({setFormSubmitted , isLoading, submitError, setSubmitError, setIsLoading, fetchCountryCode}) => {
   const handleButtonClickGA = (button)=>{
     ReactGA.event({
       category: "Button Click",
@@ -25,7 +25,7 @@ const ContactUsSubmitConfirm = ({setFormSubmitted , isLoading, submitError, setS
           <h3 className='sub-heading'>Your message has been sent successfully</h3>
           <p className='text'>We will try to contact you soon</p>
           <div className="buttons">
-          <button onClick={()=>{setFormSubmitted(false),handleButtonClickGA('Go Back')}} className='back-to-home-button button-round'>Go Back</button>
+          <button onClick={()=>{setFormSubmitted(false),handleButtonClickGA('Go Back'),fetchCountryCode()}} className='back-to-home-button button-round'>Go Back</button>
           <button onClick={()=>{navigate('/'),handleButtonClickGA('Back to Home')}} className='back-to-home-button button-round'>Back To Home</button>
           </div>
         </div>
