@@ -19,7 +19,25 @@
 .form-input input,.form-input textarea{
   width: 100%;
 }
-.form-input input,.form-input textarea,.form-input select{
+.country_code{
+  display: flex;
+}
+.country_code input.form-control{
+  margin-left: 35% !important;
+  width: 100% !important;
+}
+.country_code .flag-dropdown .selected-flag{
+  background: var(--color-primary4) !important;
+}
+.country_code .flag-dropdown {
+  border-radius: 6px !important;
+  border: none !important;
+  border-right: 4px solid white !important;
+}
+.country_code .selected-flag:hover{
+  background-color: var(--color-primary4) !important; 
+}
+.form-input input,.form-input textarea,.form-input select, .country_code input.form-control{
   border: 2px solid transparent;
   border-radius: 6px;
   padding: 8px 10px;
@@ -27,7 +45,7 @@
   resize: none;
   background-color: var(--color-primary4);
 }
-.form-input input:focus,.form-input textarea:focus,.form-input select:focus{
+.form-input input:focus,.form-input textarea:focus,.form-input select:focus, .country_code input{
   border-color: var(--color-primary2);
 }
 .phone_container{
