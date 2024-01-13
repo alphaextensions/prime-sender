@@ -12,7 +12,7 @@ const Error = () => {
       />
       <div id='error' className='error'>
         <div className="error-img">
-          <img src="/images/404Error.gif" alt="404 Page Not Found" />
+          <img src="/gifs/404Error.gif" alt="404 Page Not Found" />
         </div>
         <NavLink to='/' className="error-button button-round">
           Back To Home

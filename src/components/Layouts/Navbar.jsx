@@ -114,7 +114,7 @@ function Navbar() {
         <NavLink to='/' className='brand' onClick={openPage}>
           <div className='nav_img_container'>
             <img src="/images/logo-img.png" alt="logo" />
-            <img src="/images/logo-text.png" alt="logo" />
+            <img src="/images/logo-text.png" alt="Prime Sender" />
           </div>
         </NavLink>
 

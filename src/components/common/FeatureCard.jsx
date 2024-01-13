@@ -7,7 +7,7 @@ const FeatureCard = ({imgSrc,name,desc}) => {
       <div className="feature-card">
         <div className="feature-card-head">
           <div className="feature-img">
-            <img src={imgSrc} />
+            <img src={imgSrc} alt={`${name} icon`}/>
           </div>
           <div className="feature-name sub-heading">
             {name}

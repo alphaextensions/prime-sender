@@ -19,7 +19,7 @@ const EverythingInOne = () => {
         <div className="everything_lower"  data-aos="fade-up">
           <div className="everything_card">
             <div className="everything_card_upper">
-              <img src="/images/chat.png" alt="" />
+              <img src="/images/chat.png" alt="Chat icon" />
               <h1>Integrated</h1>
             </div>
             <div className="everything_card_lower">
@@ -28,7 +28,7 @@ const EverythingInOne = () => {
           </div>
           <div className="everything_card">
             <div className="everything_card_upper">
-              <img src="/images/chat.png" alt="" />
+              <img src="/images/chat.png" alt="Chat icon" />
               <h1>Integrated</h1>
             </div>
             <div className="everything_card_lower">
@@ -37,7 +37,7 @@ const EverythingInOne = () => {
           </div>
           <div className="everything_card">
             <div className="everything_card_upper">
-              <img src="/images/chat.png" alt="" />
+              <img src="/images/chat.png" alt="Chat icon" />
               <h1>Integrated</h1>
             </div>
             <div className="everything_card_lower">
@@ -46,7 +46,7 @@ const EverythingInOne = () => {
           </div>
           <div className="everything_card">
             <div className="everything_card_upper">
-              <img src="/images/chat.png" alt="" />
+              <img src="/images/chat.png" alt="Chat icon" />
               <h1>Integrated</h1>
             </div>
             <div className="everything_card_lower">

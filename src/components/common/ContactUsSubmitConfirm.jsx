@@ -20,7 +20,7 @@ const ContactUsSubmitConfirm = ({setFormSubmitted , isLoading, submitError, setS
         <div className="success-container">
           <h1 className='large-heading'>Thank You!</h1>
           <div className="success-icon">
-            <img src="/gifs/heart.gif" alt="" />
+            <img src="/gifs/heart.gif" alt="Thank you icon" />
           </div>
           <h3 className='sub-heading'>Your message has been sent successfully</h3>
           <p className='text'>We will try to contact you soon</p>
@@ -35,7 +35,7 @@ const ContactUsSubmitConfirm = ({setFormSubmitted , isLoading, submitError, setS
         <div className="success-container">
           <h1 className='large-heading'>Something went wrong...</h1>
           <div className="success-icon">
-            <img src="/gifs/processing.gif" alt="" />
+            <img src="/gifs/processing.gif" alt="Processing icon" />
           </div>
           <h3 className='sub-heading'>Please try again</h3>
           <div className="buttons">
@@ -47,7 +47,7 @@ const ContactUsSubmitConfirm = ({setFormSubmitted , isLoading, submitError, setS
           <div className="success-container">
             <h1 className='large-heading'>Processing...</h1>
             <div className="success-icon">
-              <img src="/gifs/processing.gif" alt="" />
+              <img src="/gifs/processing.gif" alt="Processing icon" />
             </div>
           </div>
         )

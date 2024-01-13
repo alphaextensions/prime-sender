@@ -21,7 +21,7 @@ const CompleteSolutions = () => {
         <div className="solutions_lower" data-aos="fade-up">
           <div className="solutions_card">
             <div className="solutions_card_upper">
-              <img src="/images/trust1.gif"  />
+              <img src="/gifs/trust1.gif" alt="GIF" />
               <h1 className="heading">Highly Trusted</h1>
             </div>
             <div className="solutions_card_lower">
@@ -30,7 +30,7 @@ const CompleteSolutions = () => {
           </div>{" "}
           <div className="solutions_card">
             <div className="solutions_card_upper">
-              <img src="/images/interface.gif" alt="" />
+              <img src="/gifs/interface.gif" alt="GIF" />
               <h1 className="heading">Friendly Interface</h1>
             </div>
             <div className="solutions_card_lower">
@@ -39,7 +39,7 @@ const CompleteSolutions = () => {
           </div>{" "}
           <div className="solutions_card">
             <div className="solutions_card_upper">
-              <img src="/images/price.gif" alt="" />
+              <img src="/gifs/price.gif" alt="GIF" />
               <h1 className="heading">Free to use</h1>
             </div>
             <div className="solutions_card_lower">

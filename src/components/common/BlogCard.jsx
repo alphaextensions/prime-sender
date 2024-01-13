@@ -10,7 +10,7 @@ const BlogCard = ({ title, date, imageUrl, step, redirectLink }) => {
       </div>
       <div className="blog_card_lower">
         <div className='blog_card_image'>
-          <img src={imageUrl} alt="excel image" />
+          <img src={imageUrl} alt="Excel image" />
         </div>
         <div className='blog_card_text'>
           <p>{step}</p>

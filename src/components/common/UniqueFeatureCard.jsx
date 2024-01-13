@@ -14,7 +14,7 @@ const UniqueFeatureCard = ({ imgSrc, subTitle, featureTitle, featureText, order 
     <>
       <div className={order === 1 ? 'unique_card' : 'unique_card unique_card_reverse'}>
         <div className="unique_card_image" data-aos="fade-left" >
-          <img src={imgSrc} alt="" />
+          <img src={imgSrc} alt="Feature icon" />
         </div>
         <div className="unique_card_text" data-aos="fade-right" >
           <p className="sub_title heading">{subTitle}</p>

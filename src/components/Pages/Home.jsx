@@ -113,8 +113,8 @@ const Home = () => {
             </div>
           </div>
           <div className="right-col">
-            <img className='girl' src="/images/main-1.gif" alt="" />
-            <img className='objects' src="/images/main-2.svg" alt="" />
+            <img className='girl' src="/gifs/main-1.gif" alt="Main GIF" />
+            <img className='objects' src="/svgs/main-2.svg" alt="Main icon" />
             <div className='free_forever_div'>
               <p className='free_green'>IT'S FREE. FOREVER.</p>
             </div>

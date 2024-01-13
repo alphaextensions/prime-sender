@@ -37,7 +37,7 @@ const Footer = () => {
         <div className="footer_row">
           <div className="footer_logo">
             <img src="/images/logo-img.png" alt="logo"/>
-            <img src="/images/logo-text.png" alt="logo"/>
+            <img src="/images/logo-text.png" alt="Prime Sender"/>
           </div>
           <div className="footer_links">
             <h4 className='heading'>Company</h4>
