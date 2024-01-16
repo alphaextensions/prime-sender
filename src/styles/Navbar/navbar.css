@@ -2,14 +2,14 @@
   top: 0;
   height: max-content;
   width: 100%;
-  z-index: 1000;
+  z-index: 10000000;
   transition: 0.4s;
   margin: auto;
   position: fixed;
 }
 
 .navbar-fixed {
-  z-index: 1000;
+  z-index: 10000000;
   background: linear-gradient(to bottom, var(--color-primary4), var(--color-primary4) 60%, #fff 90%);
   border-radius: 0 0 125px 125px; /* Adjust the border-radius values as needed */
   box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
