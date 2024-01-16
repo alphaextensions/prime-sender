@@ -34,7 +34,7 @@ const UniqueFeatures = () => {
           <div className="unique_container">
             <div className="unique_features">
               <UniqueFeatureCard
-                imgSrc={'/images/translate.gif'}
+                imgSrc={'/gifs/translate.gif'}
                 order={1}
                 subTitle={'Available in Your regional language'}
                 featureTitle={'Easily Translate chats with customers and features inside the chrome extension'}
@@ -45,7 +45,7 @@ const UniqueFeatures = () => {
           <div className="unique_container">
             <div className="unique_features">
               <UniqueFeatureCard
-                imgSrc={'/images/save-customer-data.gif'}
+                imgSrc={'/gifs/save-customer-data.gif'}
                 order={1}
                 subTitle={'Save Campaigns'}
                 featureTitle={`Save your customer details in a single click`}
@@ -56,7 +56,7 @@ const UniqueFeatures = () => {
           <div className="unique_container">
             <div className="unique_features">
               <UniqueFeatureCard
-                imgSrc={'/images/data-analysis.gif'}
+                imgSrc={'/gifs/data-analysis.gif'}
                 order={1}
                 subTitle={'Invoice, Report and analysis'}
                 featureTitle={'Get details of your past activities'}

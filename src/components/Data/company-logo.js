@@ -6,5 +6,5 @@ export default [
   "/images/company-5.png",
   "/images/company-6.png",
   "/images/company-7.png",
-  "/images/company-8.gif"
+  "/images/company-8.png"
 ];

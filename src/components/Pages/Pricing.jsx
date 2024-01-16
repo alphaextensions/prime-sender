@@ -628,7 +628,7 @@ const Pricing = () => {
     if (myLocation && myLocation.country_name) {
       return <div className="pricing_country_text">
         <p className="heading">Pricing curated just for you,
-          <img src={flagIconSrc} alt="" />
+          <img src={flagIconSrc} alt="flag" />
           <span className="country_name">{myLocation.country_name}!</span>
         </p>
       </div>
@@ -726,7 +726,7 @@ const Pricing = () => {
                   Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF. &nbsp; </span> 
                 </div>
                 <div className="discount-img text" >
-                  Use code <img src={currentCountry=='india' || currentCountry=='indonesia' || currentCountry=='international'? "/images/coupon.png" : "/images/first_coupon.png"} alt="" />
+                  Use code <img src={currentCountry=='india' || currentCountry=='indonesia' || currentCountry=='international'? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
                 </div>
               </div>
             }
@@ -735,7 +735,7 @@ const Pricing = () => {
             {/* free card */}
             <div className="pricing_card">
               <div className="pricing_card_type">
-                <img src="/images/signal-free.png" alt="" />
+                <img src="/images/signal-free.png" alt="Free plan icon" />
                 <p>Free</p>
               </div>
               <div className="pricing_card_price">
@@ -792,7 +792,7 @@ const Pricing = () => {
             {/* basic card */}
             <div className="pricing_card premium_card">
               <div className="pricing_card_type">
-                <img src="/images/signal-basic.png" alt="" />
+                <img src="/images/signal-basic.png" alt="Basic plan icon" />
                 <p>Basic</p>
               </div>
               <div className="pricing_card_price">
@@ -864,9 +864,9 @@ const Pricing = () => {
             </div>
             {/* advance card */}
             <div className="pricing_card premium_card">
-              <img className="recommended_tag" src="/images/recommended_tag.png" alt="" />
+              <img className="recommended_tag" src="/images/recommended_tag.png" alt="Recommended tag" />
               <div className="pricing_card_type">
-                <img src="/images/signal-advance.png" alt="" />
+                <img src="/images/signal-advance.png" alt="Advance plan icon" />
                 <p>Advance</p>
               </div>
               <div className="pricing_card_price">

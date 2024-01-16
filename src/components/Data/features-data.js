@@ -5,12 +5,12 @@ export default [
     desc: "Broadcast to multiple chats at once, effortlessly scaling your communication. No need for template approvals and extra fees.",
   },
   {
-    logo: '/images/delivery-report.gif',
+    logo: '/gifs/delivery-report.gif',
     name: "Report",
     desc: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
   },
   {
-    logo: `/images/attachment.gif`,
+    logo: `/gifs/attachment.gif`,
     name: "File Attachment",
     desc: "You can attach and send images, documents, videos, etc. along with your message to users",
   },
@@ -35,12 +35,12 @@ export default [
     desc: "You can respond to your customers quickly, with pre-saved responses",
   },
   {
-    logo: '/images/customer-support.gif',
+    logo: '/gifs/customer-support.gif',
     name: "Active support",
     desc: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
   },
   {
-    logo: '/images/upload-excel.gif',
+    logo: '/gifs/upload-excel.gif',
     name: "Upload excel of numbers",
     desc: "You can directly upload an excel sheet of numbers you want to send your message to without having to type or copy-paste",
   },

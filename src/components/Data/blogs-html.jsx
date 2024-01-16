@@ -6,7 +6,7 @@ export const blogHtml = {
         <p className="blog_page_date">May 13, 2023</p>
       </div>
       <div className="blog_page_cover_image">
-        <img src="/images/excel-2.png" alt="" />
+        <img src="/images/excel-2.png" alt="Excel icon" />
       </div>
       <div className="blog_page_content">
         <div className="blog_page_step">
@@ -16,13 +16,13 @@ export const blogHtml = {
           <a target="_blank" href="https://docs.google.com/spreadsheets/d/1xCZr8e0wKO8bsQdrVZdXrmfijgO-zgLXLzFjAjaX8eQ/edit?usp=sharing">Template Excel</a>
         </div>
         <div className="blog_page_content_image">
-          <img src="/images/blog_img_1.png" alt="" />
+          <img src="/images/blog_img_1.png" alt="blog image" />
         </div>
         <div className="blog_page_step">
           <p>2. Open <a target="_blank" href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia" className="blog_text_blue">Prime Sender</a> extension. You can click on Upload and upload the excel right away.</p>
         </div>
         <div className="blog_page_content_image">
-          <img src="/images/blog_img_2.png" alt="" />
+          <img src="/images/blog_img_2.png" alt="blog image" />
         </div>
         <div className="blog_page_step">
           <p>3. Uploaded numbers would be visible in the numbers area.</p>
@@ -39,7 +39,7 @@ export const blogHtml = {
         <p className="blog_page_date">December 22, 2022</p>
       </div>
       <div className="blog_page_cover_image">
-        <img src="/images/schedule.png" alt="" />
+        <img src="/images/schedule.png" alt="Schedule icon" />
       </div>
       <div className="blog_page_content">
         <div className="blog_page_subheading">
@@ -49,7 +49,7 @@ export const blogHtml = {
           <p>The option to schedule allows you to send messages to your contacts at a pre-set time. When you want to broadcast your message at a certain time during the day and you aren’t available during that time, you can choose to schedule your message.</p>
         </div>
         <div className="blog_page_content_image">
-          <img src="/images/blog_img_3.png" alt="" />
+          <img src="/images/blog_img_3.png" alt="blog image" />
         </div>
         <div className="blog_page_step">
           <p>After entering the contacts and the message you want to send, enter the time you would want to send the message at. Once you enter the preferred time, click on Schedule. You should receive a notification confirming about the same. </p>
@@ -82,7 +82,7 @@ export const blogHtml = {
           <p>When you want to inform your customers about a promotional offer, it is always better if the message is personalized to the customer. It increases the probability of the customer replying to the message. Similarly, if you want to update your customer regarding their order, it is obvious to send the message custom to the user. Here's how you can send customized messages using <a target="_blank" href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia" className="blog_text_blue">Prime Sender</a> :</p>
         </div>
         <div className="blog_page_content_image">
-          <img src="/images/blog_img_4.png" alt="" />
+          <img src="/images/blog_img_4.png" alt="blog image" />
         </div>
         <div className="blog_page_step">
           <p>Enter the details you'd like to send customized to the user along with their contact numbers. For example, in this case, I'd like to add the customer's Name and a custom message. The first row is always for the column headings - Contact numbers, Name and Message in this case.
@@ -126,7 +126,7 @@ export const blogHtml = {
         <p className="blog_page_date">December 22, 2022</p>
       </div>
       <div className="blog_page_cover_image">
-        <img src="/images/blog_img_5.png" alt="" />
+        <img src="/images/blog_img_5.png" alt="blog image" />
       </div>
       <div className="blog_page_content">
         <div className="blog_page_step">
