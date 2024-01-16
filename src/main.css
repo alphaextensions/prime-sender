@@ -38,6 +38,10 @@ body {
 }
 
 /* utility classes */
+.extra-small-tex{
+  font-size: 12px !important;
+}
+
 .sub-text {
   font-size: 14px !important;
 }
