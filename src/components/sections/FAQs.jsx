@@ -31,6 +31,7 @@ const FAQs = () => {
       <Helmet
         title={'FAQs | Prime Sender - Best Web Sender Extension'}
         description={'FAQs of Prime Sender'}
+        keywords={'prime sender frequently asked questions, FAQs, prime sender faqs, most frequently asked questions'}
       />
       <div className="faq_section">
         <SectionTitle gif="/gifs/faq.gif" title="Frequently Asked Questions" />

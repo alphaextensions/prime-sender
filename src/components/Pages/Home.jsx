@@ -97,6 +97,7 @@ const Home = () => {
       <HelmetHeader
         title={'Prime Sender - Best Web Sender Extension'}
         description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'}
+        keywords={'prime sender, prime sender home, home page'}
       />
       <div className="home-container">
         <div className="home-content">

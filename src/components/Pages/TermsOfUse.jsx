@@ -19,6 +19,7 @@ function TermsOfUse() {
       <HelmetHeader 
         title={'Terms Of Service | Prime Sender - Best Web Sender Extension'}
         description={'Terms Of Service for Prime Sender'}
+        keywords={'prime sender terms of use, terms and conditions, privacy policy and terms&conditions'}
       />
       <div className="terms-of-use main-section">
         {promoTextComponent}

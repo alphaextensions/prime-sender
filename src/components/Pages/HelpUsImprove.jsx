@@ -18,6 +18,7 @@ const HelpUsImprove = () => {
       <HelmetHeader 
         title={'Help Us Improve | Prime Sender - Best Web Sender Extension'}
         description={'Submit your feedback to help us improve Prime Sender'}
+        keywords={'help-us-improve,prime sender help, prime sender feedback'}
       />
       <div className='main-section'>
         {promoTextComponent}
