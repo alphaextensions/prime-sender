@@ -705,7 +705,8 @@ const Pricing = () => {
     <>
       <HelmetHeader 
         title={'Pricing | Prime Sender - Best Web Sender Extension'}
-        description={'Pricing for Prime Sender'}
+        description={'Pricing for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
+        keywords={'pricing, prime sender pricing, affordable pricing, Simple, cheap, prime sender pricing plans'}
       />
       <div className="pricing_container">
         {promoTextComponent}

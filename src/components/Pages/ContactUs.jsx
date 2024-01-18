@@ -134,6 +134,7 @@ const ContactUs = () => {
       <HelmetHeader
         title={'Contact Us | Prime Sender - Best Web Sender Extension'}
         description={'Contact Us at Prime Sender'}
+        keywords={'contact,prime sender contact page, prime sender support'}
       />      
       {
           formSubmitted && !isLoading ? 
