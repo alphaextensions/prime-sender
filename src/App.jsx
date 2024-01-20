@@ -26,7 +26,7 @@ const App = () => {
     try {
       const res = await fetch('https://ipapi.co/json');
       const data = await res.json();
-      if(data.country=='US' || data.country=='CN '){
+      if(data.country=='US' || data.country=='CN'){
         setShowWebsite(false);
       }else{
         setShowWebsite(true);
