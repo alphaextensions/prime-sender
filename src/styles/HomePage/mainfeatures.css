@@ -13,30 +13,25 @@
 
 .features{
   margin-top: 2rem;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  place-items: center;
 }
 
-.main-feature-section .slick-next::before,
-.main-feature-section .slick-prev::before{
-  color: var(--color-primary1) !important;
-  font-size: 40px;
+@media (max-width: 1200px) {
+  .features{
+    grid-template-columns: auto auto;
+  }
+  .main-feature-section{
+    padding: 8rem 1rem 4rem;
+  }
 }
 
-.main-feature-section .slick-next::before{
-  margin-left: 10px;
-}
-.main-feature-section .slick-prev::before{
-  margin-left: -15px;
-}
-
-.main-feature-section .slick-next::before:hover{
-  color: var(--color-primary2) !important;
-}
-
-.main-feature-section .slick-dots li button:before{
-  color: var(--color-primary1) !important;
-  margin-top: 1rem;
-}
-
-.main-feature-section .slick-dots li.slick-active button:before{
-  scale: 1.6;
+@media (max-width: 800px) {
+  .features{
+    grid-template-columns: auto;
+  }
+  .feature-card{
+    width: min(400px,90%);
+  }
 }

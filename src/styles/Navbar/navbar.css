@@ -131,7 +131,7 @@
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 990px) {
   .nav_img_container {
     width: 220px;
   }
@@ -140,7 +140,7 @@
   }
 }
 
-@media (max-width: 890px) {
+@media (max-width: 915px) {
   .prime-sender-navbar .prime-sender-container {
     width: 95%;
     padding: 1rem 1.2rem;
