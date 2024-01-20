@@ -12,7 +12,7 @@ import ChatSupport from './components/common/ChatSupport';
 import Error from './components/Pages/Error';
 import Success from './components/Pages/success';
 import ReactGA from "react-ga4";
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import ContactUs from './components/Pages/ContactUs';
 import BlogPage from './components/Pages/BlogPage';
 import FAQs from './components/Sections/FAQs';
@@ -20,15 +20,30 @@ import HowToUse from './components/Pages/HowToUse';
 import MainFeatures from './components/Sections/MainFeatures';
 
 const App = () => {
+  const [showWebsite, setShowWebsite] = useState(true);
 
+  const checkForCountry = async () => {
+    try {
+      const res = await fetch('https://ipapi.co/json');
+      const data = await res.json();
+      if(data.country=='US' || data.country=='CN'){
+        setShowWebsite(false);
+      }else{
+        setShowWebsite(true);
+      }
+    } catch (error) {
+      console.log(error)  
+    }
+  }
   // initializing react-ga
   useEffect(() => {
     ReactGA.initialize("G-3KZPL7D3HB");
+    checkForCountry();
   }, []);
 
   return (
     <>
-    <Router>
+    { showWebsite ? <Router>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />}/>
@@ -49,7 +64,7 @@ const App = () => {
       </Routes>
       <Footer />
       <ChatSupport />
-    </Router>
+    </Router> : '' }
     </>
   );
 };
