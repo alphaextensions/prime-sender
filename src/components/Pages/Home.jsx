@@ -127,7 +127,7 @@ const Home = () => {
       <Companies />
       <CompleteSolutions />
       <HowToUse />
-      <MainFeatures />
+      <MainFeatures isSlider='true' />
       <UniqueFeatures />
       {/* <EverythingInOne /> */}
       <Testimonial />
