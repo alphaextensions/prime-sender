@@ -59,7 +59,7 @@ const App = () => {
         <Route exact path="/basic-success" element={<Success plan="basic" />} />
         <Route exact path="/advance-success" element={<Success plan="advance" />} />
         <Route exact path="/how-to-use" element={<HowToUse />} />
-        <Route exact path="/main-features" element={<MainFeatures />} />
+        <Route exact path="/main-features" element={<MainFeatures isSlider='false' />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
