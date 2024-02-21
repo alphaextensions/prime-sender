@@ -153,8 +153,8 @@ const Pricing = () => {
         basicSlash: "AED 89.99",
         advance: "AED 73.99",
         advanceSlash: "AED 105.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "AED 44.09",
+        advanceOffer: "AED 51.79"
       },
       annually: {
         free: "AED 0",
@@ -175,8 +175,8 @@ const Pricing = () => {
         basicSlash: "EGP 628.99",
         advance: "EGP 529.99",
         advanceSlash: "EGP 756.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "EGP 307.99",
+        advanceOffer: "EGP 370.99"
       },
       annually: {
         free: "EGP 0",
@@ -197,8 +197,8 @@ const Pricing = () => {
         basicSlash: "$22.99",
         advance: "$18.99",
         advanceSlash: "$26.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "$11.19",
+        advanceOffer: "$13.29"
       },
       annually: {
         free: "$0",
@@ -219,8 +219,8 @@ const Pricing = () => {
         basicSlash: "SGD 33.99",
         advance: "SGD 27.99",
         advanceSlash: "SGD 39.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "SGD 16.79",
+        advanceOffer: "SGD 19.59"
       },
       annually: {
         free: "SGD 0",
@@ -241,8 +241,8 @@ const Pricing = () => {
         basicSlash: "ILS 89.99",
         advance: "ILS 73.99",
         advanceSlash: "ILS 105.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "ILS 44.09",
+        advanceOffer: "ILS 51.79"
       },
       annually: {
         free: "ILS 0",
@@ -263,8 +263,8 @@ const Pricing = () => {
         basicSlash: "GBP 19.99",
         advance: "GBP 16.99",
         advanceSlash: "GBP 23.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "GBP 9.79",
+        advanceOffer: "GBP 11.89"
       },
       annually: {
         free: "GBP 0",
@@ -285,8 +285,8 @@ const Pricing = () => {
         basicSlash: "SAR 81.99",
         advance: "SAR 75.99",
         advanceSlash: "SAR 108.99",
-        basicOffer: "",
-        advanceOffer: ""
+        basicOffer: "SAR 39.89",
+        advanceOffer: "SAR 53.19"
       },
       annually: {
         free: "SAR 0",
