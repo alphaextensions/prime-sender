@@ -146,4 +146,11 @@ export default [
     advance: true,
     description: "Generate a link to your WhatsApp number's chat and let customers directly connect with you",
   },
+  {
+    name: 'Export Unsaved Chat Contacts',
+    free: false,
+    basic: false,
+    advance: true,
+    description: "Download unsaved chat contacts",
+  },
 ];

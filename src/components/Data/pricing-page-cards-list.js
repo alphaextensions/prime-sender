@@ -64,5 +64,9 @@ export const advanceCardFeatures = [
   {
     name: "Business Chat Link",
     description: "You can create a link for your business and share it with your customers to start a conversation with you"
-  }
+  },
+  {
+    name: 'Export Unsaved Chat Contacts',
+    description: "Download unsaved chat contacts",
+  },
 ]
