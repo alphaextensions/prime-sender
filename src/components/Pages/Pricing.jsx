@@ -507,14 +507,13 @@ const Pricing = () => {
                   )}
             </div>
               {
-                popupCountry === 'indonesia' ?
+                popupCountry !== 'india' && popupCountry !=='international' && popupCountry !=='kuwait' ?
                 <div className="annual-price-indonesia" >
                   <span>
                     {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}
                     &nbsp;({
-                      (popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 4) : pricing[popupCountry].annually.advance.substring(0, 4)) +
-                      Math.floor((popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(4) : pricing[popupCountry].annually.advance.substring(4)) / 12)
-                    }/month)</span> 
+                        (popupPlan === 'basic' ? pricing[popupCountry].annually.basicRoundedOffPrice : pricing[popupCountry].annually.advanceRoundedOffPrice)
+                      }/month)</span> 
                 </div> :
                 <div className="annual-price" >
                   <span> 
@@ -526,11 +525,9 @@ const Pricing = () => {
                     </span>
                     &nbsp;(
                       <span className={popupCountry==='india' ? 'rupee': ''}>
-                      {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 1) : pricing[popupCountry].annually.advance.substring(0, 1))}
-                      </span>{
-                      Math.floor((popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(1) : pricing[popupCountry].annually.advance.substring(1)) / 12)
-                    }
+                      {(popupPlan === 'basic' ? pricing[popupCountry].annually.basicRoundedOffPrice : pricing[popupCountry].annually.advanceRoundedOffPrice)}
                     /month)</span>
+                  </span>
               </div>
               }
           </div>
