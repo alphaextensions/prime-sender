@@ -33,16 +33,16 @@ const Testimonial = () => {
           <div className="testimonial_stats">
             <div className="testimonial_rating">
               <h1 className="large-heading">
-                4.6<span style={{ color: "#47CFFF" }}> / </span>5
+                4.7<span style={{ color: "#47CFFF" }}> / </span>5
               </h1>
               <p className="large-text">User Ratings</p>
             </div>
             <ScrollTrigger onEnter={()=>{setCounterOn(true)}} onExit={()=>{setCounterOn(false),setCounter(false)}}>
               <div className="testimonial_users">
                 <h1 className="large-heading">
-                {counter && counterOn && <span><CountUp end={55} /><span style={{ color: "#FFB545" }}>K</span>+</span>}
+                {counter && counterOn && <span><CountUp end={60} /><span style={{ color: "#FFB545" }}>K</span>+</span>}
                 {
-                  !counter && <span>55<span style={{ color: "#FFB545" }}>K</span>+</span>
+                  !counter && <span>60<span style={{ color: "#FFB545" }}>K</span>+</span>
                 }
                 </h1>
                 <p className="large-text">Users</p>
