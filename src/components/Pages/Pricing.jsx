@@ -65,7 +65,7 @@ const Pricing = () => {
     "IL": 'israel',
   }
 
-  const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=919160583572&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
+  const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
   const trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report"];
   const premium_features = ["Schedule", 'Business Chat Link', 'Meet/Zoom Support', "Multiple Attachments"];
