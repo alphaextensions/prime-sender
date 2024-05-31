@@ -9,6 +9,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ScrollTrigger from 'react-scroll-trigger';
+import HelmetHeader from '../Common/HelmetHeader'
 
 const MainFeatures = ({isSlider}) => {
   const [slidesPerView, setSlidePerView] = useState(3);
@@ -31,6 +32,13 @@ const MainFeatures = ({isSlider}) => {
   }, []);
 
   return (
+    <>
+      <HelmetHeader 
+        title={'Main Features | Prime Sender - Best Web Sender Extension'}
+        description={'Main features page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
+        keywords={'main features , prime sender main features, features prime sender, Simple, cheap, prime sender'}
+      />
+
      <section className="main-feature-section">
       <SectionTitle id="main-features" gif="/gifs/main-features.gif" title="Main Features" />
       <div className="main-features-content">
@@ -70,6 +78,7 @@ const MainFeatures = ({isSlider}) => {
           }
         </div>
       </section> 
+    </>
   )
 }
 
