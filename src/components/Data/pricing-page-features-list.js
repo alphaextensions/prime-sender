@@ -119,6 +119,13 @@ export default [
     description: "You can respond to your customers quickly, with pre-saved responses",
   },
   {
+    name: 'Pause Campaign',
+    free: false,
+    basic: false,
+    advance: true,
+    description: "Ability to resume messaging mid-campaign",
+  },
+  {
     name: 'Multiple Attachments',
     free: false,
     basic: false,

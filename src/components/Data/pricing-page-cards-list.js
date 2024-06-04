@@ -58,8 +58,8 @@ export const advanceCardFeatures = [
     description: "You can schedule at what time to send your messages to users and your messages would be sent automatically at the set time"
   },
   {
-    name: "Zoom Call Support",
-    description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support."
+    name: 'Pause Campaign',
+    description: "Ability to resume messaging mid-campaign",
   },
   {
     name: "Business Chat Link",
