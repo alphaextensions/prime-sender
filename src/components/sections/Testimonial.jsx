@@ -40,9 +40,9 @@ const Testimonial = () => {
             <ScrollTrigger onEnter={()=>{setCounterOn(true)}} onExit={()=>{setCounterOn(false),setCounter(false)}}>
               <div className="testimonial_users">
                 <h1 className="large-heading">
-                {counter && counterOn && <span><CountUp end={60} /><span style={{ color: "#FFB545" }}>K</span>+</span>}
+                {counter && counterOn && <span><CountUp end={80} /><span style={{ color: "#FFB545" }}>K</span>+</span>}
                 {
-                  !counter && <span>60<span style={{ color: "#FFB545" }}>K</span>+</span>
+                  !counter && <span>80<span style={{ color: "#FFB545" }}>K</span>+</span>
                 }
                 </h1>
                 <p className="large-text">Users</p>
