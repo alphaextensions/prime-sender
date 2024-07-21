@@ -52,11 +52,11 @@ const Pricing = () => {
       }
     }
   };
-  const countryCodesPresent= ["IN", "ID", "AED", "EG", "GB", "SA", "KW", "SG", "IL"]
+  const countryCodesPresent= ["IN", "ID", "AE", "EG", "GB", "SA", "KW", "SG", "IL"]
   const countryCodeToName= {
     "IN": 'india',
     "ID": 'indonesia',
-    "AED": 'uae',
+    "AE": 'uae',
     "EG": 'egypt',
     "GB": 'uk',
     "SA": 'saudi_arabia',
