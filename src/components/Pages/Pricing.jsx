@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
@@ -11,7 +11,8 @@ import { promoText } from "../Data/seo-data";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
 
-const Pricing = () => {  
+
+const Pricing = () => {
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
       return <span key={index} className='white_promo_text pro'>{text}</span>
@@ -24,12 +25,14 @@ const Pricing = () => {
   const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");
   const [popupPlanPeriod, setPopupPlanPeriod] = useState('annually');
-  const [popupLastPlan,setPopupLastPlan] = useState(null);
-  const [popupCountry,setPopupCountry] = useState(null);
-  const [popupPlan,setPopupPlan] = useState(null);
+  // const [currency, setCurrency] = useState(null)
+  // const [convertedCurrency, setConvertedCurrency] = useState({ basic: 0, advance: 0 })
+  const [popupLastPlan, setPopupLastPlan] = useState(null);
+  const [popupCountry, setPopupCountry] = useState(null);
+  const [popupPlan, setPopupPlan] = useState(null);
   const [myLocation, setMyLocation] = useState(null);
   const [flagIconSrc, setFlagIconSrc] = useState('');
-  const [loading, setLoading]= useState(false);
+  const [loading, setLoading] = useState(false);
   const [featureDetailHover, setFeatureDetailHover] = useState(-1);
   const [freeCardDetailHover, setFreeCardDetailHover] = useState(-1);
   const [basicCardDetailHover, setBasicCardDetailHover] = useState(-1);
@@ -38,7 +41,7 @@ const Pricing = () => {
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
     const params = new URLSearchParams(urlParams);
-    if(params.size > 0){
+    if (params.size > 0) {
       const lastPlan = params.get('lastPlan');
       const country = params.get('country');
       const currentPlan = params.get('currentPlan')
@@ -46,7 +49,7 @@ const Pricing = () => {
       setPopupCountry(country)
       setPopupLastPlan(lastPlan)
       setPopupPlan(currentPlan)
-    
+
       if (lastPlan || country || currentPlan) {
         window.history.replaceState(null, '', window.location.pathname);
       }
@@ -65,12 +68,12 @@ const Pricing = () => {
     "IL": 'israel',
   }
 
-  const whatsappRedirectUrl= "https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
+  const whatsappRedirectUrl = "https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
   const trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report"];
   const premium_features = ["Schedule", 'Business Chat Link', 'Meet/Zoom Support', "Multiple Attachments"];
 
-  const handleGaButtonClick=(type)=>{
+  const handleGaButtonClick = (type) => {
     ReactGA.event({
       category: "Button Click",
       action: `buy ${type} button click`,
@@ -408,21 +411,21 @@ const Pricing = () => {
   // links for the button to buy
   function getButtonLink(country, duration, type) {
     let buttonLink;
-    if(country == 'india' && duration == 'annually')
-      buttonLink= 'https://razorpay.com/payment-button/';
+    if (country == 'india' && duration == 'annually')
+      buttonLink = 'https://razorpay.com/payment-button/';
     else
-      buttonLink= 'https://buy.stripe.com/'
+      buttonLink = 'https://buy.stripe.com/'
     buttonLink += pricing_links[country][duration][type]
     return buttonLink;
   }
 
-  function showButton(isPopup,planType) {
-    const button_link = !isPopup ? 
-        planType === 'basic' ? getButtonLink(currentCountry,planPeriod,'basic') : getButtonLink(currentCountry,planPeriod,'advance') :
-        popupPlan === 'basic' ? getButtonLink(popupCountry,popupPlanPeriod,'basic') : getButtonLink(popupCountry,popupPlanPeriod,'advance');
-    const button_text = !isPopup ? 
-        planPeriod === 'monthly' ? 'Subscribe' : planType==='basic' ? 'Buy Basic' : 'Buy Advance' : 
-        popupPlanPeriod ==='annually' ? 'Buy' : 'Subscribe'
+  function showButton(isPopup, planType) {
+    const button_link = !isPopup ?
+      planType === 'basic' ? getButtonLink(currentCountry, planPeriod, 'basic') : getButtonLink(currentCountry, planPeriod, 'advance') :
+      popupPlan === 'basic' ? getButtonLink(popupCountry, popupPlanPeriod, 'basic') : getButtonLink(popupCountry, popupPlanPeriod, 'advance');
+    const button_text = !isPopup ?
+      planPeriod === 'monthly' ? 'Subscribe' : planType === 'basic' ? 'Buy Basic' : 'Buy Advance' :
+      popupPlanPeriod === 'annually' ? 'Buy' : 'Subscribe'
     return (
       <a
         href={button_link}
@@ -435,19 +438,20 @@ const Pricing = () => {
 
   function togglePlanPeriod() {
     planPeriod === "annually" ? setPlanPeriod("monthly") : setPlanPeriod("annually")
+    currentCountry === 'international' && setInternational()
   }
 
   function togglePopupPlanPeriod() {
-    popupPlanPeriod==='monthly' ? setPopupPlanPeriod('annually') : setPopupPlanPeriod('monthly');
+    popupPlanPeriod === 'monthly' ? setPopupPlanPeriod('annually') : setPopupPlanPeriod('monthly');
   }
 
   let currentPrice;
-  currentPrice= pricing[currentCountry][planPeriod];
+  currentPrice = pricing[currentCountry][planPeriod];
 
   function generatePricingPopup() {
     ReactGA.send({ hitType: "popupview", page: "/pricing", title: "Pricing Page Popup, Redirected from extension" });
     let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1);
-    const handlePopupGaButtonClick= ()=>{
+    const handlePopupGaButtonClick = () => {
       ReactGA.event({
         category: "Button Click",
         action: `pricing popup buy ${popupPlan} button click`,
@@ -458,12 +462,12 @@ const Pricing = () => {
     return (
       <>
         <div className="pricing-popup-overlay"></div>
-        <div className="pricing-popup" style={popupLastPlan === 'planExpired'  ? { background: '#EDF9F3' } : null}>
+        <div className="pricing-popup" style={popupLastPlan === 'planExpired' ? { background: '#EDF9F3' } : null}>
           <div className="pricing-popup-header">
-          <div className='pricing-popup-logo'>
-            <img src="/images/logo-img.png" alt="logo"/>
-            <img src="/images/logo-text.png" alt="logo"/>
-          </div>
+            <div className='pricing-popup-logo'>
+              <img src="/images/logo-img.png" alt="logo" />
+              <img src="/images/logo-text.png" alt="logo" />
+            </div>
             <h1> <b>{capitalPlanName} Plan</b></h1>
           </div>
           <hr />
@@ -473,77 +477,77 @@ const Pricing = () => {
           </div>
           <div className="pricing-popup-slider">
             {
-              popupPlan==='basic' ? 
-              <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod}/> :
-              <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod}/>
+              popupPlan === 'basic' ?
+                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} /> :
+                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} />
             }
           </div>
           <div className="pricing-popup-content">
             <div className="monthly-price">
-              <span className={popupLastPlan==='freeTrial' ? 'pricing-popup-slash-price' : ''}>
+              <span className={popupLastPlan === 'freeTrial' ? 'pricing-popup-slash-price' : ''}>
+                {
+                  popupCountry !== 'india' ? <span>
+                    {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic : pricing[popupCountry].monthly.advance}
+                  </span> : <span>
+                    <span className="rupee"> {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic.substring(0, 1) : pricing[popupCountry].monthly.advance.substring(0, 1)}</span>
+                    <span>{popupPlan === 'basic' ? pricing[popupCountry].monthly.basic.substring(1) : pricing[popupCountry].monthly.advance.substring(1)}</span>
+                  </span>
+                }
+                /month</span>
+              <br />
+              {popupLastPlan === 'freeTrial' && (
+                <span className="pricing-popup-offer-price">
                   {
                     popupCountry !== 'india' ? <span>
-                    { popupPlan==='basic' ? pricing[popupCountry].monthly.basic : pricing[popupCountry].monthly.advance }
-                    </span> : <span>
-                    <span className="rupee"> { popupPlan==='basic' ? pricing[popupCountry].monthly.basic.substring(0,1) : pricing[popupCountry].monthly.advance.substring(0,1)}</span>
-                    <span>{ popupPlan==='basic' ? pricing[popupCountry].monthly.basic.substring(1) : pricing[popupCountry].monthly.advance.substring(1) }</span>
-                    </span>
-                  }
-                  /month</span>
-                   <br />
-                  { popupLastPlan==='freeTrial' && (
-                      <span className="pricing-popup-offer-price">
-                      {
-                        popupCountry !== 'india' ? <span>
-                        { popupPlan==='basic' ? pricing[popupCountry].monthly.basicOffer : pricing[popupCountry].monthly.advanceOffer }
-                      </span> :
+                      {popupPlan === 'basic' ? pricing[popupCountry].monthly.basicOffer : pricing[popupCountry].monthly.advanceOffer}
+                    </span> :
                       <span>
-                      <span className='rupee'>{ popupPlan==='basic' ? pricing[popupCountry].monthly.basicOffer.substring(0,1) : pricing[popupCountry].monthly.advanceOffer.substring(0,1) }</span>
-                      <span>{ popupPlan==='basic' ? pricing[popupCountry].monthly.basicOffer.substring(1) : pricing[popupCountry].monthly.advanceOffer.substring(1) }</span>
-                    </span>
-                      }
-                      */month
+                        <span className='rupee'>{popupPlan === 'basic' ? pricing[popupCountry].monthly.basicOffer.substring(0, 1) : pricing[popupCountry].monthly.advanceOffer.substring(0, 1)}</span>
+                        <span>{popupPlan === 'basic' ? pricing[popupCountry].monthly.basicOffer.substring(1) : pricing[popupCountry].monthly.advanceOffer.substring(1)}</span>
                       </span>
-                  )}
+                  }
+                  */month
+                </span>
+              )}
             </div>
-              {
-                popupCountry !== 'india' && popupCountry !=='international' && popupCountry !=='kuwait' ?
+            {
+              popupCountry !== 'india' && popupCountry !== 'international' && popupCountry !== 'kuwait' ?
                 <div className="annual-price-indonesia" >
                   <span>
                     {popupPlan === 'basic' ? pricing[popupCountry].annually.basic : pricing[popupCountry].annually.advance}
                     &nbsp;({
-                        (popupPlan === 'basic' ? pricing[popupCountry].annually.basicRoundedOffPrice : pricing[popupCountry].annually.advanceRoundedOffPrice)
-                      }/month)</span> 
+                      (popupPlan === 'basic' ? pricing[popupCountry].annually.basicRoundedOffPrice : pricing[popupCountry].annually.advanceRoundedOffPrice)
+                    }/month)</span>
                 </div> :
                 <div className="annual-price" >
-                  <span> 
-                    <span className={popupCountry==='india' ? 'rupee': ''}>
-                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0,1) : pricing[popupCountry].annually.advance.substring(0,1)}
+                  <span>
+                    <span className={popupCountry === 'india' ? 'rupee' : ''}>
+                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(0, 1) : pricing[popupCountry].annually.advance.substring(0, 1)}
                     </span>
                     <span>
                       {popupPlan === 'basic' ? pricing[popupCountry].annually.basic.substring(1) : pricing[popupCountry].annually.advance.substring(1)}
                     </span>
                     &nbsp;(
-                      <span className={popupCountry==='india' ? 'rupee': ''}>
+                    <span className={popupCountry === 'india' ? 'rupee' : ''}>
                       {(popupPlan === 'basic' ? pricing[popupCountry].annually.basicRoundedOffPrice : pricing[popupCountry].annually.advanceRoundedOffPrice)}
-                    /month)</span>
+                      /month)</span>
                   </span>
-              </div>
-              }
+                </div>
+            }
           </div>
           <div className="pricing-popup-btn">
-            <button onClick={handlePopupGaButtonClick}>{showButton(true,popupPlan)}</button>
+            <button onClick={handlePopupGaButtonClick}>{showButton(true, popupPlan)}</button>
             <a href={whatsappRedirectUrl} target="_blank" className="multiple-accounts-btn">Purchase for multiple users</a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
               {
-                premium_features.map((item,index)=>{
+                premium_features.map((item, index) => {
                   return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item} <span className="text-bold">&nbsp;(Advance)</span></div>
                 })
               }
               {
-                trial_features.map((item,index)=>{
+                trial_features.map((item, index) => {
                   return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item}</div>
                 })
               }
@@ -552,15 +556,15 @@ const Pricing = () => {
             <div className="pricing-popup-footer">
               <div className="pricing-popup-footer-icon"><span>i</span></div>
               <div className="pricing-popup-footer-content">
-                <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan==='freeTrial' ? "*Discount applicable for the first month" : ""}</span>
+                <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan === 'freeTrial' ? "*Discount applicable for the first month" : ""}</span>
                 {
                   popupPlanPeriod === 'monthly' ?
-                  <span>
-                    By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
-                  </span>:
-                  <span>
-                    By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
-                  </span>
+                    <span>
+                      By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
+                    </span> :
+                    <span>
+                      By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
+                    </span>
                 }
               </div>
             </div>
@@ -637,7 +641,7 @@ const Pricing = () => {
             countrySwitchObject1.map((obj, ind) => (
               <div key={ind} className={`country_switch ${currentCountry === obj.currentCountryName && "active_country_class"}`} onClick={() => setCurrentCountry(obj.currentCountryName)}>
                 <p className="country_current_switch heading">
-                  <img src={`https://flagcdn.com/160x120/${obj.countryCode}.webp`} alt= {`${obj.name}`} />
+                  <img src={`https://flagcdn.com/160x120/${obj.countryCode}.webp`} alt={`${obj.name}`} />
                   {obj.name}
                 </p>
               </div>
@@ -656,7 +660,7 @@ const Pricing = () => {
               }
               return <div key={ind} className={`country_switch ${currentCountry === obj.currentCountryName && "active_country_class"}`} onClick={() => setCurrentCountry(obj.currentCountryName)}>
                 <p className="country_current_switch heading">
-                  <img src={`https://flagcdn.com/160x120/${obj.countryCode}.webp`} alt= {`${obj.name}`} />
+                  <img src={`https://flagcdn.com/160x120/${obj.countryCode}.webp`} alt={`${obj.name}`} />
                   {obj.name}
                 </p>
               </div>
@@ -667,6 +671,66 @@ const Pricing = () => {
     </>;
   }
 
+  // const currencyConversion = async (amount, planType) => {
+  //   if (!amount) return;
+  //   try {
+  //     const res = await fetch(
+  //       `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json`
+  //     );
+  //     const data = await res.json();
+  //     setConvertedCurrency((prevState) => {
+  //       return { ...prevState, [planType]: data.usd[currency] * 1.02 * parseFloat(amount) };
+  //     })
+  //   } catch (error) {
+  //     console.error("Error Fetching", error);
+  //     const res = await fetch(
+  //       `https://latest.currency-api.pages.dev/v1/currencies/usd.json`
+  //     );
+  //     const data = await res.json();
+  //     setConvertedCurrency((prevState) => {
+  //       return { ...prevState, [planType]: data.usd[currency] * 1.02 * parseFloat(amount) };
+  //     })
+  //   }
+  // }
+
+  // const getAmount = (price, roundedPrice) => {
+  //   return planPeriod === 'monthly' ? price.substring(4) : roundedPrice.substring(4);
+  // }
+
+  // const getLocalAmount = (price, roundedPrice) => {
+  //   return planPeriod === 'monthly' ? price.substring(1) : roundedPrice.substring(1);
+  // }
+
+  // const countryWisePrices = (planType) => {
+  //   if (planType === "advance") {
+  //     return (
+  //       <span style={{ fontSize: "0.75rem", margin: "0 2px" }}>
+  //         ( ~ {new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3, maximumFractionDigits: 1 }).format(convertedCurrency.advance)}{" "}{currency.toUpperCase()})
+  //       </span>
+  //     );
+  //   }
+
+  //   return (
+  //     <span style={{ fontSize: "0.75rem", margin: "0 2px" }}>
+  //       ( ~ {new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3, maximumFractionDigits: 1 }).format(convertedCurrency.basic)}{" "}{currency.toUpperCase()})
+  //     </span>
+  //   );
+  // }
+
+  // const setInternational = () => {
+  //   const isLocalCountry = ['india', 'international', 'kuwait'].includes(currentCountry);
+
+  //   const basicAmount = isLocalCountry ? getLocalAmount(currentPrice.basic, currentPrice.basicRoundedOffPrice)
+  //     : getAmount(currentPrice.basic, currentPrice.basicRoundedOffPrice);
+
+  //   const advanceAmount = isLocalCountry ? getLocalAmount(currentPrice.advance, currentPrice.advanceRoundedOffPrice)
+  //     : getAmount(currentPrice.advance, currentPrice.advanceRoundedOffPrice);
+
+  //   currencyConversion(basicAmount, "basic");
+  //   currencyConversion(advanceAmount, "advance");
+  // }
+
+
   useEffect(() => {
     setLoading(true);
     getParams();
@@ -674,8 +738,8 @@ const Pricing = () => {
       .then(res => res.json())
       .then((data) => {
         let country;
-        if(!countryCodesPresent.includes(data.country_code))
-          country = 'international';
+        if (!countryCodesPresent.includes(data.country_code)) 
+          country = 'international';      
         else
           country = countryCodeToName[data.country_code];
         setMyLocation({
@@ -700,7 +764,7 @@ const Pricing = () => {
 
   return (
     <>
-      <HelmetHeader 
+      <HelmetHeader
         title={'Pricing | Prime Sender - Best Web Sender Extension'}
         description={'Pricing for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
         keywords={'pricing, prime sender pricing, affordable pricing, Simple, cheap, prime sender pricing plans'}
@@ -718,13 +782,13 @@ const Pricing = () => {
               </div>
             </div>
             {
-              planPeriod === 'monthly' && 
+              planPeriod === 'monthly' &&
               <div className="pricing_discount_text ">
                 <div className="text">
-                  Early bird offer for new user - <span className="text" style={{fontWeight:"bold", marginLeft:"4px"}}>Extra 30% OFF. &nbsp; </span> 
+                  Early bird offer for new user - <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>Extra 30% OFF. &nbsp; </span>
                 </div>
                 <div className="discount-img text" >
-                  Use code <img src={currentCountry=='india' || currentCountry=='indonesia' || currentCountry=='international'? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
+                  Use code <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
                 </div>
               </div>
             }
@@ -739,7 +803,7 @@ const Pricing = () => {
               <div className="pricing_card_price">
                 <div className="free_pricing_div">
                   <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
-                  {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.toString().substring(0, 4) : currentPrice.basic.toString().substring(0, 1)}</span>
+                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.toString().substring(0, 4) : currentPrice.basic.toString().substring(0, 1)}</span>
                   <span className="heading">0</span>
                   <br />
                   <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", visibility: "hidden" }}>{currentCountry === "india" ? "₹" : currentCountry === 'indonesia' ? "IDR " : "$"}</p>
@@ -759,19 +823,19 @@ const Pricing = () => {
                     target="_blank"
                     className="buy_button"
                     onClick={handleGaButtonClick("free")}>
-                      Try Now
+                    Try Now
                   </a>
                 </button>
               </div>
 
               <div className="pricing_card_features">
                 {
-                  FreeCardFeatures.map((item, index)=>{
+                  FreeCardFeatures.map((item, index) => {
                     return <div className="pricing_card_feature" key={index}>
-                    <AiOutlineCheck />
-                    <div className="pricing_card_feature_text">
-                      {item.name}
-                    </div>
+                      <AiOutlineCheck />
+                      <div className="pricing_card_feature_text">
+                        {item.name}
+                      </div>
                       <span className={`pricing_feature_info_container`} onMouseEnter={() => setFreeCardDetailHover(index)} onMouseLeave={() => setFreeCardDetailHover(-1)}>
                         <IoIosInformationCircleOutline className="feature_info_class" />
                         <div className="navigation_outer_box_down navigation_container" hidden={!(freeCardDetailHover == index)}>
@@ -782,7 +846,7 @@ const Pricing = () => {
                           </div>
                         </div>
                       </span>
-                  </div>
+                    </div>
                   })
                 }
               </div>
@@ -796,7 +860,7 @@ const Pricing = () => {
               <div className="pricing_card_price">
                 <div className="pricing_cut_price">
                   <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
-                  {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
+                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
                   </span>
                   {
                     (currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait') ?
@@ -806,10 +870,10 @@ const Pricing = () => {
                   <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                   <br />
                   <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
-                  {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
+                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
                   </p>
                   <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
-                  {
+                    {
                       currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ?
                         planPeriod === 'monthly' ? currentPrice.basicSlash.substring(4) : currentPrice.monthlyBasicSlash.substring(4) :
                         planPeriod === 'monthly' ? currentPrice.basicSlash.substring(1) : currentPrice.monthlyBasicSlash.substring(1)
@@ -821,7 +885,7 @@ const Pricing = () => {
                 <div className="pricing_card_heading">
                   <span>Billed&nbsp;
                     <span className={currentCountry === 'india' ? 'rupee' : ''}>
-                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
+                      {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
                     </span>
                     {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months' service per account
                   </span>
@@ -836,7 +900,7 @@ const Pricing = () => {
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text" style={{fontWeight:"bold"}}>All Free Features</p>
+                  <p className="pricing_card_feature_text" style={{ fontWeight: "bold" }}>All Free Features</p>
                 </div>
                 {
                   basicCardFeatures.map((item, index) => {
@@ -870,7 +934,7 @@ const Pricing = () => {
               <div className="pricing_card_price">
                 <div className="pricing_cut_price">
                   <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>
-                  {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 4) : currentPrice.advance.substring(0, 1)}
+                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 4) : currentPrice.advance.substring(0, 1)}
                   </span>
                   {
                     currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ?
@@ -887,7 +951,7 @@ const Pricing = () => {
                       currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ?
                         planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(4) : currentPrice.monthlyAdvanceSlash.substring(4) :
                         planPeriod === 'monthly' ? currentPrice.advanceSlash.substring(1) : currentPrice.monthlyAdvanceSlash.substring(1)
-                    }  
+                    }
                   </p>
                 </div>
               </div>
@@ -895,7 +959,7 @@ const Pricing = () => {
                 <div className="pricing_card_heading">
                   <span>Billed&nbsp;
                     <span className={currentCountry === 'india' ? 'rupee' : ''}>
-                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 4) : currentPrice.advance.substring(0, 1)}
+                      {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 4) : currentPrice.advance.substring(0, 1)}
                     </span>
                     {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months' service per account
                   </span>
@@ -910,7 +974,7 @@ const Pricing = () => {
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text"  style={{fontWeight:"bold"}}>All Basic Features</p>
+                  <p className="pricing_card_feature_text" style={{ fontWeight: "bold" }}>All Basic Features</p>
                 </div>
                 {
                   advanceCardFeatures.map((item, index) => {
@@ -941,11 +1005,11 @@ const Pricing = () => {
 
               <div className="pricing_card_heading">
                 <div>
-                Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto 60%</span>
+                  Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto 60%</span>
                 </div>
                 {
                   planPeriod === 'annually' && (
-                    <div style={{visibility:'hidden'}}>
+                    <div style={{ visibility: 'hidden' }}>
                       This is dummy text
                     </div>
                   )
@@ -961,9 +1025,9 @@ const Pricing = () => {
           <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
           <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
           <div className="pricing_lower_section">
-            <SectionTitle 
-              gif="/gifs/compare-plans.gif" 
-              title="Compare Our Plans" 
+            <SectionTitle
+              gif="/gifs/compare-plans.gif"
+              title="Compare Our Plans"
               subtitle="Complete list of features available in our pricing plans"
             />
             <div className="pricing_table_section">
@@ -977,33 +1041,33 @@ const Pricing = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {pricingFeatures.map((feature, index) => (
-                  <tr key={index}>
-                    <th>
-                      {feature.name}
-                      <span className={`pricing_feature_info_container`} onMouseEnter={() => setFeatureDetailHover(index)} onMouseLeave={() => setFeatureDetailHover(-1)}>
-                        <IoIosInformationCircleOutline className="feature_info_class" />
-                        <div className="navigation_outer_box_down navigation_container" hidden={!(featureDetailHover == index)}>
-                          <div className="msg-box-down">
-                            <p>
-                              {feature.description}
-                            </p>
-                            {/* <div className="arrow"></div> */}
+                  {pricingFeatures.map((feature, index) => (
+                    <tr key={index}>
+                      <th>
+                        {feature.name}
+                        <span className={`pricing_feature_info_container`} onMouseEnter={() => setFeatureDetailHover(index)} onMouseLeave={() => setFeatureDetailHover(-1)}>
+                          <IoIosInformationCircleOutline className="feature_info_class" />
+                          <div className="navigation_outer_box_down navigation_container" hidden={!(featureDetailHover == index)}>
+                            <div className="msg-box-down">
+                              <p>
+                                {feature.description}
+                              </p>
+                              {/* <div className="arrow"></div> */}
+                            </div>
                           </div>
-                        </div>
-                      </span>
-                    </th>
-                    <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
-                    <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
-                    <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
-                  </tr>
-                ))}
+                        </span>
+                      </th>
+                      <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                      <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                      <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 };
