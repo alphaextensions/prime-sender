@@ -25,8 +25,8 @@ const Pricing = () => {
   const [planPeriod, setPlanPeriod] = useState("annually");
   const [currentCountry, setCurrentCountry] = useState("india");
   const [popupPlanPeriod, setPopupPlanPeriod] = useState('annually');
-  const [currency, setCurrency] = useState(null)
-  const [convertedCurrency, setConvertedCurrency] = useState({ basic: 0, advance: 0 })
+  // const [currency, setCurrency] = useState(null)
+  // const [convertedCurrency, setConvertedCurrency] = useState({ basic: 0, advance: 0 })
   const [popupLastPlan, setPopupLastPlan] = useState(null);
   const [popupCountry, setPopupCountry] = useState(null);
   const [popupPlan, setPopupPlan] = useState(null);
@@ -671,64 +671,64 @@ const Pricing = () => {
     </>;
   }
 
-  const currencyConversion = async (amount, planType) => {
-    if (!amount) return;
-    try {
-      const res = await fetch(
-        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json`
-      );
-      const data = await res.json();
-      setConvertedCurrency((prevState) => {
-        return { ...prevState, [planType]: data.usd[currency] * 1.02 * parseFloat(amount) };
-      })
-    } catch (error) {
-      console.error("Error Fetching", error);
-      const res = await fetch(
-        `https://latest.currency-api.pages.dev/v1/currencies/usd.json`
-      );
-      const data = await res.json();
-      setConvertedCurrency((prevState) => {
-        return { ...prevState, [planType]: data.usd[currency] * 1.02 * parseFloat(amount) };
-      })
-    }
-  }
+  // const currencyConversion = async (amount, planType) => {
+  //   if (!amount) return;
+  //   try {
+  //     const res = await fetch(
+  //       `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json`
+  //     );
+  //     const data = await res.json();
+  //     setConvertedCurrency((prevState) => {
+  //       return { ...prevState, [planType]: data.usd[currency] * 1.02 * parseFloat(amount) };
+  //     })
+  //   } catch (error) {
+  //     console.error("Error Fetching", error);
+  //     const res = await fetch(
+  //       `https://latest.currency-api.pages.dev/v1/currencies/usd.json`
+  //     );
+  //     const data = await res.json();
+  //     setConvertedCurrency((prevState) => {
+  //       return { ...prevState, [planType]: data.usd[currency] * 1.02 * parseFloat(amount) };
+  //     })
+  //   }
+  // }
 
-  const getAmount = (price, roundedPrice) => {
-    return planPeriod === 'monthly' ? price.substring(4) : roundedPrice.substring(4);
-  }
+  // const getAmount = (price, roundedPrice) => {
+  //   return planPeriod === 'monthly' ? price.substring(4) : roundedPrice.substring(4);
+  // }
 
-  const getLocalAmount = (price, roundedPrice) => {
-    return planPeriod === 'monthly' ? price.substring(1) : roundedPrice.substring(1);
-  }
+  // const getLocalAmount = (price, roundedPrice) => {
+  //   return planPeriod === 'monthly' ? price.substring(1) : roundedPrice.substring(1);
+  // }
 
-  const countryWisePrices = (planType) => {
-    if (planType === "advance") {
-      return (
-        <span style={{ fontSize: "0.75rem", margin: "0 2px" }}>
-          ( ~ {new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3, maximumFractionDigits: 1 }).format(convertedCurrency.advance)}{" "}{currency.toUpperCase()})
-        </span>
-      );
-    }
+  // const countryWisePrices = (planType) => {
+  //   if (planType === "advance") {
+  //     return (
+  //       <span style={{ fontSize: "0.75rem", margin: "0 2px" }}>
+  //         ( ~ {new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3, maximumFractionDigits: 1 }).format(convertedCurrency.advance)}{" "}{currency.toUpperCase()})
+  //       </span>
+  //     );
+  //   }
 
-    return (
-      <span style={{ fontSize: "0.75rem", margin: "0 2px" }}>
-        ( ~ {new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3, maximumFractionDigits: 1 }).format(convertedCurrency.basic)}{" "}{currency.toUpperCase()})
-      </span>
-    );
-  }
+  //   return (
+  //     <span style={{ fontSize: "0.75rem", margin: "0 2px" }}>
+  //       ( ~ {new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3, maximumFractionDigits: 1 }).format(convertedCurrency.basic)}{" "}{currency.toUpperCase()})
+  //     </span>
+  //   );
+  // }
 
-  const setInternational = () => {
-    const isLocalCountry = ['india', 'international', 'kuwait'].includes(currentCountry);
+  // const setInternational = () => {
+  //   const isLocalCountry = ['india', 'international', 'kuwait'].includes(currentCountry);
 
-    const basicAmount = isLocalCountry ? getLocalAmount(currentPrice.basic, currentPrice.basicRoundedOffPrice)
-      : getAmount(currentPrice.basic, currentPrice.basicRoundedOffPrice);
+  //   const basicAmount = isLocalCountry ? getLocalAmount(currentPrice.basic, currentPrice.basicRoundedOffPrice)
+  //     : getAmount(currentPrice.basic, currentPrice.basicRoundedOffPrice);
 
-    const advanceAmount = isLocalCountry ? getLocalAmount(currentPrice.advance, currentPrice.advanceRoundedOffPrice)
-      : getAmount(currentPrice.advance, currentPrice.advanceRoundedOffPrice);
+  //   const advanceAmount = isLocalCountry ? getLocalAmount(currentPrice.advance, currentPrice.advanceRoundedOffPrice)
+  //     : getAmount(currentPrice.advance, currentPrice.advanceRoundedOffPrice);
 
-    currencyConversion(basicAmount, "basic");
-    currencyConversion(advanceAmount, "advance");
-  }
+  //   currencyConversion(basicAmount, "basic");
+  //   currencyConversion(advanceAmount, "advance");
+  // }
 
 
   useEffect(() => {
@@ -738,11 +738,8 @@ const Pricing = () => {
       .then(res => res.json())
       .then((data) => {
         let country;
-        if (!countryCodesPresent.includes(data.country_code)) {
-          country = 'international';
-          setCurrency(data.currency.toLowerCase())
-          setInternational()
-        }
+        if (!countryCodesPresent.includes(data.country_code)) 
+          country = 'international';      
         else
           country = countryCodeToName[data.country_code];
         setMyLocation({
@@ -870,9 +867,7 @@ const Pricing = () => {
                       <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(4) : currentPrice.basicRoundedOffPrice.substring(4)}</span> :
                       <span className="heading">{planPeriod === 'monthly' ? currentPrice.basic.substring(1) : currentPrice.basicRoundedOffPrice.substring(1)}</span>
                   }
-                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> {
-                    currentCountry === 'international' && countryWisePrices("basic")
-                  }  / month</p>
+                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                   <br />
                   <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
                     {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
@@ -946,9 +941,7 @@ const Pricing = () => {
                       <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(4) : currentPrice.advanceRoundedOffPrice.substring(4)}</span> :
                       <span className="heading">{planPeriod === 'monthly' ? currentPrice.advance.substring(1) : currentPrice.advanceRoundedOffPrice.substring(1)}</span>
                   }
-                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> {
-                    currentCountry === 'international' && countryWisePrices("advance")
-                  } / month</p>
+                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
                   <br />
                   <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>
                     {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 4) : currentPrice.advance.substring(0, 1)}
