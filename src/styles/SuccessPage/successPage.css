@@ -50,3 +50,117 @@
 .success-page-container .cross-icon {
     color: var(--color-dark-grey) !important;
 }
+
+.number_section_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.number_section_div .number_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number_section_div .number_section p {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--color-primary1);
+  text-align: center;
+}
+
+.number_section_div .number_section p span {
+  font-weight: normal;
+  color: #000;
+}
+
+.premium_transfer_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.premium_transfer_div p {
+  font-size: 14px;
+}
+
+.premium_transfer_div p span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.premium_transfer_div input::-webkit-outer-spin-button,
+.premium_transfer_div input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.premium_transfer_div input:focus {
+    border: none !important;
+    outline: none !important;
+}
+
+.premium_transfer_div input {
+  height: 30px !important;
+  width: 130px;
+  border: none;
+  outline: none;
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.premium_transfer_div .react-tel-input .country-list {
+	max-height: 150px !important;
+}
+
+.premium_transfer_div .react-tel-input .form-control {
+	pointer-events: none;
+	width: 100px !important;
+	background-color: #D9D9D9 !important;
+  height: 30px !important;
+}
+
+.premium_transfer_div .premium_transfer_input_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.premium_transfer_div .request_plan_transfer_button {
+  background-color: transparent;
+  color: var(--color-primary1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.success-page-container .font_grey {
+  color: grey !important;
+}
+
+.redirect_section {
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.redirect_section a {
+  background: var(--color-primary1);
+  padding: 10px 15px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
