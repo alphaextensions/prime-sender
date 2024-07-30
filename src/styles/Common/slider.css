@@ -1,7 +1,6 @@
 .slider {
   display: flex;
   align-items: center;
-  color: var(--color-primary1);
 }
 
 .slider-text {
