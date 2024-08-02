@@ -57,7 +57,7 @@ function Navbar() {
   const [isFixed, setIsFixed] = useState(false);
 
   const handleScroll = () => {
-    const navbarHeight = document.querySelector('.prime-sender-navbar').offsetHeight;
+    const navbarHeight = document.querySelector('.prime-sender-navbar')?.offsetHeight;
     const scroll = window.scrollY;
     setIsFixed(scroll > navbarHeight);
   };

@@ -10,6 +10,8 @@ import ReactGA from "react-ga4";
 import { promoText } from "../Data/seo-data";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
+import {Oval} from "react-loader-spinner";
+import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 
 
 const Pricing = () => {
@@ -37,7 +39,16 @@ const Pricing = () => {
   const [freeCardDetailHover, setFreeCardDetailHover] = useState(-1);
   const [basicCardDetailHover, setBasicCardDetailHover] = useState(-1);
   const [advanceCardDetailHover, setAdvanceCardDetailHover] = useState(-1);
-
+  const [pricingCalculatorPlan, setPricingCalculatorPlan] = useState("advance");
+  const [pricingCalculatorPeriod, setPricingCalculatorPeriod] = useState("annually");
+  const [numAccounts, setNumAccounts] = useState(Number(JSON.parse(localStorage.getItem('numAccounts')))|| 2);
+  const [multAccountPrice, setMultAccountPrice] = useState({ price: '', totalPrice: '', cutPrice: ''});
+  const [priceCalculatorLoader, setPriceCalculatorLoader] = useState(false);
+  const [showMultipleAccountPopup, setShowMultipleAccountPopup] = useState(false);
+  const [phoneNumbers, setPhoneNumbers] = useState(JSON.parse(localStorage.getItem("phoneNumbers"))  || ['', '']);
+  const [isMultipleAccountPage, setIsMultipleAccountPage] = useState(false);
+  const [isPricingCardHovered, setIsPricingCardHovered] = useState("");
+  
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
     const params = new URLSearchParams(urlParams);
@@ -67,6 +78,17 @@ const Pricing = () => {
     "SG": 'singapore',
     "IL": 'israel',
   }
+  const countryCodeToCurrency = {
+    "IN": "INR",
+    "ID": "IDR",
+    "AED": "AED",
+    "EG": "EGP",
+    "GB": "GBP",
+    "SA": "SAR",
+    "KW": "USD",
+    "SG": "SGD",
+    "IL": "ILS",
+  }
 
   const whatsappRedirectUrl = "https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20purchase%20premium%20for%20multiple%20users."
 
@@ -79,6 +101,9 @@ const Pricing = () => {
       action: `buy ${type} button click`,
       label: `buy_${type}_btn_clicked`,
     });
+    if(type == "multiple_user") {
+      setShowMultipleAccountPopup(true);
+    }
     return;
   }
 
@@ -732,18 +757,26 @@ const Pricing = () => {
 
 
   useEffect(() => {
+    const url = window.location.href;
+    if(url.includes('multiple-account')) {
+      setIsMultipleAccountPage(true);
+    }
     setLoading(true);
     getParams();
     fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then((data) => {
-        let country;
-        if (!countryCodesPresent.includes(data.country_code)) 
-          country = 'international';      
-        else
+        let country, currency;
+        if(!countryCodesPresent.includes(data.country_code)){
+          country = 'international';
+          currency = "USD";
+        }
+        else {
           country = countryCodeToName[data.country_code];
+          currency= countryCodeToCurrency[data.country_code];
+        }
         setMyLocation({
-          country_name: data.country_name, pricing_country_name: country, country_code: data.country_code
+          country_name: data.country_name, pricing_country_name: country, country_code: data.country_code, country_currency : currency
         });
         setLoading(false);
       })
@@ -762,6 +795,66 @@ const Pricing = () => {
     }
   }, [myLocation]);
 
+  const pricingCalculatorPeriodHandler = (e)=>{
+    e.stopPropagation();
+      pricingCalculatorPeriod == 'annually' ? setPricingCalculatorPeriod('monthly') : setPricingCalculatorPeriod('annually')
+  }
+
+  const calculateMultAccountPrice = () => {
+    let currentPrice = pricing[currentCountry][pricingCalculatorPeriod];
+    let price;
+    let discountPercentage;
+    if (numAccounts == 2) 
+      discountPercentage = 0.20;
+    else if (numAccounts == 3) 
+      discountPercentage = 0.30;
+    else if (numAccounts >= 4 && numAccounts <= 9)
+      discountPercentage = 0.40;
+    else if (numAccounts >= 10 && numAccounts <= 25) 
+      discountPercentage = 0.50;
+    else if (numAccounts > 25) 
+      discountPercentage = 0.60;
+    
+    if(pricingCalculatorPeriod == 'annually')
+      discountPercentage += 0.05;
+    if(pricingCalculatorPlan == 'advance')
+      discountPercentage += 0.05;
+    let currency;
+    if (pricingCalculatorPlan == 'advance') {
+      currency = currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 3) : currentPrice.advance.substring(0, 1);
+      price = currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1);
+    }
+    else {
+      currency = currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 3) : currentPrice.advance.substring(0, 1);
+      price = currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1);
+    }
+    let cutPrice;
+    if(pricingCalculatorPlan == 'advance'){
+      cutPrice = pricing[currentCountry].monthly.advanceSlash;
+    } else {
+      cutPrice = pricing[currentCountry].monthly.basicSlash;
+    }
+      
+    let discountedPrice = Math.ceil(Number(numAccounts) * (Number(price) - Number(price) * Number(discountPercentage)));
+    let totalPrice = discountedPrice;
+    if (pricingCalculatorPeriod == 'annually') {
+      totalPrice = discountedPrice;
+      discountedPrice = Math.ceil(Number(discountedPrice) / 12);
+    }
+    setMultAccountPrice({ price: currency + discountedPrice.toString(), totalPrice: currency + totalPrice, cutPrice: cutPrice });
+    return;
+  }
+
+  useEffect(()=>{
+    setPriceCalculatorLoader(true);
+    const timeout = setTimeout(() => {
+      setPriceCalculatorLoader(false);
+    }, 1000);
+    calculateMultAccountPrice();
+    localStorage.setItem('numAccounts', JSON.stringify(numAccounts));
+    return () => clearTimeout(timeout);
+  }, [myLocation, numAccounts, pricingCalculatorPlan, pricingCalculatorPeriod])
+
   return (
     <>
       <HelmetHeader
@@ -769,6 +862,20 @@ const Pricing = () => {
         description={'Pricing for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
         keywords={'pricing, prime sender pricing, affordable pricing, Simple, cheap, prime sender pricing plans'}
       />
+      {showMultipleAccountPopup &&
+        <MultipleAccountPopup
+          value={numAccounts}
+          setValue={setNumAccounts}
+          phoneNumbers={phoneNumbers}
+          setPhoneNumbers={setPhoneNumbers} 
+          setShowMultipleAccountPopup= {setShowMultipleAccountPopup}
+          plan_duration = {pricingCalculatorPeriod}
+          plan_type = {pricingCalculatorPlan}
+          amount = {multAccountPrice}
+          country_currency = {myLocation.country_currency}
+          multCountry = {currentCountry}
+        />
+      }
       <div className="pricing_container">
         {promoTextComponent}
         {popupLastPlan && generatePricingPopup()}
@@ -778,7 +885,7 @@ const Pricing = () => {
             <div className="pricing_switches">
               {!loading && countrySwitchComponent()}
               <div className="pricing-slider">
-                <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} />
+                <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} planPeriod={planPeriod} />
               </div>
             </div>
             {
@@ -793,9 +900,10 @@ const Pricing = () => {
               </div>
             }
           </div>
-          <div className="pricing_cards_container">
+          <div className={`pricing_cards_container ${isMultipleAccountPage && 'multiple_acc_pricing_cards_container'}`}>
+            {isMultipleAccountPage && <div className="pricing_card_container_overlay"></div>}
             {/* free card */}
-            <div className="pricing_card">
+            <div className={`pricing_card ${isPricingCardHovered == "free" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("free")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-free.png" alt="Free plan icon" />
                 <p>Free</p>
@@ -822,7 +930,7 @@ const Pricing = () => {
                     href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
                     target="_blank"
                     className="buy_button"
-                    onClick={handleGaButtonClick("free")}>
+                    onClick={() => handleGaButtonClick("free")}>
                     Try Now
                   </a>
                 </button>
@@ -852,7 +960,7 @@ const Pricing = () => {
               </div>
             </div>
             {/* basic card */}
-            <div className="pricing_card premium_card">
+            <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-basic.png" alt="Basic plan icon" />
                 <p>Basic</p>
@@ -887,12 +995,12 @@ const Pricing = () => {
                     <span className={currentCountry === 'india' ? 'rupee' : ''}>
                       {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
                     </span>
-                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months' service per account
+                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(4) : currentPrice.basic.substring(1)} for 12 months' service per user
                   </span>
                 </div>
               }
               <div className="pricing_card_button">
-                <button onClick={handleGaButtonClick("basic")}>
+                <button onClick={() => handleGaButtonClick("basic")}>
                   {showButton(false, 'basic')}
                 </button>
               </div>
@@ -925,7 +1033,7 @@ const Pricing = () => {
               </div>
             </div>
             {/* advance card */}
-            <div className="pricing_card premium_card">
+            <div className={`pricing_card premium_card ${isPricingCardHovered == "advance" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("advance")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <img className="recommended_tag" src="/images/recommended_tag.png" alt="Recommended tag" />
               <div className="pricing_card_type">
                 <img src="/images/signal-advance.png" alt="Advance plan icon" />
@@ -961,12 +1069,12 @@ const Pricing = () => {
                     <span className={currentCountry === 'india' ? 'rupee' : ''}>
                       {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(0, 4) : currentPrice.advance.substring(0, 1)}
                     </span>
-                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months' service per account
+                    {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.advance.substring(4) : currentPrice.advance.substring(1)} for 12 months' service per user 
                   </span>
                 </div>
               }
               <div className="pricing_card_button">
-                <button onClick={handleGaButtonClick("advance")}>
+                <button onClick={() => handleGaButtonClick("advance")}>
                   {showButton(false, 'advance')}
                 </button>
               </div>
@@ -998,27 +1106,130 @@ const Pricing = () => {
                 }
               </div>
             </div>
-            <div className="pricing_card multiple_user_card">
+            <div className={`pricing_card multiple_user_card premium_card_purple ${isMultipleAccountPage && 'multiple_card_hover_style'} ${isPricingCardHovered == "multiple" && !isMultipleAccountPage && "pricing_card_hover"}`} onMouseEnter={() => setIsPricingCardHovered("multiple")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="multiple_card_type">
                 <p>Need multiple accounts?</p>
               </div>
 
               <div className="pricing_card_heading">
                 <div>
-                  Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto 60%</span>
+                Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto 70%</span>
                 </div>
-                {
+                {/* {
                   planPeriod === 'annually' && (
-                    <div style={{ visibility: 'hidden' }}>
+                    <div style={{visibility:'hidden'}}>
                       This is dummy text
                     </div>
                   )
-                }
+                } */}
               </div>
-              <div className="pricing_card_button">
-                <button onClick={handleGaButtonClick("multiple_user")}>
-                  <a href={whatsappRedirectUrl} target="_blank" className="buy_button">Talk to Us</a>
+              <div className="pricing_calculator_section">
+                {/* heading section */}
+                <div className="pricing_calculator_heading">
+                  <div className="left_line"></div>
+                  <div className="pricing_calculator_text">Pricing Calculator</div>
+                  <div className="right_line"></div>
+                </div>
+                {/* basic/advance switch */}
+                <div className="pricing_country background-royal">
+                  <div className="pricing_country_switch">
+                    <div className={`country_switch ${pricingCalculatorPlan == 'basic' && 'active_country_class'}`} onClick={()=> setPricingCalculatorPlan("basic")}>
+                      <p className="country_current_switch plan_switch">
+                        Basic
+                      </p>
+                    </div>
+                    <div className={`country_switch ${pricingCalculatorPlan == 'advance' && 'active_country_class'}`} onClick={()=> setPricingCalculatorPlan("advance")}>
+                      <p className="country_current_switch plan_switch">
+                        Advance
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {/* slider plan period */}
+                <div className="pricing-slider pricing_calculator_slider">
+                  <div className="slider">
+                    <span className={`slider-text ${pricingCalculatorPeriod == 'monthly' ? 'text-royal' : 'text-gray'}`}> Monthly</span>
+                    <label className="switch-container" onChange={(e)=>pricingCalculatorPeriodHandler(e)}>
+                      <input type="checkbox" defaultChecked />
+                      <span className="switch background-royal" />
+                    </label>
+                    <span className={`slider-text ${pricingCalculatorPeriod !='monthly' ? 'text-royal' : 'text-gray'}`}>12 Months</span>
+                  </div> 
+                </div>
+                {/* number of accounts */}
+                <div className="num_accounts_section">
+                  <p className="num_accounts_title text-gray">Number of accounts:</p>
+                  <input className="num_accounts_input" type="number" value={numAccounts} onChange={(e) => {
+                    setNumAccounts(e.target.value)
+                    // if (e.target.value < 2) setNumAccounts(2);
+                    if(e.target.value>1)
+                      setPhoneNumbers([...Array(Number(e.target.value)).fill('')]);
+                  }} />
+                </div>
+              </div>
+              {/* price section */}
+              {
+              priceCalculatorLoader ? 
+              <div style={{width: "100%", display:"flex", justifyContent:"center", alignItems:"center"}}>
+              <Oval
+                visible={true}
+                height="50"
+                width="50"
+                color="#7829f9"
+                ariaLabel="oval-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              /></div> : 
+                numAccounts > 1 ?
+                  (
+                    <>
+                      <div className="pricing_card_price">
+                        <div className="pricing_cut_price">
+                          <span style={{ "fontWeight": "bold", "marginRight": "5px" }} className="text-royal">~</span>
+                          <span className={`${currentCountry === 'india' ? 'rupee heading' : ' heading'} text-royal`}>
+                            {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? multAccountPrice.price.substring(0, 4) : multAccountPrice.price.substring(0, 1)}
+                          </span>
+                          {
+                            (currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait') ?
+                              <span className="heading text-royal">{Math.ceil(multAccountPrice.price.substring(4)/numAccounts)}</span> :
+                              <span className="heading text-royal">{Math.round(multAccountPrice.price.substring(1)/numAccounts)}</span>
+                          }
+                          <p style={{ display: "inline", whiteSpace: "nowrap" }}> <span className="text-royal">per user</span> / month</p>
+                          <br />
+                          <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", marginLeft: "13px" }}>
+                            {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? currentPrice.basic.substring(0, 4) : currentPrice.basic.substring(0, 1)}
+                          </p>
+                          <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                            {
+                              currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ?
+                              multAccountPrice.cutPrice.substring(4) : multAccountPrice.cutPrice.substring(1)
+                            }
+                          </p>
+                        </div>
+                      </div>
+                      {
+                        pricingCalculatorPeriod == 'annually' &&
+                        <div className="pricing_card_heading">
+                          <span>Billed&nbsp;
+                            <span className={currentCountry === 'india' ? 'rupee' : ''}>
+                              {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? multAccountPrice.totalPrice.substring(0, 4) : multAccountPrice.totalPrice.substring(0, 1)}
+                            </span>
+                            {currentCountry !== 'india' && currentCountry !== 'international' && currentCountry !== 'kuwait' ? Math.round(multAccountPrice.totalPrice.substring(4)/numAccounts) : Math.round(multAccountPrice.totalPrice.substring(1)/numAccounts)} for 12 months' service per user
+                          </span>
+                        </div>
+                      }
+                    </>
+                  ) : <div className="mult_error_message">
+                    Number of accounts cannot be less than 2
+                  </div>
+              }
+              <div className="pricing_card_button background-royal">
+                <button onClick={() => handleGaButtonClick("multiple_user")}>
+                  <a target="_blank" className="buy_button">Buy</a>
                 </button>
+              </div>
+              <div className="pricing_calculator_support">
+                <p>Need more support? <a href="">Click here</a></p>
               </div>
             </div>
           </div>
