@@ -125,12 +125,12 @@ const Home = () => {
       </div>
 
       <Companies />
-      <CompleteSolutions />
+      <Testimonial />
       <HowToUse />
+      <CompleteSolutions />
       <MainFeatures isSlider='true' />
       <UniqueFeatures />
       {/* <EverythingInOne /> */}
-      <Testimonial />
     </>
   );
 };

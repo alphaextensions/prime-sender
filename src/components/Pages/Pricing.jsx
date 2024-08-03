@@ -337,8 +337,8 @@ const Pricing = () => {
         advance: 'fZe7sMawi30Acg0bIZ'
       },
       annually: {
-        basic: 'pl_HyuSnC8BpjlWV7/view',
-        advance: 'pl_HyuXVKKhpfe28k/view'
+        basic: '9AQ14o47UdFe6VG7tq',
+        advance: '14k9AUgUG9oY3Ju5lj'
       }
     },
     international: {
@@ -435,11 +435,7 @@ const Pricing = () => {
 
   // links for the button to buy
   function getButtonLink(country, duration, type) {
-    let buttonLink;
-    if (country == 'india' && duration == 'annually')
-      buttonLink = 'https://razorpay.com/payment-button/';
-    else
-      buttonLink = 'https://buy.stripe.com/'
+    let buttonLink = 'https://buy.stripe.com/'
     buttonLink += pricing_links[country][duration][type]
     return buttonLink;
   }
@@ -1229,7 +1225,7 @@ const Pricing = () => {
                 </button>
               </div>
               <div className="pricing_calculator_support">
-                <p>Need more support? <a href="">Click here</a></p>
+                <p>Need more support? <a href={whatsappRedirectUrl} target="_blank">Click here</a></p>
               </div>
             </div>
           </div>
