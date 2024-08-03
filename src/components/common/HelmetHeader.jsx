@@ -8,7 +8,8 @@ const HelmetHeader = ({ title, description, keywords}) => {
         <html lang="en" />
         <title>{title}</title>
         <meta name="title" content={title} />
-        <meta name="title" property="og:title" content={title} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <link rel="icon" type="image/png" href={logo} />

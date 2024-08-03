@@ -1,23 +1,27 @@
 import "../../styles/HomePage/howToUse.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
 
 const HowToUse = () => {
-
+  const [showMetaData, setShowMetaData] = useState(false);
   useEffect(() => {
     AOS.init({duration: 1000});
+    if(window.location.href?.includes('how-to-use'))
+      setShowMetaData(true);
   }, [])
 
   return (
     <>
-      <HelmetHeader 
-        title={'How To Use | Prime Sender - Best Web Sender Extension'}
-        description={'How to use page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
-        keywords={'how to use , prime sender how to use, how to use prime sender, Simple, cheap, prime sender'}
-      />
+      {showMetaData &&
+        <HelmetHeader
+          title={'How To Use | Prime Sender - Best Web Sender Extension'}
+          description={'How to use page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
+          keywords={'how to use , prime sender how to use, how to use prime sender, Simple, cheap, prime sender'}
+        />
+      }
     <div className="use_main">
       <SectionTitle id="how-to-use" gif="/images/lightbulb.png" title="How to Use" white/>
       <div className="use_container">
