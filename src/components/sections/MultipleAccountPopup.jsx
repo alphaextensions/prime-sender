@@ -4,7 +4,14 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Oval } from 'react-loader-spinner';
 import { IoMdClose } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+
+const validateUserEmail = (email) => {
+	const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	return pattern.test(email);
+}
 
 const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler }) => {
 	const [countryCode, setCountryCode] = useState('91');
@@ -50,10 +57,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const [userEmail, setUserEmail] = useState(JSON.parse(localStorage.getItem("userEmail")) || '');
 	const [showNumbersList, setShowNumbersList] = useState(false);
 	const [numbersAdded, setNumbersAdded] = useState(false);
+	const [emailInputError, setEmailInputError] = useState(false);
 
 	const valueChangeHandler = (val, ind) => {
 		if (val < 2) {
 			setValue(val);
+			setPhoneNumbers(['', '']);
 			return;
 		}
 		if (val < value) {
@@ -75,6 +84,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	}
 
 	const setDataInDatabase = async (name, description, currency) => {
+		setIsPageGenerating(true);
 		const myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 		const raw = JSON.stringify({
@@ -100,34 +110,61 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			let data = await response.text();
 			data = JSON.parse(data);
 			const body = JSON.parse(data.body);
+			setIsPageGenerating(false);
 			return body.data.stripe_page_url;
 		} catch (error) {
 			setIsPageGenerating(false);
 			console.log("error from setting data in database ", error);
+			toast("Something went wrong. Please try again.", { theme: 'colored', type: 'error', autoClose: 5000 });
 		}
 	}
 
+	const validateUserData = () => {
+		console.log(phoneNumbers);
+		// validate user email
+		if (!userEmail || userEmail == '' || !validateUserEmail(userEmail)) {
+			setEmailInputError(true);
+			setTimeout(() => {
+				setEmailInputError(false);	
+			}, 3000);
+			toast("Please enter a valid email id", { theme: "colored", type: "error", autoClose:3000 });
+			return false;
+		};
+
+		// check for the number of accounts 
+		if(value<2) {
+			toast("Number of accounts cannot be less than 2", {theme: 'colored', type:'error', autoClose:3000 });
+			return false;
+		}
+
+		// check for numbers
+		for (let i = 0; i < phoneNumbers.length; i++) {
+			if (!phoneNumbers[i] || phoneNumbers[i] == '') {
+				toast("Please enter a valid phone number", { theme: 'colored', type: 'error', autoClose: 3000 });
+				return false;
+			}
+			else if (phoneNumbers[i].split('-')[1] == '') {
+				toast("Please enter a valid phone number", { theme: 'colored', type: 'error', autoClose: 3000 });
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	const handleBuyPlan = async () => {
-		setIsPageGenerating(true);
+		const isUserDataValid = validateUserData();
+		if(!isUserDataValid) 
+			return;
+
 		let productName = "Prime Sender";
 		plan_type = plan_type == 'basic' ? "Basic" : "Advance";
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
 		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} numbers.`
-		let finalPrice = "";
-		for (let i = 0; i < amount.totalPrice.length; i++) {
-			if (amount.totalPrice[i] >= '0' && amount.totalPrice[i] <= '9') {
-				finalPrice = amount.totalPrice.substring(i);
-				break;
-			}
-		}
-		finalPrice += '00';
-
 		const stripe_page_url = await setDataInDatabase(productName, productDescription, country_currency);
-		setIsPageGenerating(false);
 		if(stripe_page_url) {
 			window.open(stripe_page_url, '_blank');
-			setShowMultipleAccountPopup(false);
 		}
 	}
 
@@ -198,6 +235,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			<div className="pricing-popup-overlay" ref={overlayRef}></div>
 			<div className='multiple_account_popup'>
 				{/* popup top section */}
+				<ToastContainer />
 				{showNumbersList ? <NumberListComponent /> :
 					<>
 						<div className='mult_accont_top_section'>
@@ -224,7 +262,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							</div>
 							<div className='mult_account_num'>
 								<p className='mult_account_num_text'>Enter email address: </p>
-								<input type="email" className='mult_account_email_input' value={userEmail} onChange={(e) => {
+								<input type="email" className={`mult_account_email_input ${emailInputError?'input_error_border':''}`} value={userEmail} onChange={(e) => {
 									setUserEmail(e.target.value)
 									localStorage.setItem("userEmail", JSON.stringify(e.target.value))
 								}} />

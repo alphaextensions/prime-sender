@@ -39,7 +39,7 @@ function NavLinks({ onClick }) {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/pricing' onClick={onClick} className='large-text'>
+        <NavLink to='/pricing' end onClick={onClick} className='large-text'>
           Pricing
         </NavLink>
       </li>
