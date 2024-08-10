@@ -208,9 +208,9 @@ const Pricing = () => {
       },
       annually: {
         free: "EGP 0",
-        basic: "EGP 4,399.99",
+        basic: "EGP 4399.99",
         basicSlash: "",
-        advance: "EGP 5,299.99",
+        advance: "EGP 5299.99",
         advanceSlash: "",
         monthlyBasicSlash: "EGP 628.99",
         monthlyAdvanceSlash: "EGP 756.99",
