@@ -208,9 +208,9 @@ const Pricing = () => {
       },
       annually: {
         free: "EGP 0",
-        basic: "EGP 4,399.99",
+        basic: "EGP 4399.99",
         basicSlash: "",
-        advance: "EGP 5,299.99",
+        advance: "EGP 5299.99",
         advanceSlash: "",
         monthlyBasicSlash: "EGP 628.99",
         monthlyAdvanceSlash: "EGP 756.99",
@@ -837,7 +837,17 @@ const Pricing = () => {
       totalPrice = discountedPrice;
       discountedPrice = Math.ceil(Number(discountedPrice) / 12);
     }
-    setMultAccountPrice({ price: currency + discountedPrice.toString(), totalPrice: currency + totalPrice, cutPrice: cutPrice });
+
+    if(currentCountry!='india' && currentCountry!='international' && currentCountry!='kuwait'){ 
+      price = currency+" "+discountedPrice.toString();
+      totalPrice = currency+" "+totalPrice;
+    }
+    else {
+      price = currency+discountedPrice.toString()
+      totalPrice = currency+totalPrice;
+    }
+
+    setMultAccountPrice({ price: price, totalPrice: totalPrice, cutPrice: cutPrice });
     return;
   }
 
@@ -1157,9 +1167,10 @@ const Pricing = () => {
                   <p className="num_accounts_title text-gray">Number of accounts:</p>
                   <input className="num_accounts_input" type="number" value={numAccounts} onChange={(e) => {
                     setNumAccounts(e.target.value)
-                    // if (e.target.value < 2) setNumAccounts(2);
                     if(e.target.value>1)
                       setPhoneNumbers([...Array(Number(e.target.value)).fill('')]);
+                    else 
+                      setPhoneNumbers(['', '']);
                   }} />
                 </div>
               </div>

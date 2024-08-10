@@ -166,6 +166,10 @@ body {
   background-color: var(--color-white);
 }
 
+.input_error_border {
+  border: 1px solid red !important;
+}
+
 /* Media query for responsiveness */
 
 @media screen and (max-width:1080px) {
