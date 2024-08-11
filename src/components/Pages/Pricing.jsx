@@ -859,7 +859,7 @@ const Pricing = () => {
     calculateMultAccountPrice();
     localStorage.setItem('numAccounts', JSON.stringify(numAccounts));
     return () => clearTimeout(timeout);
-  }, [myLocation, numAccounts, pricingCalculatorPlan, pricingCalculatorPeriod])
+  }, [myLocation, numAccounts, pricingCalculatorPlan, pricingCalculatorPeriod, currentCountry])
 
   return (
     <>
