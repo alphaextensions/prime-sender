@@ -25,7 +25,7 @@ const Pricing = () => {
     {...promoTextComponentGenerator()}
   </div>
   const [planPeriod, setPlanPeriod] = useState("annually");
-  const [currentCountry, setCurrentCountry] = useState("india");
+  const [currentCountry, setCurrentCountry] = useState("international");
   const [popupPlanPeriod, setPopupPlanPeriod] = useState('annually');
   // const [currency, setCurrency] = useState(null)
   // const [convertedCurrency, setConvertedCurrency] = useState({ basic: 0, advance: 0 })
@@ -859,7 +859,7 @@ const Pricing = () => {
     calculateMultAccountPrice();
     localStorage.setItem('numAccounts', JSON.stringify(numAccounts));
     return () => clearTimeout(timeout);
-  }, [myLocation, numAccounts, pricingCalculatorPlan, pricingCalculatorPeriod])
+  }, [myLocation, numAccounts, pricingCalculatorPlan, pricingCalculatorPeriod, currentCountry])
 
   return (
     <>
