@@ -46,21 +46,21 @@ const App = () => {
     { showWebsite ? <Router>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />}/>
-        <Route exact path="/pricing" element={<Pricing />} />
-        <Route exact path="/feature-request" element={<RequestFeature />} />
-        <Route exact path="/help-us-improve" element={<HelpUsImprove />} />
-        <Route exact path="/blogs" element={<Blogs />} />
-        <Route exact path="/blogs/:id" element={<BlogPage />} />
-        <Route exact path="/faqs" element={<FAQs/>} />
-        <Route exact path="/contactus" element={<ContactUs />} />
-        <Route exact path="/terms-of-service" element={<TermsOfUse />} />
-        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route exact path="/basic-success" element={<Success plan="basic" />} />
-        <Route exact path="/advance-success" element={<Success plan="advance" />} />
-        <Route exact path="/how-to-use" element={<HowToUse />} />
-        <Route exact path="/main-features" element={<MainFeatures isSlider='false' />} />
-        <Route exact path="/pricing/multiple-account" element={<Pricing />} />
+        <Route path="/" element={<Home />}/>
+        <Route path="/pricing" element={<Pricing key="pricing"/>} />
+        <Route path="/feature-request" element={<RequestFeature />} />
+        <Route path="/help-us-improve" element={<HelpUsImprove />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:id" element={<BlogPage />} />
+        <Route path="/faqs" element={<FAQs/>} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/terms-of-service" element={<TermsOfUse />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/basic-success" element={<Success plan="basic" />} />
+        <Route path="/advance-success" element={<Success plan="advance" />} />
+        <Route path="/how-to-use" element={<HowToUse />} />
+        <Route path="/main-features" element={<MainFeatures isSlider='false' />} />
+        <Route path="/pricing/multiple-account" element={<Pricing key="multiple-account" />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
