@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 import { FaArrowRightLong } from 'react-icons/fa6' 
-import SectionTitle from "../Common/SectionTitle";
+import SectionTitle from "../common/SectionTitle";
 import ReactGA from "react-ga4";
 import TestimonialCard from "../common/TestimonialCard";
 import Slider from "react-slick";

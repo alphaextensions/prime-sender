@@ -10,14 +10,14 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy"
 import Footer from "./components/Layouts/Footer";
 import ChatSupport from './components/common/ChatSupport';
 import Error from './components/Pages/Error';
-import Success from './components/Pages/success';
 import ReactGA from "react-ga4";
 import {useEffect, useState} from 'react';
 import ContactUs from './components/Pages/ContactUs';
 import BlogPage from './components/Pages/BlogPage';
-import FAQs from './components/Sections/FAQs';
+import FAQs from './components/sections/FAQs';
 import HowToUse from './components/Pages/HowToUse';
-import MainFeatures from './components/Sections/MainFeatures';
+import MainFeatures from './components/sections/MainFeatures';
+import Success from './components/Pages/Success';
 
 const App = () => {
   const [showWebsite, setShowWebsite] = useState(true);

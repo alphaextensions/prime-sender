@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/HomePage/homepage.css';
-import DownloadBtn from '../Common/DownloadBtn';
+import DownloadBtn from '../common/DownloadBtn';
 import { Link } from 'react-router-dom';
-import Companies from '../Sections/Companies';
-import MainFeatures from '../Sections/MainFeatures';
-import Testimonial from '../Sections/Testimonial';
-import UniqueFeatures from '../Sections/UniqueFeatures';
-import FAQs from '../Sections/FAQs';
-import CompleteSolutions from '../Sections/CompleteSolutions';
-import HelmetHeader from "../Common/HelmetHeader";
+import Companies from '../sections/Companies';
+import MainFeatures from '../sections/MainFeatures';
+import Testimonial from '../sections/Testimonial';
+import UniqueFeatures from '../sections/UniqueFeatures';
+import FAQs from '../sections/FAQs';
+import CompleteSolutions from '../sections/CompleteSolutions';
+import HelmetHeader from "../common/HelmetHeader";
 import ReactGA from "react-ga4";
 import { promoText } from '../Data/seo-data';
 import HowToUse from './HowToUse';
-// import EverythingInOne from '../Sections/EverythingInOne';
+// import EverythingInOne from '../sections/EverythingInOne';
 
 const Home = () => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);

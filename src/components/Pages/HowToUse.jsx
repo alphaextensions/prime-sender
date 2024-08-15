@@ -2,8 +2,8 @@ import "../../styles/HomePage/howToUse.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect, useState} from "react";
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from "../Common/HelmetHeader";
+import SectionTitle from "../common/SectionTitle";
+import HelmetHeader from "../common/HelmetHeader";
 
 const HowToUse = () => {
   const [showMetaData, setShowMetaData] = useState(false);

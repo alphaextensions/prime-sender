@@ -3,9 +3,9 @@ import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import pricingFeatures from "../Data/pricing-page-features-list"
-import Slider from "../Common/Slider";
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from "../Common/HelmetHeader";
+import Slider from "../common/Slider";
+import SectionTitle from "../common/SectionTitle";
+import HelmetHeader from "../common/HelmetHeader";
 import ReactGA from "react-ga4";
 import { promoText } from "../Data/seo-data";
 import { IoIosInformationCircleOutline } from "react-icons/io";

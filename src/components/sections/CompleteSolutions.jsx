@@ -2,7 +2,7 @@ import "../../styles/HomePage/completeSolutions.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect} from "react";
-import SectionTitle from "../Common/SectionTitle";
+import SectionTitle from "../common/SectionTitle";
 
 const CompleteSolutions = () => {
 

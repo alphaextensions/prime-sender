@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/TermsOfUsePage/termsOfUse.css';
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from '../Common/HelmetHeader';
+import SectionTitle from "../common/SectionTitle";
+import HelmetHeader from '../common/HelmetHeader';
 import { promoText } from '../Data/seo-data';
 
 function TermsOfUse() {

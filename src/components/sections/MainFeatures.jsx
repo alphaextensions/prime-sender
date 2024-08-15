@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import featuresData from '../Data/features-data'
-import FeatureCard from '../Common/FeatureCard'
-import SectionTitle from '../Common/SectionTitle'
+import FeatureCard from '../common/FeatureCard'
+import SectionTitle from '../common/SectionTitle'
 import '../../styles/HomePage/mainfeatures.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -9,7 +9,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ScrollTrigger from 'react-scroll-trigger';
-import HelmetHeader from '../Common/HelmetHeader'
+import HelmetHeader from '../common/HelmetHeader'
 
 const MainFeatures = ({isSlider}) => {
   const [slidesPerView, setSlidePerView] = useState(3);
