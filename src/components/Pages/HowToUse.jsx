@@ -4,12 +4,19 @@ import 'aos/dist/aos.css';
 import {useEffect} from "react";
 import SectionTitle from "../Common/SectionTitle";
 import HelmetHeader from "../Common/HelmetHeader";
+import { useNavigate } from "react-router-dom";
+import { primeSenderController } from "../context";
 
 const HowToUse = () => {
+  const [controller] = primeSenderController();
+  const navigate = useNavigate();
 
   useEffect(() => {
     AOS.init({duration: 1000});
-  }, [])
+    if (controller?.credentials) {
+      navigate("/dashboard/home")
+    }
+  }, [controller, navigate])
 
   return (
     <>

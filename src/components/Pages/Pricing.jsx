@@ -10,9 +10,13 @@ import ReactGA from "react-ga4";
 import { promoText } from "../Data/seo-data";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
-
+import { useNavigate } from "react-router-dom";
+import { primeSenderController } from "../context";
 
 const Pricing = () => {
+  const [controller] = primeSenderController();
+  const navigate = useNavigate();
+
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
       return <span key={index} className='white_promo_text pro'>{text}</span>
@@ -761,6 +765,12 @@ const Pricing = () => {
       setCurrentCountry(myLocation.pricing_country_name.toLowerCase());
     }
   }, [myLocation]);
+
+  useEffect(() => {
+    if (controller?.credentials) {
+      navigate("/dashboard/home")
+    }
+  }, [controller, navigate]);
 
   return (
     <>

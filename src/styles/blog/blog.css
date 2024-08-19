@@ -33,6 +33,8 @@
 
 .blog_card_title {
   font-size: 30px;
+  line-height: initial;
+  letter-spacing: normal;
   font-weight: bold;
 }
 
@@ -186,7 +188,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   gap: 10px;
   padding-left: 20px;
 }

@@ -48,6 +48,11 @@ function NavLinks({ onClick }) {
           Blogs
         </NavLink>
       </li>
+      <li>
+        <NavLink to='/login' onClick={onClick} className='large-text'>
+          Login
+        </NavLink>
+      </li>
     </ul>
   );
 }
