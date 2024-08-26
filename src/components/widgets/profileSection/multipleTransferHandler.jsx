@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import {
     Typography,
     Input,
@@ -8,13 +8,37 @@ import {
     MenuItem,
     Button,
 } from "@material-tailwind/react";
-import { useState, useMemo } from "react";
 import { useCountries } from "use-react-countries";
 import { PhoneNumberSelect } from "./countrySelector";
+import { primeSenderController } from "../../context";
 
-function MultipleTransferHandler({ phoneNumbers }) {
+function MultipleTransferHandler() {
+    const [controller, dispatch] = primeSenderController();
     const { countries } = useCountries();
     const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
+    const [attempts, setAttempts] = useState(controller.credentials.data[controller.profile].transfer_attempts);
+    const [formattedPhoneNumbers, setFormattedPhoneNumbers] = useState(null);
+
+    const getCountryByPhoneCode = (phoneCode) => {
+        return countries.find(country => country.countryCallingCode === `+${phoneCode}`);
+    };
+
+    const formatPhoneNumbers = (phoneNumbers) => {
+        const formatted = phoneNumbers.map(phoneNumber => {
+            let countryCode, number;
+            for (let i = 1; i <= 3; i++) {
+                countryCode = phoneNumber.slice(0, i);
+                const country = getCountryByPhoneCode(countryCode);
+                if (country) {
+                    number = phoneNumber.slice(i);
+                    return { countryCode: `+${countryCode}`, number: number };
+                }
+            }
+            return { countryCode: null, number: phoneNumber };
+        });
+        setFormattedPhoneNumbers(formatted);
+    };
+
     const sortedCountries = useMemo(
         () => countries.slice().sort((a, b) => a.name.localeCompare(b.name)),
         [countries]
@@ -23,6 +47,42 @@ function MultipleTransferHandler({ phoneNumbers }) {
     const currentCountry = sortedCountries.find(
         (country) => country.name === selectedCountry
     );
+
+    const getPhoneNumbers = () => {
+        let transferUrl = 'https://410yao624j.execute-api.eu-north-1.amazonaws.com/dev';
+        const headers = {
+            "Content-Type": "application/json",
+        };
+        const body = JSON.stringify({
+            email: controller.credentials.data[controller.profile].email,
+            operation: "get-completed-transaction"
+        });
+
+        fetch(transferUrl, {
+            method: "POST",
+            headers: headers,
+            body: body,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok " + response.statusText);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                let res = JSON.parse(data.body);
+                if (data.statusCode === 200) {
+                    formatPhoneNumbers(res.data.numbers)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    useEffect(() => {
+        getPhoneNumbers();
+    }, []);
 
     return (
         <div className="mt-8 mb-4 px-4 flex-col flex justify-start ">
@@ -34,7 +94,11 @@ function MultipleTransferHandler({ phoneNumbers }) {
             </p>
             <div className="mb-4 mt-2 px-1 flex items-center w-max">
                 <div className="flex justify-center">
-                    <PhoneNumberSelect phoneNumbers={phoneNumbers} />
+                    {formattedPhoneNumbers && formattedPhoneNumbers.length > 0 ? (
+                        <PhoneNumberSelect phoneNumbers={formattedPhoneNumbers} />
+                    ) : (
+                        <p>Loading phone numbers...</p>
+                    )}
                 </div>
 
                 <span className="ml-3 mr-3 text-lg font-semibold">To</span>
@@ -89,6 +153,7 @@ function MultipleTransferHandler({ phoneNumbers }) {
 
                 <Button
                     variant="filled"
+                    disabled={attempts === 0 ? true : false}
                     className="bg-[#009a88] !overflow-visible"
                 >
                     Transfer

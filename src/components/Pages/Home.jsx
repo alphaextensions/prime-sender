@@ -100,7 +100,7 @@ const Home = () => {
 
   useEffect(() => {
     if (controller?.credentials) {
-      navigate("/dashboard/home")
+      navigate("/dashboard/profile")
     }
   }, [controller, navigate]);
 

@@ -8,7 +8,7 @@ import {
     MenuItem,
     Button,
 } from "@material-tailwind/react";
-import { primeSenderController, updatePhoneAndAttempts } from "../../context";
+import { primeSenderController, replaceDataObject } from "../../context";
 import { useCountries } from "use-react-countries";
 
 function TransferPlan({ isAuthor }) {
@@ -16,6 +16,7 @@ function TransferPlan({ isAuthor }) {
     const [controller, dispatch] = primeSenderController();
     const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [attempts, setAttempts] = useState(controller.credentials.data[controller.profile].transfer_attempts);
     const [warning, setWarning] = useState(null);
 
     const sortedCountries = useMemo(
@@ -23,16 +24,22 @@ function TransferPlan({ isAuthor }) {
         [countries]
     );
 
-    const handleRes = (data) => {
-        updatePhoneAndAttempts(dispatch, data[0].phone, data[0].transfer_attempts);
-    };
-
     const currentCountry = sortedCountries.find(
         (country) => country.name === selectedCountry
     );
 
+    const handleWarning = () => {
+        let war = null;
+        if (attempts === 0) {
+            war = "You've exhausted your transfer requests";
+        } else if (attempts !== 3) {
+            war = `You have ${attempts} requests remaining for this month.`;
+        }
+        setWarning(war);
+    }
+
     const sendReq = (newNumber) => {
-        let transferUrl = 'https://nbxe0yejq7.execute-api.eu-north-1.amazonaws.com/dev/';
+        let transferUrl = 'https://nbxe0yejq7.execute-api.eu-north-1.amazonaws.com/dev';
         const headers = {
             "Content-Type": "application/json",
         };
@@ -55,7 +62,7 @@ function TransferPlan({ isAuthor }) {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
-                    handleRes(res.data.userData);
+                    replaceDataObject(dispatch, res.data.userData)
                 }
             })
             .catch((error) => {
@@ -64,21 +71,19 @@ function TransferPlan({ isAuthor }) {
     };
 
     useEffect(() => {
-        let war = null;
-        if (controller.credentials.data[0].transfer_attempts === 0) {
-            war = "You've exhausted your transfer requests";
-        } else if (controller.credentials.data[0].transfer_attempts !== 3) {
-            war = `You have ${controller.credentials.data[0].transfer_attempts} requests remaining for this month.`;
-        }
-        setWarning(war);
-    }, []);
+        setAttempts(controller.credentials.data[controller.profile].transfer_attempts);
+        handleWarning();
+    }, [controller.credentials.data, controller.profile]);
+
 
     const handleTransfer = () => {
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
         setPhoneNumber("")
         setSelectedCountry(countries[0].name)
-        sendReq(fullNumber);
+        if (attempts > 0 && fullNumber !== "" && phoneNumber !== "") {
+            sendReq(fullNumber);
+        }
     };
 
 
@@ -148,6 +153,7 @@ function TransferPlan({ isAuthor }) {
                         </div>
                         <Button
                             variant="filled"
+                            disabled={attempts === 0 ? true : false}
                             className="bg-[#009a88] !overflow-visible"
                             onClick={handleTransfer}
                         >

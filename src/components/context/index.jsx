@@ -36,13 +36,18 @@ export function reducer(state, action) {
       newState = { ...state, profile: action.value };
       break;
 
-    case "UPDATE_PHONE_AND_ATTEMPTS":
+    case "REPLACE_DATA_OBJECT":
+      if (!state.credentials || !state.credentials.data) {
+        throw new Error("Credentials or data is not initialized");
+      }
+
       newState = {
         ...state,
         credentials: {
           ...state.credentials,
-          phone: action.payload.phone,
-          transfer_attempts: action.payload.transfer_attempts,
+          data: state.credentials.data.map((item, index) =>
+            index === state.profile ? action.value : item
+          ),
         },
       };
       break;
@@ -77,7 +82,10 @@ export function PrimeSenderControllerProvider({ children }) {
     transparentNavbar: true,
     fixedNavbar: true,
     openConfigurator: false,
-    credentials: null,
+    credentials: {
+      cred: "",
+      data: [],
+    },
     profile: 0
   };
 
@@ -85,6 +93,11 @@ export function PrimeSenderControllerProvider({ children }) {
   const initialState = savedState || defaultState;
 
   const [controller, dispatch] = React.useReducer(reducer, initialState);
+
+  React.useEffect(() => {
+    localStorage.setItem("appState", JSON.stringify(controller));
+  }, [controller]);
+
   const value = React.useMemo(
     () => [controller, dispatch],
     [controller, dispatch]
@@ -125,15 +138,12 @@ export const setTransparentNavbar = (dispatch, value) =>
   dispatch({ type: "TRANSPARENT_NAVBAR", value });
 export const setFixedNavbar = (dispatch, value) =>
   dispatch({ type: "FIXED_NAVBAR", value });
-export const updatePhoneAndAttempts = (dispatch, phone, transfer_attempts) =>
-  dispatch({
-    type: "UPDATE_PHONE_AND_ATTEMPTS",
-    payload: { phone, transfer_attempts },
-  });
 export const setOpenConfigurator = (dispatch, value) =>
   dispatch({ type: "OPEN_CONFIGURATOR", value });
 export const setCredentials = (dispatch, value) =>
   dispatch({ type: "SET_CREDENTIALS", value });
+export const replaceDataObject = (dispatch, value) =>
+  dispatch({ type: "REPLACE_DATA_OBJECT", value });
 export const setProfile = (dispatch, value) =>
   dispatch({ type: "SET_PROFILE", value });
 export const clearCredentials = (dispatch) =>

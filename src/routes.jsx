@@ -33,7 +33,6 @@ export const routes = [
     ],
   },
   {
-    title: "auth pages",
     layout: "dashboard",
     pages: [
       {

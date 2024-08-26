@@ -19,20 +19,13 @@ export function Profile() {
 
   const navigate = useNavigate();
 
-  const phoneNumbers = [
-    { countryCode: "+1", number: "1234567890" },
-    { countryCode: "+44", number: "7894561230" },
-    { countryCode: "+91", number: "9023970601" },
-    { countryCode: "+61", number: "4561237890" },
-  ];
-
   useEffect(() => {
     if (!controller.credentials) {
       navigate("/login")
     }
     else {
       setCred(jwtDecode(controller.credentials.cred))
-      setData(controller.credentials.data[0]);
+      setData(controller.credentials.data[controller.profile]);
     }
   }, [controller.credentials, dispatch]);
 
@@ -87,10 +80,10 @@ export function Profile() {
               />
             </div>
           </div>
-          <TransferPlan isAuthor={true} />
+          <TransferPlan isAuthor={data.parent_email === "" || data.email === data.parent_email ? true : false} />
           {
             data.parent_email !== "" &&
-            <MultipleTransferHandler phoneNumbers={phoneNumbers} />
+            <MultipleTransferHandler />
           }
         </CardBody>
       </Card>
