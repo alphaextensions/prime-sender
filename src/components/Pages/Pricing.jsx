@@ -202,7 +202,7 @@ const Pricing = () => {
           </div>
           <div className="pricing-popup-btn">
             <button onClick={handlePopupGaButtonClick}>{showButton(true, popupPlan)}</button>
-            <a href={whatsappRedirectUrl} target="_blank" className="multiple-accounts-btn">Purchase for multiple users</a>
+            <a href={'/pricing/multiple-account'} className="multiple-accounts-btn">Purchase for multiple users</a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
@@ -427,7 +427,8 @@ const Pricing = () => {
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
               {!loading && countrySwitchComponent()}
-              <div className="pricing-slider">
+              <div className="pricing-slider top-pricing-slider">
+                {isMultipleAccountPage && <div className="pricing-slider-overlay"></div>}
                 <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} planPeriod={planPeriod} />
               </div>
             </div>

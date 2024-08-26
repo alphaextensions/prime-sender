@@ -13,7 +13,7 @@ const validateUserEmail = (email) => {
 	return pattern.test(email);
 }
 
-const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler }) => {
+const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers }) => {
 	const [countryCode, setCountryCode] = useState('91');
 
 	const handleNumberChange = (e) => {
@@ -40,7 +40,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 					value={countryCode}
 					onChange={code => handleCountryCodeChange({ code })}
 				/>
-				<input type="number" value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
+				<input type="number" className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
 				{
 					value > 2 &&
 					<div className='number_input_remov_button' onClick={() => valueChangeHandler(value - 1, index)}>
@@ -58,6 +58,8 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const [showNumbersList, setShowNumbersList] = useState(false);
 	const [numbersAdded, setNumbersAdded] = useState(false);
 	const [emailInputError, setEmailInputError] = useState(false);
+	const [numberInputError, setNumberInputError] = useState(false);
+	const [inputErrorNumbers, setInputErrorNumbers] = useState([]);
 
 	const valueChangeHandler = (val, ind) => {
 		if (val < 2) {
@@ -120,7 +122,6 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	}
 
 	const validateUserData = () => {
-		console.log(phoneNumbers);
 		// validate user email
 		if (!userEmail || userEmail == '' || !validateUserEmail(userEmail)) {
 			setEmailInputError(true);
@@ -137,18 +138,32 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			return false;
 		}
 
-		// check for numbers
-		for (let i = 0; i < phoneNumbers.length; i++) {
-			if (!phoneNumbers[i] || phoneNumbers[i] == '') {
-				toast("Please enter a valid phone number", { theme: 'colored', type: 'error', autoClose: 3000 });
-				return false;
-			}
-			else if (phoneNumbers[i].split('-')[1] == '') {
-				toast("Please enter a valid phone number", { theme: 'colored', type: 'error', autoClose: 3000 });
-				return false;
+		// validate user phone number
+		let isInputErrorPresent = false, errorNumbers = [];
+		for(let i=0; i<phoneNumbers.length; i++) {
+			if(!phoneNumbers[i] || phoneNumbers[i]=='') {
+				isInputErrorPresent = true;
+				setNumberInputError(true);
+				errorNumbers.push(i);
+			} else if(phoneNumbers[i].split('-')[1]=='') {
+				isInputErrorPresent = true;
+				setNumberInputError(true);
+				errorNumbers.push(i);
 			}
 		}
-
+		setInputErrorNumbers(errorNumbers);
+		if(isInputErrorPresent) {
+			toast("Please enter a valid phone number", {theme: 'colored', type:'error', autoClose:3000 });
+			// scroll to the first number with error
+			let firstErrorInput = document.querySelectorAll('.mult_number_input')[errorNumbers[0]];
+			if(firstErrorInput) {
+				firstErrorInput.scrollIntoView({behavior:"smooth", block:"center"});
+			}
+			setTimeout(() => {
+				setNumberInputError(false);
+			}, 3000);
+		}
+		if(isInputErrorPresent) return false;
 		return true;
 	}
 
@@ -283,6 +298,8 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 												key={index}
 												value={value}
 												valueChangeHandler={valueChangeHandler}
+												numberInputError={numberInputError}
+												inputErrorNumbers={inputErrorNumbers}
 											/>
 										})
 									}
