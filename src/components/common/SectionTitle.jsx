@@ -1,5 +1,5 @@
 import React from "react";
-import '../../styles/Common/sectionTitle.css'
+import '../../styles/common/sectionTitle.css'
 
 const SectionTitle = ({ id, gif, title, subtitle, white }) => {
   const titleColor = (white) ? "#f5f5f5" : "#4b4b4b";

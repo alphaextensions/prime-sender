@@ -139,6 +139,11 @@
 	justify-content: space-between;
 }
 
+.number_component_transition {
+	transform: translateX(-100%);
+	transition: all 0.5s ease-in-out;
+}
+
 .number_component_number {
 	display: flex;
 	justify-content: center;
@@ -216,7 +221,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-weight: 600;
 	font-size: 17px;
 	color: #009a88;
 	margin-bottom: 10px;
@@ -245,6 +249,8 @@
 	justify-content: center;
 	align-items: center;
 	font-family: 'PT Sans Caption' !important;
+	font-size: 16px;
+	white-space: nowrap;
 }
 
 .mult_popup_buy_button svg {

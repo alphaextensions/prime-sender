@@ -59,7 +59,7 @@
   place-items: center;
 }
 .pricing-popup-header h1{
-  font-size: 27px;
+  font-size: 25px;
   font-weight: 400;
   color: var(--color-primary1);
   margin-left: 15px;
@@ -129,6 +129,7 @@
   position: absolute;
   top: 0%;
   left: 23%;
+  color: var(--color-black);
 }
 .pricing-popup-content .annual-price{
   position: absolute;
@@ -170,6 +171,7 @@
   font-size: 20px;
   color: var(--color-white);
   transition: 0.3s;
+  font-family: 'PT Sans Caption', sans-serif;
 }
 .pricing-popup-btn button:hover{
   background: transparent;
@@ -803,10 +805,23 @@
   position: absolute;
     top: 20px;
     left: 0;
-    height: 100%;
+    height: 97%;
     width: 100%;
     z-index: 1000000;
-    transform: bl;
+    backdrop-filter: blur(5px);
+}
+
+.top-pricing-slider {
+  position: relative;
+}
+
+.pricing-slider-overlay {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 150%;
+    width: 100%;
+    z-index: 1000000;
     backdrop-filter: blur(5px);
 }
 

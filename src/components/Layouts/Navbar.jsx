@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { MdFileDownload, MdClose, MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
-import DownloadBtn from '../Common/DownloadBtn'
+import DownloadBtn from '../common/DownloadBtn'
 import ReactGA from "react-ga4";
 
 function NavLinks({ onClick }) {

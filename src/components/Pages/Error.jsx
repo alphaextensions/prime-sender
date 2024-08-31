@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../styles/Error/error.css'
 import {NavLink} from 'react-router-dom'
-import HelmetHeader from "../Common/HelmetHeader";
+import HelmetHeader from "../common/HelmetHeader";
 
 const Error = () => {
   return (

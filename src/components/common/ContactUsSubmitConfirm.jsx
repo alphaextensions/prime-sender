@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/Common/contactUsSubmitConfirm.css'
+import '../../styles/common/contactUsSubmitConfirm.css'
 import {useNavigate} from 'react-router'
 import ReactGA from 'react-ga4'
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Common/slider.css'
+import '../../styles/common/slider.css'
 
 export default function Slider({ onTextHeader, offTextHeader, onTextValue, offTextValue, setValue, planPeriod ,style }) {
   return (

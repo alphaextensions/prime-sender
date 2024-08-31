@@ -1,5 +1,5 @@
-import SectionTitle from '../Common/SectionTitle';
-import HelmetHeader from "../Common/HelmetHeader";
+import SectionTitle from '../common/SectionTitle';
+import HelmetHeader from "../common/HelmetHeader";
 import '../../styles/HelpUsImprovePage/helpusimprove.css';
 import { promoText } from '../Data/seo-data';
 

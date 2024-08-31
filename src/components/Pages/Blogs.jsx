@@ -1,5 +1,5 @@
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from "../Common/HelmetHeader";
+import SectionTitle from "../common/SectionTitle";
+import HelmetHeader from "../common/HelmetHeader";
 import BlogCard from "../common/BlogCard";
 import '../../styles/blog/blog.css';
 import { BlogCardData } from "../Data/blogCard-data";

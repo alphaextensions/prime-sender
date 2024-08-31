@@ -1,5 +1,5 @@
 import '../../styles/SuccessPage/successPage.css'
-import HelmetHeader from '../Common/HelmetHeader';
+import HelmetHeader from '../common/HelmetHeader';
 import featuresList from '../Data/pricing-page-features-list';
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
