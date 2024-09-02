@@ -34,7 +34,7 @@ function Login() {
     if (data.message === "User not exist") {
       setIsPopupActive(true)
       setHeadline("User Not Found");
-      setSubHeadline("The email you entered does not match our records. Please check and try again.")
+      setSubHeadline("The email you selected does not match our records. Please check and try again.")
       setIsSubHeadLine(true)
     }
   }
@@ -114,9 +114,6 @@ function Login() {
                 Ensure you logged in the whatsapp web which account you want to
                 login{" "}
               </li>
-              {/* <button className="ghost" id="signUp">
-                Sign Up
-              </button> */}
             </div>
           </div>
         </div>

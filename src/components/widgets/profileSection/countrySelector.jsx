@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCountries } from "use-react-countries";
 import { Menu, MenuHandler, MenuList, MenuItem, Button } from "@material-tailwind/react";
 
-export function PhoneNumberSelect({ phoneNumbers }) {
+export function PhoneNumberSelect({ phoneNumbers, onSelectNumber }) {
   const { countries } = useCountries();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -12,6 +12,19 @@ export function PhoneNumberSelect({ phoneNumbers }) {
 
   const selectedNumber = phoneNumbers[selectedIndex];
   const selectedCountryInfo = getCountryInfo(selectedNumber.countryCode);
+
+  useEffect(() => {
+    if (phoneNumbers.length > 0 && onSelectNumber && selectedIndex === 0) {
+      onSelectNumber(phoneNumbers[0]); 
+    }
+  }, [phoneNumbers, onSelectNumber, selectedIndex]);
+
+  const handleSelectNumber = (index) => {
+    setSelectedIndex(index);
+    if (onSelectNumber) {
+      onSelectNumber(phoneNumbers[index]);
+    }
+  };
 
   return (
     <Menu placement="bottom-start">
@@ -41,7 +54,7 @@ export function PhoneNumberSelect({ phoneNumbers }) {
             <MenuItem
               key={`${countryCode}-${number}`}
               className="flex items-center gap-2 border-none"
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => handleSelectNumber(index)}
             >
               {countryInfo.flags ? (
                 <img
@@ -58,4 +71,3 @@ export function PhoneNumberSelect({ phoneNumbers }) {
     </Menu>
   );
 }
-

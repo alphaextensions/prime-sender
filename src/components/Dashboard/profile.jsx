@@ -27,7 +27,7 @@ export function Profile() {
       setCred(jwtDecode(controller.credentials.cred))
       setData(controller.credentials.data[controller.profile]);
     }
-  }, [controller.credentials, dispatch]);
+  }, [controller.profile,controller.credentials, dispatch]);
 
   return (
     <>

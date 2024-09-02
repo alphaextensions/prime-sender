@@ -70,12 +70,6 @@ function TransferPlan({ isAuthor }) {
             });
     };
 
-    useEffect(() => {
-        setAttempts(controller.credentials.data[controller.profile].transfer_attempts);
-        handleWarning();
-    }, [controller.credentials.data, controller.profile]);
-
-
     const handleTransfer = () => {
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
@@ -86,6 +80,10 @@ function TransferPlan({ isAuthor }) {
         }
     };
 
+    useEffect(() => {
+        setAttempts(controller.credentials.data[controller.profile].transfer_attempts);
+        handleWarning();
+    }, [controller.credentials.data, controller.profile]);
 
     return (
         <div className="mt-4 mb-4 px-4 flex-col flex justify-start ">

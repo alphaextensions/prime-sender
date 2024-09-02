@@ -10,13 +10,15 @@ import {
 } from "@material-tailwind/react";
 import { useCountries } from "use-react-countries";
 import { PhoneNumberSelect } from "./countrySelector";
-import { primeSenderController } from "../../context";
+import { primeSenderController, replaceDataObject } from "../../context";
 
 function MultipleTransferHandler() {
     const [controller, dispatch] = primeSenderController();
     const { countries } = useCountries();
     const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
+    const [selectedOldNumber, setSelectedOldNumber] = useState("")
     const [attempts, setAttempts] = useState(controller.credentials.data[controller.profile].transfer_attempts);
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [formattedPhoneNumbers, setFormattedPhoneNumbers] = useState(null);
 
     const getCountryByPhoneCode = (phoneCode) => {
@@ -24,7 +26,9 @@ function MultipleTransferHandler() {
     };
 
     const formatPhoneNumbers = (phoneNumbers) => {
-        const formatted = phoneNumbers.map(phoneNumber => {
+        const filteredPhoneNumbers = phoneNumbers.filter(phoneNumber => phoneNumber !== controller.credentials.data[controller.profile].phone);
+
+        const formatted = filteredPhoneNumbers.map(phoneNumber => {
             let countryCode, number;
             for (let i = 1; i <= 3; i++) {
                 countryCode = phoneNumber.slice(0, i);
@@ -36,6 +40,7 @@ function MultipleTransferHandler() {
             }
             return { countryCode: null, number: phoneNumber };
         });
+
         setFormattedPhoneNumbers(formatted);
     };
 
@@ -49,7 +54,7 @@ function MultipleTransferHandler() {
     );
 
     const getPhoneNumbers = () => {
-        let transferUrl = 'https://410yao624j.execute-api.eu-north-1.amazonaws.com/dev';
+        let url = 'https://410yao624j.execute-api.eu-north-1.amazonaws.com/dev';
         const headers = {
             "Content-Type": "application/json",
         };
@@ -58,7 +63,7 @@ function MultipleTransferHandler() {
             operation: "get-completed-transaction"
         });
 
-        fetch(transferUrl, {
+        fetch(url, {
             method: "POST",
             headers: headers,
             body: body,
@@ -80,9 +85,58 @@ function MultipleTransferHandler() {
             });
     };
 
+    const sendReq = (newNumber) => {
+        let transferUrl = 'https://nbxe0yejq7.execute-api.eu-north-1.amazonaws.com/dev';
+        const headers = {
+            "Content-Type": "application/json",
+        };
+        const body = JSON.stringify({
+            authToken: controller.credentials.cred,
+            oldNumber: selectedOldNumber,
+            newNumber: newNumber,
+            adminNumber: controller.credentials.data[controller.profile].phone,
+        });
+        fetch(transferUrl, {
+            method: "POST",
+            headers: headers,
+            body: body,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok " + response.statusText);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                let res = JSON.parse(data.body);
+                if (data.statusCode === 200) {
+                    replaceDataObject(dispatch, res.data.adminData)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    const handleSelectNumber = (phoneNumber) => {
+        const countryCode = phoneNumber.countryCode.replace('+', '');
+        const fullNumber = `${countryCode}${phoneNumber.number}`;
+        setSelectedOldNumber(fullNumber)
+    };
+
+    const handleTransfer = () => {
+        const countryCode = currentCountry.countryCallingCode.replace('+', '');
+        const fullNumber = `${countryCode}${phoneNumber}`;
+        setPhoneNumber("")
+        setSelectedCountry(countries[0].name)
+        if (attempts > 0 && phoneNumber !== "" && selectedOldNumber !== "") {
+            sendReq(fullNumber);
+        }
+    };
+
     useEffect(() => {
         getPhoneNumbers();
-    }, []);
+    }, [controller.credentials.data, controller.profile]);
 
     return (
         <div className="mt-8 mb-4 px-4 flex-col flex justify-start ">
@@ -95,7 +149,10 @@ function MultipleTransferHandler() {
             <div className="mb-4 mt-2 px-1 flex items-center w-max">
                 <div className="flex justify-center">
                     {formattedPhoneNumbers && formattedPhoneNumbers.length > 0 ? (
-                        <PhoneNumberSelect phoneNumbers={formattedPhoneNumbers} />
+                        <PhoneNumberSelect
+                            phoneNumbers={formattedPhoneNumbers}
+                            onSelectNumber={handleSelectNumber}
+                        />
                     ) : (
                         <p>Loading phone numbers...</p>
                     )}
@@ -141,6 +198,8 @@ function MultipleTransferHandler() {
                     <Input
                         type="tel"
                         placeholder="Mobile Number"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                         className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900"
                         labelProps={{
                             className: "before:content-none after:content-none",
@@ -155,6 +214,7 @@ function MultipleTransferHandler() {
                     variant="filled"
                     disabled={attempts === 0 ? true : false}
                     className="bg-[#009a88] !overflow-visible"
+                    onClick={handleTransfer}
                 >
                     Transfer
                 </Button>
