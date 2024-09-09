@@ -15,6 +15,7 @@ const validateUserEmail = (email) => {
 
 const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers }) => {
 	const [countryCode, setCountryCode] = useState('91');
+	const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
 
 	const handleNumberChange = (e) => {
 		let temp = [...phoneNumbers];
@@ -30,7 +31,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 		setPhoneNumbers(temp);
 	}
 
-	return <div className='number_component_container'>
+	return <div className={`number_component_container ${removeNumberIndex==index ?'slide_out':''}`}>
 		<div className='number_component_number'>
 			<div className='number_component_line'></div>
 			<div className='number_component_circle'>{index + 1}</div>
@@ -43,7 +44,16 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 				<input type="number" className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
 				{
 					value > 2 &&
-					<div className='number_input_remov_button' onClick={() => valueChangeHandler(value - 1, index)}>
+					<div 
+						className='number_input_remov_button' 
+						onClick={() => {
+							setRemoveNumberIndex(index);
+							setTimeout(() => {
+								setRemoveNumberIndex(null);
+								valueChangeHandler(value - 1, index)
+							}, 500)
+						}}
+					>
 						<p>Remove</p>
 					</div>
 				}
@@ -266,7 +276,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								<div className="mult_account_image">
 									<img src="images/logo-large.png" alt="" />
 								</div>
-								<div className="mult_account_logo_text">Advance Annual</div>
+								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} Annual</div>
 							</div>
 						</div>
 						{/* popup body */}
@@ -318,6 +328,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 									{isPageGenerating ? <Oval /> : <a>Buy Now</a>}
 								</button>
 							</div>
+							{isPageGenerating && <div className='please_wait_text'>Please wait...</div>}
 						</div>
 					</>
 				}

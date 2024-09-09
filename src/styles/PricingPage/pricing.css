@@ -825,6 +825,114 @@
     backdrop-filter: blur(5px);
 }
 
+.pay_via_upi_text {
+  font-size: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-dark-grey);
+}
+
+.pay_via_upi_text span {
+  color: var(--color-primary1);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pay_via_bank_text {
+  font-size: 15px;
+  width: 100%;
+  text-align: center;
+  color: var(--color-dark-grey);
+}
+
+.pay_via_bank_text a {
+  color: var(--color-primary1);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.upi_popoup_container {
+  position: fixed;
+  z-index: 100000000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-white);
+  border: 3px solid var(--color-primary1);
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 10px;
+}
+
+.upi_popup_title {
+  display: flex;
+  font-size: 25px;
+  color: var(--color-primary1);
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.ui_popup_title_img{
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui_popup_title_img img {
+  width: 100%;
+}
+
+.upi_popup_price {
+  text-align: center;
+  font-size: 25px;
+  color: var(--color-primary1);
+  font-weight: bold;
+  font-family: 'PT Sans Caption' !important;
+}
+
+.upi_monthly_price {
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--color-dark-grey);
+  margin-left: 5px;
+}
+
+.upi_billed_text {
+  font-size: 16px;
+  color: var(--color-dark-grey);
+  font-weight: normal;
+}
+
+.upi_buy_button {
+  background: var(--color-primary1);
+  border: none;
+  padding: 10px;
+  color: var(--color-white);
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'P T Sans Caption', sans-serif;
+  text-align: center;
+}
+
+.upi_last_text {
+  font-size: 13px;
+  color: var(--color-dark-grey);
+}
+
 @media (max-width: 1280px) {
   .pricing_cards_container{
     grid-template-columns: 1fr 1fr 1fr;

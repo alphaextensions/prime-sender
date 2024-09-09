@@ -359,3 +359,23 @@
 .mult_popup_corss_section svg:hover {
 	color: #d6d3d3;
 }
+
+.please_wait_text {
+	color: var(--color-purple);
+	font-weight: bold;
+}
+
+.slide_out {
+    animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
