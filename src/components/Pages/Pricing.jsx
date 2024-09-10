@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../../styles/PricingPage/pricing.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
@@ -13,6 +13,49 @@ import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Dat
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features } from "../Data/pricing-data";
+
+const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
+  const overlayRef = useRef(null);
+  let whatsappRedirectUrl = "https://web.whatsapp.com/send?phone=917058067789&text="
+  let whatsappText = plan_type == 'Basic'?'Hi, I want to buy Basic Annual via UPI':'Hi, I want to buy Advance Annual via UPI';
+  whatsappRedirectUrl+=encodeURIComponent(whatsappText);
+  useEffect(() => {
+    if (overlayRef.current) {
+      overlayRef.current.addEventListener('click', () => {
+        setShowUPIPopup(false);
+      })
+    }
+
+    return () => {
+      if (overlayRef.current) {
+        overlayRef.current.removeEventListener('click', () => {
+          setShowUPIPopup(false);
+        })
+      }
+    }
+  }, [])
+  return <>
+    <div className="pricing-popup-overlay" ref={overlayRef}></div>
+    <div className="upi_popoup_container">
+      <div className="upi_popup_title">
+        <div className="ui_popup_title_img">
+          <img src="/images/logo-large.png" alt="" />
+        </div>
+        <p className="ui_popup_title_title">{plan_type=='Advance'?'Advance':'Basic'} Annual</p>
+      </div>
+      <div className="upi_popup_price rupee">
+        <span className="upi_annual_price"><span className="rupee">{currency}</span>{price}</span>
+        <span className="upi_monthly_price">(<span className="rupee">{currency}</span>{monthly_price}/month)</span>
+        <br />
+        <span className="upi_billed_text">Billed for 12 months' service</span>
+      </div>
+        <a className="upi_buy_button" href={whatsappRedirectUrl} target="_blank">
+          Click here to buy
+        </a>
+      <span className="upi_last_text">*UPI transfer only available for Annual Plans</span>
+    </div>
+  </>
+}
 
 
 const Pricing = () => {
@@ -50,6 +93,7 @@ const Pricing = () => {
   const [phoneNumbers, setPhoneNumbers] = useState(JSON.parse(localStorage.getItem("phoneNumbers"))  || ['', '']);
   const [isMultipleAccountPage, setIsMultipleAccountPage] = useState(false);
   const [isPricingCardHovered, setIsPricingCardHovered] = useState("");
+  const [showUPIPopup, setShowUPIPopup] = useState({ show: false, type: 'Basic', price: '', monthly_price: '', currency: '' });
   
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
@@ -285,8 +329,24 @@ const Pricing = () => {
     </>;
   }
 
+  const getWhatsappLink = (type, plan_type) => {
+    let whatsappRedirectUrl = "https://web.whatsapp.com/send?phone=917058067789&text="
+    let whatsappText = '';
+    if (type == 'bank') {
+      whatsappText = plan_type == 'Basic' ? 'Hi, I want to buy Basic Annual via Bank Transfer or PayPal' : 'Hi, I want to buy Advance Annual via Bank Transfer or PayPal';
+      whatsappRedirectUrl += encodeURIComponent(whatsappText);
+    }
+    return whatsappRedirectUrl;
+  }
+
     function checkIfMultipleAccountPage() {
         const url = window.location.href;
+        const params = new URLSearchParams(window.location.search);
+        const numberOfAccounts = params.get('numAccounts');
+        if(numberOfAccounts!=null && numberOfAccounts!=undefined && numberOfAccounts=='25'){
+          setNumAccounts(26);
+          localStorage.setItem('numAccounts', JSON.stringify(26));
+        }
         if (url.includes('multiple-account')) {
             setIsMultipleAccountPage(true);
         }
@@ -419,6 +479,14 @@ const Pricing = () => {
           multCountry = {currentCountry}
         />
       }
+      {showUPIPopup.show && 
+        <UPIPopup 
+          plan_type={showUPIPopup.type} 
+          price={showUPIPopup.price} 
+          monthly_price={showUPIPopup.monthly_price} 
+          currency={showUPIPopup.currency} 
+          setShowUPIPopup={setShowUPIPopup}
+        />}
       <div className="pricing_container">
         {promoTextComponent}
         {popupLastPlan && generatePricingPopup()}
@@ -533,7 +601,14 @@ const Pricing = () => {
                   {showButton(false, 'basic')}
                 </button>
               </div>
-
+              {
+                currentCountry == 'india' && planPeriod == 'annually' && 
+                <div className="pay_via_upi_text">Want to pay via UPI? <span onClick={() => setShowUPIPopup({ show: true, type: 'Basic', price: currentPrice.basic_plan.final, monthly_price: currentPrice.basic_plan.monthly_final, currency: currentPrice.currency_symbol })}>Click here</span></div>
+              }
+              {
+                currentCountry !='india' && planPeriod == 'annually' &&
+                <div className="pay_via_bank_text">Bank Transfer and PayPal also available - <a href={getWhatsappLink("bank", "Basic")} target="_blank">Click here</a></div>
+              }
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
@@ -593,7 +668,14 @@ const Pricing = () => {
                   {showButton(false, 'advance')}
                 </button>
               </div>
-
+              {
+                currentCountry == 'india' && planPeriod == 'annually' &&
+                <div className="pay_via_upi_text">Want to pay via UPI? <span onClick={() => setShowUPIPopup({ show: true, type: 'Advance', price: currentPrice.advance_plan.final, monthly_price: currentPrice.advance_plan.monthly_final, currency: currentPrice.currency_symbol })}>Click here</span></div>
+              }
+              {
+                currentCountry !='india' && planPeriod == 'annually' &&
+                <div className="pay_via_bank_text">Bank Transfer and PayPal also available - <a href={getWhatsappLink("bank", "Advance")} target="_blank">Click here</a></div>
+              }
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
@@ -686,7 +768,7 @@ const Pricing = () => {
               {/* price section */}
               {
               priceCalculatorLoader ? 
-              <div style={{width: "100%", display:"flex", justifyContent:"center", alignItems:"center"}}>
+              <div style={{width: "100%", display:"flex", flexDirection:'column', justifyContent:"center", alignItems:"center"}} className={`${pricingCalculatorPeriod=='monthly'?'marginBottom10':'marginBottom30'}`}>
               <Oval
                 visible={true}
                 height="50"
@@ -695,8 +777,18 @@ const Pricing = () => {
                 ariaLabel="oval-loading"
                 wrapperStyle={{}}
                 wrapperClass=""
-              /></div> : 
-                numAccounts > 1 ?
+                />
+                    {
+                      pricingCalculatorPeriod == 'annually' &&
+                      <div className="pricing_card_heading" style={{visibility:"hidden"}}>
+                        <span>Billed&nbsp;
+                          <span className={currentCountry === 'india' ? 'rupee' : ''}>{multAccountPrice.currency}</span>
+                          {Math.round(multAccountPrice.totalPrice / numAccounts)} for 12 months' service per user
+                        </span>
+                      </div>
+                    }
+                  </div> :
+                  numAccounts > 1 ?
                   (
                     <>
                       <div className="pricing_card_price">
