@@ -18,6 +18,8 @@ import FAQs from './components/sections/FAQs';
 import HowToUse from './components/Pages/HowToUse';
 import MainFeatures from './components/sections/MainFeatures';
 import Success from './components/Pages/Success';
+import Checkout from './components/Pages/Checkout';
+import { CheckoutProvider } from './components/context/CheckoutContext';
 
 const App = () => {
   const [showWebsite, setShowWebsite] = useState(true);
@@ -43,29 +45,33 @@ const App = () => {
 
   return (
     <>
-    { showWebsite ? <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/pricing" element={<Pricing key="pricing"/>} />
-        <Route path="/feature-request" element={<RequestFeature />} />
-        <Route path="/help-us-improve" element={<HelpUsImprove />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogs/:id" element={<BlogPage />} />
-        <Route path="/faqs" element={<FAQs/>} />
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/terms-of-service" element={<TermsOfUse />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/basic-success" element={<Success plan="basic" />} />
-        <Route path="/advance-success" element={<Success plan="advance" />} />
-        <Route path="/how-to-use" element={<HowToUse />} />
-        <Route path="/main-features" element={<MainFeatures isSlider='false' />} />
-        <Route path="/pricing/multiple-account" element={<Pricing key="multiple-account" />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer />
-      <ChatSupport />
-    </Router> : '' }
+      {showWebsite ?
+        <CheckoutProvider>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/pricing" element={<Pricing key="pricing" />} />
+              <Route path="/feature-request" element={<RequestFeature />} />
+              <Route path="/help-us-improve" element={<HelpUsImprove />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blogs/:id" element={<BlogPage />} />
+              <Route path="/faqs" element={<FAQs />} />
+              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/terms-of-service" element={<TermsOfUse />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/basic-success" element={<Success plan="basic" />} />
+              <Route path="/advance-success" element={<Success plan="advance" />} />
+              <Route path="/how-to-use" element={<HowToUse />} />
+              <Route path="/main-features" element={<MainFeatures isSlider='false' />} />
+              <Route path="/pricing/multiple-account" element={<Pricing key="multiple-account" />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="*" element={<Error />} />
+            </Routes>
+            <Footer />
+            <ChatSupport />
+          </Router>
+        </CheckoutProvider> : ''}
     </>
   );
 };
