@@ -42,10 +42,6 @@ const CheckoutForm = () => {
     if (error) {
       console.log(error.message);
     }
-
-    if(paymentIntent.status == 'succeeded'){
-      alert("Payment successfull");
-    }
   };
 
   const paymentElementOptions = {
