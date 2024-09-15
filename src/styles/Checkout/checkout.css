@@ -126,4 +126,20 @@
 	/* font-weight: bold; */
 	font-size: 20px;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid var(--color-primary1);
+}
+
+.checkout_payment_button:hover {
+	border: 2px solid var(--color-primary1);
+	background-color: #fff;
+	color: var(--color-primary1);
+}
+
+.checkout_payment_button svg {
+	width: 22px;
+	height: 22px;
+	stroke: #fff;
 }
