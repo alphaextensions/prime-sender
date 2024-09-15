@@ -20,8 +20,6 @@ const CheckoutForm = () => {
     if (!clientSecret) {
       return;
     }
-    // stripe.retrievePaymentIntent(clientSecret).then( async ({ paymentIntent }) => {
-    // });
   }, [stripe, elements]);
 
   const handleSubmit = async (e) => {
