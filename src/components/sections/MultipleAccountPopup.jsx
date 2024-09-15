@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../styles/PricingPage/multipleAccountPopup.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -6,7 +6,8 @@ import { Oval } from 'react-loader-spinner';
 import { IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useNavigate } from 'react-router';
+import { CheckoutContext } from '../context/CheckoutContext';
 
 const validateUserEmail = (email) => {
 	const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -62,7 +63,9 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 	</div>
 }
 const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry }) => {
+	const { setCheckoutData } = useContext(CheckoutContext);
 	const numbersContainerRef = useRef(null);
+	const navigate = useNavigate();
 	const [isPageGenerating, setIsPageGenerating] = useState(false);
 	const [userEmail, setUserEmail] = useState(JSON.parse(localStorage.getItem("userEmail")) || '');
 	const [showNumbersList, setShowNumbersList] = useState(false);
@@ -123,7 +126,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			data = JSON.parse(data);
 			const body = JSON.parse(data.body);
 			setIsPageGenerating(false);
-			return body.data.stripe_page_url;
+			return body.data.client_secret;
 		} catch (error) {
 			setIsPageGenerating(false);
 			console.log("error from setting data in database ", error);
@@ -186,11 +189,20 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		plan_type = plan_type == 'basic' ? "Basic" : "Advance";
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
-		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} numbers.`
-		const stripe_page_url = await setDataInDatabase(productName, productDescription, country_currency);
-		if(stripe_page_url) {
-			window.open(stripe_page_url, '_blank');
+		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
+		const client_secret = await setDataInDatabase(productName, productDescription, country_currency);
+		const reqQuery = {
+			clientSecret: client_secret,
+			email: userEmail,
+			numbers: phoneNumbers,
+			currency: country_currency,
+			totalPrice: amount.totalPrice,
+			title: productDescription,
+			plan_type: plan_type
 		}
+		setCheckoutData(reqQuery);
+		navigate(`/checkout`);
+
 	}
 
 	const overlayRef = useRef(null);
