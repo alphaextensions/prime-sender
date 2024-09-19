@@ -1,0 +1,100 @@
+#google_translate_element {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 80px !important;
+  height: 35px !important;
+  overflow: hidden !important;
+  opacity: 0;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 100000000;
+  background-color: #fff;
+  border: 1px solid #009a88;
+  border-radius: 5px;
+  filter: drop-shadow(1px 4px 3px var(--color-dark-grey));
+}
+
+#google_translate_element select {
+  font-size: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  width: 80px;
+  height: 35px;
+}
+
+.goog-te-gadget {
+  height: 35px !important;
+}
+
+/* Hide unwanted google translate elements */
+#goog-gt-tt,
+.skiptranslate iframe,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-l4eHX-hSRGPd {
+  display: none !important;
+}
+
+/* Handle unwanted class added to Texts */
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {
+    all: unset !important;
+}
+
+.translate-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
+  cursor: default;
+  font-weight: 400;
+  transition: color 0.3s;
+  text-decoration: none;
+  padding: 2px;
+}
+
+.translate-container:hover {
+  color: var(--color-primary1);
+  /* border-bottom: 2.5px solid var(--color-primary1); */
+}
+
+.translate-container.active {
+  color: var(--color-primary1);
+  /* border-bottom: 3px solid var(--color-primary1); */
+  font-weight: 900;
+  position: relative;
+}
+
+.current-language {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1200px) {
+  #google_translate_element {
+    width: 75px !important;
+  }
+  #google_translate_element select,
+  .current-language {
+    font-size: 14px !important;
+  }
+  .translate-container {
+    margin-right: 10px;
+    gap: 7px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  #google_translate_element {
+    width: 70px !important;
+  }
+  #google_translate_element select,
+  .current-language {
+    font-size: 12px !important;
+  }
+  .translate-container {
+    margin-right: 5px;
+    gap: 5px;
+  }
+}

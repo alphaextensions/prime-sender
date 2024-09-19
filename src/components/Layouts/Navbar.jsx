@@ -4,6 +4,7 @@ import { MdFileDownload, MdClose, MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
 import DownloadBtn from '../common/DownloadBtn'
 import ReactGA from "react-ga4";
+import GoogleTranslate from '../common/GoogleTranslate';
 
 function NavLinks({ onClick }) {
   const location = useLocation();
@@ -21,30 +22,30 @@ function NavLinks({ onClick }) {
   return (
     <ul>
       {
-        location.pathname === '/' ? '' : 
-        <li>
-          <NavLink to='/' onClick={onClick} className='large-text'>
-            Home
-          </NavLink>
-        </li>
+        location.pathname === '/' ? '' :
+          <li>
+            <NavLink to='/' onClick={onClick} className='large-text notranslate'>
+              Home
+            </NavLink>
+          </li>
       }
       <li>
-        <NavLink to='/how-to-use' onClick={onClick} className='large-text'>
+        <NavLink to='/how-to-use' onClick={onClick} className='large-text notranslate'>
           How To Use
         </NavLink>
       </li>
       <li>
-        <NavLink to='/main-features' onClick={onClick} className='large-text' >
+        <NavLink to='/main-features' onClick={onClick} className='large-text notranslate' >
           Features
         </NavLink>
       </li>
       <li>
-        <NavLink to='/pricing' end onClick={onClick} className='large-text'>
+        <NavLink to='/pricing' end onClick={onClick} className='large-text notranslate'>
           Pricing
         </NavLink>
       </li>
       <li>
-        <NavLink to='/blogs' onClick={onClick} className='large-text'>
+        <NavLink to='/blogs' onClick={onClick} className='large-text notranslate'>
           Blogs
         </NavLink>
       </li>
@@ -127,6 +128,10 @@ function Navbar() {
         </NavLink>
 
         <div className='nav-links' >
+          <div className='google-translate-div'>
+            <GoogleTranslate />
+          </div>
+
           <div className={`nav-elements  ${showMenu && 'active'}`}>
             <NavLinks onClick={openPage} />
           </div>

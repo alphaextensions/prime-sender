@@ -19,7 +19,7 @@ const DownloadBtn = (props) => {
   return (
     <>
       <a
-        className="button-round download-btn btn"
+        className="button-round download-btn btn notranslate"
         href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia"
         target="_blank"
         onClick={handleDownloadBtnClick}
