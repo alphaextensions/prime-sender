@@ -288,7 +288,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								<div className="mult_account_image">
 									<img src="images/logo-large.png" alt="" />
 								</div>
-								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} Annual</div>
+								<div className="mult_account_logo_text notranslate">{plan_type=='basic'?'Basic':'Advance'} Annual</div>
 							</div>
 						</div>
 						{/* popup body */}
@@ -333,10 +333,10 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								}}>+ Add More</p>
 							</div>
 							<div className='mult_popup_button_section'>
-								<button className='mult_popup_buy_button mult_review_button' disabled={value<2} onClick={() => setShowNumbersList(true)}>
+								<button className='mult_popup_buy_button mult_review_button notranslate' disabled={value<2} onClick={() => setShowNumbersList(true)}>
 									<a>Show numbers</a>
 								</button>
-								<button className='mult_popup_buy_button' onClick={handleBuyPlan} disabled={isPageGenerating}>
+								<button className='mult_popup_buy_button notranslate' onClick={handleBuyPlan} disabled={isPageGenerating}>
 									{isPageGenerating ? <Oval /> : <a>Buy Now</a>}
 								</button>
 							</div>

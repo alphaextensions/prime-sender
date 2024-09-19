@@ -244,7 +244,7 @@ const Pricing = () => {
                 </div>
             }
           </div>
-          <div className="pricing-popup-btn">
+          <div className="pricing-popup-btn notranslate">
             <button onClick={handlePopupGaButtonClick}>{showButton(true, popupPlan)}</button>
             <a href={'/pricing/multiple-account'} className="multiple-accounts-btn">Purchase for multiple users</a>
           </div>
@@ -518,7 +518,7 @@ const Pricing = () => {
             <div className={`pricing_card ${isPricingCardHovered == "free" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("free")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-free.png" alt="Free plan icon" />
-                <p>Free</p>
+                <p className="notranslate">Free</p>
               </div>
               <div className="pricing_card_price">
                 <div className="free_pricing_div">
@@ -540,7 +540,7 @@ const Pricing = () => {
                   <a
                     href='https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia?hl=en'
                     target="_blank"
-                    className="buy_button"
+                    className="buy_button notranslate"
                     onClick={() => handleGaButtonClick("free")}>
                     Try Now
                   </a>
@@ -574,7 +574,7 @@ const Pricing = () => {
             <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-basic.png" alt="Basic plan icon" />
-                <p>Basic</p>
+                <p className="notranslate">Basic</p>
               </div>
               <div className="pricing_card_price">
                 <div className="pricing_cut_price">
@@ -596,7 +596,7 @@ const Pricing = () => {
                   </span>
                 </div>
               }
-              <div className="pricing_card_button">
+              <div className="pricing_card_button notranslate">
                 <button onClick={() => handleGaButtonClick("basic")}>
                   {showButton(false, 'basic')}
                 </button>
@@ -641,7 +641,7 @@ const Pricing = () => {
               <img className="recommended_tag" src="/images/recommended_tag.png" alt="Recommended tag" />
               <div className="pricing_card_type">
                 <img src="/images/signal-advance.png" alt="Advance plan icon" />
-                <p>Advance</p>
+                <p className="notranslate">Advance</p>
               </div>
               <div className="pricing_card_price">
                 <div className="pricing_cut_price">
@@ -663,7 +663,7 @@ const Pricing = () => {
                   </span>
                 </div>
               }
-              <div className="pricing_card_button">
+              <div className="pricing_card_button notranslate">
                 <button onClick={() => handleGaButtonClick("advance")}>
                   {showButton(false, 'advance')}
                 </button>
@@ -731,12 +731,12 @@ const Pricing = () => {
                 <div className="pricing_country background-royal">
                   <div className="pricing_country_switch">
                     <div className={`country_switch ${pricingCalculatorPlan == 'basic' && 'active_country_class'}`} onClick={()=> setPricingCalculatorPlan("basic")}>
-                      <p className="country_current_switch plan_switch">
+                      <p className="country_current_switch plan_switch notranslate">
                         Basic
                       </p>
                     </div>
                     <div className={`country_switch ${pricingCalculatorPlan == 'advance' && 'active_country_class'}`} onClick={()=> setPricingCalculatorPlan("advance")}>
-                      <p className="country_current_switch plan_switch">
+                      <p className="country_current_switch plan_switch notranslate">
                         Advance
                       </p>
                     </div>
@@ -820,7 +820,7 @@ const Pricing = () => {
               }
               <div className="pricing_card_button background-royal">
                 <button onClick={() => handleGaButtonClick("multiple_user")}>
-                  <a target="_blank" className="buy_button">Buy</a>
+                  <a target="_blank" className="buy_button notranslate">Buy</a>
                 </button>
               </div>
               <div className="pricing_calculator_support">

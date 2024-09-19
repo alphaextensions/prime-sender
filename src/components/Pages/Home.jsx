@@ -108,7 +108,7 @@ const Home = () => {
             <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
             <div className="home-btns">
               <DownloadBtn />
-              <Link to="/how-to-use" onClick={() => { HowToUseButtonClickHandle() }} className="howtousebtn button-round large-text btn">
+              <Link to="/how-to-use" onClick={() => { HowToUseButtonClickHandle() }} className="howtousebtn button-round large-text btn notranslate">
                 How To Use
               </Link>
             </div>
