@@ -4,7 +4,7 @@ import { BsTranslate } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
 const GoogleTranslate = () => {
-  const [currentLang, setCurrentLang] = useState(localStorage.getItem('prime-sender-langauge') || 'en');
+  const [currentLang, setCurrentLang] = useState('en');
   const intervalRef = useRef(null);
 
   const getCountryLanguage = async () => {
@@ -26,47 +26,49 @@ const GoogleTranslate = () => {
     }
   }
 
+  const changeCurrentLangauge = (newLang) => {
+    const selectElement = document.querySelector('select.goog-te-combo');
+    if (selectElement) {
+      selectElement.value = newLang;
+      selectElement.dispatchEvent(new Event('change'));
+    }
+  }
+
   useEffect(() => {
     intervalRef.current = setInterval(async () => {
       const selectElement = document.querySelector('select.goog-te-combo');
-      console.log("START INTERVAL ", intervalRef.current);
 
       if (selectElement && intervalRef.current) {
         clearInterval(intervalRef.current);
-        console.log("STOP INTERVAL", intervalRef.current);
 
         // Add event listener to update the `currentLang` when user selects a new one
         selectElement.addEventListener('change', () => {
-          const selectedLang = selectElement.options[selectElement.selectedIndex].value;
-          if (selectedLang !== currentLang) {
-            console.log("LANG CHANGED", selectedLang);
+          const selectedLang = selectElement.value;
+          if (selectedLang && selectedLang !== '') {
+            // console.log("Language changes from [" + currentLang + "] to [" + selectedLang + "]");
             setCurrentLang(selectedLang);
             localStorage.setItem('prime-sender-language', selectedLang);
           }
         });
 
-
-        let prevLang = localStorage.getItem('prime-sender-langauge');
-        if (!prevLang) {
-          // Set country language
+        let prevLang = localStorage.getItem('prime-sender-language');
+        if (prevLang) {
+          // If prevLang exists set that language
+          console.log("PREV LANGUAGE :: ", prevLang);
+          changeCurrentLangauge(prevLang);
+        }
+        else {
+          // Otherwise set country language
           let countryLang = await getCountryLanguage();
+          // console.log("Country language = ", countryLang);
 
-          // Check if the `countryLang` exists as an option in the Google Translate dropdown
           const optionExists = Array.from(selectElement.options).some(
             (option) => option.value === countryLang
           );
 
-          // If the langCode exists, change the selected language; otherwise, keep English
           if (optionExists && countryLang !== currentLang) {
-            // setCurrentLang(countryLang);
-            // localStorage.setItem('prime-sender-language', countryLang);
-
-            selectElement.value = countryLang;
-            selectElement.dispatchEvent(new Event('change'));
+            changeCurrentLangauge(countryLang);
           }
-        } else {
-          selectElement.value = prevLang;
-          selectElement.dispatchEvent(new Event('change'));
         }
       }
     }, 1000);
