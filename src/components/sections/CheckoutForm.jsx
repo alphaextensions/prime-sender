@@ -3,7 +3,8 @@ import {
   PaymentElement,
   useStripe,
   useElements,
-  AddressElement
+  AddressElement,
+  LinkAuthenticationElement
 } from "@stripe/react-stripe-js";
 import { CheckoutContext } from "../context/CheckoutContext";
 import { toast } from "react-toastify";
@@ -21,10 +22,15 @@ const CheckoutForm = () => {
     if (!stripe || !elements) {
       return;
     }
-    const clientSecret = new URLSearchParams(window.location.search).get("clientSecret");
-    if (!clientSecret) {
-      return;
-    }
+
+    const emailInputInterval = setInterval(() => {
+      const emailInputElement = document.querySelector("#link-authentication-element iframe");
+      if(emailInputElement) {
+        clearInterval(emailInputInterval);
+        emailInputElement.style.pointerEvents = "none";
+      }
+    }, 100);
+    return () => clearInterval(emailInputInterval);
   }, [stripe, elements]);
 
   const handleSubmit = async (e) => {
@@ -40,7 +46,6 @@ const CheckoutForm = () => {
       confirmParams: {
         return_url: `http://prime-sender.com/${checkoutData.plan_type.toLowerCase()}-success`,
       },
-      redirect: "if_required",
     });
 
     if (error) {
@@ -61,6 +66,11 @@ const CheckoutForm = () => {
   return (
     <form onSubmit={handleSubmit} className="stripe_payment_form">
       <ToastContainer style={{zIndex: "100000000"}} />
+      <LinkAuthenticationElement
+        id="link-authentication-element"
+        options={{ defaultValues: { email: checkoutData.email } } }
+        disabled
+      />
       <PaymentElement options={paymentElementOptions} />
       <AddressElement options={{mode: 'billing'}} />
       <button className="checkout_payment_button">

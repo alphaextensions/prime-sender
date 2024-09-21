@@ -125,6 +125,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			let data = await response.text();
 			data = JSON.parse(data);
 			const body = JSON.parse(data.body);
+			if(body.data == null) {
+				setIsPageGenerating(false);
+				toast(body.message, { theme: 'colored', type: 'error', autoClose: 5000 });
+				return null;
+			}
 			setIsPageGenerating(false);
 			return body.data.client_secret;
 		} catch (error) {
@@ -191,6 +196,9 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		productName += ' ' + plan_type + ' ' + bodyDuration;
 		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
 		const client_secret = await setDataInDatabase(productName, productDescription, country_currency);
+		if(!client_secret){
+			return;
+		}
 		const reqQuery = {
 			clientSecret: client_secret,
 			email: userEmail,
