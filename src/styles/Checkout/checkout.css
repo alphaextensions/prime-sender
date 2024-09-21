@@ -130,6 +130,7 @@
 	justify-content: center;
 	align-items: center;
 	border: 2px solid var(--color-primary1);
+	transition: all 0.3s ease;
 }
 
 .checkout_payment_button:hover {
