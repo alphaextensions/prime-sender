@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/Common/chatSupport.css'
+import '../../styles/common/chatSupport.css'
 
 const ChatSupport = () => {
   const whatsappWebURL = window.innerWidth <= 768 ? 'whatsapp://send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender' 

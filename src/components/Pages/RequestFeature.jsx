@@ -1,5 +1,5 @@
-import HelmetHeader from "../Common/HelmetHeader";
-import SectionTitle from "../Common/SectionTitle";
+import HelmetHeader from "../common/HelmetHeader";
+import SectionTitle from "../common/SectionTitle";
 import { promoText } from "../Data/seo-data";
 
 const RequestFeature = () => {

@@ -1,0 +1,146 @@
+.checkout-section {
+	display: flex;
+	justify-content: center;
+	padding: 0 30px;
+	gap: 20px;
+	margin-bottom: 80px !important;
+}
+
+.checkout_info_section {
+	width: 100%;
+	background: var(--color-primary1);
+	border-radius: 8px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+}
+
+.checkout_heading_section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.checkout_logo {
+	width: 50px;
+}
+
+.checkout_logo img {
+	width: 100%;
+}
+
+.checkout_logo_text {
+	width: 250px;
+}
+
+.checkout_logo_text img {
+	width: 100%;
+}
+
+.checkout_heading {
+	font-size: 30px;
+	color: var(--color-white);
+}
+
+.checkout_form_section {
+	width: 100%;
+}
+
+.checkout_title_section {
+	width: 100%;
+	color: var(--color-white);
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.checkout_email_section,
+.checkout_numbers_section,
+.checkout_price_section {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 5px;
+}
+
+.checkout_email_label,
+.checkout_number_label {
+	color: var(--color-white);
+	width: 100%;
+}
+
+.checkout_email_text {
+	border: 2px solid var(--color-primary2);
+	padding: 10px 10px;
+	border-radius: 8px;
+	background: #fff3;
+	color: #fff;
+	min-width: 300px;
+}
+
+.checkout_numbers_div {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	max-height: 300px;
+	overflow-y: scroll;
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	scrollbar-width: none;
+}
+
+.checkout_number_text {
+	background: #fff3;
+	color: #fff;
+	border-radius: 8px;
+	padding: 5px;
+	border: 2px solid var(--color-primary2);
+}
+
+.checkout_price {
+	color: var(--color-white);
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.stripe_payment_form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.checkout_payment_button{
+	padding: 10px 20px;
+	border-radius: 8px;
+	border: none;
+	background: var(--color-primary1);
+	color: var(--color-white);
+	/* font-weight: bold; */
+	font-size: 20px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid var(--color-primary1);
+	transition: all 0.3s ease;
+}
+
+.checkout_payment_button:hover {
+	border: 2px solid var(--color-primary1);
+	background-color: #fff;
+	color: var(--color-primary1);
+}
+
+.checkout_payment_button svg {
+	width: 22px;
+	height: 22px;
+	stroke: #fff;
+}

@@ -59,7 +59,7 @@
   place-items: center;
 }
 .pricing-popup-header h1{
-  font-size: 27px;
+  font-size: 25px;
   font-weight: 400;
   color: var(--color-primary1);
   margin-left: 15px;
@@ -129,6 +129,7 @@
   position: absolute;
   top: 0%;
   left: 23%;
+  color: var(--color-black);
 }
 .pricing-popup-content .annual-price{
   position: absolute;
@@ -170,6 +171,7 @@
   font-size: 20px;
   color: var(--color-white);
   transition: 0.3s;
+  font-family: 'PT Sans Caption', sans-serif;
 }
 .pricing-popup-btn button:hover{
   background: transparent;
@@ -344,6 +346,14 @@
   background: rgb(1, 112, 99);
 }
 
+.multiple_user_card .pricing_country_switch .country_switch:hover{
+  background: #5f1ccb;
+}
+
+.pricing_calculator_slider .switch:hover {
+  background: #5f1ccb;
+}
+
 .pricing_discount_text {
   color: var(--color-purple);
   font-size: 20px;
@@ -364,6 +374,7 @@
 }
 
 .pricing_cards_container {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: auto;
@@ -403,10 +414,10 @@
   transform: rotate(340deg);
 }
 
-.pricing_card:hover {
+/* .pricing_card:hover {
   transform: scale(1.05);
   z-index: 1000000;
-}
+} */
 
 .pricing_card_type {
   font-size: 40px;
@@ -486,6 +497,23 @@
 
 .pricing_card_button:hover .buy_button {
   color: var(--color-primary1) !important;
+}
+
+.multiple_user_card .pricing_card_button {
+  cursor: pointer !important;
+}
+
+.multiple_user_card .pricing_card_button button {
+  cursor: pointer !important;
+}
+
+.multiple_user_card .pricing_card_button:hover {
+  background: transparent !important;
+  border: 2px solid var(--color-purple) !important;
+}
+
+.multiple_user_card .pricing_card_button:hover .buy_button {
+  color: var(--color-purple) !important;
 }
 
 .pricing_card_button button {
@@ -654,6 +682,257 @@
 .advance_navigation_box{
   right: 50%; 
   left: unset;
+}
+
+.pricing_calculator_section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.pricing_calculator_heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.pricing_calculator_heading .left_line,
+.pricing_calculator_heading .right_line {
+  height: 2px;
+  flex: 1;
+  background-color: #565554;
+}
+
+.pricing_calculator_heading .pricing_calculator_text{
+  font-size: 18px;
+  color: #565554;
+  font-weight: 600;
+}
+
+.pricing_calculator_section .plan_switch {
+  font-size: 16px !important;
+}
+
+.pricing_calculator_section .country_switch {
+  padding: 3px 15px !important;
+}
+
+.pricing_calculator_section .slider-text {
+  font-size: 16px ;
+  padding: 10px !important;
+}
+
+.pricing_calculator_section .pricing_calculator_slider{
+  margin-top: 10px;
+}
+
+.num_accounts_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.num_accounts_title {
+  font-weight: bold;
+}
+.num_accounts_input {
+  width: 60px;
+  height: 30px;
+  background: #d9d9d9;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 4px;
+  border: 0px;
+  outline: none;
+  border-radius: 8px;
+}
+.num_accounts_input:active,
+.num_accounts_input:focus {
+  outline: none;
+}
+
+.pricing_calculator_support {
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pricing_calculator_support p a{
+  text-decoration: none;
+  color: var(--color-primary1);
+}
+
+.premium_card_purple {
+  background: linear-gradient(
+    to bottom,
+    #f9f5ff,
+    #f9f5ff 60%,
+    var(--color-white) 90%
+  );
+}
+
+.mult_error_message {
+  width: 90%;
+  margin: 0 auto;
+  color: red;
+  text-align: center;
+}
+
+.multiple_acc_pricing_cards_container {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.multiple_card_hover_style {
+  position: absolute;
+  z-index: 1000000000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pricing_card_hover {
+  transform: scale(1.05);
+  z-index: 1000000;
+}
+
+.pricing_card_container_overlay {
+  position: absolute;
+    top: 20px;
+    left: 0;
+    height: 97%;
+    width: 100%;
+    z-index: 1000000;
+    backdrop-filter: blur(5px);
+}
+
+.top-pricing-slider {
+  position: relative;
+}
+
+.pricing-slider-overlay {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 150%;
+    width: 100%;
+    z-index: 1000000;
+    backdrop-filter: blur(5px);
+}
+
+.pay_via_upi_text {
+  font-size: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-dark-grey);
+}
+
+.pay_via_upi_text span {
+  color: var(--color-primary1);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pay_via_bank_text {
+  font-size: 15px;
+  width: 100%;
+  text-align: center;
+  color: var(--color-dark-grey);
+}
+
+.pay_via_bank_text a {
+  color: var(--color-primary1);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.upi_popoup_container {
+  position: fixed;
+  z-index: 100000000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-white);
+  border: 3px solid var(--color-primary1);
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap: 10px;
+}
+
+.upi_popup_title {
+  display: flex;
+  font-size: 25px;
+  color: var(--color-primary1);
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.ui_popup_title_img{
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui_popup_title_img img {
+  width: 100%;
+}
+
+.upi_popup_price {
+  text-align: center;
+  font-size: 25px;
+  color: var(--color-primary1);
+  font-weight: bold;
+  font-family: 'PT Sans Caption' !important;
+}
+
+.upi_monthly_price {
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--color-dark-grey);
+  margin-left: 5px;
+}
+
+.upi_billed_text {
+  font-size: 16px;
+  color: var(--color-dark-grey);
+  font-weight: normal;
+}
+
+.upi_buy_button {
+  background: var(--color-primary1);
+  border: none;
+  padding: 10px;
+  color: var(--color-white);
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'P T Sans Caption', sans-serif;
+  text-align: center;
+}
+
+.upi_last_text {
+  font-size: 13px;
+  color: var(--color-dark-grey);
 }
 
 @media (max-width: 1280px) {

@@ -1,6 +1,6 @@
-import UniqueFeatureCard from "../Common/UniqueFeatureCard";
+import UniqueFeatureCard from "../common/UniqueFeatureCard";
 import '../../styles/HomePage/uniqueFeatures.css'
-import SectionTitle from "../Common/SectionTitle";
+import SectionTitle from "../common/SectionTitle";
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

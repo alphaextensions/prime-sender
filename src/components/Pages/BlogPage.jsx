@@ -1,5 +1,5 @@
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from "../Common/HelmetHeader";
+import SectionTitle from "../common/SectionTitle";
+import HelmetHeader from "../common/HelmetHeader";
 import '../../styles/blog/blog.css';
 import { useParams } from "react-router-dom";
 import { blogHtml } from "../../components/Data/blogs-html.jsx";

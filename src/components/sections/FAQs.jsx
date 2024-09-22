@@ -3,7 +3,7 @@ import '../../styles/HomePage/faqs.css'
 import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import SectionTitle from '../Common/SectionTitle';
+import SectionTitle from '../common/SectionTitle';
 import { useState } from 'react';
 import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi'
 import { Helmet } from 'react-helmet';

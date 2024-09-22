@@ -21,6 +21,7 @@
   --color-light-grey: #dadada;
   --color-dark-grey: #6b6b6b;
   --color-purple: #7829f9;
+  --color-dark-purple: #7829f9;
 }
 
 html {
@@ -74,7 +75,19 @@ body {
 }
 
 .text-royal{
-    color: #7829f9;
+    color: #7829f9 !important;
+}
+
+.text-gray {
+  color: #565554 !important;
+}
+
+.text-primary {
+  color: var(--color-primary1) !important;
+}
+
+.background-royal {
+  background-color: #7829f9 !important;
 }
 
 .grid{
@@ -130,6 +143,14 @@ body {
   border: 0;
 }
 
+.marginBottom30 {
+  margin-bottom: 30px;
+}
+
+.marginBottom10 {
+  margin-bottom: 10px;
+}
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 11px;
@@ -152,6 +173,10 @@ body {
 ::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: var(--color-white);
+}
+
+.input_error_border {
+  border: 1px solid red !important;
 }
 
 /* Media query for responsiveness */

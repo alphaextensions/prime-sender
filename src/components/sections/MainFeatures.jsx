@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import featuresData from '../Data/features-data'
-import FeatureCard from '../Common/FeatureCard'
-import SectionTitle from '../Common/SectionTitle'
+import FeatureCard from '../common/FeatureCard'
+import SectionTitle from '../common/SectionTitle'
 import '../../styles/HomePage/mainfeatures.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -9,11 +9,12 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ScrollTrigger from 'react-scroll-trigger';
-import HelmetHeader from '../Common/HelmetHeader'
+import HelmetHeader from '../common/HelmetHeader'
 
 const MainFeatures = ({isSlider}) => {
   const [slidesPerView, setSlidePerView] = useState(3);
   const [autoplaySlider, setAutoplaySlider] = useState(false);
+  const [showMetaData, setShowMetaData] = useState(false);
 
   function slides() {
     if (window.screen.width >= 1200) {
@@ -29,15 +30,19 @@ const MainFeatures = ({isSlider}) => {
     AOS.init({duration: 1000});
     slides();
     window.addEventListener('resize', slides);
+    if(window.location.href?.includes('main-features'))
+      setShowMetaData(true);
   }, []);
 
   return (
     <>
-      <HelmetHeader 
-        title={'Main Features | Prime Sender - Best Web Sender Extension'}
-        description={'Main features page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
-        keywords={'main features , prime sender main features, features prime sender, Simple, cheap, prime sender'}
-      />
+      {showMetaData &&
+        <HelmetHeader
+          title={'Main Features | Prime Sender - Best Web Sender Extension'}
+          description={'Main features page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
+          keywords={'main features , prime sender main features, features prime sender, Simple, cheap, prime sender'}
+        />
+      }
 
      <section className="main-feature-section">
       <SectionTitle id="main-features" gif="/gifs/main-features.gif" title="Main Features" />

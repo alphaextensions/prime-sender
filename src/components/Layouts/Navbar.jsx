@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { MdFileDownload, MdClose, MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
-import DownloadBtn from '../Common/DownloadBtn'
+import DownloadBtn from '../common/DownloadBtn'
 import ReactGA from "react-ga4";
 
 function NavLinks({ onClick }) {
@@ -39,7 +39,7 @@ function NavLinks({ onClick }) {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/pricing' onClick={onClick} className='large-text'>
+        <NavLink to='/pricing' end onClick={onClick} className='large-text'>
           Pricing
         </NavLink>
       </li>
@@ -62,7 +62,7 @@ function Navbar() {
   const [isFixed, setIsFixed] = useState(false);
 
   const handleScroll = () => {
-    const navbarHeight = document.querySelector('.prime-sender-navbar').offsetHeight;
+    const navbarHeight = document.querySelector('.prime-sender-navbar')?.offsetHeight;
     const scroll = window.scrollY;
     setIsFixed(scroll > navbarHeight);
   };

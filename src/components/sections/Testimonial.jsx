@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 import { FaArrowRightLong } from 'react-icons/fa6' 
-import SectionTitle from "../Common/SectionTitle";
+import SectionTitle from "../common/SectionTitle";
 import ReactGA from "react-ga4";
 import TestimonialCard from "../common/TestimonialCard";
 import Slider from "react-slick";
@@ -40,9 +40,9 @@ const Testimonial = () => {
             <ScrollTrigger onEnter={()=>{setCounterOn(true)}} onExit={()=>{setCounterOn(false),setCounter(false)}}>
               <div className="testimonial_users">
                 <h1 className="large-heading">
-                {counter && counterOn && <span><CountUp end={80} /><span style={{ color: "#FFB545" }}>K</span>+</span>}
+                {counter && counterOn && <span><CountUp end={90} /><span style={{ color: "#FFB545" }}>K</span>+</span>}
                 {
-                  !counter && <span>80<span style={{ color: "#FFB545" }}>K</span>+</span>
+                  !counter && <span>90<span style={{ color: "#FFB545" }}>K</span>+</span>
                 }
                 </h1>
                 <p className="large-text">Users</p>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PrivacyPolicyData from '../Data/privacy-policy-data.js';
 import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from "../Common/HelmetHeader";
+import SectionTitle from "../common/SectionTitle";
+import HelmetHeader from "../common/HelmetHeader";
 import { promoText } from '../Data/seo-data.js';
 
 function PrivacyPolicy() {
