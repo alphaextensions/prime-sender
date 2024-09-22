@@ -123,6 +123,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			let data = await response.text();
 			data = JSON.parse(data);
 			const body = JSON.parse(data.body);
+			if(body.data == null) {
+				setIsPageGenerating(false);
+				toast(body.message, { theme: 'colored', type: 'error', autoClose: 5000 });
+				return null;
+			}
 			setIsPageGenerating(false);
 			return body.data.stripe_page_url;
 		} catch (error) {
@@ -187,11 +192,22 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		plan_type = plan_type == 'basic' ? "Basic" : "Advance";
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
-		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} numbers.`
-		const stripe_page_url = await setDataInDatabase(productName, productDescription, country_currency);
-		if(stripe_page_url) {
-			window.open(stripe_page_url, '_blank');
+		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
+		const client_secret = await setDataInDatabase(productName, productDescription, country_currency);
+		if(!client_secret){
+			return;
 		}
+		const reqQuery = {
+			clientSecret: client_secret,
+			email: userEmail,
+			numbers: phoneNumbers,
+			currency: country_currency,
+			totalPrice: amount.totalPrice,
+			title: productDescription,
+			plan_type: plan_type
+		}
+		setCheckoutData(reqQuery);
+		navigate(`/checkout`);
 	}
 
 	function startTour(){
