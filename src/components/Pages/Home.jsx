@@ -12,13 +12,9 @@ import HelmetHeader from "../common/HelmetHeader";
 import ReactGA from "react-ga4";
 import { promoText } from '../Data/seo-data';
 import HowToUse from './HowToUse';
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { primeSenderController } from "../context";
-// import EverythingInOne from '../Sections/EverythingInOne';
-=======
-// import EverythingInOne from '../sections/EverythingInOne';
->>>>>>> 357965461f68e116b4efc4aed8bb51e67ca5884e
+
 
 const Home = () => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);

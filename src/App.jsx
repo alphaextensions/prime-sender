@@ -16,10 +16,7 @@ import MainLayout from "./components/Layouts/MainLayout";
 import DashboardLayout from "./components/Layouts/Dashboard";
 import ReactGA from "react-ga4";
 import {useEffect, useState} from 'react';
-import ContactUs from './components/Pages/ContactUs';
-import BlogPage from './components/Pages/BlogPage';
 import FAQs from './components/sections/FAQs';
-import HowToUse from './components/Pages/HowToUse';
 import MainFeatures from './components/sections/MainFeatures';
 import Checkout from './components/Pages/Checkout';
 import { CheckoutProvider } from './components/context/CheckoutContext';
@@ -63,6 +60,7 @@ const App = () => {
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/contactus" element={<ContactUs />} />
               <Route path="/terms-of-service" element={<TermsOfUse />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/basic-success" element={<Success plan="basic" />} />
               <Route path="/advance-success" element={<Success plan="advance" />} />

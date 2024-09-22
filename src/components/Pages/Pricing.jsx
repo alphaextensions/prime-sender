@@ -10,10 +10,8 @@ import ReactGA from "react-ga4";
 import { promoText } from "../Data/seo-data";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { primeSenderController } from "../context";
-=======
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features } from "../Data/pricing-data";
@@ -60,8 +58,6 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
     </div>
   </>
 }
-
->>>>>>> 357965461f68e116b4efc4aed8bb51e67ca5884e
 
 const Pricing = () => {
   const [controller] = primeSenderController();
@@ -417,13 +413,11 @@ const Pricing = () => {
     }
   }, [myLocation]);
 
-<<<<<<< HEAD
   useEffect(() => {
     if (controller?.credentials) {
       navigate("/dashboard/home")
     }
   }, [controller, navigate]);
-=======
   const pricingCalculatorPeriodHandler = (e)=>{
     e.stopPropagation();
       pricingCalculatorPeriod == 'annually' ? setPricingCalculatorPeriod('monthly') : setPricingCalculatorPeriod('annually')
@@ -472,7 +466,6 @@ const Pricing = () => {
     localStorage.setItem('numAccounts', JSON.stringify(numAccounts));
     return () => clearTimeout(timeout);
   }, [myLocation, numAccounts, pricingCalculatorPlan, pricingCalculatorPeriod, currentCountry, pricing])
->>>>>>> 357965461f68e116b4efc4aed8bb51e67ca5884e
 
   return (
     <>

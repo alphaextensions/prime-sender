@@ -1,36 +1,25 @@
 import "../../styles/HomePage/howToUse.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-<<<<<<< HEAD
-import {useEffect} from "react";
-import SectionTitle from "../Common/SectionTitle";
-import HelmetHeader from "../Common/HelmetHeader";
 import { useNavigate } from "react-router-dom";
 import { primeSenderController } from "../context";
-
-const HowToUse = () => {
-  const [controller] = primeSenderController();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    AOS.init({duration: 1000});
-    if (controller?.credentials) {
-      navigate("/dashboard/home")
-    }
-  }, [controller, navigate])
-=======
 import {useEffect, useState} from "react";
 import SectionTitle from "../common/SectionTitle";
 import HelmetHeader from "../common/HelmetHeader";
 
 const HowToUse = () => {
   const [showMetaData, setShowMetaData] = useState(false);
+  const [controller] = primeSenderController();
+  const navigate = useNavigate();
   useEffect(() => {
     AOS.init({duration: 1000});
+    if (controller?.credentials) {
+      navigate("/dashboard/home")
+    }
+
     if(window.location.href?.includes('how-to-use'))
       setShowMetaData(true);
-  }, [])
->>>>>>> 357965461f68e116b4efc4aed8bb51e67ca5884e
+  }, [controller, navigate])
 
   return (
     <>
