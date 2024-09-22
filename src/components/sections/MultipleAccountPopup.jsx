@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../styles/PricingPage/multipleAccountPopup.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -6,6 +6,8 @@ import { Oval } from 'react-loader-spinner';
 import { IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router';
+import { CheckoutContext } from '../context/CheckoutContext';
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 
@@ -63,7 +65,9 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 	</div>
 }
 const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry }) => {
+	const { setCheckoutData } = useContext(CheckoutContext);
 	const numbersContainerRef = useRef(null);
+	const navigate = useNavigate();
 	const [isPageGenerating, setIsPageGenerating] = useState(false);
 	const [userEmail, setUserEmail] = useState(JSON.parse(localStorage.getItem("userEmail")) || '');
 	const [showNumbersList, setShowNumbersList] = useState(false);
@@ -129,7 +133,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 				return null;
 			}
 			setIsPageGenerating(false);
-			return body.data.stripe_page_url;
+			return body.data.client_secret;
 		} catch (error) {
 			setIsPageGenerating(false);
 			console.log("error from setting data in database ", error);
@@ -208,54 +212,8 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		}
 		setCheckoutData(reqQuery);
 		navigate(`/checkout`);
-	}
 
-	function startTour(){
-		const urlParams = new URLSearchParams(window.location.search);
-		const isTour = urlParams.get('isTour') === 'true';
-		const accountObj = {
-		  showProgress: true,
-		  popoverClass: "driverjs-theme",
-		  steps: [
-			{
-			  element: ".mult_account_email_input",
-			  popover: {
-				title: "Provide Email Address",
-				description:
-				  "Enter your email address to receive purchase details.",
-			  },
-			},
-			{
-			  element: ".react-tel-input",
-			  popover: {
-				title: "Select Country Code",
-				description:
-				  "Choose your country code from the dropdown menu.",
-			  },
-			},
-			{
-			  element: ".mult_number_input",
-			  popover: {
-				title: "Enter WhatsApp Number",
-				description:
-				  "Input the WhatsApp number where you want to activate the premium plan.",
-			  },
-			},
-			{
-			  element: "#buyMultiple",
-			  popover: {
-				title: "Complete Purchase",
-				description:
-				  "Click 'Buy' to finalize your order and proceed to payment.",
-			  },
-			},
-		  ],
-		};
-		if(isTour){
-		  driver(accountObj).drive()
-		}
-  
-	  }
+	}
 
 	const overlayRef = useRef(null);
 	useEffect(() => {
