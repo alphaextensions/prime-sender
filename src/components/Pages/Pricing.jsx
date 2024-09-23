@@ -12,6 +12,8 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features } from "../Data/pricing-data";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
@@ -392,12 +394,63 @@ const Pricing = () => {
             });
     }
 
+    function startTour(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const isTour = urlParams.get('isTour') === 'true';
+      const accountObj = {
+        showProgress: true,
+        popoverClass: "driverjs-theme",
+        steps: [
+          {
+            element: ".pricing_country.background-royal",
+            popover: {
+              title: "Choose Plan Type",
+              description:
+                "Please select the desired plan type from the available options.",
+            },
+          },
+          {
+            element: ".pricing-slider.pricing_calculator_slider",
+            popover: {
+              title: "Choose Plan Duration",
+              description:
+                "Select whether you prefer monthly or annual billing for the chosen plan.",
+            },
+          },
+          {
+            element: ".num_accounts_section",
+            popover: {
+              title: "Specify Number of Accounts",
+              description:
+                "Enter the number of accounts you'd like to purchase.",
+            },
+          },
+          {
+            element: ".pricing_card_button.background-royal",
+            popover: {
+              title: "Proceed to Purchase",
+              description:
+                "Once all selections are made, click 'Buy' to proceed.",
+              onNextClick: () => {
+                document.querySelectorAll(".buy_button")[3].click();
+              },
+            },
+          }
+        ],
+      };
+      if(isTour){
+        driver(accountObj).drive()
+      }
+
+    }
+
     useEffect(() => {
         checkIfMultipleAccountPage();
         setLoading(true);
         getParams();
         getUserLocation();
         getPricingDataFromDatabase();
+        startTour()
     }, []);
 
   useEffect(() => {
