@@ -38,6 +38,16 @@
   <script type="module" src="/src/main.jsx"></script>
 
   <script type="text/javascript">
+    // Clear google translate related cookies
+    const cookies = document.cookie.split(";");
+    cookies.forEach((cookie) => {
+      const name = cookie.split("=")[0].trim();
+      if (name.includes("googtrans") || name.includes("__Secure")) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname};Secure`;
+      }
+    });
+
+    // Init google translate element
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
     }

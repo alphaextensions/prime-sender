@@ -4,7 +4,7 @@ import { BsTranslate } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
 const GoogleTranslate = () => {
-  const [currentLang, setCurrentLang] = useState('en');
+  const [currentLang, setCurrentLang] = useState("");
   const intervalRef = useRef(null);
 
   const getCountryLanguage = async () => {
@@ -26,16 +26,39 @@ const GoogleTranslate = () => {
     }
   }
 
+  const getBrowserLanguage = () => {
+    try {
+      const browserLang = navigator.language || navigator.userLanguage;
+      return browserLang ? browserLang.split('-')[0] : 'en';
+    } catch (err) {
+      console.error('Failed :: getBrowserLanguage :: Error = ', err);
+      return 'en';
+    }
+  };
+
   const changeCurrentLangauge = (newLang) => {
     const selectElement = document.querySelector('select.goog-te-combo');
+
     if (selectElement) {
-      selectElement.value = newLang;
-      selectElement.dispatchEvent(new Event('change'));
+      const optionExists = Array.from(selectElement.options).some(
+        (option) => option.value === newLang
+      );
+
+      if (optionExists) {
+        setCurrentLang(newLang);
+        localStorage.setItem('prime-sender-language', newLang);
+
+        selectElement.value = newLang;
+        selectElement.dispatchEvent(new Event('change'));
+      } else {
+        setCurrentLang('en');
+        localStorage.setItem('prime-sender-language', 'en');
+      }
     }
   }
 
   useEffect(() => {
-    intervalRef.current = setInterval(async () => {
+    intervalRef.current = setInterval(() => {
       const selectElement = document.querySelector('select.goog-te-combo');
 
       if (selectElement && intervalRef.current) {
@@ -51,25 +74,13 @@ const GoogleTranslate = () => {
           }
         });
 
+        // Set new language
         let prevLang = localStorage.getItem('prime-sender-language');
-        if (prevLang) {
-          // If prevLang exists set that language
-          console.log("PREV LANGUAGE :: ", prevLang);
-          changeCurrentLangauge(prevLang);
-        }
-        else {
-          // Otherwise set country language
-          let countryLang = await getCountryLanguage();
-          // console.log("Country language = ", countryLang);
+        let browserLang = getBrowserLanguage();
+        let newLang = prevLang || browserLang || 'en';
 
-          const optionExists = Array.from(selectElement.options).some(
-            (option) => option.value === countryLang
-          );
-
-          if (optionExists && countryLang !== currentLang) {
-            changeCurrentLangauge(countryLang);
-          }
-        }
+        // console.log("NEW LANGUAGE :: ", newLang);
+        changeCurrentLangauge(newLang);
       }
     }, 1000);
 
@@ -81,7 +92,7 @@ const GoogleTranslate = () => {
   }, []);
 
   return (
-    <div className='translate-container'>
+    <div className='translate-container' style={{ display: (currentLang) ? 'flex' : 'none' }}>
       <BsTranslate className='translate-lang-icon' size={20} />
       <span className='current-language notranslate'>{currentLang.toUpperCase()}</span>
       <IoIosArrowDown className='translate-dropdown-icon' />
