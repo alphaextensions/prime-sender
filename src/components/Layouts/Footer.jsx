@@ -31,7 +31,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="footer_main" >
+    <div className="footer_main notranslate" >
       <div className="footer_container">
       <hr className='divider' />
         <div className="footer_row">
