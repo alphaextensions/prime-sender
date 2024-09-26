@@ -238,8 +238,12 @@ const Pricing = () => {
                     </span>
                     &nbsp;(
                     <span className={popupCountry === 'india' ? 'rupee' : ''}>
-                      {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)}
-                      /month)</span>
+                      {pricing[popupCountry].currency_symbol}
+                      <span className="font-family-class">
+                        {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)}
+                        /month)
+                      </span>
+                      </span>
                   </span>
                 </div>
             }
