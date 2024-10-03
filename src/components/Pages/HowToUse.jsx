@@ -13,8 +13,8 @@ const HowToUse = () => {
   const navigate = useNavigate();
   useEffect(() => {
     AOS.init({duration: 1000});
-    if (controller?.credentials) {
-      navigate("/dashboard/home")
+    if (controller?.credentials?.cred !== "") {
+      navigate("/dashboard/profile")
     }
 
     if(window.location.href?.includes('how-to-use'))

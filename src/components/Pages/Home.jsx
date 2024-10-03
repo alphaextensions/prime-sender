@@ -99,8 +99,11 @@ const Home = () => {
 
 
   useEffect(() => {
-    if (controller?.credentials) {
+    if (controller?.credentials?.cred !== "") {
       navigate("/dashboard/profile")
+    }
+    else{
+      navigate("/");
     }
   }, [controller, navigate]);
 

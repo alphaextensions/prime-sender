@@ -19,6 +19,46 @@ export function Profile() {
 
   const navigate = useNavigate();
 
+  const is_transfer_allowed = (user) => {
+    try {
+      let { purchased_date, is_account_transfered } = user;
+
+      let today = new Date();
+      let days_since_purchased = Utility.get_days_diff(today, purchased_date);
+
+      if (!is_account_transfered && days_since_purchased <= TRANSFER_ALLOWED_DAYS) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error in is_transfer_allowed: ", error);
+      return false;
+    }
+  }
+
+  const convert_date_str = (date = null) => {
+    if (!date)
+      return null;
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  }
+
+  const convert_date = (date = null) => {
+    if (!date)
+      return null;
+    return new Date(date);
+  }
+
+  const get_days_diff = (date1, date2) => {
+    date1 = convert_date(date1);
+    date2 = convert_date(date2);
+
+    if (!date1 || !date2)
+      return NaN;
+
+    let days_diff = Math.floor((date1.getTime() - date2.getTime()) / (1000 * 3600 * 24))
+    return days_diff;
+  }
+
   useEffect(() => {
     if (!controller.credentials) {
       navigate("/login")
@@ -27,7 +67,7 @@ export function Profile() {
       setCred(jwtDecode(controller.credentials.cred))
       setData(controller.credentials.data[controller.profile]);
     }
-  }, [controller.profile,controller.credentials, dispatch]);
+  }, [controller.profile, controller.credentials, dispatch]);
 
   return (
     <>

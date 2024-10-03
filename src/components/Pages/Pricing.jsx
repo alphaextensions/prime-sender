@@ -414,8 +414,8 @@ const Pricing = () => {
   }, [myLocation]);
 
   useEffect(() => {
-    if (controller?.credentials) {
-      navigate("/dashboard/home")
+    if (controller?.credentials?.cred !== "") {
+      navigate("/dashboard/profile")
     }
   }, [controller, navigate]);
   const pricingCalculatorPeriodHandler = (e)=>{
