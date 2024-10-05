@@ -234,12 +234,16 @@ const Pricing = () => {
                       {pricing[popupCountry].currency_symbol}
                     </span>
                     <span>
-                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.original : pricing[popupCountry].annually.advance_plan.original}
+                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.final : pricing[popupCountry].annually.advance_plan.final}
                     </span>
                     &nbsp;(
                     <span className={popupCountry === 'india' ? 'rupee' : ''}>
-                      {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)}
-                      /month)</span>
+                      {pricing[popupCountry].currency_symbol}
+                      <span className="font-family-class">
+                        {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)}
+                        /month)
+                      </span>
+                      </span>
                   </span>
                 </div>
             }

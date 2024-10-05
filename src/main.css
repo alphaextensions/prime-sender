@@ -150,6 +150,9 @@ body {
   margin-bottom: 10px;
 }
 
+.font-family-class {
+  font-family: 'PT Sans Caption', sans-serif;
+}
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 11px;
