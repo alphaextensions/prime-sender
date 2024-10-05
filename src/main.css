@@ -30,6 +30,7 @@ html {
 }
 
 body {
+  top: 0 !important;
   width: 100% !important;
   background-color: var(--color-white);
   overflow-x: hidden !important;
