@@ -4,18 +4,18 @@ import { Menu, MenuHandler, MenuList, MenuItem, Button } from "@material-tailwin
 
 export function PhoneNumberSelect({ phoneNumbers, onSelectNumber }) {
   const { countries } = useCountries();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(-1);
 
   const getCountryInfo = (countryCode) => {
     return countries.find((country) => country.countryCallingCode === countryCode) || {};
   };
 
-  const selectedNumber = phoneNumbers[selectedIndex];
+  const selectedNumber = phoneNumbers[selectedIndex < 0 ? 0 : selectedIndex];
   const selectedCountryInfo = getCountryInfo(selectedNumber.countryCode);
 
   useEffect(() => {
-    if (phoneNumbers.length > 0 && onSelectNumber && selectedIndex === 0) {
-      onSelectNumber(phoneNumbers[0]); 
+    if (phoneNumbers.length > 0 && onSelectNumber && selectedIndex === -1) {
+      handleSelectNumber(0)
     }
   }, [phoneNumbers, onSelectNumber, selectedIndex]);
 

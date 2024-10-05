@@ -7,7 +7,7 @@ import { PrimeSenderControllerProvider } from "./components/context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_DEV_GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID}>
       <ThemeProvider>
         <PrimeSenderControllerProvider>
           <App />

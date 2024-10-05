@@ -11,12 +11,12 @@ import {
 import { primeSenderController, replaceDataObject } from "../../context";
 import { useCountries } from "use-react-countries";
 
-function TransferPlan({ isAuthor }) {
+function TransferPlan() {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
     const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [attempts, setAttempts] = useState(controller.credentials.data[controller.profile].transfer_attempts);
+    const [data, setData] = useState(controller.credentials.data[controller.profile]);
     const [warning, setWarning] = useState(null);
 
     const sortedCountries = useMemo(
@@ -27,6 +27,14 @@ function TransferPlan({ isAuthor }) {
     const currentCountry = sortedCountries.find(
         (country) => country.name === selectedCountry
     );
+
+    const isPremiumUser = () => {
+        return (data.plan_type === "Advance" || data.plan_type === "Basic")
+    }
+
+    const isMultipleAccountAdmin = () => {
+        return (data.parent_email && data.email === data.parent_email)
+    }
 
     const handleWarning = () => {
         let war = null;
@@ -39,7 +47,7 @@ function TransferPlan({ isAuthor }) {
     }
 
     const sendReq = (newNumber) => {
-        let transferUrl = 'https://nbxe0yejq7.execute-api.eu-north-1.amazonaws.com/dev';
+        let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
         const headers = {
             "Content-Type": "application/json",
         };
@@ -75,15 +83,48 @@ function TransferPlan({ isAuthor }) {
         const fullNumber = `${countryCode}${phoneNumber}`;
         setPhoneNumber("")
         setSelectedCountry(countries[0].name)
-        if (attempts > 0 && fullNumber !== "" && phoneNumber !== "") {
+        if (is_transfer_allowed() && fullNumber !== "" && phoneNumber !== "") {
             sendReq(fullNumber);
         }
     };
 
-    useEffect(() => {
-        setAttempts(controller.credentials.data[controller.profile].transfer_attempts);
-        handleWarning();
-    }, [controller.credentials.data, controller.profile]);
+    const is_transfer_allowed = () => {
+        try {
+            let { purchased_date, is_account_transferred } = data;
+            let today = new Date();
+            let days_since_purchased = get_days_diff(today, purchased_date);
+
+            if (!is_account_transferred && days_since_purchased <= import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error("Error in is_transfer_allowed: ", error);
+            return false;
+        }
+    }
+
+    const convert_date = (date = null) => {
+        if (!date)
+            return null;
+        return new Date(date);
+    }
+
+    const get_days_diff = (date1, date2) => {
+        date1 = convert_date(date1);
+        date2 = convert_date(date2);
+
+        if (!date1 || !date2)
+            return NaN;
+
+        let days_diff = Math.floor((date1.getTime() - date2.getTime()) / (1000 * 3600 * 24))
+        return days_diff;
+    }
+
+    // useEffect(() => {
+    //     setAttempts(controller.credentials.data[controller.profile]);
+    //     handleWarning();
+    // }, [controller.credentials.data, controller.profile]);
 
     return (
         <div className="mt-4 mb-4 px-4 flex-col flex justify-start ">
@@ -91,13 +132,16 @@ function TransferPlan({ isAuthor }) {
                 Transfer a Plan
             </Typography>
 
-            {isAuthor ? (
+            {isPremiumUser() || isMultipleAccountAdmin() ? (
                 <>
                     <p className="mt-2 mb-2 font-light text-xs px-1">
                         Please enter the WhatsApp number to which you would like to transfer your current plan. Before proceeding, kindly double-check the number for accuracy. Please be aware that we are not responsible for any errors you may make during this process.
                     </p>
-                    <p className="mb-4 font-semibold text-xs px-1">
-                        Please note: You are limited to three requests per month for transferring your plan.
+                    <p className={is_transfer_allowed() ? "mb-4 font-semibold text-xs px-1" : "mb-4 font-semibold text-red-400 text-xs px-1"}>
+                        {
+                            is_transfer_allowed() ? "Please note: You are eligible for a plan transfer within 7 days of purchasing your Premium plan." : "Please note: You are no longer eligible for an account transfer, as transfers can only be made within 7 days of purchase or you have already used your one-time transfer."
+                        }
+
                     </p>
                     <div className="mb-4 mt-2 px-1 flex items-center w-max">
                         <div className="relative flex w-full max-w-[20rem] mr-3">
@@ -151,7 +195,7 @@ function TransferPlan({ isAuthor }) {
                         </div>
                         <Button
                             variant="filled"
-                            disabled={attempts === 0 ? true : false}
+                            disabled={!is_transfer_allowed()}
                             className="bg-[#009a88] !overflow-visible"
                             onClick={handleTransfer}
                         >
@@ -159,13 +203,13 @@ function TransferPlan({ isAuthor }) {
                         </Button>
 
                     </div>
-                    <p className="mb-4 font-semibold text-red-400 text-xs px-1">
+                    {/* <p className="mb-4 font-semibold text-red-400 text-xs px-1">
                         {warning}
-                    </p>
+                    </p> */}
                 </>
             ) : (
                 <p className="mt-2 mb-2 font-light text-xs px-1">
-                    Your account is part of a multi-account plan managed by an admin. If you wish to transfer your current plan to a different WhatsApp number, please contact your admin for assistance.
+                    {!isPremiumUser() ? "You're not on a Premium plan, so the transfer option isn't available for your account." : "Your account is part of a multi-account plan managed by an admin. If you wish to transfer your current plan to a different WhatsApp number, please contact your admin for assistance."}
                 </p>
             )}
         </div>

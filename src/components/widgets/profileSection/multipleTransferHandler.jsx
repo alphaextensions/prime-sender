@@ -10,14 +10,14 @@ import {
 } from "@material-tailwind/react";
 import { useCountries } from "use-react-countries";
 import { PhoneNumberSelect } from "./countrySelector";
-import { primeSenderController, replaceDataObject } from "../../context";
+import { primeSenderController } from "../../context";
 
 function MultipleTransferHandler() {
     const [controller, dispatch] = primeSenderController();
     const { countries } = useCountries();
     const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
     const [selectedOldNumber, setSelectedOldNumber] = useState("")
-    const [attempts, setAttempts] = useState(controller.credentials.data[controller.profile].transfer_attempts);
+    const [selectedUser, setSelectedUser] = useState({})
     const [phoneNumber, setPhoneNumber] = useState("");
     const [formattedPhoneNumbers, setFormattedPhoneNumbers] = useState(null);
 
@@ -54,7 +54,7 @@ function MultipleTransferHandler() {
     );
 
     const getPhoneNumbers = () => {
-        let url = 'https://410yao624j.execute-api.eu-north-1.amazonaws.com/dev';
+        let url = import.meta.env.VITE_PROD_FETCH_MULTIPLE_ACC_INFO_API;
         const headers = {
             "Content-Type": "application/json",
         };
@@ -86,7 +86,7 @@ function MultipleTransferHandler() {
     };
 
     const sendReq = (newNumber) => {
-        let transferUrl = 'https://nbxe0yejq7.execute-api.eu-north-1.amazonaws.com/dev';
+        let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
         const headers = {
             "Content-Type": "application/json",
         };
@@ -110,7 +110,7 @@ function MultipleTransferHandler() {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
-                    replaceDataObject(dispatch, res.data.adminData)
+                    setSelectedUser(res.data.userData)
                 }
             })
             .catch((error) => {
@@ -118,10 +118,40 @@ function MultipleTransferHandler() {
             });
     };
 
+    const fetchUserInfo = (number) => {
+        let fetchUrl = import.meta.env.VITE_PROD_FETCH_USER_INFO_API + "?phone=" + number;
+        const headers = {
+            "Content-Type": "application/json",
+        };
+        fetch(fetchUrl, {
+            method: "GET",
+            headers: headers,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok " + response.statusText);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                let res = data.body;
+                if (data.statusCode === 200) {
+                    setSelectedUser(res);
+                }
+            })
+            .catch((error) => {
+                setSelectedUser({});
+                console.error(error);
+            });
+
+
+    }
+
     const handleSelectNumber = (phoneNumber) => {
         const countryCode = phoneNumber.countryCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber.number}`;
         setSelectedOldNumber(fullNumber)
+        fetchUserInfo(fullNumber)
     };
 
     const handleTransfer = () => {
@@ -129,10 +159,43 @@ function MultipleTransferHandler() {
         const fullNumber = `${countryCode}${phoneNumber}`;
         setPhoneNumber("")
         setSelectedCountry(countries[0].name)
-        if (attempts > 0 && phoneNumber !== "" && selectedOldNumber !== "") {
+        if (is_transfer_allowed() && phoneNumber !== "" && selectedOldNumber !== "") {
             sendReq(fullNumber);
         }
     };
+
+    const is_transfer_allowed = () => {
+        try {
+            let { purchased_date, is_account_transferred } = selectedUser;
+            let today = new Date();
+            let days_since_purchased = get_days_diff(today, purchased_date);
+
+            if (!is_account_transferred && days_since_purchased <= import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error("Error in is_transfer_allowed: ", error);
+            return false;
+        }
+    }
+
+    const convert_date = (date = null) => {
+        if (!date)
+            return null;
+        return new Date(date);
+    }
+
+    const get_days_diff = (date1, date2) => {
+        date1 = convert_date(date1);
+        date2 = convert_date(date2);
+
+        if (!date1 || !date2)
+            return NaN;
+
+        let days_diff = Math.floor((date1.getTime() - date2.getTime()) / (1000 * 3600 * 24))
+        return days_diff;
+    }
 
     useEffect(() => {
         getPhoneNumbers();
@@ -212,11 +275,11 @@ function MultipleTransferHandler() {
 
                 <Button
                     variant="filled"
-                    disabled={attempts === 0 ? true : false}
+                    disabled={!is_transfer_allowed() ? true : false}
                     className="bg-[#009a88] !overflow-visible"
                     onClick={handleTransfer}
                 >
-                    Transfer
+                    {selectedUser?.plan_type ? "Transfer" : "Loading..."}
                 </Button>
 
             </div>

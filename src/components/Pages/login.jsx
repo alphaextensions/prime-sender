@@ -6,12 +6,12 @@ import { primeSenderController, setCredentials } from "../context";
 import "../../styles/login/login.css";
 
 function Login() {
-  const url = "https://pzx8ao8mk8.execute-api.eu-north-1.amazonaws.com/dev";
   const [controller, dispatch] = primeSenderController();
   const [headline, setHeadline] = useState("");
   const [subHeadline, setSubHeadline] = useState("");
   const [isSubHeadLine, setIsSubHeadLine] = useState(false)
   const [isPopupActive, setIsPopupActive] = useState(false)
+  const url = import.meta.env.VITE_PROD_LOGIN_API;
 
   const navigate = useNavigate();
 
