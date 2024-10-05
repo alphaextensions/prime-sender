@@ -81,6 +81,14 @@
 .phone-error{
   color: red;
 }
+
+form{
+    background-color: #FFFFFF;
+    display: block;
+    padding: initial;
+    text-align: initial;
+    height: auto;
+}
 @media (max-width:560px) {
   .phone_container label{
     font-size: 12px;
