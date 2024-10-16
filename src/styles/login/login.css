@@ -228,20 +228,20 @@ input {
 
 .popup_container {
 	width: 400px;
-    height: -moz-max-content;
-    height: max-content;
-    padding: 14px 22px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-50%);
-    z-index: 1000;
-    background: #ebebeb;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    animation: all 0.5s ease-in-out;
+	height: -moz-max-content;
+	height: max-content;
+	padding: 10px 12px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-50%);
+	z-index: 1000;
+	background: #ebebeb;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	animation: all 0.5s ease-in-out;
 }
 
 .close_btn {
@@ -267,6 +267,12 @@ input {
 	color: #000;
 }
 
+.headline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .headline span,
 .sub_headline span {
 	font-size: 18px;
@@ -277,6 +283,7 @@ input {
 
 .sub_headline {
 	padding: 0px 12px;
+	width: 90%;
 }
 
 .sub_headline span {

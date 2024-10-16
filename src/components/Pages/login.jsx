@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { primeSenderController, setCredentials } from "../context";
 import "../../styles/login/login.css";
+import theme from "@material-tailwind/react/theme";
 
 function Login() {
   const [controller, dispatch] = primeSenderController();
@@ -34,8 +34,14 @@ function Login() {
     if (data.message === "User not exist") {
       setIsPopupActive(true)
       setHeadline("User Not Found");
-      setSubHeadline("The email you selected does not match our records. Please check and try again.")
       setIsSubHeadLine(true)
+      setSubHeadline("The email you selected does not match our records. Please check and try again.")
+    }
+    if (data === "Server error") {
+      setIsPopupActive(true)
+      setHeadline("Server Error");
+      setIsSubHeadLine(true)
+      setSubHeadline("There is some server issue please try again later.")
     }
   }
 
@@ -67,21 +73,47 @@ function Login() {
           }
 
           if (data.statusCode === 400) {
-            showPopups(res)
+            showPopups(res);
           }
         })
         .catch((error) => {
           console.error(error);
+          showPopups("Server error")
         });
-    }
-    else {
-      getWhatsappNum()
+    } else {
+      getWhatsappNum();
     }
   };
 
   useEffect(() => {
+    if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
+      navigate("/dashboard/profile")
+    }
+  }, [controller, navigate]);
+
+
+  useEffect(() => {
     !isWhatsappNumExist() && getWhatsappNum()
+
+    /* global variable google */
+    google.accounts.id.initialize({
+      client_id: import.meta.env.VITE_DEV_GOOGLE_CLIENT_ID,
+      callback: onSuccess,
+      auto_select: true,
+      itp_support: true
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("signInGoogle"),
+      {
+        theme: "outline",
+        size: "large",
+        text: "continue_with",
+        logo_alignment: "left"
+      }
+    );
+
   }, [])
+
 
   return (
     <div className="page">
@@ -89,14 +121,9 @@ function Login() {
         <div className="form-container sign-in-container">
           <form action="#">
             <h1 style={{ margin: "10px 0px" }}>Sign in</h1>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                onSuccess(credentialResponse);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
+            <div id="signInGoogle">
+
+            </div>
             <span style={{ margin: "10px 0px" }}>
               use your google account to Sign - In
             </span>
@@ -120,12 +147,11 @@ function Login() {
       </div>
 
       <div className={isPopupActive ? "popup_container active_popup" : "popup_container"}>
-        <div className="close_btn">
-          <IoClose style={{ cursor: "pointer" }} onClick={() => setIsPopupActive(false)} />
-        </div>
+
         <div className="popup_content">
           <div className="headline">
             <span>{headline}</span>
+            <IoClose style={{ cursor: "pointer", fontSize: "22px" }} onClick={() => setIsPopupActive(false)} />
           </div>
           <div className="sub_headline" style={{ display: isSubHeadLine ? "block" : "none" }}>
             <span>{subHeadline}</span>

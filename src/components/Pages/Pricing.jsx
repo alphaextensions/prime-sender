@@ -414,7 +414,7 @@ const Pricing = () => {
   }, [myLocation]);
 
   useEffect(() => {
-    if (controller?.credentials?.cred !== "") {
+    if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
       navigate("/dashboard/profile")
     }
   }, [controller, navigate]);

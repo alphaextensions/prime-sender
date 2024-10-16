@@ -82,8 +82,9 @@ export function Profile() {
           </div>
           <TransferPlan />
           {
-            data.parent_email !== "" &&
-            <MultipleTransferHandler />
+            data.parent_email && data.parent_email.trim() !== "" && (
+              <MultipleTransferHandler />
+            )
           }
         </CardBody>
       </Card>

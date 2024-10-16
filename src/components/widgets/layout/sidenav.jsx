@@ -6,7 +6,6 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { googleLogout } from '@react-oauth/google';
 import { primeSenderController, setOpenSidenav, clearCredentials } from "../../context";
 
 export function Sidenav({ routes }) {
@@ -30,7 +29,6 @@ export function Sidenav({ routes }) {
 
 
   const handleLogout = () => {
-    googleLogout();
     logoutActionFun(dispatch, "logout");
   };
 
