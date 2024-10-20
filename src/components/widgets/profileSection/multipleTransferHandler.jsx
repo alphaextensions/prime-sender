@@ -58,15 +58,17 @@ function MultipleTransferHandler() {
         const headers = {
             "Content-Type": "application/json",
         };
-        const body = JSON.stringify({
+    
+        const params = new URLSearchParams({
             email: controller.credentials.data[controller.profile].email,
             operation: "get-completed-transaction"
         });
-
-        fetch(url, {
-            method: "POST",
+    
+        const fullUrl = `${url}?${params.toString()}`;
+    
+        fetch(fullUrl, {
+            method: "GET",
             headers: headers,
-            body: body,
         })
             .then((response) => {
                 if (!response.ok) {
@@ -77,14 +79,14 @@ function MultipleTransferHandler() {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
-                    formatPhoneNumbers(res.data.numbers)
+                    formatPhoneNumbers(res.data.numbers);
                 }
             })
             .catch((error) => {
                 console.error(error);
             });
     };
-
+    
     const sendReq = (newNumber) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
         const headers = {
