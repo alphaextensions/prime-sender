@@ -6,7 +6,7 @@ const HelmetHeader = ({ title, description, keywords}) => {
   return (
     <Helmet>
         <html lang="en" />
-        <title>{title}</title>
+        <title className="notranslate">{title}</title>
         <meta name="title" content={title} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
