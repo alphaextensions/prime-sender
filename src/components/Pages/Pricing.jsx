@@ -86,7 +86,10 @@ const Pricing = () => {
   const [advanceCardDetailHover, setAdvanceCardDetailHover] = useState(-1);
   const [pricingCalculatorPlan, setPricingCalculatorPlan] = useState("advance");
   const [pricingCalculatorPeriod, setPricingCalculatorPeriod] = useState("annually");
-  const [numAccounts, setNumAccounts] = useState(Number(JSON.parse(localStorage.getItem('numAccounts')))|| 2);
+  const [numAccounts, setNumAccounts] = useState(() => {
+    const phoneNumbers = JSON.parse(localStorage.getItem('phoneNumbers')) || [];
+    return phoneNumbers.length || 2;
+  });
   const [multAccountPrice, setMultAccountPrice] = useState({ currency:'', price: '', totalPrice: '', cutPrice: ''});
   const [priceCalculatorLoader, setPriceCalculatorLoader] = useState(false);
   const [showMultipleAccountPopup, setShowMultipleAccountPopup] = useState(false);
@@ -629,7 +632,7 @@ const Pricing = () => {
                 <div className="pay_via_upi_text">Want to pay via UPI? <span onClick={() => setShowUPIPopup({ show: true, type: 'Basic', price: currentPrice.basic_plan.final, monthly_price: currentPrice.basic_plan.monthly_final, currency: currentPrice.currency_symbol })}>Click here</span></div>
               }
               {
-                currentCountry !='india' && planPeriod == 'annually' &&
+                currentCountry !='india' && planPeriod != 'monthly' &&
                 <div className="pay_via_bank_text">Bank Transfer and PayPal also available - <a href={getWhatsappLink("bank", "Basic")} target="_blank">Click here</a></div>
               }
               <div className="pricing_card_features">
@@ -696,7 +699,7 @@ const Pricing = () => {
                 <div className="pay_via_upi_text">Want to pay via UPI? <span onClick={() => setShowUPIPopup({ show: true, type: 'Advance', price: currentPrice.advance_plan.final, monthly_price: currentPrice.advance_plan.monthly_final, currency: currentPrice.currency_symbol })}>Click here</span></div>
               }
               {
-                currentCountry !='india' && planPeriod == 'annually' &&
+                currentCountry !='india' && planPeriod != 'montly' &&
                 <div className="pay_via_bank_text">Bank Transfer and PayPal also available - <a href={getWhatsappLink("bank", "Advance")} target="_blank">Click here</a></div>
               }
               <div className="pricing_card_features">
