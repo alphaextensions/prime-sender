@@ -790,7 +790,7 @@
 
 .multiple_card_hover_style {
   position: absolute;
-  z-index: 1000000000;
+  z-index: 1000000;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -808,7 +808,7 @@
     height: 97%;
     width: 100%;
     z-index: 1000000;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
 }
 
 .top-pricing-slider {

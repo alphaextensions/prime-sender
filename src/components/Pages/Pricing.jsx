@@ -97,6 +97,8 @@ const Pricing = () => {
   const [isMultipleAccountPage, setIsMultipleAccountPage] = useState(false);
   const [isPricingCardHovered, setIsPricingCardHovered] = useState("");
   const [showUPIPopup, setShowUPIPopup] = useState({ show: false, type: 'Basic', price: '', monthly_price: '', currency: '' });
+    
+  const scrollToPricingPopupRef = useRef(null);
   
   const getParams = () => {
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
@@ -356,6 +358,11 @@ const Pricing = () => {
         }
         if (url.includes('multiple-account')) {
             setIsMultipleAccountPage(true);
+            setTimeout(() => {
+                if (scrollToPricingPopupRef.current) {
+                    scrollToPricingPopupRef.current.scrollIntoView({ behavior: 'smooth' });
+                } 
+            }, 400);
         }
     }
 
@@ -502,10 +509,8 @@ const Pricing = () => {
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
               {!loading && countrySwitchComponent()}
-              <div className="pricing-slider top-pricing-slider">
-                {isMultipleAccountPage && <div className="pricing-slider-overlay"></div>}
-                {/* <Slider onTextHeader="Monthly" offTextHeader="12 Months" setValue={togglePlanPeriod} planPeriod={planPeriod} /> */}
-                <div className="pricing_country">
+              <div className={`pricing-slider top-pricing-slider`} ref={scrollToPricingPopupRef}>
+                <div className={`pricing_country ${isMultipleAccountPage?"display_none":""}`}>
                   <div className="pricing_country_switch">
                     <div className={`country_switch ${planPeriod == 'monthly' && 'active_country_class'}`} onClick={()=> setPlanPeriod("monthly")}>
                       <p className="country_current_switch plan_switch">
