@@ -369,6 +369,37 @@
     animation: slideOut 0.5s forwards;
 }
 
+.auto_renew_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2px;
+}
+
+.auto_renew_text {
+	font-size: 16px;
+	font-weight: bold;
+	color: rgb(75, 75, 75);
+}
+
+.auto_renew_container .pricing_feature_info_container {
+	margin-left: 2px;
+	margin-bottom: 4px;
+}
+
+.auto_renew_container input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+} 
+.auto_renew_container input[type=checkbox], input[type=radio], input[type=range] {
+    accent-color: #009A88;
+}
+
 @keyframes slideOut {
     from {
         transform: translateX(0);
