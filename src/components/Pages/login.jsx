@@ -31,7 +31,7 @@ function Login() {
   }
 
   const showPopups = (data) => {
-    if (data.message === "User not exist") {
+    if (data.message === "User data not found.") {
       setIsPopupActive(true)
       setHeadline("User Not Found");
       setIsSubHeadLine(true)
@@ -42,6 +42,18 @@ function Login() {
       setHeadline("Server Error");
       setIsSubHeadLine(true)
       setSubHeadline("There is some server issue please try again later.")
+    }
+    if (data.message === "Another email is already associated with the provided whatsapp number.") {
+      setIsPopupActive(true)
+      setHeadline("WhatsApp Number Already Linked");
+      setIsSubHeadLine(true)
+      setSubHeadline("This WhatsApp number is already associated with an existing email account. Please use a different number or email.")
+    }
+    if (data.message === "WhatsApp number is required.") {
+      setIsPopupActive(true);
+      setHeadline("WhatsApp Number Verification Needed");
+      setIsSubHeadLine(true);
+      setSubHeadline("Please install our extension on this device to proceed with login.");
     }
   }
 
@@ -97,7 +109,7 @@ function Login() {
 
     /* global variable google */
     google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_DEV_GOOGLE_CLIENT_ID,
+      client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
       callback: onSuccess,
       auto_select: true,
       itp_support: true

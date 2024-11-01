@@ -10,9 +10,10 @@ import {
 } from "@material-tailwind/react";
 import { useCountries } from "use-react-countries";
 import { PhoneNumberSelect } from "./countrySelector";
+import { toast } from 'react-toastify';
 import { primeSenderController } from "../../context";
 
-function MultipleTransferHandler() {
+function MultipleTransferHandler({ countryData }) {
     const [controller, dispatch] = primeSenderController();
     const { countries } = useCountries();
     const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
@@ -58,14 +59,14 @@ function MultipleTransferHandler() {
         const headers = {
             "Content-Type": "application/json",
         };
-    
+
         const params = new URLSearchParams({
-            email: controller.credentials.data[controller.profile].email,
+            email: `${controller.credentials.data[controller.profile].email}`,
             operation: "get-completed-transaction"
         });
-    
+
         const fullUrl = `${url}?${params.toString()}`;
-    
+
         fetch(fullUrl, {
             method: "GET",
             headers: headers,
@@ -86,7 +87,7 @@ function MultipleTransferHandler() {
                 console.error(error);
             });
     };
-    
+
     const sendReq = (newNumber) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
         const headers = {
@@ -113,10 +114,27 @@ function MultipleTransferHandler() {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
                     setSelectedUser(res.data.userData)
+                    toast(
+                        <div>
+                            <strong>Account Transferred Successfully!</strong>
+                            <p>Your multiple account old number <strong>+{selectedOldNumber}</strong> is now transferred to <strong>+{newNumber}</strong>.</p>
+                        </div>,
+                        { theme: 'colored', type: 'success', autoClose: 4000 }
+                    );
+                }
+                else {
+                    throw new Error(`Unexpected status code: ${data.statusCode}`);
                 }
             })
             .catch((error) => {
                 console.error(error);
+                toast(
+                    <div>
+                        <strong>Transfer Failed</strong>
+                        <p>There was an issue transferring your number. Please try again or contact support.</p>
+                    </div>,
+                    { theme: 'colored', type: 'error', autoClose: 5000 }
+                );
             });
     };
 
@@ -159,9 +177,8 @@ function MultipleTransferHandler() {
     const handleTransfer = () => {
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
-        setPhoneNumber("")
-        setSelectedCountry(countries[0].name)
         if (is_transfer_allowed() && phoneNumber !== "" && selectedOldNumber !== "") {
+            setPhoneNumber("")
             sendReq(fullNumber);
         }
     };
@@ -202,6 +219,12 @@ function MultipleTransferHandler() {
     useEffect(() => {
         getPhoneNumbers();
     }, [controller.credentials.data, controller.profile]);
+
+    useEffect(() => {
+        if (countryData?.country_name) {
+            setSelectedCountry(countryData.country_name);
+        }
+    }, [countryData]);
 
     return (
         <div className="mt-8 mb-4 px-4 flex-col flex justify-start ">

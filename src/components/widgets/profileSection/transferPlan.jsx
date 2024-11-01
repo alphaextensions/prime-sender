@@ -9,18 +9,19 @@ import {
     Button,
 } from "@material-tailwind/react";
 import { primeSenderController, replaceDataObject } from "../../context";
+import { toast } from 'react-toastify';
 import { useCountries } from "use-react-countries";
 
-function TransferPlan() {
+function TransferPlan({ countryData }) {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
-    const [selectedCountry, setSelectedCountry] = useState(countries[0].name);
+    const [selectedCountry, setSelectedCountry] = useState(countries[0]?.name || "");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [data, setData] = useState(controller.credentials.data[controller.profile]);
-    const [warning, setWarning] = useState(null);
+    // const [warning, setWarning] = useState(null);
 
     const sortedCountries = useMemo(
-        () => countries.slice().sort((a, b) => a.name.localeCompare(b.name)),
+        () => countries.slice().sort((a, b) => a.name.localeCompare(b.name)).filter(a => a.countryCallingCode),
         [countries]
     );
 
@@ -36,24 +37,25 @@ function TransferPlan() {
         return (data.parent_email && data.email === data.parent_email)
     }
 
-    const handleWarning = () => {
-        let war = null;
-        if (attempts === 0) {
-            war = "You've exhausted your transfer requests";
-        } else if (attempts !== 3) {
-            war = `You have ${attempts} requests remaining for this month.`;
-        }
-        setWarning(war);
-    }
+    // const handleWarning = () => {
+    //     let war = null;
+    //     if (attempts === 0) {
+    //         war = "You've exhausted your transfer requests";
+    //     } else if (attempts !== 3) {
+    //         war = `You have ${attempts} requests remaining for this month.`;
+    //     }
+    //     setWarning(war);
+    // }
 
     const sendReq = (newNumber) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
+        let oldNumber = controller.credentials.data[0].phone;
         const headers = {
             "Content-Type": "application/json",
         };
         const body = JSON.stringify({
             authToken: controller.credentials.cred,
-            oldNumber: controller.credentials.data[0].phone,
+            oldNumber: oldNumber,
             newNumber: newNumber
         });
         fetch(transferUrl, {
@@ -71,20 +73,39 @@ function TransferPlan() {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
                     replaceDataObject(dispatch, res.data.userData)
+                    toast(
+                        <div>
+                            <strong>Account Transferred Successfully!</strong>
+                            <p>Your old number <strong>+{oldNumber}</strong> is now transferred to <strong>+{newNumber}</strong>.</p>
+                        </div>,
+                        { theme: 'colored', type: 'success', autoClose: 4000 }
+                    );
+                }
+                else {
+                    throw new Error(`Unexpected status code: ${data.statusCode}`);
                 }
             })
             .catch((error) => {
                 console.error(error);
+                toast(
+                    <div>
+                        <strong>Transfer Failed</strong>
+                        <p>There was an issue transferring your number. Please try again or contact support.</p>
+                    </div>,
+                    { theme: 'colored', type: 'error', autoClose: 5000 }
+                );
             });
     };
 
     const handleTransfer = () => {
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
-        setPhoneNumber("")
-        setSelectedCountry(countries[0].name)
-        if (is_transfer_allowed() && fullNumber !== "" && phoneNumber !== "") {
+        if (is_transfer_allowed() && fullNumber !== "" && phoneNumber !== "" && fullNumber !== data.phone) {
+            setPhoneNumber("")
             sendReq(fullNumber);
+        }
+        else {
+            alert("Please recheck the mobile number you enter in the input box.")
         }
     };
 
@@ -121,10 +142,12 @@ function TransferPlan() {
         return days_diff;
     }
 
-    // useEffect(() => {
-    //     setAttempts(controller.credentials.data[controller.profile]);
-    //     handleWarning();
-    // }, [controller.credentials.data, controller.profile]);
+    useEffect(() => {
+        console.log(countryData)
+        if (countryData?.country_name) {
+            setSelectedCountry(countryData.country_name);
+        }
+    }, [countryData]);
 
     return (
         <div className="mt-4 mb-4 px-4 flex-col flex justify-start ">
