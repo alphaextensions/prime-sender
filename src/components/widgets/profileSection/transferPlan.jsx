@@ -111,9 +111,9 @@ function TransferPlan({ countryData }) {
 
     const is_transfer_allowed = () => {
         try {
-            let { purchased_date, is_account_transferred } = data;
+            let { subscribed_date, is_account_transferred } = data;
             let today = new Date();
-            let days_since_purchased = get_days_diff(today, purchased_date);
+            let days_since_purchased = get_days_diff(today, subscribed_date );
 
             if (!is_account_transferred && days_since_purchased <= import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
                 return true;
@@ -143,7 +143,6 @@ function TransferPlan({ countryData }) {
     }
 
     useEffect(() => {
-        console.log(countryData)
         if (countryData?.country_name) {
             setSelectedCountry(countryData.country_name);
         }

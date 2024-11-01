@@ -55,19 +55,12 @@ function MultipleTransferHandler({ countryData }) {
     );
 
     const getPhoneNumbers = () => {
-        let url = import.meta.env.VITE_PROD_FETCH_MULTIPLE_ACC_INFO_API;
+        let url = import.meta.env.VITE_PROD_FETCH_MULTIPLE_ACC_INFO_API + "?email=" + controller.credentials.data[controller.profile].email + "&operation=get-completed-transaction";
         const headers = {
             "Content-Type": "application/json",
         };
 
-        const params = new URLSearchParams({
-            email: `${controller.credentials.data[controller.profile].email}`,
-            operation: "get-completed-transaction"
-        });
-
-        const fullUrl = `${url}?${params.toString()}`;
-
-        fetch(fullUrl, {
+        fetch(url, {
             method: "GET",
             headers: headers,
         })
@@ -114,6 +107,7 @@ function MultipleTransferHandler({ countryData }) {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
                     setSelectedUser(res.data.userData)
+                    getPhoneNumbers()
                     toast(
                         <div>
                             <strong>Account Transferred Successfully!</strong>
@@ -185,9 +179,9 @@ function MultipleTransferHandler({ countryData }) {
 
     const is_transfer_allowed = () => {
         try {
-            let { purchased_date, is_account_transferred } = selectedUser;
+            let { subscribed_date, is_account_transferred } = selectedUser;
             let today = new Date();
-            let days_since_purchased = get_days_diff(today, purchased_date);
+            let days_since_purchased = get_days_diff(today, subscribed_date );
 
             if (!is_account_transferred && days_since_purchased <= import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
                 return true;

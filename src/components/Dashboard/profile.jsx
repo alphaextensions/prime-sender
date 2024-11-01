@@ -27,7 +27,6 @@ export function Profile() {
       .then(res => res.json())
       .then((data) => {
         setUserLocation(data);
-        console.log(data)
       })
       .catch(err => {
         console.log(err)
@@ -100,7 +99,7 @@ export function Profile() {
           <TransferPlan countryData={userLocation} />
           {
             data.parent_email && data.parent_email.trim() !== "" && (
-              <MultipleTransferHandler />
+              <MultipleTransferHandler countryData={userLocation} />
             )
           }
         </CardBody>
