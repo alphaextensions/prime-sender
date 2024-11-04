@@ -299,15 +299,7 @@ const Pricing = () => {
   }
 
     const handleCountrySwitchClick = (val) => {
-        console.log("this is the val ", val);
         setCurrentCountry(val);
-        console.log({
-            country_name: val[0].toUpperCase() + val.slice(1),
-            pricing_country_name: val,
-            country_code: countryNameToCode[val],
-            country_currency: countryCodeToCurrency[countryNameToCode[val]],
-            isSuccess: false,
-        });
         setMyLocation({
             country_name: val[0].toUpperCase() + val.slice(1),
             pricing_country_name: val,
