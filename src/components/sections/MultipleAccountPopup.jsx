@@ -3,7 +3,7 @@ import '../../styles/PricingPage/multipleAccountPopup.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Oval } from 'react-loader-spinner';
-import { IoMdClose } from 'react-icons/io';
+import { IoIosInformationCircleOutline, IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
@@ -73,6 +73,9 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const [emailInputError, setEmailInputError] = useState(false);
 	const [numberInputError, setNumberInputError] = useState(false);
 	const [inputErrorNumbers, setInputErrorNumbers] = useState([]);
+	const [autorenewChecked, setAutorenewChecked] = useState(false);
+	const [autoRenewHover, setAutoRenewHover] = useState(false);
+	const [showLoader, setShowLoader] = useState(false);
 
 	const valueChangeHandler = (val, ind) => {
 		if (val < 2) {
@@ -98,7 +101,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		setValue(val);
 	}
 
-	const setDataInDatabase = async (name, description, currency) => {
+	const setDataInDatabase = async (name, description, currency, isAutoRenew) => {
 		setIsPageGenerating(true);
 		const myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
@@ -112,6 +115,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			"description": description,
 			"country": multCountry,
 			"currency": currency.toLowerCase(),
+            "autorenew": isAutoRenew,
 		});
 
 		const requestOptions = {
@@ -131,7 +135,8 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 				return null;
 			}
 			setIsPageGenerating(false);
-			return body.data.client_secret;
+            if(isAutoRenew) return body.data.stripe_checkout_url;
+            else return body.data.client_secret;
 		} catch (error) {
 			setIsPageGenerating(false);
 			console.log("error from setting data in database ", error);
@@ -195,7 +200,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
 		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
-		const client_secret = await setDataInDatabase(productName, productDescription, country_currency);
+        if(autorenewChecked) {
+            const stripe_checkout_url = await setDataInDatabase(productName, productDescription, country_currency, true);
+            window.location.href = stripe_checkout_url;
+            return;
+        }
+		const client_secret = await setDataInDatabase(productName, productDescription, country_currency, false);
 		if(!client_secret){
 			return;
 		}
@@ -296,7 +306,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								<div className="mult_account_image">
 									<img src="images/logo-large.png" alt="" />
 								</div>
-								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} Annual</div>
+								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} {plan_duration=='annually'?'Annual':'Monthly'}</div>
 							</div>
 						</div>
 						{/* popup body */}
@@ -340,12 +350,33 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 									valueChangeHandler(Number(value) + 1)
 								}}>+ Add More</p>
 							</div>
+                            {
+								plan_duration == 'monthly' &&
+								<div className='auto_renew_container'>
+									<input type="checkbox" checked={autorenewChecked} onChange={() => {
+										setAutorenewChecked(!autorenewChecked)
+										setShowLoader(true);
+										setTimeout(() => {
+											setShowLoader(false);
+										}, 2000);
+									}} />
+									<p className='auto_renew_text'>Auto Renew</p>
+									<span className={`pricing_feature_info_container`} onMouseEnter={() => setAutoRenewHover(true)} onMouseLeave={() => setAutoRenewHover(false)}>
+										<IoIosInformationCircleOutline className="feature_info_class" />
+										<div className="navigation_outer_box_down navigation_container" hidden={!autoRenewHover} >
+											<div className="msg-box-down">
+												<p>Amount will be deducted every month on checking this box.</p>
+											</div>
+										</div>
+									</span>
+								</div>
+							}
 							<div className='mult_popup_button_section'>
 								<button className='mult_popup_buy_button mult_review_button' disabled={value<2} onClick={() => setShowNumbersList(true)}>
 									<a>Show numbers</a>
 								</button>
 								<button className='mult_popup_buy_button' onClick={handleBuyPlan} disabled={isPageGenerating}>
-									{isPageGenerating ? <Oval /> : <a>Buy Now</a>}
+									{(isPageGenerating || showLoader) ? <Oval /> : <a>{autorenewChecked?'Subscribe':'Buy now'}</a>}
 								</button>
 							</div>
 							{isPageGenerating && <div className='please_wait_text'>Please wait...</div>}
