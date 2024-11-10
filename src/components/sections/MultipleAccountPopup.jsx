@@ -360,12 +360,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 											setShowLoader(false);
 										}, 2000);
 									}} />
-									<p className='auto_renew_text'>Auto Renew</p>
+									<p className='auto_renew_text'>Enable auto-renew</p>
 									<span className={`pricing_feature_info_container`} onMouseEnter={() => setAutoRenewHover(true)} onMouseLeave={() => setAutoRenewHover(false)}>
 										<IoIosInformationCircleOutline className="feature_info_class" />
 										<div className="navigation_outer_box_down navigation_container" hidden={!autoRenewHover} >
 											<div className="msg-box-down">
-												<p>Amount will be deducted every month on checking this box.</p>
+												<p>Premium amount will be deducted every month on checking this box.</p>
 											</div>
 										</div>
 									</span>

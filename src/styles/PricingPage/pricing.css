@@ -296,10 +296,11 @@
 }
 
 .pricing_country_text {
-  background: #009a88;
+  /*background: #009a88;*/
   border-radius: 20px;
   font-weight: bold;
-  color: #fff;
+  /*color: #fff;*/
+  color: #009a88;
   width: min(80%, 745px);
   padding: 10px 0;
 }
