@@ -3,7 +3,7 @@ import '../../styles/PricingPage/multipleAccountPopup.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Oval } from 'react-loader-spinner';
-import { IoIosInformationCircleOutline, IoMdClose } from 'react-icons/io';
+import { IoIosInformationCircleOutline, IoIosRemoveCircleOutline, IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
@@ -55,7 +55,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 							}, 500)
 						}}
 					>
-						<p>Remove</p>
+						<p><IoIosRemoveCircleOutline/></p>
 					</div>
 				}
 			</div>
@@ -278,9 +278,6 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 				<button className='mult_popup_buy_button mult_review_button' onClick={() => setShowNumbersList(false)}>
 					<a>Go Back</a>
 				</button>
-				<button className='mult_popup_buy_button go_back_button' onClick={handleBuyPlan} disabled={isPageGenerating}>
-					{isPageGenerating ? <Oval /> : <a>Buy Now</a>}
-				</button>
 			</div>
 		</>
 	}
@@ -312,18 +309,18 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 						{/* popup body */}
 						<div className='mult_account_body'>
 							<div className='mult_account_num'>
-								<p className='mult_account_num_text'>Enter number of accounts: </p>
+								<p className='mult_account_num_text'>Number of accounts: </p>
 								<input type="number" value={value} onChange={(e) => valueChangeHandler(e.target.value)} />
 							</div>
 							<div className='mult_account_num'>
-								<p className='mult_account_num_text'>Enter email address: </p>
+								<p className='mult_account_num_text'>Email address: </p>
 								<input type="email" className={`mult_account_email_input ${emailInputError?'input_error_border':''}`} value={userEmail} onChange={(e) => {
 									setUserEmail(e.target.value)
 									localStorage.setItem("userEmail", JSON.stringify(e.target.value))
 								}} />
 							</div>
 							<div className='mult_account_body_heading'>
-								<p>Enter the <span>Whatsapp numbers</span> on which the premium needs to be enabled</p>
+								<p>Add the <span>WhatsApp numbers</span> on which the premium needs to be enabled</p>
 							</div>
 							{value < 2 ? <div className="mult_error_message">
 								Number of accounts cannot be less than 2
@@ -346,10 +343,13 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								</div>
 							}
 							<div className='mult_account_add_more'>
+                                <p className='mult_account_show_more' disabled={value<2} onClick={() => setShowNumbersList(true)}>
+                                    Show numbers
+                                </p>
 								<p onClick={() => {
 									valueChangeHandler(Number(value) + 1)
-								}}>+ Add More</p>
-							</div>
+                                }}><b>+</b> Add More</p>
+                            </div>
                             {
 								plan_duration == 'monthly' &&
 								<div className='auto_renew_container'>
@@ -372,12 +372,20 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								</div>
 							}
 							<div className='mult_popup_button_section'>
-								<button className='mult_popup_buy_button mult_review_button' disabled={value<2} onClick={() => setShowNumbersList(true)}>
-									<a>Show numbers</a>
+                            {
+								// <button className='mult_popup_buy_button mult_review_button' disabled={value<2} onClick={() => setShowNumbersList(true)}>
+									// <a>Show numbers</a>
+								// </button>
+                            }
+								<button className={`mult_popup_buy_button ${autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
+                                    {((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>Buy now</a>}
 								</button>
-								<button className='mult_popup_buy_button' onClick={handleBuyPlan} disabled={isPageGenerating}>
-									{(isPageGenerating || showLoader) ? <Oval /> : <a>{autorenewChecked?'Subscribe':'Buy now'}</a>}
-								</button>
+                            {
+                                plan_duration == "monthly" && 
+                                <button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
+                                    {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>Subscribe</a>}
+                                </button>
+                            }
 							</div>
 							{isPageGenerating && <div className='please_wait_text'>Please wait...</div>}
 						</div>
