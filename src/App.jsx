@@ -60,7 +60,6 @@ const App = () => {
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/contactus" element={<ContactUs />} />
               <Route path="/terms-of-service" element={<TermsOfUse />} />
-              <Route path="/login" element={<Login />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/basic-success" element={<Success plan="basic" />} />
               <Route path="/advance-success" element={<Success plan="advance" />} />
@@ -70,6 +69,7 @@ const App = () => {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="*" element={<Error />} />
             </Route>
+            <Route path="/login" element={<Login />} />
             <Route path="/dashboard/*" element={<DashboardLayout />} />
           </Routes>
         </Router>

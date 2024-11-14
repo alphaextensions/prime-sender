@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
+import { CiWarning } from "react-icons/ci";
 import { primeSenderController, setCredentials } from "../context";
 import "../../styles/login/login.css";
-import theme from "@material-tailwind/react/theme";
+
 
 function Login() {
   const [controller, dispatch] = primeSenderController();
   const [headline, setHeadline] = useState("");
   const [subHeadline, setSubHeadline] = useState("");
   const [isSubHeadLine, setIsSubHeadLine] = useState(false)
+  const [isButtonActive, setIsButtonActive] = useState(false)
   const [isPopupActive, setIsPopupActive] = useState(false)
   const url = import.meta.env.VITE_PROD_LOGIN_API;
 
@@ -23,39 +25,77 @@ function Login() {
   const isWhatsappNumExist = () => {
     return (window.localStorage.getItem("whatsapp_number") ? true : false)
   }
-  const getWhatsappNum = () => {
-    setIsPopupActive(true)
-    setHeadline("First time login")
-    setIsSubHeadLine(true)
-    setSubHeadline("If this is your first time logging in, please ensure you do so from a desktop or laptop where the Prime Sender extension is installed. This will help ensure that all necessary features are properly activated. Thank you for your cooperation.")
+
+  const isCorrectWhatsappNum = () => {
+    let whatsapp_number = parseInt(window.localStorage.getItem("whatsapp_number"));
+    return !isNaN(whatsapp_number);
   }
 
-  const showPopups = (data) => {
-    if (data.message === "User data not found.") {
-      setIsPopupActive(true)
-      setHeadline("User Not Found");
-      setIsSubHeadLine(true)
-      setSubHeadline("The email you selected does not match our records. Please check and try again.")
-    }
-    if (data === "Server error") {
-      setIsPopupActive(true)
-      setHeadline("Server Error");
-      setIsSubHeadLine(true)
-      setSubHeadline("There is some server issue please try again later.")
-    }
-    if (data.message === "Another email is already associated with the provided whatsapp number.") {
-      setIsPopupActive(true)
-      setHeadline("WhatsApp Number Already Linked");
-      setIsSubHeadLine(true)
-      setSubHeadline("This WhatsApp number is already associated with an existing email account. Please use a different number or email.")
-    }
-    if (data.message === "WhatsApp number is required.") {
-      setIsPopupActive(true);
-      setHeadline("WhatsApp Number Verification Needed");
-      setIsSubHeadLine(true);
-      setSubHeadline("Please install our extension on this device to proceed with login.");
+  const isMobileDevice = () => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobileUserAgent = /mobile|android|iphone|ipad|tablet/.test(userAgent);
+
+    if (isTouchDevice && isMobileUserAgent) {
+      return true;
+    } else {
+      return false;
     }
   }
+
+  const showPopup = (headline, subHeadline, isButtonActive = false) => {
+    setIsPopupActive(true);
+    setIsSubHeadLine(Boolean(subHeadline));
+    setHeadline(headline);
+    setSubHeadline(subHeadline || "");
+    setIsButtonActive(isButtonActive);
+  };
+
+  const promptWhatsAppWebLogin = () => {
+    showPopup(
+      "WhatsApp Web Login Required",
+      "Please log in to your WhatsApp Web account to continue."
+    );
+  };
+
+  const promptInstallPrimes = () => {
+    const isMobile = isMobileDevice();
+    showPopup(
+      isMobile
+        ? "Unable to login via Mobile!"
+        : "Prime Sender Extension Not Installed",
+      isMobile
+        ? "Currently we are not able to login you through mobile. sorry for inconvenience."
+        : "To proceed, please install our browser extension and then try logging in again.",
+      !isMobile
+    );
+  };
+
+  const handlePopups = (data) => {
+    if (data.message === "User data not found.") {
+      promptInstallPrimes();
+      return;
+    }
+
+    if (data === "Server error") {
+      showPopup(
+        "Internal Server Error",
+        "An issue occurred on our end. Please try again later."
+      );
+      return;
+    }
+
+    if (data.message === "Another email is already associated with the provided WhatsApp number.") {
+      const userName = data.data.user_name;
+      const maskedEmail = data.data.user_masked_email;
+      showPopup(
+        "Email ID Already Linked",
+        userName ? `Hi ${userName}, this email is already linked with an account registered using ${maskedEmail}. Please check your extension profile for the registered email ID.` : `Hi, this email is already linked with an account registered using ${maskedEmail}. Please check your extension profile for the registered email ID.`
+      );
+      return;
+    }
+  };
+
 
   const onSuccess = (credentialResponse) => {
     const headers = {
@@ -66,7 +106,7 @@ function Login() {
       phoneNumber: window.localStorage.getItem("whatsapp_number"),
     });
 
-    if (isWhatsappNumExist()) {
+    if (isWhatsappNumExist() && isCorrectWhatsappNum()) {
       fetch(url, {
         method: "POST",
         headers: headers,
@@ -85,17 +125,25 @@ function Login() {
           }
 
           if (data.statusCode === 400) {
-            showPopups(res);
+            handlePopups(res);
           }
         })
         .catch((error) => {
           console.error(error);
-          showPopups("Server error")
+          handlePopups("Server error")
         });
     } else {
-      getWhatsappNum();
+      if (!isWhatsappNumExist()) {
+        promptInstallPrimes()
+      } else {
+        !isMobileDevice() && promptWhatsAppWebLogin()
+      }
     }
   };
+
+  const returnToHomePage=()=>{
+    navigate("/")
+  }
 
   useEffect(() => {
     if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
@@ -105,7 +153,7 @@ function Login() {
 
 
   useEffect(() => {
-    !isWhatsappNumExist() && getWhatsappNum()
+    !isWhatsappNumExist() && !isMobileDevice() && promptInstallPrimes();
 
     /* global variable google */
     google.accounts.id.initialize({
@@ -114,12 +162,14 @@ function Login() {
       auto_select: true,
       itp_support: true
     });
+
     google.accounts.id.renderButton(
       document.getElementById("signInGoogle"),
       {
-        theme: "outline",
+        type: "standard",
         size: "large",
-        text: "continue_with",
+        text: "signin_with",
+        shape: "pill",
         logo_alignment: "left"
       }
     );
@@ -129,44 +179,45 @@ function Login() {
 
   return (
     <div className="page">
-      <div className="container" id="container">
-        <div className="form-container sign-in-container">
-          <form action="#">
-            <h1 style={{ margin: "10px 0px" }}>Sign in</h1>
-            <div id="signInGoogle">
+      <div className={isPopupActive ? "main blur_active" : "main"}>
+        <div className="left-side">
+          <div className="logo_box" onClick={returnToHomePage}>
+            <img className="icon" src="/images/logo-img.png" alt="logo" />
+            <img src="/images/logo-text.png" alt="Prime Sender" />
+          </div>
+          <div className="img_box">
+            <h2>Reach Your Audience on WhatsApp with Precision</h2>
+            <hr />
+            <img src="/images/login_image.png" alt="" />
+          </div>
 
-            </div>
-            <span style={{ margin: "10px 0px" }}>
-              use your google account to Sign - In
-            </span>
-          </form>
         </div>
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-right">
-              <h2>Prerequisite for sign-in via Google</h2>
-              <li>
-                Ensure you installed prime-sender extension in the current
-                browser from which you try to login.{" "}
-              </li>
-              <li>
-                Ensure you logged in the whatsapp web which account you want to
-                login{" "}
-              </li>
+        <div className="right-side">
+          <div className="main_box">
+            <div className="intro_text">
+              <h1>Welcome!</h1>
+              <h3>Let's Make WhatsApp Work Smarter for You with Prime Sender.</h3>
+            </div>
+            <div id="signInGoogle">
+            </div>
+            <div className="end_text">
+              <hr />
+              <h5>Log In to Connect, Engage, and Grow!</h5>
             </div>
           </div>
         </div>
       </div>
-
       <div className={isPopupActive ? "popup_container active_popup" : "popup_container"}>
-
         <div className="popup_content">
+          <IoClose className="cross_close" onClick={() => setIsPopupActive(false)} />
           <div className="headline">
-            <span>{headline}</span>
-            <IoClose style={{ cursor: "pointer", fontSize: "22px" }} onClick={() => setIsPopupActive(false)} />
+            <CiWarning className="warning_icon" /><span>{headline}</span>
           </div>
           <div className="sub_headline" style={{ display: isSubHeadLine ? "block" : "none" }}>
             <span>{subHeadline}</span>
+          </div>
+          <div className={isButtonActive ? "button_div active_btn" : "button_div"}>
+            <a target="_blank" href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia">Download Now</a>
           </div>
         </div>
       </div>
