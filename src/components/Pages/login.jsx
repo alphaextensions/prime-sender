@@ -22,9 +22,9 @@ function Login() {
     navigate("/dashboard/profile")
   };
 
-  const isWhatsappNumExist = () => {
-    return (window.localStorage.getItem("whatsapp_number") ? true : false)
-  }
+  // const isWhatsappNumExist = () => {
+  //   return (window.localStorage.getItem("whatsapp_number") ? true : false)
+  // }
 
   const isCorrectWhatsappNum = () => {
     let whatsapp_number = parseInt(window.localStorage.getItem("whatsapp_number"));
@@ -51,22 +51,18 @@ function Login() {
     setIsButtonActive(isButtonActive);
   };
 
-  const promptWhatsAppWebLogin = () => {
-    showPopup(
-      "WhatsApp Web Login Required",
-      "Please log in to your WhatsApp Web account to continue."
-    );
-  };
+  // const promptWhatsAppWebLogin = () => {
+  //   showPopup(
+  //     "WhatsApp Web Login Required",
+  //     "Please log in to your WhatsApp Web account to continue."
+  //   );
+  // };
 
   const promptInstallPrimes = () => {
     const isMobile = isMobileDevice();
     showPopup(
-      isMobile
-        ? "Unable to login via Mobile!"
-        : "Prime Sender Extension Not Installed",
-      isMobile
-        ? "Currently we are not able to login you through mobile. sorry for inconvenience."
-        : "To proceed, please install our browser extension and then try logging in again.",
+      "Prime Sender Extension Not Installed",
+      "To proceed, please install our browser extension and then try logging in again.",
       !isMobile
     );
   };
@@ -101,47 +97,44 @@ function Login() {
     const headers = {
       "Content-Type": "application/json",
     };
+
+    let phoneNumber = window.localStorage.getItem("whatsapp_number");
+
     const body = JSON.stringify({
       authToken: credentialResponse.credential,
-      phoneNumber: window.localStorage.getItem("whatsapp_number"),
+      phoneNumber: isCorrectWhatsappNum(phoneNumber) ? phoneNumber : "",
     });
 
-    if (isWhatsappNumExist() && isCorrectWhatsappNum()) {
-      fetch(url, {
-        method: "POST",
-        headers: headers,
-        body: body,
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: body,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          let res = JSON.parse(data.body);
-          if (data.statusCode === 200) {
-            handleLogin(res.data.authToken, res.data.userData);
-          }
+      .then((data) => {
+        let res = JSON.parse(data.body);
+        if (data.statusCode === 200) {
+          handleLogin(res.data.authToken, res.data.userData);
+        }
 
-          if (data.statusCode === 400) {
-            handlePopups(res);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          handlePopups("Server error")
-        });
-    } else {
-      if (!isWhatsappNumExist()) {
-        promptInstallPrimes()
-      } else {
-        !isMobileDevice() && promptWhatsAppWebLogin()
-      }
-    }
+        if (data.statusCode !== 200) {
+          handlePopups(res);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        handlePopups("Server error")
+      });
+
+
   };
 
-  const returnToHomePage=()=>{
+  const returnToHomePage = () => {
     navigate("/")
   }
 
@@ -153,7 +146,6 @@ function Login() {
 
 
   useEffect(() => {
-    !isWhatsappNumExist() && !isMobileDevice() && promptInstallPrimes();
 
     /* global variable google */
     google.accounts.id.initialize({
