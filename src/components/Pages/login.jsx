@@ -86,7 +86,7 @@ function Login() {
       const maskedEmail = data.data.user_masked_email;
       showPopup(
         "Email ID Already Linked",
-        userName ? `Hi ${userName}, this email is already linked with an account registered using ${maskedEmail}. Please check your extension profile for the registered email ID.` : `Hi, this email is already linked with an account registered using ${maskedEmail}. Please check your extension profile for the registered email ID.`
+        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked with an account registered using ${maskedEmail}. Please check your extension profile for the registered email ID.`
       );
       return;
     }
