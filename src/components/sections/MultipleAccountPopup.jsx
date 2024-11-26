@@ -202,7 +202,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
         if(autorenewChecked) {
             const stripe_checkout_url = await setDataInDatabase(productName, productDescription, country_currency, true);
-            window.location.href = stripe_checkout_url;
+            window.open(stripe_checkout_url, '_blank');
             return;
         }
 		const client_secret = await setDataInDatabase(productName, productDescription, country_currency, false);

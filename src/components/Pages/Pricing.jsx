@@ -57,6 +57,13 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
   </>
 }
 
+const DiscountPercentageBox = ({discountPercentage}) => {
+    return <div className="discount_percentage_box">
+        <img src="/images/yellow-stars.png"/>
+        <p>Save {discountPercentage}%</p>
+        </div>
+}
+
 
 const Pricing = () => {
   const promoTextComponentGenerator = () => {
@@ -537,12 +544,14 @@ const Pricing = () => {
                         Monthly
                       </p>
                     </div>
-                    <div className={`country_switch ${planPeriod == 'annually' && 'active_country_class'}`} onClick={()=> setPlanPeriod("annually")}>
+                    <div className={`country_switch ${planPeriod == 'annually' && 'active_country_class'}`} onClick={()=> setPlanPeriod("annually")} style={{position:"relative"}}>
+                        <DiscountPercentageBox discountPercentage={40} />
                       <p className="country_current_switch plan_switch">
                       12 Months
                       </p>
                     </div>
-                    <div className={`country_switch ${planPeriod == 'biannually' && 'active_country_class'}`} onClick={()=> setPlanPeriod("biannually")}>
+                    <div className={`country_switch ${planPeriod == 'biannually' && 'active_country_class'}`} onClick={()=> setPlanPeriod("biannually")} style={{position:"relative"}}>
+                        <DiscountPercentageBox discountPercentage={60} />
                       <p className="country_current_switch plan_switch">
                       24 Months
                       </p>

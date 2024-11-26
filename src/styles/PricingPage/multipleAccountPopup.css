@@ -230,7 +230,7 @@
 .mult_account_add_more{
 	width: 100%;
 	display: flex;
-    gap: 15px;
+    gap: 40px;
 	justify-content: center;
 	align-items: center;
 	font-size: 17px;

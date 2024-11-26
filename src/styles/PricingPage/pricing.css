@@ -292,7 +292,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
 }
 
 .pricing_country_text {
@@ -934,6 +934,32 @@
   color: var(--color-dark-grey);
 }
 
+.discount_percentage_box {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    background: #616FF0;
+    border-radius: 30px;
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    font-family: 'PT Sans Caption';
+}
+
+
+.discount_percentage_box img {
+    width: 15px;
+}
+
+
+.discount_percentage_box p {
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 @media (max-width: 1280px) {
   .pricing_cards_container{
     grid-template-columns: 1fr 1fr 1fr;
@@ -1068,6 +1094,7 @@
   .pricing_country_switch{
     flex-direction: column;
     padding: 5px;
+    gap: 25px;
   }
   .pricing_switches .country_switch{
     width: 100%;
