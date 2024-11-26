@@ -20,6 +20,7 @@ import MainFeatures from './components/sections/MainFeatures';
 import Success from './components/Pages/Success';
 import Checkout from './components/Pages/Checkout';
 import { CheckoutProvider } from './components/context/CheckoutContext';
+import RefundAndCancellation from './components/Pages/RefundAndCancellation';
 
 const App = () => {
   const [showWebsite, setShowWebsite] = useState(true);
@@ -45,7 +46,7 @@ const App = () => {
 
   return (
     <>
-      {showWebsite ?
+   {showWebsite ?
         <CheckoutProvider>
           <Router>
             <Navbar />
@@ -57,8 +58,9 @@ const App = () => {
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blogs/:id" element={<BlogPage />} />
               <Route path="/faqs" element={<FAQs />} />
-              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/terms-of-service" element={<TermsOfUse />} />
+              <Route path="/refund-policy" element={<RefundAndCancellation />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/basic-success" element={<Success plan="basic" />} />
               <Route path="/advance-success" element={<Success plan="advance" />} />
