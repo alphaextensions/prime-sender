@@ -84,6 +84,7 @@ const Pricing = () => {
   const [popupLastPlan, setPopupLastPlan] = useState(null);
   const [popupCountry, setPopupCountry] = useState(null);
   const [popupPlan, setPopupPlan] = useState(null);
+  const [showPopupMonthly, setShowPopupMonthly] = useState(true);
   const [myLocation, setMyLocation] = useState({
         country_name: "International",
         pricing_country_name: "international",
@@ -120,10 +121,12 @@ const Pricing = () => {
       const lastPlan = params.get('lastPlan');
       const country = params.get('country');
       const currentPlan = params.get('currentPlan')
+      const hideMonthly = params.get('hideMonthly') || "false";
 
       setPopupCountry(country)
       setPopupLastPlan(lastPlan)
       setPopupPlan(currentPlan)
+      setShowPopupMonthly(hideMonthly=="false"?true:false)
 
       if (lastPlan || country || currentPlan) {
         window.history.replaceState(null, '', window.location.pathname);
@@ -205,48 +208,55 @@ const Pricing = () => {
             <h1> <b>{capitalPlanName} Plan</b></h1>
           </div>
           <hr />
+        {
+
+            showPopupMonthly &&
           <div className='pricing-recommendation-msg'>
             <img src="/images/stars.png" alt="starts" />
             <div className="recommendation-msg-content">Recommended - Value for Money</div>
           </div>
-          <div className="pricing-popup-slider">
+          }
+          <div className={`pricing-popup-slider ${!showPopupMonthly?"marginTop30":""}`}>
             {
               popupPlan === 'basic' ?
-                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} /> :
+                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly}  /> :
                 <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} />
             }
           </div>
-          <div className="pricing-popup-content">
-            <div className="monthly-price">
-              <span className={popupLastPlan === 'freeTrial' ? 'pricing-popup-slash-price' : ''}>
-                {
-                  <span className={popupCountry=='india'?"rupee":""}>
-                    {popupPlan === 'basic' ? pricing[popupCountry].currency_symbol + pricing[popupCountry].monthly.basic_plan.final : pricing[popupCountry].currency_symbol + pricing[popupCountry].monthly.advance_plan.final}
-                  </span>
-                }
-                /month</span>
-              <br />
-              {popupLastPlan === 'freeTrial' && (
-                <span className="pricing-popup-offer-price">
-                  {
-                    <span>
-                      {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic_plan.discounted : pricing[popupCountry].monthly.advance_plan.discounted}
+          <div className={`pricing-popup-content ${!showPopupMonthly?"hideMonthlyPopupPriceClass":""}`}>
+            {
+                showPopupMonthly &&
+                <div className="monthly-price">
+                  <span className={popupLastPlan === 'freeTrial' ? 'pricing-popup-slash-price' : ''}>
+                    {
+                      <span className={popupCountry=='india'?"rupee":""}>
+                        {popupPlan === 'basic' ? pricing[popupCountry].currency_symbol + pricing[popupCountry].monthly.basic_plan.final : pricing[popupCountry].currency_symbol + pricing[popupCountry].monthly.advance_plan.final}
+                      </span>
+                    }
+                    /month</span>
+                  <br />
+                  {popupLastPlan === 'freeTrial' && (
+                    <span className="pricing-popup-offer-price">
+                      {
+                        <span>
+                          {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic_plan.discounted : pricing[popupCountry].monthly.advance_plan.discounted}
+                        </span>
+                      }
+                      */month
                     </span>
-                  }
-                  */month
-                </span>
-              )}
-            </div>
+                  )}
+                </div>
+            }
             {
               popupCountry !== 'india' && popupCountry !== 'international' && popupCountry !== 'kuwait' ?
-                <div className="annual-price-indonesia" >
+                <div className={`${showPopupMonthly?"annual-price-indonesia":"hideMonthlyPopupAnnualPriceClass"}`} >
                   <span>
                     {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.final : pricing[popupCountry].annually.advance_plan.final}
                     &nbsp;({
                       (popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)
                     }/month)</span>
                 </div> :
-                <div className="annual-price" >
+                <div className={`${showPopupMonthly?"annual-price":"hideMonthlyPopupAnnualPriceClass"}`} >
                   <span>
                     <span className={popupCountry === 'india' ? 'rupee' : ''}>
                       {pricing[popupCountry].currency_symbol}
@@ -274,7 +284,7 @@ const Pricing = () => {
             <div className="pricing-popup-features">
               {
                 pricing_popup_premium_features.map((item, index) => {
-                  return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item} <span className="text-bold">&nbsp;(Advance)</span></div>
+                  return <div className="feature-item" key={index}><img src={`/images/${popupPlan=="basic"?"circle_cross":"check"}.png`} className="check_icon" alt="✔"></img>{item} <span className="text-bold">&nbsp;(Advance)</span></div>
                 })
               }
               {
@@ -558,6 +568,13 @@ const Pricing = () => {
                     </div>
                   </div>
                 </div>
+            {
+                planPeriod != "monthly" && 
+                <div className="slider_discount_text">
+                    <img src="/images/yellow-stars.png"/>
+                    <p>Purchase a {planPeriod == "annually" ? 12 : 24} months plan to save <span className="text-royal italic_text">{planPeriod == "annually" ? "40%" : "60%"}</span> for the whole year</p>
+                </div>
+            }
               </div>
             </div>
             {

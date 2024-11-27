@@ -39,6 +39,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   z-index: 10000000;
+  backdrop-filter: blur(10px);
 }
 .pricing-popup-header{
   width: 62%;
@@ -147,6 +148,17 @@
 .pricing-popup-offer-price{
   color: var(--color-purple);
 }
+
+.hideMonthlyPopupPriceClass {
+    min-height: auto;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.hideMonthlyPopupAnnualPriceClass {
+    position: relative;
+}
+
 .pricing-popup-btn{
   width: 90%;
   margin: auto;
@@ -284,7 +296,7 @@
   align-items: center;
   justify-content: center;
   background: var(--color-primary1);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 5px;
 }
 
@@ -318,13 +330,33 @@
 
 .country_switch {
   padding: 10px;
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 8px 30px;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   color: var(--color-white);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+
+.top-pricing-slider .pricing_country_switch {
+    gap: 60px;
+}
+
+.slider_discount_text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.slider_discount_text img {
+    width: 25px;
+}
+
+.top-pricing-slider .country_switch {
+    padding: 8px 60px;
 }
 
 .country_current_switch {
@@ -814,6 +846,7 @@
 
 .top-pricing-slider {
   position: relative;
+  margin: 15px;
 }
 
 .pricing-slider-overlay {
@@ -979,7 +1012,7 @@
   }
 }
 
-@media (max-width: 900px){
+@media (max-width: 920px){
   .pricing_card_feature .pricing_feature_info_container{
     position: static;
   }
@@ -992,6 +1025,14 @@
     right: unset;
     left: -10px;
   }  
+
+  .top-pricing-slider .pricing_country_switch {
+    gap: 50px !important;
+  }
+
+  .top-pricing-slider .country_switch {
+      padding: 8px 40px;
+  }
 }
 
 @media (max-width: 895px) {
@@ -1018,6 +1059,14 @@
   .country_switch{
     padding: 8px 23px;
   }
+
+    .pricing_country_switch {
+        gap: 25px !important;
+    }
+
+    .top-pricing-slider .pricing_country_switch {
+        gap: 25px !important;
+    }
 }
 
 @media (max-width: 720px) {
@@ -1048,6 +1097,10 @@
     padding: 6px;
     font-size: 16px; 
   }
+
+  .top-pricing-slider .country_switch {
+      padding: 8px 20px;
+    }
 }
 
 @media (max-width: 600px){

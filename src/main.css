@@ -142,6 +142,10 @@ body {
   border: 0;
 }
 
+.marginTop30 {
+  margin-top: 30px;
+}
+
 .marginBottom30 {
   margin-bottom: 30px;
 }
@@ -183,6 +187,10 @@ body {
 
 .input_error_border {
   border: 1px solid red !important;
+}
+.italic_text{
+    font-style: italic;
+    font-weight: bold;
 }
 
 /* Media query for responsiveness */
