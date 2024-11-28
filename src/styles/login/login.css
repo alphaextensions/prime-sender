@@ -235,6 +235,24 @@
 	display: flex;
 }
 
+.customer_support{
+	width: 100%;
+	display: none;
+	padding: 10px 12px;
+}
+.customer_support span,
+.customer_support a{
+	font-size: 13px;
+}
+
+.customer_support a{
+	cursor: pointer;
+}
+
+.active_support{
+	display: block;
+}
+
 @media (max-width: 767px) { 
 	.page{
 		height: max-content;
@@ -262,6 +280,15 @@
 	}
 	.main_box{
 		width: 85%;
+	}
+	.popup_container{
+		width: 300px;
+	}
+	.headline{
+		flex-direction: column;
+	}
+	.warning_icon{
+		font-size: 60px;
 	}
 }
 

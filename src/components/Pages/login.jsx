@@ -11,7 +11,7 @@ function Login() {
   const [headline, setHeadline] = useState("");
   const [subHeadline, setSubHeadline] = useState("");
   const [isSubHeadLine, setIsSubHeadLine] = useState(false)
-  const [isButtonActive, setIsButtonActive] = useState(false)
+  const [isSupportActive, setIsSupportActive] = useState(false)
   const [isPopupActive, setIsPopupActive] = useState(false)
   const url = import.meta.env.VITE_PROD_LOGIN_API;
 
@@ -31,24 +31,24 @@ function Login() {
     return !isNaN(whatsapp_number);
   }
 
-  const isMobileDevice = () => {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobileUserAgent = /mobile|android|iphone|ipad|tablet/.test(userAgent);
+  // const isMobileDevice = () => {
+  //   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  //   const userAgent = navigator.userAgent.toLowerCase();
+  //   const isMobileUserAgent = /mobile|android|iphone|ipad|tablet/.test(userAgent);
 
-    if (isTouchDevice && isMobileUserAgent) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  //   if (isTouchDevice && isMobileUserAgent) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  const showPopup = (headline, subHeadline, isButtonActive = false) => {
+  const showPopup = (headline, subHeadline, isSupportActive = false) => {
     setIsPopupActive(true);
     setIsSubHeadLine(Boolean(subHeadline));
     setHeadline(headline);
     setSubHeadline(subHeadline || "");
-    setIsButtonActive(isButtonActive);
+    setIsSupportActive(isSupportActive);
   };
 
   // const promptWhatsAppWebLogin = () => {
@@ -58,18 +58,22 @@ function Login() {
   //   );
   // };
 
-  const promptInstallPrimes = () => {
-    const isMobile = isMobileDevice();
-    showPopup(
-      "Prime Sender Extension Not Installed",
-      "To proceed, please install our browser extension and then try logging in again.",
-      !isMobile
-    );
-  };
+  // const promptInstallPrimes = () => {
+  //   const isMobile = isMobileDevice();
+  //   showPopup(
+  //     "Prime Sender Extension Not Installed",
+  //     "To proceed, please install our browser extension and then try logging in again.",
+  //     !isMobile
+  //   );
+  // };
 
   const handlePopups = (data) => {
     if (data.message === "User data not found.") {
-      promptInstallPrimes();
+      // promptInstallPrimes();
+      showPopup(
+        "Login Unavailable for Free Users",
+        "We’re currently enhancing the login experience for free users. Stay tuned for updates. Thank you for your patience!"
+      );
       return;
     }
 
@@ -84,9 +88,17 @@ function Login() {
     if (data.message === "Another email is already associated with the provided WhatsApp number.") {
       const userName = data.data.user_name;
       const maskedEmail = data.data.user_masked_email;
+      let supportCount = parseInt(window.localStorage.getItem("support_count") || 0);
+
+      if (supportCount < 2) {
+        window.localStorage.setItem("support_count", supportCount + 1);
+      }
+      let isSecondOrMoreVisit = supportCount >= 1;
+
       showPopup(
         "Email ID Already Linked",
-        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked with an account registered using ${maskedEmail}. Please check your extension profile for the registered email ID.`
+        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked to an account registered using ${maskedEmail}. To view the full email address, please check the profile section in your extension. The complete email is displayed there for your reference.`,
+        isSecondOrMoreVisit
       );
       return;
     }
@@ -98,11 +110,10 @@ function Login() {
       "Content-Type": "application/json",
     };
 
-    let phoneNumber = window.localStorage.getItem("whatsapp_number");
-
+    let whatsapp_number = window.localStorage.getItem("whatsapp_number");
     const body = JSON.stringify({
       authToken: credentialResponse.credential,
-      phoneNumber: isCorrectWhatsappNum(phoneNumber) ? phoneNumber : "",
+      phoneNumber: isCorrectWhatsappNum(whatsapp_number) ? whatsapp_number : ""
     });
 
     fetch(url, {
@@ -142,32 +153,26 @@ function Login() {
     if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
       navigate("/dashboard/profile")
     }
+
+      /* global variable google */
+      google.accounts.id.initialize({
+        client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
+        callback: onSuccess,
+        auto_select: true,
+        itp_support: true
+      });
+  
+      google.accounts.id.renderButton(
+        document.getElementById("signInGoogle"),
+        {
+          type: "standard",
+          size: "large",
+          text: "signin_with",
+          shape: "pill",
+          logo_alignment: "left"
+        }
+      );
   }, [controller, navigate]);
-
-
-  useEffect(() => {
-
-    /* global variable google */
-    google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
-      callback: onSuccess,
-      auto_select: true,
-      itp_support: true
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById("signInGoogle"),
-      {
-        type: "standard",
-        size: "large",
-        text: "signin_with",
-        shape: "pill",
-        logo_alignment: "left"
-      }
-    );
-
-  }, [])
-
 
   return (
     <div className="page">
@@ -208,9 +213,13 @@ function Login() {
           <div className="sub_headline" style={{ display: isSubHeadLine ? "block" : "none" }}>
             <span>{subHeadline}</span>
           </div>
-          <div className={isButtonActive ? "button_div active_btn" : "button_div"}>
-            <a target="_blank" href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia">Download Now</a>
+          <div className={isSupportActive ? "customer_support active_support" : "customer_support"}>
+            <span>Still not able to login?</span><a target="_blank" href="https://api.whatsapp.com/send?phone=917058067789">Click here</a>
           </div>
+
+          {/* <div className={isButtonActive ? "button_div active_btn" : "button_div"}>
+            <a target="_blank" href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia">Download Now</a>
+          </div> */}
         </div>
       </div>
     </div>
