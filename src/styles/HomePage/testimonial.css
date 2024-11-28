@@ -173,6 +173,10 @@
   left: 0;
 }
 
+.testimonial_stats span{
+  font-size: inherit;
+}
+
 .customer_review{
   line-height: 27px;
   margin-bottom: 15px;
@@ -201,12 +205,14 @@
 }
 
 .view-more-btn{
-  margin-top: 4rem;
+  margin-top: 4rem !important;
+  font-size: inherit;
   transition: 0.4s;
 }
 
 .view-more-btn span{
   margin-right: 10px;
+  font-size: inherit;
 }
 
 .view-more-btn:hover{

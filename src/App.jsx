@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/Home";
-import Navbar from "./components/Layouts/Navbar";
 import Pricing from "./components/Pages/Pricing";
 import RequestFeature from "./components/Pages/RequestFeature";
 import HelpUsImprove from "./components/Pages/HelpUsImprove";
 import Blogs from "./components/Pages/Blogs";
 import TermsOfUse from "./components/Pages/TermsOfUse";
-import PrivacyPolicy from "./components/Pages/PrivacyPolicy"
-import Footer from "./components/Layouts/Footer";
-import ChatSupport from './components/common/ChatSupport';
-import Error from './components/Pages/Error';
+import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
+import Login from "./components/Pages/login";
+import ContactUs from "./components/Pages/ContactUs";
+import BlogPage from "./components/Pages/BlogPage";
+import HowToUse from "./components/Pages/HowToUse";
+import Success from "./components/Pages/success";
+import Error from "./components/Pages/Error";
+import MainLayout from "./components/Layouts/MainLayout";
+import DashboardLayout from "./components/Layouts/Dashboard";
 import ReactGA from "react-ga4";
 import {useEffect, useState} from 'react';
-import ContactUs from './components/Pages/ContactUs';
-import BlogPage from './components/Pages/BlogPage';
 import FAQs from './components/sections/FAQs';
-import HowToUse from './components/Pages/HowToUse';
 import MainFeatures from './components/sections/MainFeatures';
-import Success from './components/Pages/Success';
 import Checkout from './components/Pages/Checkout';
 import { CheckoutProvider } from './components/context/CheckoutContext';
 
@@ -26,18 +26,18 @@ const App = () => {
 
   const checkForCountry = async () => {
     try {
-      const res = await fetch('https://ipapi.co/json');
+      const res = await fetch("https://ipapi.co/json");
       const data = await res.json();
-      if(data.country=='US' || data.country=='CN'){
+      if (data.country === "US" || data.country === "CN") {
         setShowWebsite(false);
-      }else{
+      } else {
         setShowWebsite(true);
       }
     } catch (error) {
-      console.log(error)  
+      console.log(error);
     }
-  }
-  // initializing react-ga
+  };
+
   useEffect(() => {
     ReactGA.initialize("G-3KZPL7D3HB");
     checkForCountry();
@@ -45,12 +45,13 @@ const App = () => {
 
   return (
     <>
-      {showWebsite ?
+
+     {showWebsite ?
         <CheckoutProvider>
-          <Router>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
+         <Router>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
               <Route path="/pricing" element={<Pricing key="pricing" />} />
               <Route path="/feature-request" element={<RequestFeature />} />
               <Route path="/help-us-improve" element={<HelpUsImprove />} />
@@ -67,11 +68,14 @@ const App = () => {
               <Route path="/pricing/multiple-account" element={<Pricing key="multiple-account" />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="*" element={<Error />} />
-            </Routes>
-            <Footer />
-            <ChatSupport />
-          </Router>
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard/*" element={<DashboardLayout />} />
+          </Routes>
+        </Router>
         </CheckoutProvider> : ''}
+
+      
     </>
   );
 };
