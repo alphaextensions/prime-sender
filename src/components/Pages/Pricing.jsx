@@ -220,7 +220,7 @@ const Pricing = () => {
             {
               popupPlan === 'basic' ?
                 <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly}  /> :
-                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} />
+                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} />
             }
           </div>
           <div className={`pricing-popup-content ${!showPopupMonthly?"hideMonthlyPopupPriceClass":""}`}>
