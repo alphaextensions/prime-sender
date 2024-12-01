@@ -10,9 +10,10 @@ import {
 } from "@material-tailwind/react";
 import { primeSenderController, replaceDataObject } from "../../context";
 import { toast } from 'react-toastify';
+import { PhoneNumberSelect } from "./countrySelector";
 import { useCountries } from "use-react-countries";
 
-function TransferPlan({ countryData }) {
+function TransferPlan({ countryData, phone }) {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
     const [selectedCountry, setSelectedCountry] = useState(countries[0]?.name || "");
@@ -113,7 +114,7 @@ function TransferPlan({ countryData }) {
         try {
             let { subscribed_date, is_account_transferred } = data;
             let today = new Date();
-            let days_since_purchased = get_days_diff(today, subscribed_date );
+            let days_since_purchased = get_days_diff(today, subscribed_date);
 
             if (!is_account_transferred && days_since_purchased <= import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
                 return true;
@@ -166,7 +167,11 @@ function TransferPlan({ countryData }) {
 
                     </p>
                     <div className="mb-4 mt-2 px-1 flex items-center w-max">
-                        <div className="relative flex w-full max-w-[20rem] mr-3">
+                        <div className="relative flex w-full mr-3 items-center">
+                            <PhoneNumberSelect
+                                phoneNumbers={[{ countryCode: countryData.country_calling_code, number: phone }]}
+                            />
+                            <span className="ml-3 mr-3 text-lg font-semibold">To</span>
                             <Menu placement="bottom-start">
                                 <MenuHandler>
                                     <Button

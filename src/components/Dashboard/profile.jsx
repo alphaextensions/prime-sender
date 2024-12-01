@@ -96,7 +96,7 @@ export function Profile() {
               />
             </div>
           </div>
-          <TransferPlan countryData={userLocation} />
+          <TransferPlan countryData={userLocation} phone={data.phone} />
           {
             data.parent_email && data.parent_email.trim() !== "" && (
               <MultipleTransferHandler countryData={userLocation} />

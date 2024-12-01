@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { CiWarning } from "react-icons/ci";
 import { primeSenderController, setCredentials } from "../context";
+import HashLoader from "react-spinners/HashLoader";
 import "../../styles/login/login.css";
 
 
@@ -11,7 +12,9 @@ function Login() {
   const [headline, setHeadline] = useState("");
   const [subHeadline, setSubHeadline] = useState("");
   const [isSubHeadLine, setIsSubHeadLine] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [isSupportActive, setIsSupportActive] = useState(false)
+  const [isButtonActive, setIsButtonActive] = useState(false)
   const [isPopupActive, setIsPopupActive] = useState(false)
   const url = import.meta.env.VITE_PROD_LOGIN_API;
 
@@ -43,12 +46,13 @@ function Login() {
   //   }
   // }
 
-  const showPopup = (headline, subHeadline, isSupportActive = false) => {
+  const showPopup = (headline, subHeadline, isSupportActive = false, isButtonActive = false) => {
     setIsPopupActive(true);
     setIsSubHeadLine(Boolean(subHeadline));
     setHeadline(headline);
     setSubHeadline(subHeadline || "");
     setIsSupportActive(isSupportActive);
+    setIsButtonActive(isButtonActive)
   };
 
   // const promptWhatsAppWebLogin = () => {
@@ -71,8 +75,8 @@ function Login() {
     if (data.message === "User data not found.") {
       // promptInstallPrimes();
       showPopup(
-        "Login Unavailable for Free Users",
-        "We’re currently enhancing the login experience for free users. Stay tuned for updates. Thank you for your patience!"
+        "Login Only available for Premium Users.",
+        "We’re upgrading our login experience to serve you better. Currently, this feature is available for Premium Users. Stay tuned for updates!", false, true
       );
       return;
     }
@@ -106,6 +110,7 @@ function Login() {
 
 
   const onSuccess = (credentialResponse) => {
+    setLoading(true)
     const headers = {
       "Content-Type": "application/json",
     };
@@ -129,6 +134,7 @@ function Login() {
       })
       .then((data) => {
         let res = JSON.parse(data.body);
+        setLoading(false)
         if (data.statusCode === 200) {
           handleLogin(res.data.authToken, res.data.userData);
         }
@@ -154,28 +160,37 @@ function Login() {
       navigate("/dashboard/profile")
     }
 
-      /* global variable google */
-      google.accounts.id.initialize({
-        client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
-        callback: onSuccess,
-        auto_select: true,
-        itp_support: true
-      });
-  
-      google.accounts.id.renderButton(
-        document.getElementById("signInGoogle"),
-        {
-          type: "standard",
-          size: "large",
-          text: "signin_with",
-          shape: "pill",
-          logo_alignment: "left"
-        }
-      );
+    /* global variable google */
+    google.accounts.id.initialize({
+      client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
+      callback: onSuccess,
+      auto_select: true,
+      itp_support: true
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInGoogle"),
+      {
+        type: "standard",
+        size: "large",
+        text: "signin_with",
+        shape: "pill",
+        logo_alignment: "left"
+      }
+    );
   }, [controller, navigate]);
 
   return (
     <div className="page">
+      <div className={loading ? "loader active_loader" : "loader"}>
+        <HashLoader
+          color="#009a88"
+          loading={loading}
+          size={100}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
       <div className={isPopupActive ? "main blur_active" : "main"}>
         <div className="left-side">
           <div className="logo_box" onClick={returnToHomePage}>
@@ -217,9 +232,9 @@ function Login() {
             <span>Still not able to login?</span><a target="_blank" href="https://api.whatsapp.com/send?phone=917058067789">Click here</a>
           </div>
 
-          {/* <div className={isButtonActive ? "button_div active_btn" : "button_div"}>
-            <a target="_blank" href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia">Download Now</a>
-          </div> */}
+          <div className={isButtonActive ? "button_div active_btn" : "button_div"}>
+            <a target="_blank" href="https://prime-sender.com/pricing/">Purchase Now</a>
+          </div>
         </div>
       </div>
     </div>

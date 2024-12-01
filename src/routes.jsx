@@ -35,10 +35,10 @@ export const routes = [
   {
     layout: "dashboard",
     pages: [
-      {
-        icon: <FiLogOut {...icon} />,
-        name: "logout",
-      },
+      // {
+      //   icon: <FiLogOut {...icon} />,
+      //   name: "logout",
+      // },
     ],
   },
 ];

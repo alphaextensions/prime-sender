@@ -6,7 +6,7 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { primeSenderController, setOpenSidenav, clearCredentials } from "../../context";
+import { primeSenderController, setOpenSidenav } from "../../context";
 
 export function Sidenav({ routes }) {
   const [controller, dispatch] = primeSenderController();
@@ -16,20 +16,6 @@ export function Sidenav({ routes }) {
     dark: "bg-gradient-to-br from-gray-800 to-gray-900",
     white: "bg-white shadow-sm",
     transparent: "bg-transparent",
-  };
-
-  const logoutActionFun = (dispatch, name) => {
-    if (name === "logout") {
-      if (confirm("Are you sure you want to logout from this account?")) {
-        clearCredentials(dispatch);
-        navigate("/login");
-      }
-    }
-  };
-
-
-  const handleLogout = () => {
-    logoutActionFun(dispatch, "logout");
   };
 
   return (
@@ -74,7 +60,7 @@ export function Sidenav({ routes }) {
               </li>
             )}
             {pages.map(({ icon, name, path }) => (
-              <li key={name} id={name} onClick={() => { name === "logout" ? handleLogout() : "" }}>
+              <li key={name} id={name}>
                 <NavLink to={`/${layout}${path}`}>
                   {({ isActive }) => (
                     <Button
