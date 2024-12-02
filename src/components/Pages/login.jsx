@@ -34,17 +34,13 @@ function Login() {
     return !isNaN(whatsapp_number);
   }
 
-  // const isMobileDevice = () => {
-  //   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  //   const userAgent = navigator.userAgent.toLowerCase();
-  //   const isMobileUserAgent = /mobile|android|iphone|ipad|tablet/.test(userAgent);
+  const isMobileDevice = () => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobileUserAgent = /mobile|android|iphone|ipad|tablet/.test(userAgent);
 
-  //   if (isTouchDevice && isMobileUserAgent) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+    return isTouchDevice && isMobileUserAgent;
+  };
 
   const showPopup = (headline, subHeadline, isSupportActive = false, isButtonActive = false) => {
     setIsPopupActive(true);
@@ -74,10 +70,21 @@ function Login() {
   const handlePopups = (data) => {
     if (data.message === "User data not found.") {
       // promptInstallPrimes();
-      showPopup(
-        "Login Only available for Premium Users.",
-        "We’re upgrading our login experience to serve you better. Currently, this feature is available for Premium Users. Stay tuned for updates!", false, true
-      );
+      if (isMobileDevice()) {
+        showPopup(
+          "Sorry, we couldn't identify your login.",
+          "For a smoother experience, please try logging in through a desktop device. Stay tuned for updates!",
+          false,
+          true
+        );
+      } else {
+        showPopup(
+          "Login Only Available for Premium Users",
+          "We’re upgrading our login experience to serve you better. Currently, this feature is available for Premium Users. Stay tuned for updates!",
+          false,
+          true
+        );
+      }
       return;
     }
 
