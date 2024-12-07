@@ -22,26 +22,28 @@ export function DashboardNavbar() {
       <div className="mr-10 flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
           <Breadcrumbs
-            className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""
-              }`}
+            className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""}`}
           >
-            <Link to={`/${layout}`}>
+            <span>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal opacity-50 transition-all"
+              >
+                {layout}
+              </Typography>
+            </span>
+            <Link to={`/dashboard/${page}`}>
               <Typography
                 variant="small"
                 color="blue-gray"
                 className="font-normal opacity-50 transition-all hover:text-green-500 hover:opacity-100"
               >
-                {layout}
+                {page}
               </Typography>
             </Link>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {page}
-            </Typography>
           </Breadcrumbs>
+
           <Typography variant="h6" color="blue-gray">
             {page}
           </Typography>

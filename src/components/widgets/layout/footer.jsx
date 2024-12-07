@@ -38,14 +38,11 @@ export function Footer({ brandName, brandLink, routes }) {
 }
 
 Footer.defaultProps = {
-  brandName: "Team Prime-Sender",
+  brandName: "Zero To Zee",
   brandLink: "https://prime-sender.com",
   routes: [
-    { name: "Home", path: "https://prime-sender.com" },
-    { name: "How to use", path: "https://prime-sender.com/how-to-use" },
     { name: "Features", path: "https://prime-sender.com/main-features" },
-    { name: "Pricing", path: "https://prime-sender.com/pricing" },
-    { name: "ContactUs", path: "https://prime-sender.com/contactus" },
+    { name: "Contact Us", path: "https://prime-sender.com/contactus" },
     { name: "Terms of service ", path: "https://prime-sender.com/terms-of-service" },
     { name: "Blogs", path: "https://prime-sender.com/blogs" },
   ],

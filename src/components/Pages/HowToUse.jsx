@@ -14,7 +14,7 @@ const HowToUse = () => {
   useEffect(() => {
     AOS.init({duration: 1000});
     if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
-      navigate("/dashboard/profile")
+      navigate("/dashboard/home")
     }
 
     if(window.location.href?.includes('how-to-use'))

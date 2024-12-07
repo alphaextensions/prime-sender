@@ -181,7 +181,7 @@ function MultipleTransferHandler({ countryData }) {
         try {
             let { subscribed_date, is_account_transferred } = selectedUser;
             let today = new Date();
-            let days_since_purchased = get_days_diff(today, subscribed_date );
+            let days_since_purchased = get_days_diff(today, subscribed_date);
 
             if (!is_account_transferred && days_since_purchased <= import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
                 return true;
@@ -229,6 +229,7 @@ function MultipleTransferHandler({ countryData }) {
                 Please select the WhatsApp number from which you wish to transfer the plan, and enter the target number in the input field below. Before proceeding, kindly double-check the number for accuracy, as we are not responsible for any errors made during this process.
             </p>
             <div className="mb-4 mt-2 px-1 flex items-center w-max">
+                <span className="ml-3 mr-3 text-lg font-semibold">From</span>
                 <div className="flex justify-center">
                     {formattedPhoneNumbers && formattedPhoneNumbers.length > 0 ? (
                         <PhoneNumberSelect
@@ -241,6 +242,7 @@ function MultipleTransferHandler({ countryData }) {
                 </div>
 
                 <span className="ml-3 mr-3 text-lg font-semibold">To</span>
+
 
                 <div className="relative flex w-full max-w-[17rem] mr-3">
                     <Menu placement="bottom-start">
@@ -282,7 +284,7 @@ function MultipleTransferHandler({ countryData }) {
                         placeholder="Mobile Number"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900"
+                        className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900"
                         labelProps={{
                             className: "before:content-none after:content-none",
                         }}

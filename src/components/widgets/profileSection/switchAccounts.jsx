@@ -6,14 +6,9 @@ import {
     MenuItem,
     Typography,
 } from "@material-tailwind/react";
-import { primeSenderController, setProfile, clearCredentials } from "../../context";
+import { primeSenderController, setProfile } from "../../context";
 import { FaAngleDown } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
-
-const icon = {
-    className: "w-5 h-5 text-inherit",
-};
 
 export function AvatarMenu() {
     const [controller, dispatch] = primeSenderController();
@@ -21,20 +16,6 @@ export function AvatarMenu() {
     const [avatars, setAvatars] = useState([]);
     const [selectedAvatar, setSelectedAvatar] = useState(null);
     const navigate = useNavigate();
-
-    const logoutActionFun = (dispatch, name) => {
-        if (name === "logout") {
-            if (confirm("Are you sure you want to logout from this account?")) {
-                clearCredentials(dispatch);
-                navigate("/login");
-            }
-        }
-    };
-
-
-    const handleLogout = () => {
-        logoutActionFun(dispatch, "logout");
-    };
 
     useEffect(() => {
         if (!controller.credentials) {
@@ -61,9 +42,9 @@ export function AvatarMenu() {
                     <Typography variant="small" className="font-semibold mr-1">
                         {selectedAvatar ? selectedAvatar.text : "Select an Avatar"}
                     </Typography>
-                    <FaAngleDown
+                    {avatars.length > 1 ? <FaAngleDown
                         className={isOpen ? 'transform transition-transform duration-200 rotate-180' : 'transform transition-transform duration-200 rotate-0'}
-                    />
+                    /> : ""}
                 </div>
             </MenuHandler>
             <MenuList className="flex flex-col gap-2 max-h-[200px]">
@@ -80,18 +61,7 @@ export function AvatarMenu() {
                         </div>
                     </MenuItem>
                 ))}
-                <MenuItem
-                    key="10101015421"
-                    className="flex items-center  py-2 pl-2 w-[100%] border-none"
-                    onClick={handleLogout}
-                >
-                    <div className="flex flex-row items-center w-max">
-                        <FiLogOut {...icon} />
-                        <Typography variant="small" color="gray" className="font-semibold ml-2">
-                            Logout
-                        </Typography>
-                    </div>
-                </MenuItem>
+
             </MenuList>
         </Menu>
     );

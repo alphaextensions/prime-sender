@@ -10,16 +10,15 @@ import {
 } from "@material-tailwind/react";
 import { primeSenderController, replaceDataObject } from "../../context";
 import { toast } from 'react-toastify';
-import { PhoneNumberSelect } from "./countrySelector";
 import { useCountries } from "use-react-countries";
 
-function TransferPlan({ countryData, phone }) {
+function TransferPlan({ countryData }) {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
     const [selectedCountry, setSelectedCountry] = useState(countries[0]?.name || "");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [info, setInfo] = useState("");
     const [data, setData] = useState(controller.credentials.data[controller.profile]);
-    // const [warning, setWarning] = useState(null);
 
     const sortedCountries = useMemo(
         () => countries.slice().sort((a, b) => a.name.localeCompare(b.name)).filter(a => a.countryCallingCode),
@@ -38,15 +37,13 @@ function TransferPlan({ countryData, phone }) {
         return (data.parent_email && data.email === data.parent_email)
     }
 
-    // const handleWarning = () => {
-    //     let war = null;
-    //     if (attempts === 0) {
-    //         war = "You've exhausted your transfer requests";
-    //     } else if (attempts !== 3) {
-    //         war = `You have ${attempts} requests remaining for this month.`;
-    //     }
-    //     setWarning(war);
-    // }
+    const removeCountryCode = (phone, countryCode) => {
+        const normalizedCountryCode = countryCode.replace("+", "");
+        if (phone.startsWith(normalizedCountryCode)) {
+            return phone.slice(normalizedCountryCode.length);
+        }
+        return phone;
+    }
 
     const sendReq = (newNumber) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
@@ -81,6 +78,7 @@ function TransferPlan({ countryData, phone }) {
                         </div>,
                         { theme: 'colored', type: 'success', autoClose: 4000 }
                     );
+                    infoShowCase()
                 }
                 else {
                     throw new Error(`Unexpected status code: ${data.statusCode}`);
@@ -101,14 +99,31 @@ function TransferPlan({ countryData, phone }) {
     const handleTransfer = () => {
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
-        if (is_transfer_allowed() && fullNumber !== "" && phoneNumber !== "" && fullNumber !== data.phone) {
-            setPhoneNumber("")
-            sendReq(fullNumber);
-        }
-        else {
-            alert("Please recheck the mobile number you enter in the input box.")
+        if (confirm(`Are you sure you want to transfer your current plan from +${data.phone} to +${fullNumber}`)) {
+            if (is_transfer_allowed() && fullNumber !== "" && phoneNumber !== "" && fullNumber !== data.phone) {
+                setPhoneNumber("")
+                sendReq(fullNumber);
+            }
+            else {
+                alert("Please recheck the mobile number you enter in the input box.")
+            }
         }
     };
+
+    const infoShowCase = () => {
+        let { subscribed_date, is_account_transferred } = data;
+        let today = new Date();
+        let days_since_purchased = get_days_diff(today, subscribed_date);
+        if (is_account_transferred) {
+            setInfo("You are no longer eligible for an account transfer, as transfers can only available for once and you have already used your one-time transfer.")
+        }
+        else if (days_since_purchased > import.meta.env.VITE_TRANSFER_ALLOWED_DAYS) {
+            setInfo("You are no longer eligible for an account transfer, as transfers can only be made within seven days of purchase.")
+        }
+        else {
+            setInfo("Please enter the WhatsApp number to which you would like to transfer your current plan. Before proceeding, kindly double-check the number for accuracy. Please be aware that we are not responsible for any errors you may make during this process.")
+        }
+    }
 
     const is_transfer_allowed = () => {
         try {
@@ -147,6 +162,7 @@ function TransferPlan({ countryData, phone }) {
         if (countryData?.country_name) {
             setSelectedCountry(countryData.country_name);
         }
+        infoShowCase()
     }, [countryData]);
 
     return (
@@ -158,18 +174,58 @@ function TransferPlan({ countryData, phone }) {
             {isPremiumUser() || isMultipleAccountAdmin() ? (
                 <>
                     <p className="mt-2 mb-2 font-light text-xs px-1">
-                        Please enter the WhatsApp number to which you would like to transfer your current plan. Before proceeding, kindly double-check the number for accuracy. Please be aware that we are not responsible for any errors you may make during this process.
+                        {info}
                     </p>
-                    <p className={is_transfer_allowed() ? "mb-4 font-semibold text-xs px-1" : "mb-4 font-semibold text-red-400 text-xs px-1"}>
-                        {
-                            is_transfer_allowed() ? "Please note: You are eligible for a plan transfer within 7 days of purchasing your Premium plan." : "Please note: You are no longer eligible for an account transfer, as transfers can only be made within 7 days of purchase or you have already used your one-time transfer."
-                        }
 
-                    </p>
                     <div className="mb-4 mt-2 px-1 flex items-center w-max">
                         <div className="relative flex w-full mr-3 items-center">
-                            <PhoneNumberSelect
-                                phoneNumbers={[{ countryCode: countryData.country_calling_code, number: phone }]}
+                            <span className="ml-3 mr-3 text-lg font-semibold">From</span>
+                            <Menu placement="bottom-start">
+                                <MenuHandler>
+                                    <Button
+                                        ripple={false}
+                                        variant="text"
+                                        color="blue-gray"
+                                        disabled
+                                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3 cursor-not-allowed"
+                                    >
+                                        <img
+                                            src={currentCountry.flags.svg}
+                                            alt={currentCountry.name}
+                                            className="h-4 w-4 rounded-full object-cover"
+                                        />
+                                        {currentCountry.countryCallingCode}
+                                    </Button>
+                                </MenuHandler>
+                                <MenuList className="max-h-[20rem] max-w-[18rem] pointer-events-none">
+                                    {sortedCountries.map(({ name, flags, countryCallingCode }) => (
+                                        <MenuItem
+                                            key={name}
+                                            value={name}
+                                            className="flex items-center gap-2 border-none cursor-not-allowed"
+                                        >
+                                            <img
+                                                src={flags.svg}
+                                                alt={name}
+                                                className="h-5 w-5 rounded-full object-cover"
+                                            />
+                                            {name} <span className="ml-auto">{countryCallingCode}</span>
+                                        </MenuItem>
+                                    ))}
+                                </MenuList>
+                            </Menu>
+                            <Input
+                                type="tel"
+                                placeholder="Mobile Number"
+                                value={removeCountryCode(data.phone, currentCountry.countryCallingCode)}
+                                readOnly
+                                className="rounded-l-none border border-solid border-blue-gray-200 bg-gray-100 !border-t-blue-gray-200 cursor-not-allowed focus:!border-t-gray-900"
+                                labelProps={{
+                                    className: "before:content-none after:content-none",
+                                }}
+                                containerProps={{
+                                    className: "min-w-0",
+                                }}
                             />
                             <span className="ml-3 mr-3 text-lg font-semibold">To</span>
                             <Menu placement="bottom-start">
@@ -211,7 +267,7 @@ function TransferPlan({ countryData, phone }) {
                                 placeholder="Mobile Number"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900"
+                                className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -230,9 +286,6 @@ function TransferPlan({ countryData, phone }) {
                         </Button>
 
                     </div>
-                    {/* <p className="mb-4 font-semibold text-red-400 text-xs px-1">
-                        {warning}
-                    </p> */}
                 </>
             ) : (
                 <p className="mt-2 mb-2 font-light text-xs px-1">

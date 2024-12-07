@@ -22,7 +22,7 @@ function Login() {
 
   const handleLogin = (cred, data) => {
     setCredentials(dispatch, { cred, data });
-    navigate("/dashboard/profile")
+    navigate("/dashboard/home")
   };
 
   // const isWhatsappNumExist = () => {
@@ -30,7 +30,7 @@ function Login() {
   // }
 
   const isCorrectWhatsappNum = () => {
-    let whatsapp_number = parseInt(window.localStorage.getItem("whatsapp_number"));
+    let whatsapp_number = parseInt(window.localStorage.getItem("PRIMES::whatsapp_number"));
     return !isNaN(whatsapp_number);
   }
 
@@ -122,7 +122,7 @@ function Login() {
       "Content-Type": "application/json",
     };
 
-    let whatsapp_number = window.localStorage.getItem("whatsapp_number");
+    let whatsapp_number = window.localStorage.getItem("PRIMES::whatsapp_number");
     const body = JSON.stringify({
       authToken: credentialResponse.credential,
       phoneNumber: isCorrectWhatsappNum(whatsapp_number) ? whatsapp_number : ""
@@ -164,7 +164,7 @@ function Login() {
 
   useEffect(() => {
     if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
-      navigate("/dashboard/profile")
+      navigate("/dashboard/home")
     }
 
     /* global variable google */

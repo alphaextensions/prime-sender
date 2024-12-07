@@ -7,31 +7,16 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileInfoCard } from "../widgets/cards";
-import { ToastContainer, toast } from 'react-toastify';
 import { primeSenderController } from "../context";
 import 'react-toastify/dist/ReactToastify.css';
 import { jwtDecode } from "jwt-decode";
-import MultipleTransferHandler from "../widgets/profileSection/multipleTransferHandler";
-import TransferPlan from "../widgets/profileSection/transferPlan";
 
 export function Profile() {
   const [controller, dispatch] = primeSenderController();
   const [data, setData] = useState({});
   const [cred, setCred] = useState({});
-  const [userLocation, setUserLocation] = useState({})
 
   const navigate = useNavigate();
-
-  const getUserLocation = () => {
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then((data) => {
-        setUserLocation(data);
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
 
   useEffect(() => {
     if (!controller?.credentials?.cred) {
@@ -40,13 +25,11 @@ export function Profile() {
     else {
       setCred(jwtDecode(controller.credentials.cred))
       setData(controller.credentials.data[controller.profile]);
-      getUserLocation()
     }
   }, [controller.profile, controller.credentials, dispatch]);
 
   return (
     <>
-      <ToastContainer />
       <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
         <div className="absolute inset-0 h-full w-full bg-gradient-to-br transition-transform from-[#00d4bb] to-[#009a88]" />
       </div>
@@ -65,12 +48,6 @@ export function Profile() {
                 <Typography variant="h5" color="blue-gray" className="mb-1">
                   {cred.given_name || "Default Username"}
                 </Typography>
-                <Typography
-                  variant="small"
-                  className="font-normal text-blue-gray-600"
-                >
-                  {data.plan_type || "Default PlanType"}
-                </Typography>
               </div>
             </div>
           </div>
@@ -78,30 +55,21 @@ export function Profile() {
             <ProfileInfoCard
               title="Profile Information"
               details={{
-                "first name": `${cred.given_name}`,
-                "mobile": `+${data.phone}`,
-                "country-code": `${userLocation.country}`,
-                "email": `${data.email}`,
+                "Name": `${data?.name ? data.name : cred.given_name}`,
+                "Current Plan": `${data.plan_type}`,
               }}
             />
             <div className="mt-5">
               <ProfileInfoCard
                 title=""
                 details={{
-                  "plan-type": `${data.plan_type}`,
-                  "Start-Date": `${data.subscribed_date}`,
-                  "Expiry-Date": `${data.expiry_date}`,
-                  "Last Plan Type": `${data.last_plan_type}`
+                  "Whatsapp Number": `+${data.phone}`,
+                  "Email": `${data.email}`,
                 }}
               />
             </div>
           </div>
-          <TransferPlan countryData={userLocation} phone={data.phone} />
-          {
-            data.parent_email && data.parent_email.trim() !== "" && (
-              <MultipleTransferHandler countryData={userLocation} />
-            )
-          }
+
         </CardBody>
       </Card>
     </>

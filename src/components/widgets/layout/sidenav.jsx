@@ -6,7 +6,7 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { primeSenderController, setOpenSidenav } from "../../context";
+import { primeSenderController, setOpenSidenav, clearCredentials } from "../../context";
 
 export function Sidenav({ routes }) {
   const [controller, dispatch] = primeSenderController();
@@ -16,6 +16,23 @@ export function Sidenav({ routes }) {
     dark: "bg-gradient-to-br from-gray-800 to-gray-900",
     white: "bg-white shadow-sm",
     transparent: "bg-transparent",
+  };
+
+  const logoutActionFun = (dispatch, name) => {
+    if (name === "logout") {
+      if (confirm("Are you sure you want to logout from this account?")) {
+        clearCredentials(dispatch);
+        navigate("/login");
+      }
+      else {
+
+      }
+    }
+  };
+
+
+  const handleLogout = () => {
+    logoutActionFun(dispatch, "logout");
   };
 
   return (
@@ -61,23 +78,40 @@ export function Sidenav({ routes }) {
             )}
             {pages.map(({ icon, name, path }) => (
               <li key={name} id={name}>
-                <NavLink to={`/${layout}${path}`}>
-                  {({ isActive }) => (
-                    <Button
-                      variant={isActive ? "gradient" : "text"}
-                      className={isActive ? `flex items-center gap-4 px-4 capitalize border-none bg-gradient-to-br transition-transform hover:scale-105 ${sidenavColor}` : "flex items-center gap-4 px-4 capitalize border-none"}
-                      fullWidth
+                {name === "logout" ? (
+                  <Button
+                    variant="text"
+                    className="flex items-center gap-4 px-4 capitalize border-none"
+                    fullWidth
+                    onClick={handleLogout} 
+                  >
+                    {icon}
+                    <Typography
+                      color="inherit"
+                      className="font-medium capitalize"
                     >
-                      {icon}
-                      <Typography
-                        color="inherit"
-                        className="font-medium capitalize"
+                      {name}
+                    </Typography>
+                  </Button>
+                ) : (
+                  <NavLink to={`/${layout}${path}`}>
+                    {({ isActive }) => (
+                      <Button
+                        variant={isActive ? "gradient" : "text"}
+                        className={isActive ? `flex items-center gap-4 px-4 capitalize border-none bg-gradient-to-br transition-transform hover:scale-105 ${sidenavColor}` : "flex items-center gap-4 px-4 capitalize border-none"}
+                        fullWidth
                       >
-                        {name}
-                      </Typography>
-                    </Button>
-                  )}
-                </NavLink>
+                        {icon}
+                        <Typography
+                          color="inherit"
+                          className="font-medium capitalize"
+                        >
+                          {name}
+                        </Typography>
+                      </Button>
+                    )}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
