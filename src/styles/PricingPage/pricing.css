@@ -125,6 +125,7 @@
   color: var(--color-primary1);
   font-size: 16px;
   position: relative;
+  font-family: 'PT Sans Caption', sans-serif;
 }
 .pricing-popup-content .monthly-price{
   position: absolute;
@@ -304,7 +305,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 50px;
+  gap: 10px;
 }
 
 .pricing_country_text {
