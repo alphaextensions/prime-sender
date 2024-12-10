@@ -74,11 +74,11 @@ const Home = () => {
   //   checkForScroll();
   // }, []);
 
-  const HowToUseButtonClickHandle = () => {
+  const buyNowButtonClickHandle = () => {
     ReactGA.event({
       category: "Button Click",
-      action: "how to use button click",
-      label: "how_to_use_btn_clicked",
+      action: "buy now button click",
+      label: "buy_now_btn_clicked",
     });
   }
 
@@ -108,8 +108,8 @@ const Home = () => {
             <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
             <div className="home-btns">
               <DownloadBtn />
-              <Link to="/how-to-use" onClick={() => { HowToUseButtonClickHandle() }} className="howtousebtn button-round large-text btn">
-                How To Use
+              <Link to="/pricing" onClick={() => { buyNowButtonClickHandle() }} className="howtousebtn button-round large-text btn">
+                Buy Now
               </Link>
             </div>
           </div>
