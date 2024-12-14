@@ -10,6 +10,19 @@ export const countryCodeToName = {
 	"SG": 'singapore',
 	"IL": 'israel',
 }
+
+export const countryNameToCode = {
+    'india': "IN",
+    'indonesia': "ID",
+    'uae': "AE",
+    'egypt': "EG",
+    'uk': "GB",
+    'saudi_arabia': "SA",
+    'kuwait': "KW",
+    'singapore': "SG",
+    'israel': "IL",
+}
+
 export const countryCodeToCurrency = {
 	"IN": "INR",
 	"ID": "IDR",
@@ -51,6 +64,20 @@ export const pricing_data = {
 				"original": "",
 				"monthly_original": "26.99"
 			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "249.99",
+				"monthly_final": "10.41",
+				"original": "",
+				"monthly_original": "22.99"
+			},
+			"advance_plan": {
+				"final": "289.99",
+				"monthly_final": "12.08",
+				"original": "",
+				"monthly_original": "26.99"
+			}
 		}
 	},
 	"singapore": {
@@ -66,8 +93,8 @@ export const pricing_data = {
 				"original": "39.99"
 			}
 		},
-		"currency": "SGD",
-		"currency_symbol": "SGD",
+		"currency": "SGD ",
+		"currency_symbol": "SGD ",
 		"annually": {
 			"basic_plan": {
 				"final": "239.99",
@@ -78,6 +105,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "279.99",
 				"monthly_final": "23.33",
+				"original": "",
+				"monthly_original": "39.99"
+			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "369.99",
+				"monthly_final": "15.41",
+				"original": "",
+				"monthly_original": "33.99"
+			},
+			"advance_plan": {
+				"final": "429.99",
+				"monthly_final": "17.91",
 				"original": "",
 				"monthly_original": "39.99"
 			}
@@ -96,8 +137,8 @@ export const pricing_data = {
 				"original": "756.99"
 			}
 		},
-		"currency": "EGP",
-		"currency_symbol": "EGP",
+		"currency": "EGP ",
+		"currency_symbol": "EGP ",
 		"annually": {
 			"basic_plan": {
 				"final": "4399.99",
@@ -108,6 +149,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "5299.99",
 				"monthly_final": "441.66",
+				"original": "",
+				"monthly_original": "756.99"
+			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "6699.99",
+				"monthly_final": "279.16",
+				"original": "",
+				"monthly_original": "628.99"
+			},
+			"advance_plan": {
+				"final": "7999.99",
+				"monthly_final": "333.33",
 				"original": "",
 				"monthly_original": "756.99"
 			}
@@ -126,8 +181,8 @@ export const pricing_data = {
 				"original": "105.99"
 			}
 		},
-		"currency": "ILS",
-		"currency_symbol": "ILS",
+		"currency": "ILS ",
+		"currency_symbol": "ILS ",
 		"annually": {
 			"basic_plan": {
 				"final": "629.99",
@@ -138,6 +193,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "739.99",
 				"monthly_final": "61.6",
+				"original": "",
+				"monthly_original": "105.99"
+			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "959.99",
+				"monthly_final": "39.99",
+				"original": "",
+				"monthly_original": "89.99"
+			},
+			"advance_plan": {
+				"final": "1119.99",
+				"monthly_final": "46.66",
 				"original": "",
 				"monthly_original": "105.99"
 			}
@@ -156,8 +225,8 @@ export const pricing_data = {
 				"original": "23.99"
 			}
 		},
-		"currency": "GBP",
-		"currency_symbol": "GBP",
+		"currency": "GBP ",
+		"currency_symbol": "GBP ",
 		"annually": {
 			"basic_plan": {
 				"final": "139.99",
@@ -168,6 +237,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "169.99",
 				"monthly_final": "14.2",
+				"original": "",
+				"monthly_original": "23.99"
+			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "219.99",
+				"monthly_final": "9.16",
+				"original": "",
+				"monthly_original": "19.99"
+			},
+			"advance_plan": {
+				"final": "259.99",
+				"monthly_final": "10.83",
 				"original": "",
 				"monthly_original": "23.99"
 			}
@@ -186,8 +269,8 @@ export const pricing_data = {
 				"original": "105.99"
 			}
 		},
-		"currency": "AED",
-		"currency_symbol": "AED",
+		"currency": "AED ",
+		"currency_symbol": "AED ",
 		"annually": {
 			"basic_plan": {
 				"final": "629.99",
@@ -198,6 +281,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "739.99",
 				"monthly_final": "61.66",
+				"original": "",
+				"monthly_original": "105.99"
+			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "999.99",
+				"monthly_final": "41.66",
+				"original": "",
+				"monthly_original": "89.99"
+			},
+			"advance_plan": {
+				"final": "1199.99",
+				"monthly_final": "49.99",
 				"original": "",
 				"monthly_original": "105.99"
 			}
@@ -216,8 +313,8 @@ export const pricing_data = {
 				"original": "108.99"
 			}
 		},
-		"currency": "SAR",
-		"currency_symbol": "SAR",
+		"currency": "SAR ",
+		"currency_symbol": "SAR ",
 		"annually": {
 			"basic_plan": {
 				"final": "569.99",
@@ -228,6 +325,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "759.99",
 				"monthly_final": "63.3",
+				"original": "",
+				"monthly_original": "108.99"
+			}
+		},
+		"biannually": {
+			"basic_plan": {
+				"final": "899.99",
+				"monthly_final": "37.49",
+				"original": "",
+				"monthly_original": "81.99"
+			},
+			"advance_plan": {
+				"final": "1199.99",
+				"monthly_final": "49.99",
 				"original": "",
 				"monthly_original": "108.99"
 			}
@@ -261,6 +372,20 @@ export const pricing_data = {
 				"original": "209.99",
 				"monthly_original": "20.99"
 			}
+		},
+	"biannually":{
+			"basic_plan": {
+				"final": "199.99",
+				"monthly_final": "8.33",
+				"original": "169.99",
+				"monthly_original": "16.99"
+			},
+			"advance_plan": {
+				"final": "239.99",
+				"monthly_final": "9.99",
+				"original": "209.99",
+				"monthly_original": "20.99"
+			}
 		}
 	},
 	"india": {
@@ -291,6 +416,20 @@ export const pricing_data = {
 				"original": "11999",
 				"monthly_original": "1199"
 			}
+		},
+	"biannually":{
+			"basic_plan": {
+				"final": "9999",
+				"monthly_final": "417",
+				"original": "9999",
+				"monthly_original": "999"
+			},
+			"advance_plan": {
+				"final": "12799",
+				"monthly_final": "533",
+				"original": "11999",
+				"monthly_original": "1199"
+			}
 		}
 	},
 	"indonesia": {
@@ -306,8 +445,8 @@ export const pricing_data = {
 				"original": "139000"
 			}
 		},
-		"currency": "IDR",
-		"currency_symbol": "IDR",
+		"currency": "IDR ",
+		"currency_symbol": "IDR ",
 		"annually": {
 			"basic_plan": {
 				"final": "790000",
@@ -318,6 +457,20 @@ export const pricing_data = {
 			"advance_plan": {
 				"final": "990000",
 				"monthly_final": "82500",
+				"original": "1390000",
+				"monthly_original": "139000"
+			}
+		},
+		"biannually": {
+			"basic_plan": {
+				"final": "1185000",
+				"monthly_final": "49375",
+				"original": "1090000",
+				"monthly_original": "109000"
+			},
+			"advance_plan": {
+				"final": "1485000",
+				"monthly_final": "61875",
 				"original": "1390000",
 				"monthly_original": "139000"
 			}
@@ -335,6 +488,10 @@ export const pricing_links = {
 		annually: {
 			basic: '9AQ14o47UdFe6VG7tq',
 			advance: '14k9AUgUG9oY3Ju5lj'
+		},
+		biannually: {
+			basic: '5kA7sMeMy0Ss7ZK156',
+			advance: '7sIdRadIuat293O3do'
 		}
 	},
 	international: {
@@ -345,6 +502,10 @@ export const pricing_links = {
 		annually: {
 			basic: '7sI4gAcEqeJi3JudQW',
 			advance: '6oEcN6cEqat2gwg6or'
+		},
+		biannually: {
+			basic: '5kAfZidIu1Ww6VG6po',
+			advance: 'aEU5kEcEq7gQ7ZKeW4'
 		}
 	},
 	indonesia: {
@@ -355,6 +516,10 @@ export const pricing_links = {
 		annually: {
 			basic: 'fZe28s8oaat2a7S8wJ',
 			advance: '00g7sM7k6gRq3JufZ9'
+		},
+		biannually: {
+			basic: '5kA00k1ZMgRqcg0bJJ',
+			advance: '9AQeVebAm58I7ZKdS1'
 		}
 	},
 	uae: {
@@ -365,6 +530,10 @@ export const pricing_links = {
 		annually: {
 			basic: '5kAaEY7k6dFe4NycNu',
 			advance: '6oE3cwdIucBadk428P'
+		},
+		biannually: {
+			basic: '00g28s5bY30AgwgeW2',
+			advance: 'cN2dRa6g2cBa4Ny9BT'
 		}
 	},
 	kuwait: {
@@ -375,6 +544,10 @@ export const pricing_links = {
 		annually: {
 			basic: 'aEU3cwawi8kU93O7t2',
 			advance: '14k5kE9se30A93O14F'
+		},
+		biannually: {
+			basic: 'fZe5kEawigRq7ZK29c',
+			advance: 'cN2bJ2eMygRqbbW15i'
 		}
 	},
 	egypt: {
@@ -385,6 +558,10 @@ export const pricing_links = {
 		annually: {
 			basic: '00g9AU7k6bx62Fq9Be',
 			advance: '4gwcN6awi7gQ93O5kX'
+		},
+		biannually: {
+			basic: '28o6oIawiat23Ju9BJ',
+			advance: '8wM5kE5bYat293O29q'
 		}
 	},
 	singapore: {
@@ -395,6 +572,10 @@ export const pricing_links = {
 		annually: {
 			basic: 'dR63cwdIu9oYcg014z',
 			advance: 'fZeeVe8oa8kUeo828G'
+		},
+		biannually: {
+			basic: 'aEUdRa47UgRq3Ju3df',
+			advance: '7sI8wQ47U9oYa7S8xJ'
 		}
 	},
 	israel: {
@@ -405,6 +586,10 @@ export const pricing_links = {
 		annually: {
 			basic: 'aEU9AUdIu0Ssfsc3d6',
 			advance: 'aEUcN6cEqcBa3Ju5ld'
+		},
+		biannually: {
+			basic: 'eVa3cw9se6cMbbWdRV',
+			advance: '9AQ28sgUGbx63Ju7tH'
 		}
 	},
 	uk: {
@@ -415,6 +600,10 @@ export const pricing_links = {
 		annually: {
 			basic: "4gw4gA8oa44E5RC6pe",
 			advance: "bIY5kEdIu9oY2FqaFt"
+		},
+		biannually: {
+			basic: "cN2bJ2cEq8kUgwg6pu",
+			advance: "5kAeVe33Q44E4Ny15k"
 		}
 	},
 	saudi_arabia: {
@@ -425,6 +614,10 @@ export const pricing_links = {
 		annually: {
 			basic: "4gw5kE7k6dFe4Ny00M",
 			advance: "6oEaEY5bY1Wwfsc28T"
+		},
+		biannually: {
+			basic: "28o00kfQC1Wweo83dj",
+			advance: "eVaeVe5bYat2eo8cO3"
 		}
 	}
 };

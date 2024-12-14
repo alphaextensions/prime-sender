@@ -39,6 +39,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   z-index: 10000000;
+  backdrop-filter: blur(10px);
 }
 .pricing-popup-header{
   width: 62%;
@@ -147,6 +148,17 @@
 .pricing-popup-offer-price{
   color: var(--color-purple);
 }
+
+.hideMonthlyPopupPriceClass {
+    min-height: auto;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.hideMonthlyPopupAnnualPriceClass {
+    position: relative;
+}
+
 .pricing-popup-btn{
   width: 90%;
   margin: auto;
@@ -225,7 +237,7 @@
   padding: 0 1rem;
   position: absolute;
   bottom: 0;
-  margin: 2rem auto 0.6rem;
+  margin: 2rem auto 0.3rem;
   display: flex;
   align-items: center;
 }
@@ -284,7 +296,7 @@
   align-items: center;
   justify-content: center;
   background: var(--color-primary1);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 5px;
 }
 
@@ -292,14 +304,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 50px;
 }
 
 .pricing_country_text {
-  background: #009a88;
+  /*background: #009a88;*/
   border-radius: 20px;
   font-weight: bold;
-  color: #fff;
+  /*color: #fff;*/
+  color: #009a88;
   width: min(80%, 745px);
   padding: 10px 0;
 }
@@ -317,13 +330,33 @@
 
 .country_switch {
   padding: 10px;
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 8px 30px;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   color: var(--color-white);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+
+.top-pricing-slider .pricing_country_switch {
+    gap: 60px;
+}
+
+.slider_discount_text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.slider_discount_text img {
+    width: 25px;
+}
+
+.top-pricing-slider .country_switch {
+    padding: 8px 60px;
 }
 
 .country_current_switch {
@@ -792,7 +825,7 @@
 
 .multiple_card_hover_style {
   position: absolute;
-  z-index: 1000000000;
+  z-index: 1000000;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -810,11 +843,12 @@
     height: 97%;
     width: 100%;
     z-index: 1000000;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
 }
 
 .top-pricing-slider {
   position: relative;
+  margin: 15px;
 }
 
 .pricing-slider-overlay {
@@ -935,6 +969,32 @@
   color: var(--color-dark-grey);
 }
 
+.discount_percentage_box {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    background: #616FF0;
+    border-radius: 30px;
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    font-family: 'PT Sans Caption';
+}
+
+
+.discount_percentage_box img {
+    width: 15px;
+}
+
+
+.discount_percentage_box p {
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 @media (max-width: 1280px) {
   .pricing_cards_container{
     grid-template-columns: 1fr 1fr 1fr;
@@ -954,7 +1014,7 @@
   }
 }
 
-@media (max-width: 900px){
+@media (max-width: 920px){
   .pricing_card_feature .pricing_feature_info_container{
     position: static;
   }
@@ -967,6 +1027,14 @@
     right: unset;
     left: -10px;
   }  
+
+  .top-pricing-slider .pricing_country_switch {
+    gap: 50px !important;
+  }
+
+  .top-pricing-slider .country_switch {
+      padding: 8px 40px;
+  }
 }
 
 @media (max-width: 895px) {
@@ -993,6 +1061,14 @@
   .country_switch{
     padding: 8px 23px;
   }
+
+    .pricing_country_switch {
+        gap: 25px !important;
+    }
+
+    .top-pricing-slider .pricing_country_switch {
+        gap: 25px !important;
+    }
 }
 
 @media (max-width: 720px) {
@@ -1023,6 +1099,10 @@
     padding: 6px;
     font-size: 16px; 
   }
+
+  .top-pricing-slider .country_switch {
+      padding: 8px 20px;
+    }
 }
 
 @media (max-width: 600px){
@@ -1069,6 +1149,7 @@
   .pricing_country_switch{
     flex-direction: column;
     padding: 5px;
+    gap: 25px;
   }
   .pricing_switches .country_switch{
     width: 100%;
