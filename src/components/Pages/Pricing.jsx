@@ -66,7 +66,6 @@ const DiscountPercentageBox = ({discountPercentage}) => {
         </div>
 }
 
-
 const Pricing = () => {
   const [controller] = primeSenderController();
   const navigate = useNavigate();
