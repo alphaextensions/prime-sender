@@ -143,6 +143,10 @@ body {
   border: 0;
 }
 
+.marginTop30 {
+  margin-top: 30px;
+}
+
 .marginBottom30 {
   margin-bottom: 30px;
 }
@@ -151,6 +155,13 @@ body {
   margin-bottom: 10px;
 }
 
+.font-family-class {
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+.display_none {
+    display: none;
+}
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 11px;
@@ -177,6 +188,10 @@ body {
 
 .input_error_border {
   border: 1px solid red !important;
+}
+.italic_text{
+    font-style: italic;
+    font-weight: bold;
 }
 
 /* Media query for responsiveness */
