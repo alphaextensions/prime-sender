@@ -48,7 +48,7 @@ export function DashboardNavbar() {
             {page}
           </Typography>
         </div>
-        <AvatarMenu />
+        {controller.credentials.data.length > 1 ? <AvatarMenu /> : ""}
       </div>
     </Navbar>
   );
