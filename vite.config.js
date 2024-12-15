@@ -7,5 +7,11 @@ export default defineConfig({
     port: 8000,
     host: true,
   },
+  resolve: {
+    alias: [{ find: "@", replacement: "/src" }],
+  },
   plugins: [react()],
 })
+
+
+

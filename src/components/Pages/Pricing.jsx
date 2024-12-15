@@ -10,6 +10,8 @@ import ReactGA from "react-ga4";
 import { promoText } from "../Data/seo-data";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
+import { useNavigate } from "react-router-dom";
+import { primeSenderController } from "../context";
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features } from "../Data/pricing-data";
@@ -64,8 +66,10 @@ const DiscountPercentageBox = ({discountPercentage}) => {
         </div>
 }
 
-
 const Pricing = () => {
+  const [controller] = primeSenderController();
+  const navigate = useNavigate();
+
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
       return <span key={index} className='white_promo_text pro'>{text}</span>
@@ -460,6 +464,11 @@ const Pricing = () => {
     }
   }, [myLocation]);
 
+  useEffect(() => {
+    if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
+      navigate("/dashboard/home")
+    }
+  }, [controller, navigate]);
   const pricingCalculatorPeriodHandler = (e)=>{
     e.stopPropagation();
       pricingCalculatorPeriod == 'annually' ? setPricingCalculatorPeriod('monthly') : setPricingCalculatorPeriod('annually')

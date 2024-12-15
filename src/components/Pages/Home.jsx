@@ -12,7 +12,9 @@ import HelmetHeader from "../common/HelmetHeader";
 import ReactGA from "react-ga4";
 import { promoText } from '../Data/seo-data';
 import HowToUse from './HowToUse';
-// import EverythingInOne from '../sections/EverythingInOne';
+import { useNavigate } from "react-router-dom";
+import { primeSenderController } from "../context";
+
 
 const Home = () => {
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
@@ -74,6 +76,9 @@ const Home = () => {
   //   checkForScroll();
   // }, []);
 
+  const [controller] = primeSenderController();
+  const navigate = useNavigate();
+
   const HowToUseButtonClickHandle = () => {
     ReactGA.event({
       category: "Button Click",
@@ -91,6 +96,16 @@ const Home = () => {
   const promoTextComponent = <div className='promo_text_container'>
     {...promoTextComponentGenerator()}
   </div>
+
+
+  useEffect(() => {
+    if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
+      navigate("/dashboard/home")
+    }
+    else{
+      navigate("/");
+    }
+  }, [controller, navigate]);
 
   return (
     <>
