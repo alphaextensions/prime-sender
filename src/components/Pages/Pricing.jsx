@@ -59,8 +59,8 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
   </>
 }
 
-const DiscountPercentageBox = ({discountPercentage}) => {
-    return <div className="discount_percentage_box">
+const DiscountPercentageBox = ({discountPercentage, boxStyle}) => {
+    return <div className="discount_percentage_box" style={boxStyle}>
         <img src="/images/yellow-stars.png"/>
         <p>Save {discountPercentage}%</p>
         </div>
@@ -216,8 +216,7 @@ const Pricing = () => {
 
             showPopupMonthly &&
           <div className='pricing-recommendation-msg'>
-            <img src="/images/stars.png" alt="starts" />
-            <div className="recommendation-msg-content">Recommended - Value for Money</div>
+              <DiscountPercentageBox discountPercentage={40} boxStyle={{top:'-15px', right: '100px'}} />
           </div>
           }
           <div className={`pricing-popup-slider ${!showPopupMonthly?"marginTop30":""}`}>
@@ -796,7 +795,7 @@ const Pricing = () => {
 
               <div className="pricing_card_heading">
                 <div>
-                Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto 70%</span>
+                Purchase premium plan for multiple users for your organization at a <span className="text-bold text-royal">discounted rate upto <img className="discount_star_image" src="/images/yellow-stars.png" /> 70%</span>
                 </div>
                 {/* {
                   planPeriod === 'annually' && (
