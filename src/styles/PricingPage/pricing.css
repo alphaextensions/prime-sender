@@ -511,6 +511,7 @@
 
 .pricing_card_heading span {
   text-align: center;
+  font-size: inherit;
 }
 
 .pricing_card_button {
@@ -563,6 +564,7 @@
 
 .pricing_card_button button .buy_button {
   text-decoration: none;
+  margin: 0 !important;
   color: inherit;
   display: block;
   padding: 0.6rem 0;
