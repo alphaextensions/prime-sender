@@ -73,6 +73,8 @@
   margin: 5px auto;
 }
 .pricing-recommendation-msg{
+  position: relative;
+  height: 15px;
   font-family: inika;
   margin: 20px auto 0px;
   width: 75%;
@@ -304,7 +306,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 50px;
+  gap: 10px;
 }
 
 .pricing_country_text {
@@ -515,6 +517,7 @@
 .pricing_card_button {
   background: var(--color-primary1);
   width: 80%;
+  max-width: 150px;
   margin: auto;
   border-radius: 15px;
   margin-top: 10px;
@@ -993,6 +996,11 @@
     font-size: 15px;
     font-weight: bold;
     font-style: italic;
+}
+
+.discount_star_image {
+  width: 20px;
+  vertical-align: middle;
 }
 
 @media (max-width: 1280px) {

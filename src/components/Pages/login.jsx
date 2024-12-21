@@ -22,7 +22,7 @@ function Login() {
 
   const handleLogin = (cred, data) => {
     setCredentials(dispatch, { cred, data });
-    navigate("/dashboard/home")
+    navigate("/dashboard/profile")
   };
 
   // const isWhatsappNumExist = () => {
@@ -108,7 +108,7 @@ function Login() {
 
       showPopup(
         "Email ID Already Linked",
-        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked to an account registered using ${maskedEmail}. To view the full email address, please check the profile section in your extension. The complete email is displayed there for your reference.`,
+        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked to an account registered using ${maskedEmail}. To view the full email address, please check the profile section in your extension.`,
         isSecondOrMoreVisit
       );
       return;
@@ -163,10 +163,18 @@ function Login() {
   }
 
   useEffect(() => {
-    if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
-      navigate("/dashboard/home")
+    const currentUrl = window.location.href;
+    const urlParams = new URLSearchParams(new URL(currentUrl).search);
+    const transferValue = urlParams.get('transfer');
+
+    if (transferValue === "true") {
+      window.localStorage.setItem("PRIMES::Transfer", transferValue)
     }
 
+    if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
+      navigate("/dashboard/profile")
+    }
+    
     /* global variable google */
     google.accounts.id.initialize({
       client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
