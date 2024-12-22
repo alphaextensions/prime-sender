@@ -240,6 +240,11 @@
 	display: none;
 	padding: 10px 12px;
 }
+
+.customer_support span{
+	margin-right: 5px;
+}
+
 .customer_support span,
 .customer_support a{
 	font-size: 13px;
@@ -247,6 +252,7 @@
 
 .customer_support a{
 	cursor: pointer;
+	text-decoration: underline;
 }
 
 .active_support{
