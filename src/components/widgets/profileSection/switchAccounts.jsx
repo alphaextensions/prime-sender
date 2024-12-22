@@ -22,7 +22,7 @@ export function AvatarMenu() {
             navigate("/login");
         } else if (controller.credentials.data) {
             const data = controller.credentials.data;
-            const newAvatars = data.map((item, index) => ({
+            const newAvatars = data.filter(user => user.phone && (!user.parent_email || user.parent_email === "" || user.parent_email === "NULL")).map((item, index) => ({
                 id: index,
                 text: `+${item.phone}`
             }));
@@ -40,7 +40,7 @@ export function AvatarMenu() {
             <MenuHandler className="cursor-pointer font-bold px-[10px] py-1 text-[#009a88] border-solid border-2 rounded-lg border-gray-500 flex justify-around items-center">
                 <div className='flex justify-around items-center'>
                     <Typography variant="small" className="font-semibold mr-1">
-                        {selectedAvatar ? selectedAvatar.text : "Select an Avatar"}
+                        {selectedAvatar ? selectedAvatar.text : "Select an account"}
                     </Typography>
                     {avatars.length > 1 ? <FaAngleDown
                         className={isOpen ? 'transform transition-transform duration-200 rotate-180' : 'transform transition-transform duration-200 rotate-0'}

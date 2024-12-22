@@ -191,31 +191,10 @@ function TransferPlan() {
     };
 
     const getPhoneNumbers = () => {
-        let url = import.meta.env.VITE_PROD_FETCH_MULTIPLE_ACC_INFO_API + "?email=" + controller.credentials.data[controller.profile].email + "&operation=get-completed-transaction";
-        const headers = {
-            "Content-Type": "application/json",
-        };
-
-        fetch(url, {
-            method: "GET",
-            headers: headers,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok " + response.statusText);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                let res = JSON.parse(data.body);
-                if (data.statusCode === 200) {
-                    formatPhoneNumbers(res.data.numbers);
-                    fetchUserInfo(res.data.numbers[0])
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        const data = controller.credentials.data;
+        const phoneNumbers = data.filter(user => !user.phone || (user.parent_email && user.parent_email !== "" && user.parent_email !== "NULL")).map((item) => (item.phone));
+        formatPhoneNumbers(phoneNumbers)
+        fetchUserInfo(phoneNumbers[0])
     };
 
     const sendReqForMultipleAcc = (newNumber) => {
@@ -227,7 +206,6 @@ function TransferPlan() {
             authToken: controller.credentials.cred,
             oldNumber: selectedOldNumber,
             newNumber: newNumber,
-            adminNumber: controller.credentials.data[controller.profile].phone,
         });
         fetch(transferUrl, {
             method: "POST",
@@ -270,31 +248,13 @@ function TransferPlan() {
     };
 
     const fetchUserInfo = (number) => {
-        let fetchUrl = import.meta.env.VITE_PROD_FETCH_USER_INFO_API + "?phone=" + number;
-        const headers = {
-            "Content-Type": "application/json",
-        };
-        fetch(fetchUrl, {
-            method: "GET",
-            headers: headers,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok " + response.statusText);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                let res = data.body;
-                if (data.statusCode === 200) {
-                    setSelectedUser(res);
-                }
-            })
-            .catch((error) => {
-                setSelectedUser({});
-                console.error(error);
-            });
-
+        if (number !== undefined) {
+            const data = controller.credentials.data;
+            const user = data.filter(user => user.phone === number)
+            if (user[0] !== undefined) {
+                setSelectedUser(user[0])
+            }
+        }
     }
 
     const handleSelectNumber = (phoneNumber) => {

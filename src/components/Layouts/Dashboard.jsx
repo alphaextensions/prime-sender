@@ -10,7 +10,7 @@ import {
 import routes from "../../routes";
 import "../../../public/css/index.css"
 import { primeSenderController, setOpenConfigurator, setCredentials } from "../context";
-import { apiFetch } from "../Utils/apiFetch";
+import { apiFetch } from "../../utils/apiFetch";
 import { useEffect } from "react";
 
 export function Dashboard() {

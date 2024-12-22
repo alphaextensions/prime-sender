@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { CiWarning } from "react-icons/ci";
 import { primeSenderController, setCredentials } from "../context";
 import HashLoader from "react-spinners/HashLoader";
-import { apiFetch } from "../Utils/apiFetch";
+import { apiFetch } from "../../utils/apiFetch";
 import "../../styles/login/login.css";
 
 
