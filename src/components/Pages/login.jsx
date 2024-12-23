@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { CiWarning } from "react-icons/ci";
 import { primeSenderController, setCredentials } from "../context";
 import HashLoader from "react-spinners/HashLoader";
+import { apiFetch } from "../../utils/apiFetch";
 import "../../styles/login/login.css";
 
 
@@ -22,7 +23,7 @@ function Login() {
 
   const handleLogin = (cred, data) => {
     setCredentials(dispatch, { cred, data });
-    navigate("/dashboard/home")
+    navigate("/dashboard/profile")
   };
 
   // const isWhatsappNumExist = () => {
@@ -108,7 +109,7 @@ function Login() {
 
       showPopup(
         "Email ID Already Linked",
-        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked to an account registered using ${maskedEmail}. To view the full email address, please check the profile section in your extension. The complete email is displayed there for your reference.`,
+        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked to an account registered using ${maskedEmail}. To view the full email address, please check the profile section in your extension.`,
         isSecondOrMoreVisit
       );
       return;
@@ -116,45 +117,30 @@ function Login() {
   };
 
 
-  const onSuccess = (credentialResponse) => {
+  const onSuccess = async (credentialResponse) => {
     setLoading(true)
-    const headers = {
-      "Content-Type": "application/json",
-    };
 
     let whatsapp_number = window.localStorage.getItem("PRIMES::whatsapp_number");
-    const body = JSON.stringify({
+    const requestBody = {
       authToken: credentialResponse.credential,
       phoneNumber: isCorrectWhatsappNum(whatsapp_number) ? whatsapp_number : ""
-    });
+    }
 
-    fetch(url, {
-      method: "POST",
-      headers: headers,
-      body: body,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok " + response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        let res = JSON.parse(data.body);
-        setLoading(false)
-        if (data.statusCode === 200) {
-          handleLogin(res.data.authToken, res.data.userData);
-        }
+    try {
+      const data = await apiFetch(url, "POST", requestBody);
 
-        if (data.statusCode !== 200) {
-          handlePopups(res);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        handlePopups("Server error")
-      });
+      let res = JSON.parse(data.body);
+      setLoading(false);
 
+      if (data.statusCode === 200) {
+        handleLogin(res.data.authToken, res.data.userData);
+      } else {
+        handlePopups(res);
+      }
+    } catch (error) {
+      setLoading(false);
+      handlePopups("Server error");
+    }
 
   };
 
@@ -163,8 +149,16 @@ function Login() {
   }
 
   useEffect(() => {
+    const currentUrl = window.location.href;
+    const urlParams = new URLSearchParams(new URL(currentUrl).search);
+    const transferValue = urlParams.get('transfer');
+
+    if (transferValue === "true") {
+      window.localStorage.setItem("PRIMES::Transfer", transferValue)
+    }
+
     if (controller?.credentials?.cred !== undefined && controller?.credentials?.cred !== "") {
-      navigate("/dashboard/home")
+      navigate("/dashboard/profile")
     }
 
     /* global variable google */

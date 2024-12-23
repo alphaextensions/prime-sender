@@ -8,6 +8,7 @@ export function DashboardNavbar() {
   const { fixedNavbar } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
+  let adminLength = controller.credentials.data.filter(user => user.phone && (!user.parent_email || user.parent_email === "" || user.parent_email === "NULL"))
 
   return (
     <Navbar
@@ -48,7 +49,7 @@ export function DashboardNavbar() {
             {page}
           </Typography>
         </div>
-        {controller.credentials.data.length > 1 ? <AvatarMenu /> : ""}
+        {controller.credentials.data.length > 1 && adminLength.length > 1 ? <AvatarMenu /> : ""}
       </div>
     </Navbar>
   );
