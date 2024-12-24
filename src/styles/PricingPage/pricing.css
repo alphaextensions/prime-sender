@@ -517,13 +517,16 @@
 .pricing_card_button {
   background: var(--color-primary1);
   width: 80%;
-  max-width: 150px;
   margin: auto;
   border-radius: 15px;
   margin-top: 10px;
   transition: all 0.3s ease-in;
   border: 2px solid transparent;
   margin-bottom: 0;
+}
+
+.pricing_card_button_width {
+    max-width: 150px;
 }
 
 .pricing_card_button:hover {
@@ -1001,6 +1004,38 @@
 .discount_star_image {
   width: 20px;
   vertical-align: middle;
+}
+
+.shimmer{
+    background-color: #616FF0;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to right,
+        rgba(255, 215, 0, 0) 30%,
+        rgba(255, 223, 88, 0.8) 50%,
+        rgba(255, 215, 0, 0) 55%
+    );
+    background-size: 400% 100%;
+    animation: shimmer-gold 2s infinite;
+    pointer-events: none; /* Ensures the shimmer doesn’t interfere with user interactions */
+}
+
+@keyframes shimmer-gold {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
 }
 
 @media (max-width: 1280px) {
