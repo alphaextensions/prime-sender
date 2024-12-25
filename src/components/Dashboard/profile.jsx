@@ -49,34 +49,34 @@ export function Profile() {
 
   const getInvoiceArr = async () => {
     try {
-      
+
       if (!data?.email || !data?.phone) {
         console.error("Email or phone is undefined. Please provide valid data.");
         return;
       }
-  
+
       let url = `${import.meta.env.VITE_PROD_FETCH_INVOICE_API}?email=${data.email}&phone=${data.phone}`;
-  
+
       const res = await fetch(url);
       const jsonData = await res.json();
-  
+
       if (jsonData.length === 0) {
         setSelectedDate("No Receipt Found");
         return;
       }
-  
+
       const sortedData = sortDatesDescending(jsonData);
       const formattedData = sortedData.map((item) => ({
         ...item,
         date: formatDate(item.date),
       }));
-  
+
       setInvoiceObject(formattedData);
     } catch (error) {
       console.error("Error fetching and processing invoices:", error);
     }
   };
-  
+
   const redirectInvoice = () => {
     if (selectedDate !== "---- Select date ----" && selectedDate !== "No Receipt Found") {
       let invoice = invoiceObject.find((invoice) => {
@@ -129,7 +129,7 @@ export function Profile() {
               />
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  {cred.given_name || "Default Username"}
+                  {data?.name ? data.name : cred.given_name}
                 </Typography>
               </div>
             </div>

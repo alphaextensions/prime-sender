@@ -161,24 +161,41 @@ function Login() {
       navigate("/dashboard/profile")
     }
 
-    /* global variable google */
-    google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
-      callback: onSuccess,
-      auto_select: true,
-      itp_support: true
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById("signInGoogle"),
-      {
-        type: "standard",
-        size: "large",
-        text: "signin_with",
-        shape: "pill",
-        logo_alignment: "left"
+    const initializeGoogleSignIn = () => {
+      if (typeof google === "undefined" || !google.accounts) {
+        console.error("Google API not loaded.");
+        return;
       }
-    );
+
+      google.accounts.id.initialize({
+        client_id: import.meta.env.VITE_PROD_GOOGLE_CLIENT_ID,
+        callback: onSuccess,
+        auto_select: true,
+        itp_support: true,
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("signInGoogle"),
+        {
+          type: "standard",
+          size: "large",
+          text: "signin_with",
+          shape: "pill",
+          logo_alignment: "left",
+        }
+      );
+    };
+
+    if (typeof google !== "undefined" && google.accounts) {
+      initializeGoogleSignIn();
+    } else {
+      const scriptLoadInterval = setInterval(() => {
+        if (typeof google !== "undefined" && google.accounts) {
+          clearInterval(scriptLoadInterval);
+          initializeGoogleSignIn();
+        }
+      }, 100); 
+    }
   }, [controller, navigate]);
 
   return (
