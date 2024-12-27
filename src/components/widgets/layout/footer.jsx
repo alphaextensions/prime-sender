@@ -41,6 +41,8 @@ Footer.defaultProps = {
   brandName: "Zero To Zee",
   brandLink: "https://prime-sender.com",
   routes: [
+    { name: "Home", path: "https://prime-sender.com" },
+    { name: "Pricing", path: "https://prime-sender.com/pricing" },
     { name: "Features", path: "https://prime-sender.com/main-features" },
     { name: "Contact Us", path: "https://prime-sender.com/contactus" },
     { name: "Terms of service ", path: "https://prime-sender.com/terms-of-service" },
