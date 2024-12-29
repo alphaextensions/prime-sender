@@ -353,14 +353,21 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
                             {
 								plan_duration == 'monthly' &&
 								<div className='auto_renew_container'>
-									<input type="checkbox" checked={autorenewChecked} onChange={() => {
-										setAutorenewChecked(!autorenewChecked)
-										setShowLoader(true);
-										setTimeout(() => {
-											setShowLoader(false);
-										}, 2000);
-									}} />
-									<p className='auto_renew_text'>Enable auto-renew</p>
+                                <input
+                                    type="checkbox"
+                                    id="auto_renew_checkbox"
+                                    checked={autorenewChecked}
+                                    name="auto_renew_checkbox"
+                                    className="cursor-pointer"
+                                    onChange={() => {
+                                        setAutorenewChecked(!autorenewChecked);
+                                        setShowLoader(true);
+                                        setTimeout(() => {
+                                            setShowLoader(false);
+                                        }, 2000);
+                                    }}
+                                />
+                                <label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">Enable auto-renew</label>
 									<span className={`pricing_feature_info_container`} onMouseEnter={() => setAutoRenewHover(true)} onMouseLeave={() => setAutoRenewHover(false)}>
 										<IoIosInformationCircleOutline className="feature_info_class" />
 										<div className="navigation_outer_box_down navigation_container" hidden={!autoRenewHover} >

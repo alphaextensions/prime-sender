@@ -864,8 +864,7 @@ const Pricing = () => {
                 wrapperClass=""
                 />
                     {
-                      pricingCalculatorPeriod == 'annually' &&
-                      <div className="pricing_card_heading" style={{visibility:"hidden"}}>
+                      <div className="pricing_card_heading margin_bottom_110" style={{visibility:"hidden"}}>
                         <span>Billed&nbsp;
                           <span className={currentCountry === 'india' ? 'rupee' : ''}>{multAccountPrice.currency}</span>
                           {Math.round(multAccountPrice.totalPrice / numAccounts)} for 12 months' service per user
@@ -890,8 +889,7 @@ const Pricing = () => {
                         </div>
                       </div>
                       {
-                        pricingCalculatorPeriod == 'annually' &&
-                        <div className="pricing_card_heading">
+                        <div className={`pricing_card_heading margin_bottom_100 ${pricingCalculatorPeriod=="annually"?"":"visibility_hidden"}`}>
                           <span>Billed&nbsp;
                             <span className={currentCountry === 'india' ? 'rupee' : ''}>{multAccountPrice.currency}</span>
                             {Math.round(multAccountPrice.totalPrice/numAccounts)} for 12 months' service per user
@@ -903,15 +901,17 @@ const Pricing = () => {
                     Number of accounts cannot be less than 2
                   </div>
               }
-              <div className={`pricing_card_button background-royal ${isMultipleAccountPage?"pricing_card_button_width":""}`}>
-                <button onClick={() => handleGaButtonClick("multiple_user")}>
-                  <a target="_blank" className="buy_button">Buy</a>
-                </button>
-              </div>
-              <div className="pricing_calculator_support">
-                <p>Need more support? <a href={whatsappRedirectUrl} target="_blank">Click here</a></p>
-              </div>
-            </div>
+              <div className="mult_card_bottom_container">
+                  <div className={`pricing_card_button mult_account_buy_button background-royal ${isMultipleAccountPage?"pricing_card_button_width":""}`}>
+                    <button onClick={() => handleGaButtonClick("multiple_user")}>
+                      <a target="_blank" className="buy_button">Buy</a>
+                    </button>
+                  </div>
+                  <div className="pricing_calculator_support">
+                    <p>Need more support? <a href={whatsappRedirectUrl} target="_blank">Click here</a></p>
+                  </div>
+                </div>
+          </div>
           </div>
           <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
           <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
