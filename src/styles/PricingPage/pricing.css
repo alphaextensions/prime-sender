@@ -172,7 +172,6 @@
 .pricing-popup-btn button{
   border: 0;
   background: transparent;
-  padding: 7px 35px;
   background: var(--color-primary1);
   border-radius: 8px;
   border: 2px solid var(--color-primary1);
@@ -186,6 +185,9 @@
   color: var(--color-white);
   transition: 0.3s;
   font-family: 'PT Sans Caption', sans-serif;
+  display: flex;
+  width: 100%;
+  padding: 7px 35px;
 }
 .pricing-popup-btn button:hover{
   background: transparent;
@@ -227,7 +229,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: .9rem;
+  font-size: .7rem;
 }
 
 .pricing-popup-features .feature-item .check_icon{
@@ -379,6 +381,10 @@
 
 .country_switch:hover{
   background: rgb(1, 112, 99);
+}
+
+.multiple_user_card{
+    position: relative;
 }
 
 .multiple_user_card .pricing_country_switch .country_switch:hover{
@@ -1004,6 +1010,7 @@
 .discount_star_image {
   width: 20px;
   vertical-align: middle;
+  display: inline;
 }
 
 .shimmer{
@@ -1034,6 +1041,21 @@
     100% {
         background-position: 0 0;
     }
+}
+
+.mult_card_bottom_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    gap: 10px;
+    width: 100%;
+}
+.mult_account_buy_button{
+    width: 70%;
 }
 
 @media (max-width: 1280px) {
