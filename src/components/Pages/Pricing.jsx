@@ -58,7 +58,7 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
 }
 
 const DiscountPercentageBox = ({discountPercentage, boxStyle}) => {
-    return <div className="discount_percentage_box" style={boxStyle}>
+    return <div className="discount_percentage_box shimmer" style={boxStyle}>
         <img src="/images/yellow-stars.png"/>
         <p>Save {discountPercentage}%</p>
         </div>
@@ -894,7 +894,7 @@ const Pricing = () => {
                     Number of accounts cannot be less than 2
                   </div>
               }
-              <div className="pricing_card_button background-royal">
+              <div className={`pricing_card_button background-royal ${isMultipleAccountPage?"pricing_card_button_width":""}`}>
                 <button onClick={() => handleGaButtonClick("multiple_user")}>
                   <a target="_blank" className="buy_button">Buy</a>
                 </button>
