@@ -303,7 +303,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								<div className="mult_account_image">
 									<img src="images/logo-large.png" alt="" />
 								</div>
-								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} {plan_duration=='annually'?'Annual':'Monthly'}</div>
+								<div className="mult_account_logo_text notranslate">{plan_type=='basic'?'Basic':'Advance'} Annual</div>
 							</div>
 						</div>
 						{/* popup body */}
@@ -372,20 +372,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								</div>
 							}
 							<div className='mult_popup_button_section'>
-                            {
-								// <button className='mult_popup_buy_button mult_review_button' disabled={value<2} onClick={() => setShowNumbersList(true)}>
-									// <a>Show numbers</a>
-								// </button>
-                            }
-								<button className={`mult_popup_buy_button ${autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
-                                    {((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>Buy now</a>}
+								<button className='mult_popup_buy_button mult_review_button notranslate' disabled={value<2} onClick={() => setShowNumbersList(true)}>
+									<a>Show numbers</a>
 								</button>
-                            {
-                                plan_duration == "monthly" && 
-                                <button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
-                                    {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>Subscribe</a>}
-                                </button>
-                            }
+								<button className='mult_popup_buy_button notranslate' onClick={handleBuyPlan} disabled={isPageGenerating}>
+									{isPageGenerating ? <Oval /> : <a>Buy Now</a>}
+								</button>
 							</div>
 							{isPageGenerating && <div className='please_wait_text'>Please wait...</div>}
 						</div>
