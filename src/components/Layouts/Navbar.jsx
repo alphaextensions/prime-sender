@@ -50,7 +50,7 @@ function NavLinks({ onClick }) {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/login' onClick={onClick} className='large-text'>
+        <NavLink to='/login' onClick={onClick} className='large-text notranslate'>
           Login
         </NavLink>
       </li>
