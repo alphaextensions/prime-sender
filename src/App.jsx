@@ -10,7 +10,7 @@ import Login from "./components/Pages/login";
 import ContactUs from "./components/Pages/ContactUs";
 import BlogPage from "./components/Pages/BlogPage";
 import HowToUse from "./components/Pages/HowToUse";
-import Success from "./components/Pages/success";
+import Success from "./components/Pages/Success";
 import Error from "./components/Pages/Error";
 import MainLayout from "./components/Layouts/MainLayout";
 import DashboardLayout from "./components/Layouts/Dashboard";
