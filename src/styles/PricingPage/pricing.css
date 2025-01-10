@@ -131,18 +131,18 @@
 .pricing-popup-content .monthly-price{
   position: absolute;
   top: 0%;
-  left: 23%;
+  left: 25%;
   color: var(--color-black);
 }
 .pricing-popup-content .annual-price{
   position: absolute;
   top: 0%;
-  right: 18%;
+  right: 6%;
 }
 .pricing-popup-content .annual-price-indonesia{
   position: absolute;
   top: 0%;
-  right: 8%;
+  right: 6%;
 }
 .pricing-popup-slash-price{
   text-decoration: line-through;
@@ -166,7 +166,7 @@
   margin: auto;
   display: grid;
   place-items: center;
-  margin-top: 25px;
+  margin-top: 30px;
   gap: 4px;
 }
 .pricing-popup-btn button{
@@ -197,9 +197,19 @@
 }
 .pricing-popup-btn .multiple-accounts-btn{
   color: var(--color-primary1);
-  font-size: 13px;
   line-height: 14px;
   padding: 5px;
+  font-size: 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  gap: 5px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pricing-popup-btn .multiple-accounts-btn img {
+    width: 25px;
 }
 .pricing-popup-btn .multiple-accounts-btn:hover{
   filter: brightness(1.2);
@@ -495,7 +505,7 @@
   align-items: center;
 }
 
-.pricing_card_price span {
+.pricing_card_price {
   zoom: 1.2;
   color: var(--color-primary1);
   font-weight: 700;
@@ -507,7 +517,7 @@
 
 .pricing_card_heading {
   color: var(--color-dark-grey);
-  font-size: 17px;
+  font-size: 15px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -1058,6 +1068,36 @@
     width: 70%;
 }
 
+.black_color_faded {
+    color: #6b6b6b !important;
+}
+
+.primary_color_faded {
+    color: #009a8880 !important;
+}
+
+.pricing_card_price_div {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.pricing_slashed_price {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pricing_card_price_text {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: bold;
+}
+
+
 @media (max-width: 1280px) {
   .pricing_cards_container{
     grid-template-columns: 1fr 1fr 1fr;
@@ -1069,6 +1109,18 @@
   .multiple_user_card .pricing_card_button{
     width: min(80%,150px);
   }
+}
+
+
+@media screen and (max-width:1080px) {
+    .pricing_card_price_text {
+        font-size: 30px;
+        line-height: 1;
+    }
+
+    .pricing_card_price_div .marginTop3 {
+        margin-top: 0px;
+    }
 }
 
 @media (max-width: 1020px) {
