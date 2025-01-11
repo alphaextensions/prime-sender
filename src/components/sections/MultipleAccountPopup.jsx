@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
 import { CheckoutContext } from '../context/CheckoutContext';
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 const validateUserEmail = (email) => {
 	const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -225,6 +227,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 
 	const overlayRef = useRef(null);
 	useEffect(() => {
+		startTour()
 		if (overlayRef.current) {
 			overlayRef.current.addEventListener('click', () => {
 				setShowMultipleAccountPopup(false);
@@ -382,7 +385,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								</button>
                             {
                                 plan_duration == "monthly" && 
-                                <button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
+                                <button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} id='buyMultiple' onClick={handleBuyPlan} disabled={isPageGenerating}>
                                     {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>Subscribe</a>}
                                 </button>
                             }
