@@ -11,6 +11,7 @@ import {
 import { primeSenderController, replaceDataObject } from "../../context";
 import { toast } from 'react-toastify';
 import { PhoneNumberSelect } from "./countrySelector";
+import ReactGA from "react-ga4";
 import { useCountries } from "use-react-countries";
 
 function TransferPlan() {
@@ -87,6 +88,13 @@ function TransferPlan() {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
+
+                    ReactGA.event({
+                        category: "Transfer Successfully",
+                        action: "Transfer number successfully",
+                        label: "transfer_successfully",
+                    });
+
                     const localNumber = newNumber.startsWith(countryCode) ? newNumber.slice(countryCode.length) : newNumber;
                     replaceDataObject(dispatch, res.data.userData)
                     toast(
@@ -106,6 +114,13 @@ function TransferPlan() {
             })
             .catch((error) => {
                 console.error(error);
+
+                ReactGA.event({
+                    category: "Transfer Unsuccessful",
+                    action: "Transfer number unsuccessful",
+                    label: error.error || "transfer_unsuccessful",
+                });
+
                 toast(
                     <div>
                         <strong>Transfer Failed</strong>
@@ -117,6 +132,13 @@ function TransferPlan() {
     };
 
     const handleTransfer = () => {
+
+        ReactGA.event({
+            category: "Button Click",
+            action: "Transfer Button Clicked",
+            label: "transfer_btn_clicked",
+        });
+
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
         if (confirm(`Are you sure you want to transfer your current plan from +${data.phone} to +${fullNumber}`)) {
@@ -221,6 +243,13 @@ function TransferPlan() {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
+
+                    ReactGA.event({
+                        category: "Transfer Successfully",
+                        action: "Transfer multiple account number successfully",
+                        label: "transfer_multiple_acc_successfully",
+                    });
+
                     setSelectedUser(res.data.userData)
                     getPhoneNumbers()
                     toast(
@@ -237,6 +266,13 @@ function TransferPlan() {
             })
             .catch((error) => {
                 console.error(error);
+
+                ReactGA.event({
+                    category: "Transfer Unsuccessful",
+                    action: "Transfer multiple account number unsuccessful",
+                    label: error.error || "transfer_multiple_acc_unsuccessful",
+                });
+
                 toast(
                     <div>
                         <strong>Transfer Failed</strong>
@@ -265,6 +301,13 @@ function TransferPlan() {
     };
 
     const handleMultipleAccTransfer = () => {
+
+        ReactGA.event({
+            category: "Button Click",
+            action: "Transfer Button Clicked",
+            label: "transfer_multiple_acc_btn_clicked",
+        });
+
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
         if (confirm(`Are you sure you want to transfer your current plan from +${selectedOldNumber} to +${fullNumber}`)) {
