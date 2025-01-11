@@ -61,12 +61,13 @@ const Footer = () => {
             <ul className='large-text'>
               <li><Link to='/terms-of-service' onClick={scrollToTop}> Terms of Service </Link></li>
               <li><Link to='/privacy-policy' onClick={scrollToTop}> Privacy Policy </Link></li>
+              <li><Link to='/refund-policy' onClick={scrollToTop}> Refund Policy </Link></li>
             </ul>
           </div>
           <div className="footer_links">
             <h4 className='heading'>Contact With Us</h4>
             <ul className='large-text'>
-              <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
+              <li><Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link></li>
               <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
               <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender" target='_blank' >Chat on WhatsApp</a></li>
             </ul>
