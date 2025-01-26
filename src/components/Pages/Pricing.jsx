@@ -12,7 +12,8 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
-import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features } from "../Data/pricing-data";
+import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
+import NotificationBox from "../common/NotificationBox";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
   const overlayRef = useRef(null);
@@ -111,6 +112,9 @@ const Pricing = () => {
   const [isMultipleAccountPage, setIsMultipleAccountPage] = useState(false);
   const [isPricingCardHovered, setIsPricingCardHovered] = useState("");
   const [showUPIPopup, setShowUPIPopup] = useState({ show: false, type: 'Basic', price: '', monthly_price: '', currency: '' });
+  const [showNotification, setShowNotification] = useState(false);
+  const [isShowingNotification, setIsShowingNotification] = useState(false);
+  const [notificationData, setNotificationData] = useState({ prevIndex: -1, city: "Delhi", country: "India", time: "16", currency: "INR", prince:"699"});
     
   const scrollToPricingPopupRef = useRef(null);
   
@@ -450,6 +454,55 @@ const Pricing = () => {
             });
     }
 
+    function changeNotificationData() {
+        let current_country_data = notification_country_data[myLocation.pricing_country_name.toLowerCase()]?.data;
+        if(!current_country_data || current_country_data.size <= 3){
+            current_country_data = Object.values(notification_country_data).flatMap(country => country.data);
+        }
+        let dataLength = current_country_data.length;
+        let newIndex = Math.floor(Math.random()*dataLength);
+        let prevIndex = notificationData.prevIndex;
+        if(prevIndex == newIndex) {
+            if(newIndex+1<dataLength)
+                newIndex++;
+            else
+                newIndex--;
+        }
+        let hours = Math.floor(Math.random()*19+5);
+        let notification_pricing_country = current_country_data[newIndex].country_code_name.toLowerCase();
+        if(countryPresent.indexOf(notification_pricing_country) == -1)
+            notification_pricing_country = 'international';
+
+        let currency = pricing[notification_pricing_country].currency_symbol;
+        let price = pricing[notification_pricing_country].annually.advance_plan.final; 
+        setNotificationData({
+            prevIndex: newIndex,
+            city: current_country_data[newIndex].city,
+            country: current_country_data[newIndex].country,
+            time : hours,
+            currency: currency, 
+            price: price,
+        });
+    }
+
+    function changeShowNotification() {
+        changeNotificationData();
+        setShowNotification(true);
+        setIsShowingNotification(true);
+        setTimeout(() => {
+            setIsShowingNotification(false);
+            setTimeout(() => {setShowNotification(false);}, 500);
+        }, 10000);
+    }
+
+    function handleShowNotification() {
+        const intervalId = setInterval(() => {
+            changeShowNotification();
+        }, 20000);
+
+        return intervalId;
+    }
+
     useEffect(() => {
         checkIfMultipleAccountPage();
         setLoading(true);
@@ -458,14 +511,23 @@ const Pricing = () => {
         getPricingDataFromDatabase();
     }, [])
 
-  useEffect(() => {
-    if (myLocation && myLocation.country_code) {
-      setFlagIconSrc(`https://flagcdn.com/160x120/${myLocation.country_code.toLowerCase()}.webp`);
-    }
-    if (myLocation && myLocation.country_name) {
-      setCurrentCountry(myLocation.pricing_country_name.toLowerCase());
-    }
-  }, [myLocation]);
+    useEffect(() => {
+        if (myLocation && myLocation.country_code) {
+            setFlagIconSrc(`https://flagcdn.com/160x120/${myLocation.country_code.toLowerCase()}.webp`);
+        }
+        if (myLocation && myLocation.country_name) {
+            setCurrentCountry(myLocation.pricing_country_name.toLowerCase());
+        }
+        setTimeout(() => {
+            changeShowNotification();
+        }, 5000);
+        let intervalId = handleShowNotification();
+
+        return () =>{ 
+            if(intervalId)
+                clearInterval(intervalId);
+        }
+    }, [myLocation]);
 
   const pricingCalculatorPeriodHandler = (e)=>{
     e.stopPropagation();
@@ -549,6 +611,9 @@ const Pricing = () => {
           currency={showUPIPopup.currency} 
           setShowUPIPopup={setShowUPIPopup}
         />}
+      {
+          showNotification && <NotificationBox notificationData={notificationData} isShowingNotification={isShowingNotification} setShowNotification={setShowNotification} setIsShowingNotification={setIsShowingNotification} />
+      }
       <div className="pricing_container">
         {promoTextComponent}
         {popupLastPlan && generatePricingPopup()}
