@@ -12,7 +12,8 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
-import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features } from "../Data/pricing-data";
+import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
+import NotificationBox from "../common/NotificationBox";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
   const overlayRef = useRef(null);
@@ -58,7 +59,7 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
 }
 
 const DiscountPercentageBox = ({discountPercentage, boxStyle}) => {
-    return <div className="discount_percentage_box" style={boxStyle}>
+    return <div className="discount_percentage_box shimmer" style={boxStyle}>
         <img src="/images/yellow-stars.png"/>
         <p>Save {discountPercentage}%</p>
         </div>
@@ -111,6 +112,9 @@ const Pricing = () => {
   const [isMultipleAccountPage, setIsMultipleAccountPage] = useState(false);
   const [isPricingCardHovered, setIsPricingCardHovered] = useState("");
   const [showUPIPopup, setShowUPIPopup] = useState({ show: false, type: 'Basic', price: '', monthly_price: '', currency: '' });
+  const [showNotification, setShowNotification] = useState(false);
+  const [isShowingNotification, setIsShowingNotification] = useState(false);
+  const [notificationData, setNotificationData] = useState({ prevIndex: -1, city: "Delhi", country: "India", time: "16", currency: "INR", prince:"699"});
     
   const scrollToPricingPopupRef = useRef(null);
   
@@ -212,27 +216,33 @@ const Pricing = () => {
 
             showPopupMonthly &&
           <div className='pricing-recommendation-msg'>
-              <DiscountPercentageBox discountPercentage={40} boxStyle={{top:'-15px', right: '100px'}} />
+              <DiscountPercentageBox discountPercentage={40} boxStyle={{top:'-15px', right: '50px'}} />
           </div>
           }
           <div className={`pricing-popup-slider ${!showPopupMonthly?"marginTop30":""}`}>
             {
               popupPlan === 'basic' ?
-                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly}  /> :
-                <Slider onTextValue="Monthly Plan" offTextValue="Annual Plan" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} />
+                <Slider onTextValue="Monthly" offTextValue="Annual" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
+                <Slider onTextValue="Monthly" offTextValue="Annual" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
             }
           </div>
           <div className={`pricing-popup-content ${!showPopupMonthly?"hideMonthlyPopupPriceClass":""}`}>
             {
                 showPopupMonthly &&
-                <div className="monthly-price">
-                  <span className={popupLastPlan === 'freeTrial' ? 'pricing-popup-slash-price' : ''}>
+                <div className={`monthly-price ${popupPlanPeriod=='monthly'?'':'black_color_faded'}`}>
                     {
-                      <span className={popupCountry=='india'?"rupee":""}>
-                        {popupPlan === 'basic' ? pricing[popupCountry].currency_symbol + pricing[popupCountry].monthly.basic_plan.final : pricing[popupCountry].currency_symbol + pricing[popupCountry].monthly.advance_plan.final}
-                      </span>
+                        <div>
+                            <div className={`${popupLastPlan==='freeTrial'?'pricing-popup-slash-price':''} display_flex`}>
+                                <span className={popupCountry=='india'?"rupee":""}>
+                                    {pricing[popupCountry].currency_symbol}
+                                </span>
+                                <span className="font30">
+                                    {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic_plan.final : pricing[popupCountry].monthly.advance_plan.final}
+                                </span>
+                            </div>
+                            <div className="font14">/user/month</div>
+                        </div>
                     }
-                    /month</span>
                   <br />
                   {popupLastPlan === 'freeTrial' && (
                     <span className="pricing-popup-offer-price">
@@ -248,36 +258,38 @@ const Pricing = () => {
             }
             {
               popupCountry !== 'india' && popupCountry !== 'international' && popupCountry !== 'kuwait' ?
-                <div className={`${showPopupMonthly?"annual-price-indonesia":"hideMonthlyPopupAnnualPriceClass"}`} >
-                  <span>
-                    {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.final : pricing[popupCountry].annually.advance_plan.final}
-                    &nbsp;({
-                      (popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)
-                    }/month)</span>
+                <div className={`${showPopupMonthly?"annual-price-indonesia":"hideMonthlyPopupAnnualPriceClass"} ${popupPlanPeriod=='monthly'?'primary_color_faded':''}`} >
+                <div>
+                    <div className="display_flex">
+                      <span className={popupCountry === 'india' ? 'rupee' : ''}>
+                        {pricing[popupCountry].currency_symbol}
+                      </span>
+                      <span className="font30">
+                        {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final}
+                      </span>
+                    </div>
+                    <div className="font14">/user/month billed annually</div>
+                </div>
                 </div> :
-                <div className={`${showPopupMonthly?"annual-price":"hideMonthlyPopupAnnualPriceClass"}`} >
-                  <span>
-                    <span className={popupCountry === 'india' ? 'rupee' : ''}>
-                      {pricing[popupCountry].currency_symbol}
-                    </span>
-                    <span>
-                      {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.final : pricing[popupCountry].annually.advance_plan.final}
-                    </span>
-                    &nbsp;(
-                    <span className={popupCountry === 'india' ? 'rupee' : ''}>
-                      {pricing[popupCountry].currency_symbol}
-                      <span className="font-family-class">
-                        {(popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final)}
-                        /month)
-                      </span>
-                      </span>
-                  </span>
+                <div className={`${showPopupMonthly?"annual-price":"hideMonthlyPopupAnnualPriceClass"} ${popupPlanPeriod=='monthly'?'primary_color_faded':''}`} >
+                  <div>
+                    <div className="display_flex">
+                        <span className={popupCountry === 'india' ? 'rupee' : ''}>
+                            {pricing[popupCountry].currency_symbol}
+                        </span>
+                        <span className="font30">
+                            {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final}
+                        </span>
+                    </div>
+                    <div className="font14">/user/month billed annually</div>
+                  </div>
                 </div>
             }
           </div>
           <div className="pricing-popup-btn">
             <button onClick={handlePopupGaButtonClick}>{showButton(true, popupPlan)}</button>
-            <a href={'/pricing/multiple-account'} className="multiple-accounts-btn">Purchase for multiple users</a>
+            <span className="font20 marginTop10">or</span>
+            <a target="_blank" href={'/pricing/multiple-account'} className="multiple-accounts-btn"><img src="/images/mult_user.png"/><span>Buy multiple users upto 70% discount</span></a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
@@ -442,6 +454,55 @@ const Pricing = () => {
             });
     }
 
+    function changeNotificationData() {
+        let current_country_data = notification_country_data[myLocation.pricing_country_name.toLowerCase()]?.data;
+        if(!current_country_data || current_country_data.size <= 3){
+            current_country_data = Object.values(notification_country_data).flatMap(country => country.data);
+        }
+        let dataLength = current_country_data.length;
+        let newIndex = Math.floor(Math.random()*dataLength);
+        let prevIndex = notificationData.prevIndex;
+        if(prevIndex == newIndex) {
+            if(newIndex+1<dataLength)
+                newIndex++;
+            else
+                newIndex--;
+        }
+        let hours = Math.floor(Math.random()*19+5);
+        let notification_pricing_country = current_country_data[newIndex].country_code_name.toLowerCase();
+        if(countryPresent.indexOf(notification_pricing_country) == -1)
+            notification_pricing_country = 'international';
+
+        let currency = pricing[notification_pricing_country].currency_symbol;
+        let price = pricing[notification_pricing_country].annually.advance_plan.final; 
+        setNotificationData({
+            prevIndex: newIndex,
+            city: current_country_data[newIndex].city,
+            country: current_country_data[newIndex].country,
+            time : hours,
+            currency: currency, 
+            price: price,
+        });
+    }
+
+    function changeShowNotification() {
+        changeNotificationData();
+        setShowNotification(true);
+        setIsShowingNotification(true);
+        setTimeout(() => {
+            setIsShowingNotification(false);
+            setTimeout(() => {setShowNotification(false);}, 500);
+        }, 10000);
+    }
+
+    function handleShowNotification() {
+        const intervalId = setInterval(() => {
+            changeShowNotification();
+        }, 20000);
+
+        return intervalId;
+    }
+
     useEffect(() => {
         checkIfMultipleAccountPage();
         setLoading(true);
@@ -450,14 +511,23 @@ const Pricing = () => {
         getPricingDataFromDatabase();
     }, [])
 
-  useEffect(() => {
-    if (myLocation && myLocation.country_code) {
-      setFlagIconSrc(`https://flagcdn.com/160x120/${myLocation.country_code.toLowerCase()}.webp`);
-    }
-    if (myLocation && myLocation.country_name) {
-      setCurrentCountry(myLocation.pricing_country_name.toLowerCase());
-    }
-  }, [myLocation]);
+    useEffect(() => {
+        if (myLocation && myLocation.country_code) {
+            setFlagIconSrc(`https://flagcdn.com/160x120/${myLocation.country_code.toLowerCase()}.webp`);
+        }
+        if (myLocation && myLocation.country_name) {
+            setCurrentCountry(myLocation.pricing_country_name.toLowerCase());
+        }
+        setTimeout(() => {
+            changeShowNotification();
+        }, 5000);
+        let intervalId = handleShowNotification();
+
+        return () =>{ 
+            if(intervalId)
+                clearInterval(intervalId);
+        }
+    }, [myLocation]);
 
   const pricingCalculatorPeriodHandler = (e)=>{
     e.stopPropagation();
@@ -498,6 +568,10 @@ const Pricing = () => {
       setMultAccountPrice({ currency:currency, price: discountedPrice, totalPrice: totalPrice, cutPrice: cutPrice });
   }
 
+    const isCountryWithCurrency = () => {
+        return currentCountry == 'india' || currentCountry == 'kuwait' || currentCountry == 'international';
+    }
+
   useEffect(()=>{
     setPriceCalculatorLoader(true);
     const timeout = setTimeout(() => {
@@ -537,6 +611,9 @@ const Pricing = () => {
           currency={showUPIPopup.currency} 
           setShowUPIPopup={setShowUPIPopup}
         />}
+      {
+          showNotification && <NotificationBox notificationData={notificationData} isShowingNotification={isShowingNotification} setShowNotification={setShowNotification} setIsShowingNotification={setIsShowingNotification} />
+      }
       <div className="pricing_container">
         {promoTextComponent}
         {popupLastPlan && generatePricingPopup()}
@@ -597,18 +674,16 @@ const Pricing = () => {
                 <p>Free</p>
               </div>
               <div className="pricing_card_price">
-                <div className="free_pricing_div">
-                  <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>{currentPrice.currency_symbol}</span>
-                  <span className="heading">0</span>
-                  <br />
-                  <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", visibility: "hidden" }}>{currentCountry === "india" ? "₹" : currentCountry === 'indonesia' ? "IDR " : "$"}</p>
-                  <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap", visibility: "hidden" }}>{planPeriod === 'monthly' ? currentPrice.basic_plan.original : currentPrice.basic_plan.monthly_original}</p>
+                <div className="pricing_card_price_div">
+                <span className="display_flex_align_start">
+                  <span className={`${currentCountry === 'india' ? 'rupee font15' : ' font15'} ${isCountryWithCurrency()?"marginTop3":""}`}>{currentPrice.currency_symbol}</span>
+                  {<span className="pricing_card_price_text">{0}</span>}
+                </span>
                 </div>
               </div>
               {planPeriod !== 'monthly' &&
                 <div className="pricing_card_heading">
-                  <p>Free Forever</p>
-                  <p style={{ visibility: "hidden" }}>{` a`}</p>
+                  /user/month billed annually
                 </div>
               }
               <div className="pricing_card_button">
@@ -653,23 +728,22 @@ const Pricing = () => {
                 <p>Basic</p>
               </div>
               <div className="pricing_card_price">
-                <div className="pricing_cut_price">
-                  <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>{currentPrice.currency_symbol}</span>
-                  {<span className="heading">{planPeriod === 'monthly' ? currentPrice.basic_plan.final : currentPrice.basic_plan.monthly_final}</span>}
-                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
-                  <br />
-                  <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>{currentPrice.currency_symbol}</p>
-                  <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                <div className="pricing_card_price_div">
+                <span className="display_flex_align_start">
+                  <span className={`${currentCountry === 'india' ? 'rupee font15' : ' font15'} ${isCountryWithCurrency()?"marginTop3":""}`}>{currentPrice.currency_symbol}</span>
+                  {<span className="pricing_card_price_text">{planPeriod === 'monthly' ? currentPrice.basic_plan.final : currentPrice.basic_plan.monthly_final}</span>}
+                </span>
+                    <span className="pricing_slashed_price black_color_faded">
+                  <span className={currentCountry === 'india' ? 'rupee marginTop3' : ''} style={{ display: "inline" }}>{currentPrice.currency_symbol}</span>
+                  <span style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
                     {planPeriod === 'monthly' ? currentPrice.basic_plan.original : currentPrice.basic_plan.monthly_original}
-                  </p>
+                  </span>
+                </span>
                 </div>
               </div>
               {planPeriod !== 'monthly' &&
                 <div className="pricing_card_heading">
-                  <span>Billed&nbsp;
-                    <span className={currentCountry === 'india' ? 'rupee' : ''}>{currentPrice.currency_symbol}</span>
-                    {currentPrice.basic_plan.final} for {planPeriod=='annually'?12:24} months' service per user
-                  </span>
+                  /user/month billed {planPeriod == "annually" ? "annually" : "biannually"}
                 </div>
               }
               <div className="pricing_card_button">
@@ -719,24 +793,23 @@ const Pricing = () => {
                 <img src="/images/signal-advance.png" alt="Advance plan icon" />
                 <p>Advance</p>
               </div>
-              <div className="pricing_card_price">
-                <div className="pricing_cut_price">
-                  <span className={currentCountry === 'india' ? 'rupee heading' : ' heading'}>{currentPrice.currency_symbol}</span>
-                  {<span className="heading">{planPeriod === 'monthly' ? currentPrice.advance_plan.final : currentPrice.advance_plan.monthly_final}</span>}
-                  <p style={{ display: "inline", whiteSpace: "nowrap" }}> / month</p>
-                  <br />
-                  <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline" }}>{currentPrice.currency_symbol}</p>
-                  <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                <div className="pricing_card_price">
+                <div className="pricing_card_price_div">
+                <span className="display_flex_align_start">
+                  <span className={`${currentCountry === 'india' ? 'rupee font15' : ' font15'} ${isCountryWithCurrency()?"marginTop3":""}`}>{currentPrice.currency_symbol}</span>
+                  {<span className="pricing_card_price_text">{planPeriod === 'monthly' ? currentPrice.advance_plan.final : currentPrice.advance_plan.monthly_final}</span>}
+                </span>
+                    <span className="pricing_slashed_price black_color_faded">
+                  <span className={currentCountry === 'india' ? 'rupee marginTop3' : ''} style={{ display: "inline" }}>{currentPrice.currency_symbol}</span>
+                  <span style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
                     {planPeriod === 'monthly' ? currentPrice.advance_plan.original : currentPrice.advance_plan.monthly_original}
-                  </p>
+                  </span>
+                </span>
                 </div>
               </div>
               {planPeriod !== 'monthly' &&
                 <div className="pricing_card_heading">
-                  <span>Billed&nbsp;
-                    <span className={currentCountry === 'india' ? 'rupee' : ''}>{currentPrice.currency_symbol}</span>
-                    {currentPrice.advance_plan.final} for {planPeriod=='annually'?12:24} months' service per user 
-                  </span>
+                  /user/month billed {planPeriod == "annually" ? "annually" : "biannually"}
                 </div>
               }
               <div className="pricing_card_button">
@@ -855,8 +928,7 @@ const Pricing = () => {
                 wrapperClass=""
                 />
                     {
-                      pricingCalculatorPeriod == 'annually' &&
-                      <div className="pricing_card_heading" style={{visibility:"hidden"}}>
+                      <div className="pricing_card_heading margin_bottom_110" style={{visibility:"hidden"}}>
                         <span>Billed&nbsp;
                           <span className={currentCountry === 'india' ? 'rupee' : ''}>{multAccountPrice.currency}</span>
                           {Math.round(multAccountPrice.totalPrice / numAccounts)} for 12 months' service per user
@@ -868,25 +940,23 @@ const Pricing = () => {
                   (
                     <>
                       <div className="pricing_card_price">
-                        <div className="pricing_cut_price">
-                          <span style={{ "fontWeight": "bold", "marginRight": "5px" }} className="text-royal">~</span>
-                          <span className={`${currentCountry === 'india' ? 'rupee heading' : ' heading'} text-royal`}>{multAccountPrice.currency}</span>
-                          {<span className="heading text-royal">{Math.ceil(multAccountPrice.price/numAccounts)}</span>}
-                          <p style={{ display: "inline", whiteSpace: "nowrap" }}> <span className="text-royal">per user</span> / month</p>
-                          <br />
-                          <p className={currentCountry === 'india' ? 'rupee' : ''} style={{ display: "inline", marginLeft: "13px" }}>{currentPrice.currency_symbol}</p>
-                          <p style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
-                            {multAccountPrice.cutPrice}
-                          </p>
+                        <div className="pricing_card_price_div">
+                            <span style={{ "fontWeight": "bold", "marginRight": "5px" }} className="text-royal">~</span>
+                            <span className="display_flex_align_start">
+                                <span className={`${currentCountry === 'india' ? 'rupee font15' : ' font15'} ${isCountryWithCurrency()?"marginTop3":""} text-royal`}>{multAccountPrice.currency}</span>
+                                <span className="pricing_card_price_text text-royal">{Math.ceil(multAccountPrice.price/numAccounts)}</span>
+                            </span>
+                            <span className="pricing_slashed_price black_color_faded">
+                                <span className={currentCountry === 'india' ? 'rupee marginTop3' : ''} style={{ display: "inline" }}>{currentPrice.currency_symbol}</span>
+                                <span style={{ display: "inline", textDecoration: "line-through", whiteSpace: "nowrap" }}>
+                                    {multAccountPrice.cutPrice}
+                                </span>
+                            </span>
                         </div>
                       </div>
                       {
-                        pricingCalculatorPeriod == 'annually' &&
-                        <div className="pricing_card_heading">
-                          <span>Billed&nbsp;
-                            <span className={currentCountry === 'india' ? 'rupee' : ''}>{multAccountPrice.currency}</span>
-                            {Math.round(multAccountPrice.totalPrice/numAccounts)} for 12 months' service per user
-                          </span>
+                        <div className={`pricing_card_heading margin_bottom_100`}>
+                            /user/month {pricingCalculatorPeriod=="annually"?"billed annually":""}
                         </div>
                       }
                     </>
@@ -894,15 +964,17 @@ const Pricing = () => {
                     Number of accounts cannot be less than 2
                   </div>
               }
-              <div className="pricing_card_button background-royal">
-                <button onClick={() => handleGaButtonClick("multiple_user")}>
-                  <a target="_blank" className="buy_button">Buy</a>
-                </button>
-              </div>
-              <div className="pricing_calculator_support">
-                <p>Need more support? <a href={whatsappRedirectUrl} target="_blank">Click here</a></p>
-              </div>
+            <div className="mult_card_bottom_container">
+                <div className={`pricing_card_button mult_account_buy_button background-royal ${isMultipleAccountPage?"pricing_card_button_width":""}`}>
+                    <button onClick={() => handleGaButtonClick("multiple_user")}>
+                      <a target="_blank" className="buy_button">Buy</a>
+                    </button>
+                </div>
+                <div className="pricing_calculator_support">
+                    <p>Need more support? <a href={whatsappRedirectUrl} target="_blank">Click here</a></p>
+                </div>
             </div>
+          </div>
           </div>
           <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
           <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
