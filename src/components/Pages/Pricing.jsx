@@ -91,6 +91,7 @@ const Pricing = () => {
         pricing_country_name: "international",
         country_code: "US",
         country_currency: "USD" ,
+        countryCallingCode:'+1',
         isSuccess: false,
   });
   const [flagIconSrc, setFlagIconSrc] = useState('');
@@ -431,6 +432,7 @@ const Pricing = () => {
                     pricing_country_name: country,
                     country_code: data.country_code,
                     country_currency: currency,
+                    countryCallingCode:data.country_calling_code,
                     isSuccess: true,
                 });
                 setLoading(false);
@@ -601,6 +603,7 @@ const Pricing = () => {
           amount = {multAccountPrice}
           country_currency = {myLocation.country_currency}
           multCountry = {currentCountry}
+          currentCountry={myLocation.countryCallingCode}
         />
       }
       {showUPIPopup.show && 
