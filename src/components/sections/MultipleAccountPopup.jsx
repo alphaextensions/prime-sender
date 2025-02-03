@@ -14,8 +14,8 @@ const validateUserEmail = (email) => {
 	return pattern.test(email);
 }
 
-const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers }) => {
-	const [countryCode, setCountryCode] = useState('91');
+const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers,countryCallingCode }) => {
+	const [countryCode, setCountryCode] = useState(countryCallingCode.split('+')[1] || "91");
 	const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
 
 	const handleNumberChange = (e) => {
@@ -62,7 +62,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 		</div>
 	</div>
 }
-const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry }) => {
+const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry,currentCountry }) => {
 	const { setCheckoutData } = useContext(CheckoutContext);
 	const numbersContainerRef = useRef(null);
 	const navigate = useNavigate();
@@ -337,6 +337,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 												valueChangeHandler={valueChangeHandler}
 												numberInputError={numberInputError}
 												inputErrorNumbers={inputErrorNumbers}
+												countryCallingCode={currentCountry}
 											/>
 										})
 									}

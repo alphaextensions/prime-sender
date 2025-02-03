@@ -2,7 +2,7 @@ import SectionTitle from '../common/SectionTitle';
 import HelmetHeader from "../common/HelmetHeader";
 import '../../styles/HelpUsImprovePage/helpusimprove.css';
 import { promoText } from '../Data/seo-data';
-
+import { useEffect } from 'react';
 const HelpUsImprove = () => {
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
@@ -13,9 +13,41 @@ const HelpUsImprove = () => {
   const promoTextComponent = <div className='promo_text_container'>
     {...promoTextComponentGenerator()}
   </div>
+
+  useEffect(() => {
+    async function unInstallExtension() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const clientId = urlParams.get("clientId")
+      const againVisit = window.localStorage.getItem("clientId") === clientId
+      if (clientId && !againVisit) {
+        try {
+          window.localStorage.setItem("clientId", clientId)
+          console.log(clientId)
+          const response = await fetch("https://www.google-analytics.com/mp/collect?measurement_id=G-RKJ49K5JXL&api_secret=jJNQa1g_Qw64CF4MRAKj7A",
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                client_id: clientId,
+                events: [
+                  {
+                    name: "extension_uninstall",
+                    params: {}
+                  }
+                ]
+              })
+            }
+          );
+        } catch (e) {
+          console.error('Google Analytics request failed with an exception', e);
+        }
+      }
+    }
+    unInstallExtension()
+  }, [])
+
   return (
     <>
-      <HelmetHeader 
+      <HelmetHeader
         title={'Help Us Improve | Prime Sender - Best Web Sender Extension'}
         description={'Submit your feedback to help us improve Prime Sender'}
         keywords={'help-us-improve,prime sender help, prime sender feedback'}
@@ -26,15 +58,15 @@ const HelpUsImprove = () => {
           gif="/gifs/help-us-improve.gif"
           title="Help us Improve"
           subtitle="We strive to give you the best service possible but maybe there are certain things we need to catch up on."
-          />
+        />
         <div className="main-container improve_container">
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLSdAACp4FEHgEkv3o1T1fMMsY76pKv3KUUqp5wV5LT3gTEuhmQ/viewform?embedded=true"
             height="auto"
             className='main-iframe'
-            frameborder="0"
-            marginheight="0"
-            marginwidth="0"
+            frameBorder="0"
+            marginHeight="0"
+            marginWidth="0"
           >
             Loading…
           </iframe>
@@ -44,13 +76,13 @@ const HelpUsImprove = () => {
             <br />
             <p className='text'>1. Enter the numbers you want to send the message to, separated by comma.</p>
             <p className='text'>2. Enter the message you'd like to send. You could also add attachments 📁.</p>
-            <div className='text' style={{marginLeft: '2rem'}}>
+            <div className='text' style={{ marginLeft: '2rem' }}>
               <ul>
                 <li>Click on the icon of 📎 Attachment inside the text box inside the extension</li>
                 <li>Select files you'd like to send. You can select multiple files.</li>
                 <li>You can click on Add Caption to add caption to your attachment</li>
                 <li> Click on Send button inside the extension.</li>
-              </ul>         
+              </ul>
             </div>
             <p className='text'>3. Download the delivery report by clicking on Delivery Report to view the delivery status of the messages and the attachment sent.
             </p>
