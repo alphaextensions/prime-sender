@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileInfoCard } from "../widgets/cards";
 import { primeSenderController } from "../context";
-import ReactGA from "react-ga4";
 import 'react-toastify/dist/ReactToastify.css';
 import { jwtDecode } from "jwt-decode";
 
@@ -80,13 +79,6 @@ export function Profile() {
 
   const redirectInvoice = () => {
     if (selectedDate !== "---- Select date ----" && selectedDate !== "No Receipt Found") {
-
-      ReactGA.event({
-        category: "Button Click",
-        action: "Invoice Button Clicked",
-        label: "dashboard_invoice_btn_clicked",
-      });
-
       let invoice = invoiceObject.find((invoice) => {
         return invoice.date == selectedDate;
       })

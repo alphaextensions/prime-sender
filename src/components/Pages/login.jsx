@@ -4,7 +4,6 @@ import { IoClose } from "react-icons/io5";
 import { CiWarning } from "react-icons/ci";
 import { primeSenderController, setCredentials } from "../context";
 import HashLoader from "react-spinners/HashLoader";
-import ReactGA from "react-ga4";
 import { apiFetch } from "../../utils/apiFetch";
 import "../../styles/login/login.css";
 
@@ -135,24 +134,10 @@ function Login() {
 
       if (data.statusCode === 200) {
         handleLogin(res.data.authToken, res.data.userData);
-
-        ReactGA.event({
-          category: "Google Login",
-          action: "Google Login Successful",
-          label: "google_login_success",
-        });
-        
       } else {
         handlePopups(res);
       }
     } catch (error) {
-
-      ReactGA.event({
-        category: "Google Login",
-        action: "Google Login Successful",
-        label: error.error || "Unknown Error",
-      });
-
       console.log(error)
       setLoading(false);
       handlePopups("Server error");
@@ -198,15 +183,6 @@ function Login() {
           text: "signin_with",
           shape: "pill",
           logo_alignment: "left",
-          click_listener: () => {
-            ReactGA.event({
-              category: "Google Login",
-              action: "Google Login Button Clicked",
-              label: "google_login_button",
-            });
-
-            console.log("Google Login button clicked");
-          },
         }
       );
     };
