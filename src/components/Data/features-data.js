@@ -7,7 +7,7 @@ export default [
   {
     logo: '/gifs/delivery-report.gif',
     name: "Report",
-    desc: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
+    desc: "Get a detailed report of your campaigns to improve sales and utilize Message Broadcaster to the fullest",
   },
   {
     logo: `/gifs/attachment.gif`,

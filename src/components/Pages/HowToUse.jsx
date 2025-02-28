@@ -18,9 +18,9 @@ const HowToUse = () => {
     <>
       {showMetaData &&
         <HelmetHeader
-          title={'How To Use | Prime Sender - Best Web Sender Extension'}
-          description={'How to use page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
-          keywords={'how to use , prime sender how to use, how to use prime sender, Simple, cheap, prime sender'}
+          title={'How To Use | Message Broadcaster - Best Web Sender Extension'}
+          description={'How to use page for Message Broadcaster, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
+          keywords={'how to use , message broadcaster how to use, how to use message broadcaster, Simple, cheap, message broadcaster'}
         />
       }
     <div className="use_main">
@@ -70,11 +70,11 @@ const HowToUse = () => {
           </div>
         </div>
         {/* right container */}
-        <div className="use_right" data-aos="flip-right" >
+        {/* <div className="use_right" data-aos="flip-right" >
           <div className="use_right_container">
             <img src="/images/how-to-use.png" alt="How to use" />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   </>

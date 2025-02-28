@@ -322,11 +322,11 @@
 }
 
 .pricing_country_text {
-  /*background: #009a88;*/
+  /*background: #91B5FB;*/
   border-radius: 20px;
   font-weight: bold;
   /*color: #fff;*/
-  color: #009a88;
+  color: #91B5FB;
   width: min(80%, 745px);
   padding: 10px 0;
 }
@@ -678,7 +678,7 @@
 }
 
 .feature_info_class{
-  color: #009a88;
+  color: #91B5FB;
   font-size: 20px;
 }
 
@@ -706,7 +706,7 @@
 .navigation_outer_box_down .msg-box-down {
   position: relative;
   background-color: #ecf7f5;
-  border: 2px solid #009a88;
+  border: 2px solid #91B5FB;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -718,7 +718,7 @@
 }
 
 .navigation_outer_box_down .msg-box-down p{
-  color: #009a88;
+  color: #91B5FB;
   font-weight: normal;
   font-size: 14px;
 }
@@ -731,7 +731,7 @@
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #009a88;
+  border-top: 10px solid #91B5FB;
 }
 
 .advance_navigation_box{

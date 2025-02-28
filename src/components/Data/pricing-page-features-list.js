@@ -39,7 +39,7 @@ export default [
     free: true,
     basic: true,
     advance: true,
-    description: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
+    description: "Get a detailed report of your campaigns to improve sales and utilize Message Broadcaster to the fullest",
   },
   {
     name: 'Save Message Template',
@@ -53,7 +53,7 @@ export default [
     free: true,
     basic: true,
     advance: true,
-    description: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
+    description: "Get a detailed report of your campaigns to improve sales and utilize Message Broadcaster to the fullest",
   },
   {
     name: 'Translate Conversation',

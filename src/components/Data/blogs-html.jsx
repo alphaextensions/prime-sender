@@ -3,7 +3,7 @@ export const blogHtml = {
     <>
       <div className="blog_page_title">
         <p className="blog_page_heading">
-          How to send messages using excel - Prime Sender
+          How to send messages using excel - Message Broadcaster
         </p>
         <p className="blog_page_date">May 13, 2023</p>
       </div>
@@ -42,7 +42,7 @@ export const blogHtml = {
               href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia"
               className="blog_text_blue"
             >
-              Prime Sender
+              Message Broadcaster
             </a>{" "}
             extension. You can click on Upload and upload the excel right away.
           </p>
@@ -131,7 +131,7 @@ export const blogHtml = {
     <>
       <div className="blog_page_title">
         <p className="blog_page_heading">
-          How to send customized message using Prime Sender
+          How to send customized message using Message Broadcaster
         </p>
         <p className="blog_page_date">December 22, 2022</p>
       </div>
@@ -149,7 +149,7 @@ export const blogHtml = {
               href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia"
               className="blog_text_blue"
             >
-              Prime Sender
+              Message Broadcaster
             </a>{" "}
             :
           </p>
@@ -209,7 +209,7 @@ export const blogHtml = {
               href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia"
               className="blog_text_blue"
             >
-              Prime Sender
+              Message Broadcaster
             </a>
           </p>
         </div>
@@ -270,7 +270,7 @@ export const blogHtml = {
       <div className="blog_page_title">
         <p className="blog_page_heading">
           How to reply quickly to your customers using Quick Response using
-          Prime Sender
+          Message Broadcaster
         </p>
         <p className="blog_page_date">December 17, 2022</p>
       </div>
@@ -279,7 +279,7 @@ export const blogHtml = {
       </div>
       <div className="blog_page_content">
         <div className="blog_page_subheading">
-          <p>Quick Response using Prime Sender</p>
+          <p>Quick Response using Message Broadcaster</p>
         </div>
         <div className="blog_page_step">
           <p>
@@ -293,7 +293,7 @@ export const blogHtml = {
               href="https://chrome.google.com/webstore/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia"
               className="blog_text_blue"
             >
-              Prime Sender
+              Message Broadcaster
             </a>
             , you can see a strip of default template messages just above the
             chat box
@@ -414,7 +414,7 @@ export const blogHtml = {
         </div>
         <div className="blog_page_step">
           <p>
-            Once you click on the 'Translate using Prime Sender' option, the
+            Once you click on the 'Translate using Message Broadcaster' option, the
             whole chat will be translated into your local language. This will
             also apply to all other chats.
           </p>

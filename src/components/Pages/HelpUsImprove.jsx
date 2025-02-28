@@ -16,9 +16,9 @@ const HelpUsImprove = () => {
   return (
     <>
       <HelmetHeader 
-        title={'Help Us Improve | Prime Sender - Best Web Sender Extension'}
-        description={'Submit your feedback to help us improve Prime Sender'}
-        keywords={'help-us-improve,prime sender help, prime sender feedback'}
+        title={'Help Us Improve | Message Broadcaster - Best Web Sender Extension'}
+        description={'Submit your feedback to help us improve Message Broadcaster'}
+        keywords={'help-us-improve,message broadcaster help, message broadcaster feedback'}
       />
       <div className='main-section'>
         {promoTextComponent}
@@ -39,7 +39,7 @@ const HelpUsImprove = () => {
             Loading…
           </iframe>
           <div className='improve_para_2'>
-            <p className='sub-heading'>If you had a change of heart somehow and want to know how Prime Sender
+            <p className='sub-heading'>If you had a change of heart somehow and want to know how Message Broadcaster
               works quickly in 3 steps, here :</p>
             <br />
             <p className='text'>1. Enter the numbers you want to send the message to, separated by comma.</p>

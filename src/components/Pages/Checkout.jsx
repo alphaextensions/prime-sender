@@ -47,10 +47,10 @@ const Checkout = () => {
         <div className="checkout_info_section">
           <div className="checkout_heading_section">
             <div className="checkout_logo">
-              <img src="/images/logo-large.png" alt="Prime Sender logo" />
+              <img src="/images/logo-large.png" alt="Message Broadcaster logo" />
             </div>
             <div className="checkout_logo_text">
-              <img src="/images/logo-text-light.png" alt="Prime Sender logo" />
+              <img src="/images/logo-text-light.png" alt="Message Broadcaster logo" />
             </div>
           </div>
           <div className="checkout_title_section">

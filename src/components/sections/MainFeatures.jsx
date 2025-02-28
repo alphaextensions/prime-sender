@@ -38,9 +38,9 @@ const MainFeatures = ({isSlider}) => {
     <>
       {showMetaData &&
         <HelmetHeader
-          title={'Main Features | Prime Sender - Best Web Sender Extension'}
-          description={'Main features page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
-          keywords={'main features , prime sender main features, features prime sender, Simple, cheap, prime sender'}
+          title={'Main Features | Message Broadcaster - Best Web Sender Extension'}
+          description={'Main features page for Message Broadcaster, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
+          keywords={'main features , message broadcaster main features, features message broadcaster, Simple, cheap, message broadcaster'}
         />
       }
 

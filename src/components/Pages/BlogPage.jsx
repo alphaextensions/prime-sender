@@ -19,9 +19,9 @@ const BlogPage = () => {
   return (
     <>
       <HelmetHeader
-        title={'Blog | Prime Sender - Best Web Sender Extension'}
-        description={'Blog Page of Prime Sender, Efficient WhatsApp Sender Extension for Productive Messaging, Unlock Seamless Communication with Our WhatsApp Sender Extension'}
-        keywords={'Blogs,prime sender blog page, prime sender blogs'}
+        title={'Blog | Message Broadcaster - Best Web Sender Extension'}
+        description={'Blog Page of Message Broadcaster, Efficient WhatsApp Sender Extension for Productive Messaging, Unlock Seamless Communication with Our WhatsApp Sender Extension'}
+        keywords={'Blogs,message broadcaster blog page, message broadcaster blogs'}
       />
       <div className="main-section blog_section">
         <SectionTitle gif="/gifs/blogs.gif" title="Blog" />

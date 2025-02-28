@@ -31,7 +31,7 @@
 }
 
 .right-side{
-	background: #009a88;
+	background: #91B5FB;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -77,7 +77,7 @@
     font-size: 30px;
     font-weight: 600;
     width: 65%;
-    color: #009a88;
+    color: #91B5FB;
     text-align: center;
 }
 .img_box img{
@@ -151,7 +151,7 @@
 	visibility: hidden;
 	opacity: 0;
 	transition: 0.5s;
-	background: #009a88;
+	background: #91B5FB;
 	border-radius: 10px;
 }
 
@@ -215,7 +215,7 @@
 
 .button_div a{
 	text-decoration: none;
-	color:#009a88;
+	color:#91B5FB;
 	background: #fff;
 	padding: 10px 12px;
 	border-radius: 20px;

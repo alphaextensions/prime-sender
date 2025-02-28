@@ -77,7 +77,7 @@ const Testimonial = () => {
                       <div className="testimonial_card">
                         <TestimonialCard
                           heading={'This is crazy'}
-                          review={'The best application, really helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you Prime Sender team.'}
+                          review={'The best application, really helps my work, the application is simple, easy to use, admin respond quickly when tere are problems. the monthly subscription fee is affordable, thank you Message Broadcaster team.'}
                           imgSrc={'/images/user1.jpg'}
                           customerName={'EKO WICAKSONO'}
                         />
@@ -123,7 +123,7 @@ const Testimonial = () => {
                       <div className="testimonial_right_lower">
                         <div className="testimonial_card">
                           <TestimonialCard
-                            heading={'Thanks Prime Sender!'}
+                            heading={'Thanks Message Broadcaster!'}
                             review={'This extension is helping our company a lot to get in touch with many leads. Really helpful in mass messaging and offers announcement overall it is a perfect tool for mass sending messages i love it'}
                             imgSrc={'/images/user5.jpg'}
                             customerName={'Alexandre Farias'}

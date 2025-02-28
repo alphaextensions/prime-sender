@@ -36,7 +36,7 @@ export function AvatarMenu() {
 
     return (
         <Menu open={isOpen} handler={setIsOpen}>
-            <MenuHandler className="cursor-pointer font-bold px-[10px] py-1 text-[#009a88] border-solid border-2 rounded-lg border-gray-500 flex justify-around items-center">
+            <MenuHandler className="cursor-pointer font-bold px-[10px] py-1 text-[#91B5FB] border-solid border-2 rounded-lg border-gray-500 flex justify-around items-center">
                 <div className='flex justify-around items-center'>
                     <Typography variant="small" className="font-semibold mr-1">
                         {selectedAvatar ? selectedAvatar.text : "Select an account"}

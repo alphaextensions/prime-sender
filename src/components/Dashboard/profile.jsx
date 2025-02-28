@@ -114,7 +114,7 @@ export function Profile() {
   return (
     <>
       <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
-        <div className="absolute inset-0 h-full w-full bg-gradient-to-br transition-transform from-[#00d4bb] to-[#009a88]" />
+        <div className="absolute inset-0 h-full w-full bg-gradient-to-br transition-transform from-[#00d4bb] to-[#91B5FB]" />
       </div>
       <Card className="mx-3 -mt-40 mb-6 lg:mx-4 border border-blue-gray-100">
         <CardBody className="p-4">
@@ -175,7 +175,7 @@ export function Profile() {
             </div>
             <Button
               onClick={redirectInvoice}
-              className="ml-3 bg-[#009a88]"
+              className="ml-3 bg-[#91B5FB]"
             >
               Download
             </Button>

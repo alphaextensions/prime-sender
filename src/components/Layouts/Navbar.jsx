@@ -39,18 +39,8 @@ function NavLinks({ onClick }) {
         </NavLink>
       </li>
       <li>
-        <NavLink to='/pricing' end onClick={onClick} className='large-text'>
-          Pricing
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to='/blogs' onClick={onClick} className='large-text'>
-          Blogs
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to='/login' onClick={onClick} className='large-text'>
-          Login
+        <NavLink to='/plans' end onClick={onClick} className='large-text'>
+          Compare Plans
         </NavLink>
       </li>
     </ul>
@@ -122,7 +112,7 @@ function Navbar() {
         <NavLink to='/' className='brand' onClick={openPage}>
           <div className='nav_img_container'>
             <img src="/images/logo-img.png" alt="logo" />
-            <img src="/images/logo-text.png" alt="Prime Sender" />
+            <h1>Message Broadcaster</h1>
           </div>
         </NavLink>
 
@@ -132,7 +122,7 @@ function Navbar() {
           </div>
 
           <div className='nav-download-btn'>
-            <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />} />
+            {/* <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />} /> */}
             {showMenu ? (
               <MdClose className='menu-icon' onClick={closeMenu} />
             ) : (

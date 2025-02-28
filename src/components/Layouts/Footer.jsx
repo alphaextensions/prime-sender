@@ -37,25 +37,24 @@ const Footer = () => {
         <div className="footer_row">
           <div className="footer_logo">
             <img src="/images/logo-img.png" alt="logo"/>
-            <img src="/images/logo-text.png" alt="Prime Sender"/>
+            <h4 className='heading'>Message Broadcaster</h4>
           </div>
           <div className="footer_links">
             <h4 className='heading'>Company</h4>
             <ul className='large-text'>
               <li><Link to='/' onClick={scrollToTop}> Home </Link></li>
               <li><Link to='/how-to-use' onClick={scrollToTop}> How to Use </Link></li>
-              <li><Link to='/blogs' onClick={scrollToTop}> Blogs </Link></li>
               <li><Link to='/faqs' onClick={scrollToTop}> FAQs </Link></li>
             </ul>
           </div>
-          <div className="footer_links">
+          {/* <div className="footer_links">
             <h4 className='heading'>Product</h4>
             <ul className='large-text'>
               <li><Link to='/pricing' onClick={scrollToTop}>Pricing</Link></li>
               <li><Link to='/feature-request' onClick={scrollToTop}> Request a Feature </Link></li>
               <li><Link to='/#testimonial' onClick={handleSectionClick}>Reviews</Link></li>
             </ul>
-          </div>
+          </div> */}
           <div className="footer_links">
             <h4 className='heading'>Legal</h4>
             <ul className='large-text'>
@@ -67,8 +66,8 @@ const Footer = () => {
             <h4 className='heading'>Contact With Us</h4>
             <ul className='large-text'>
               <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
-              <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
-              <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender" target='_blank' >Chat on WhatsApp</a></li>
+              {/* <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li> */}
+              <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Messsage%20Broadcaster" target='_blank' >Chat on WhatsApp</a></li>
             </ul>
           </div>
         </div>

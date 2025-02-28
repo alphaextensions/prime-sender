@@ -257,7 +257,6 @@
   }
 }
 
-@media (max-width: 1060px) {
   .right-col{
     display: none !important;
     flex-basis: 0%;
@@ -267,9 +266,8 @@
     text-align: center !important;
   }
   .home-content .left-col .title{
-    width: 100%;
+    width: 100% !important;
   }
   .home-content .left-col .home-btns{
-    justify-content: center;
+    justify-content: center !important;
   }
-}

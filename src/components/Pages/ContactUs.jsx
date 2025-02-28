@@ -132,9 +132,9 @@ const ContactUs = () => {
   return (
     <>
       <HelmetHeader
-        title={'Contact Us | Prime Sender - Best Web Sender Extension'}
-        description={'Contact Us at Prime Sender'}
-        keywords={'contact,prime sender contact page, prime sender support'}
+        title={'Contact Us | Message Broadcaster - Best Web Sender Extension'}
+        description={'Contact Us at Message Broadcaster'}
+        keywords={'contact,message broadcaster contact page, message broadcaster support'}
       />      
       {
           formSubmitted && !isLoading ? 

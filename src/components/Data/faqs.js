@@ -8,7 +8,7 @@ export default [
     answer: "Yes, Every country in the world can use the extension."
   },
   {
-    question: "3. How to Send Clickable Links through Prime Sender?",
+    question: "3. How to Send Clickable Links through Message Broadcaster?",
     answer: "You can send a clickable link to anyone who <br> - Either has your number saved in their phone book  <br> - Or has replied to you at least once."
   },
   {

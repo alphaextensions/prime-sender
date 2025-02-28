@@ -18,9 +18,9 @@ function PrivacyPolicy() {
   return (
     <>
       <HelmetHeader
-        title={'Privacy Policy | Prime Sender - Best Web Sender Extension'}
-        description={'Privacy Policy for Prime Sender'}
-        keywords={'prime sender privacy policy, privacy policy,privacy policy and terms&conditions'}
+        title={'Privacy Policy | Message Broadcaster - Best Web Sender Extension'}
+        description={'Privacy Policy for Message Broadcaster'}
+        keywords={'message broadcaster privacy policy, privacy policy,privacy policy and terms&conditions'}
       />
       <div className="main-section privacy-policy">
         {promoTextComponent}

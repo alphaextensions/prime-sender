@@ -1,4 +1,4 @@
-# Prime Sender Website
+# Message Broadcaster Website
 
 ## Steps for Installation:
 

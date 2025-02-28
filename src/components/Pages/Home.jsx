@@ -95,9 +95,9 @@ const Home = () => {
   return (
     <>
       <HelmetHeader
-        title={'Prime Sender - Best Web Sender Extension'}
+        title={'Message Broadcaster - Best Web Sender Extension'}
         description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'}
-        keywords={'prime sender, prime sender home, home page'}
+        keywords={'message broadcaster, message broadcaster home, home page'}
       />
       <div className="home-container">
         <div className="home-content">
@@ -107,19 +107,19 @@ const Home = () => {
             </h1>
             <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
             <div className="home-btns">
-              <DownloadBtn />
-              <Link to="/pricing" onClick={() => { buyNowButtonClickHandle() }} className="howtousebtn button-round large-text btn">
-                Buy Now
+              {/* <DownloadBtn /> */}
+              <Link to="/plans" onClick={() => { buyNowButtonClickHandle() }} className="howtousebtn button-round large-text btn">
+                Checkout Plans
               </Link>
             </div>
           </div>
-          <div className="right-col">
+          {/* <div className="right-col">
             <img className='girl' src="/gifs/main-1.gif" alt="Main GIF" />
             <img className='objects' src="/svgs/main-2.svg" alt="Main icon" />
             <div className='free_forever_div'>
               <p className='free_green'>IT'S FREE. FOREVER.</p>
             </div>
-          </div>
+          </div> */}
         </div>
         {promoTextComponent}
       </div>

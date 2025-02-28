@@ -62,7 +62,7 @@ function Login() {
   // const promptInstallPrimes = () => {
   //   const isMobile = isMobileDevice();
   //   showPopup(
-  //     "Prime Sender Extension Not Installed",
+  //     "Message Broadcaster Extension Not Installed",
   //     "To proceed, please install our browser extension and then try logging in again.",
   //     !isMobile
   //   );
@@ -202,7 +202,7 @@ function Login() {
     <div className="page">
       <div className={loading ? "loader active_loader" : "loader"}>
         <HashLoader
-          color="#009a88"
+          color="#91B5FB"
           loading={loading}
           size={100}
           aria-label="Loading Spinner"
@@ -213,7 +213,7 @@ function Login() {
         <div className="left-side">
           <div className="logo_box" onClick={returnToHomePage}>
             <img className="icon" src="/images/logo-img.png" alt="logo" />
-            <img src="/images/logo-text.png" alt="Prime Sender" />
+            <img src="/images/logo-text.png" alt="Message Broadcaster" />
           </div>
           <div className="img_box">
             <h2>Reach Your Audience on WhatsApp with Precision</h2>
@@ -226,7 +226,7 @@ function Login() {
           <div className="main_box">
             <div className="intro_text">
               <h1>Welcome!</h1>
-              <h3>Let's Make WhatsApp Work Smarter for You with Prime Sender.</h3>
+              <h3>Let's Make WhatsApp Work Smarter for You with Message Broadcaster.</h3>
             </div>
             <div id="signInGoogle">
             </div>

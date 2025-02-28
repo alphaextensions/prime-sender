@@ -4,7 +4,7 @@ export function Home() {
     <>
       <div className="w-[60%] m-auto mt-8 flex flex-col items-center">
         <img src={DashboardImg} className="w-[70%] h-max" alt="" />
-        <span className=" font-semibold text-[28px] text-[#009a88]">Coming Soon..!</span>
+        <span className=" font-semibold text-[28px] text-[#91B5FB]">Coming Soon..!</span>
       </div>
     </>
   );

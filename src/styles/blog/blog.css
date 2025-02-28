@@ -74,7 +74,7 @@
 
 .blog_card_readmore a {
   font-size: 20px;
-  color: #009a88;
+  color: #91B5FB;
   font-weight: 600;
   padding: 8px;
   border-radius: 8px;
@@ -83,7 +83,7 @@
 }
 
 .blog_card_readmore a:hover {
-  background: #009a88;
+  background: #91B5FB;
   color: #fff;
   border: 8px;
   padding: 8px;

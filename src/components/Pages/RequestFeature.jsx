@@ -15,9 +15,9 @@ const RequestFeature = () => {
   return (
     <>
       <HelmetHeader
-        title={'Feature Request | Prime Sender - Best Web Sender Extension'}
-        description={'Submit your request for adding new features to Prime Sender'}
-        keywords={'prime sender request a feature, request new feature, add feature'}
+        title={'Feature Request | Message Broadcaster - Best Web Sender Extension'}
+        description={'Submit your request for adding new features to Message Broadcaster'}
+        keywords={'message broadcaster request a feature, request new feature, add feature'}
       />
       <div className="main-section">
         {promoTextComponent}

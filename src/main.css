@@ -8,9 +8,9 @@
 }
 
 :root {
-  --color-primary1: #009A88;
-  --color-primary2: #00d4bb;  
-  --color-primary3: #017063;  
+  --color-primary1: #4885ff;
+  --color-primary2: #7ea9ff;  
+  --color-primary3: #2d529b;  
   --color-primary4: #f2fffe;
   --color-secondary1: #ffa17a;
   --color-secondary2: #f2fffe6c;
@@ -36,6 +36,10 @@ body {
   font-family: 'PT Sans Caption', sans-serif;
   /* font-family: 'Plus Jakarta Sans', sans-serif; */
   /* font-family: Poppins; */
+}
+
+img[src*='gif'] {
+    filter: hue-rotate(45deg) saturate(1) !important;
 }
 
 /* utility classes */

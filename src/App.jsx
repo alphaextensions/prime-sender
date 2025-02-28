@@ -52,25 +52,25 @@ const App = () => {
           <Routes>
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Home />} />
-              <Route path="/pricing" element={<Pricing key="pricing" />} />
-              <Route path="/feature-request" element={<RequestFeature />} />
-              <Route path="/help-us-improve" element={<HelpUsImprove />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blogs/:id" element={<BlogPage />} />
+              <Route path="/plans" element={<Pricing key="pricing" />} />
+              {/* <Route path="/feature-request" element={<RequestFeature />} /> */}
+              {/* <Route path="/help-us-improve" element={<HelpUsImprove />} /> */}
+              {/* <Route path="/blogs" element={<Blogs />} /> */}
+              {/* <Route path="/blogs/:id" element={<BlogPage />} /> */}
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/contactus" element={<ContactUs />} />
               <Route path="/terms-of-service" element={<TermsOfUse />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/basic-success" element={<Success plan="basic" />} />
-              <Route path="/advance-success" element={<Success plan="advance" />} />
+              {/* <Route path="/basic-success" element={<Success plan="basic" />} /> */}
+              {/* <Route path="/advance-success" element={<Success plan="advance" />} /> */}
               <Route path="/how-to-use" element={<HowToUse />} />
               <Route path="/main-features" element={<MainFeatures isSlider='false' />} />
-              <Route path="/pricing/multiple-account" element={<Pricing key="multiple-account" />} />
-              <Route path="/checkout" element={<Checkout />} />
+              {/* <Route path="/pricing/multiple-account" element={<Pricing key="multiple-account" />} /> */}
+              {/* <Route path="/checkout" element={<Checkout />} /> */}
               <Route path="*" element={<Error />} />
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard/*" element={<DashboardLayout />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            {/* <Route path="/dashboard/*" element={<DashboardLayout />} /> */}
           </Routes>
         </Router>
         </CheckoutProvider> : ''}

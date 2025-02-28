@@ -369,7 +369,7 @@ function TransferPlan() {
                         <Button
                             variant="filled"
                             disabled={!is_transfer_allowed() ? true : false}
-                            className="bg-[#009a88] !overflow-visible"
+                            className="bg-[#91B5FB] !overflow-visible"
                             onClick={handleMultipleAccTransfer}
                         >
                             {selectedUser?.plan_type ? "Transfer" : "Loading..."}
@@ -485,7 +485,7 @@ function TransferPlan() {
                         <Button
                             variant="filled"
                             disabled={!is_transfer_allowed()}
-                            className="bg-[#009a88] !overflow-visible"
+                            className="bg-[#91B5FB] !overflow-visible"
                             onClick={handleTransfer}
                         >
                             Transfer

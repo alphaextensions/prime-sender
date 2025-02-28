@@ -1,5 +1,5 @@
 export const promoText = [
-  'Prime Sender',
+  'Message Broadcaster',
   'premium sender',
   'web sender',
   'whatsapp premium sender',
@@ -15,7 +15,7 @@ export const promoText = [
   'whatsapp on web login',
   'whatsapp web login',
   'whatsapp web com',
-  'Prime sender helps you in bulk messaging on WhatsApp',
+  'Message Broadcaster helps you in bulk messaging on WhatsApp',
   'Send bulk messages on WhatsApp',
   'Mass messages on WhatsApp',
   'how to send mass messages on WhatsApp',

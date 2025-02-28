@@ -195,11 +195,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		if(!isUserDataValid) 
 			return;
 
-		let productName = "Prime Sender";
+		let productName = "Message Broadcaster";
 		plan_type = plan_type == 'basic' ? "Basic" : "Advance";
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
-		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
+		let productDescription = `Message Broadcaster ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
         if(autorenewChecked) {
             const stripe_checkout_url = await setDataInDatabase(productName, productDescription, country_currency, true);
             window.open(stripe_checkout_url, '_blank');

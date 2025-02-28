@@ -1,7 +1,7 @@
 .main-feature-section{
   width: 100%;
   background-size: cover;
-  background: linear-gradient(180deg, #e2effa 0%, #009A8888 100%);
+  background: linear-gradient(180deg, #e2effa 0%, var(--color-primary1) 100%);
   padding: 8rem 2rem 4rem;
 }
 

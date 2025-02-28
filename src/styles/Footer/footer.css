@@ -29,6 +29,13 @@
   justify-self: flex-start;
 }
 
+.footer_logo h4 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-primary1);
+}
+
 .footer_logo img{
   width: 100%
 }
@@ -95,6 +102,10 @@
     grid-column: 1 / -1;
     margin-bottom: 10px;
   }
+
+  .footer_logo h4 {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -114,6 +125,10 @@
 
   .footer_logo {
     width: 220px;
+  }
+
+  .footer_logo h4 {
+    font-size: 16px;
   }
 }
 
@@ -144,5 +159,8 @@
   .footer_logo {
     justify-self: center;
     width: 150px;
+  }
+  .footer_logo h4 {
+    font-size: 14px;
   }
 }

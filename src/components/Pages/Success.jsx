@@ -20,8 +20,8 @@ const Success = ({ plan }) => {
   return (
     <>
       <HelmetHeader
-        title={successTitle[plan] + ' | Prime Sender - Best Web Sender Extension'}
-        description={successTitle[plan] + ' for Prime Sender'}
+        title={successTitle[plan] + ' | Message Broadcaster - Best Web Sender Extension'}
+        description={successTitle[plan] + ' for Message Broadcaster'}
       />
       <div className="main-section">
         {promoTextComponent}
