@@ -114,7 +114,7 @@
 
 .testimonial_left{
   flex-basis: 40%;
-  background: linear-gradient(to bottom, #d9fefb, #f2fffe);
+  background: linear-gradient(to bottom, #cbdcff, #fbfcff);
   min-height: 20vh;
   margin-left: -30px;
   color: var(--color-dark-grey);
@@ -142,14 +142,14 @@
 
 .testimonial_right_upper{
   margin-top: -5rem;
-  background: linear-gradient(to bottom, #d9fefb, #f2fffe);
+  background: linear-gradient(to bottom, #cbdcff, #fbfcff);
   border-radius: 8px;
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, .5);
 }
 
 .testimonial_right_lower{
   margin-bottom: -5rem;
-  background: linear-gradient(to bottom, #d9fefb, #f2fffe);
+  background: linear-gradient(to bottom, #cbdcff, #fbfcff);
   border-radius: 8px;
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, .5);
 }

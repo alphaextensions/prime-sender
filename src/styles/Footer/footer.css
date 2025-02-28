@@ -12,7 +12,7 @@
 
 .footer_row{
   display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1.2fr;
+  grid-template-columns: auto 1fr 1fr 0.5fr;
   place-items: center;
   flex-wrap: wrap;
   gap: 20px;
@@ -92,7 +92,7 @@
 
 @media (max-width: 1080px) {
   .footer_row {
-    grid-template-columns: 1fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr 0.5fr;
     grid-template-rows: auto auto;
     place-items: start;
   }

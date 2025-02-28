@@ -28,7 +28,7 @@ const Testimonial = () => {
   return (
     <div className="testimonial_main">
       <div className="testimonial_container">
-        <div className="testimonial_upper">
+        {/* <div className="testimonial_upper">
           <SectionTitle gif="/gifs/testimonials-1.gif" title="Our Numbers Speak For Themselves" white/>
           <div className="testimonial_stats">
             <div className="testimonial_rating">
@@ -56,7 +56,7 @@ const Testimonial = () => {
             </div>
           </div>
         </div>
-        <div className="testimonial_line_break" />
+        <div className="testimonial_line_break" /> */}
         <div className="testimonial_lower">
           <SectionTitle id="testimonial" gif="/gifs/testimonials-2.gif" title="What Customers Are Saying" white />
           <div className="testimonial_cards_div">
@@ -148,9 +148,9 @@ const Testimonial = () => {
           </div>
         </div>
       </div>
-      <div className="view-more">
+      {/* <div className="view-more">
         <a href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia/reviews?hl=en" target="_blank" className="button-round view-more-btn" onClick={handleViewMoreBtnClick}><span>View All</span> <FaArrowRightLong/></a>
-      </div>
+      </div> */}
     </div>
   );
 };

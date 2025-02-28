@@ -659,6 +659,7 @@
   color: var(--color-secondary3);
   font-size: 22px;
   font-weight: 600 !important;
+  text-align: left;
 }
 
 .pricing_table tbody th {
@@ -1156,12 +1157,6 @@
   .pricing_table{
     width: 95%;
   }
-  .pricing_table thead th{
-    padding: 8px 15px;
-  }
-  .pricing_table thead th:nth-child(4){
-    padding: 8px 5px;
-  }
   .pricing_cards_container{
     padding: 10px;
     grid-template-columns: auto;
@@ -1191,8 +1186,11 @@
     font-size: 18px;
   }
   .pricing_table tbody td{
-    padding: 6px 5px;
     font-size: 20px;
+  }
+  .pricing_table th,
+  .pricing_table td {
+    padding: 6px 5px;
   }
 }
 
@@ -1205,14 +1203,13 @@
   }
   .pricing_table thead th{
     font-size: 18px;
-    padding: 3px 5px;
-  }
-  .pricing_table thead th:nth-child(4){
-    padding: 3px 0;
   }
   .pricing_table tbody th{
-    padding: 6px;
     font-size: 16px; 
+  }
+  .pricing_table th,
+  .pricing_table td {
+    padding: 6px 5px;
   }
 
   .top-pricing-slider .country_switch {
@@ -1294,8 +1291,11 @@
     font-size: 14px;
   }
   .pricing_table tbody td{
-    padding: 4px 0px;
     font-size: 16px;
+  }
+  .pricing_table th,
+  .pricing_table td {
+    padding: 4px 0px;
   }
 
   .navigation_outer_box_down .msg-box-down{

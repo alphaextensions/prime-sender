@@ -602,7 +602,6 @@ const Pricing = () => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Free</th>
                     <th>Basic</th>
                     <th>Advance</th>
                   </tr>
@@ -624,7 +623,6 @@ const Pricing = () => {
                           </div>
                         </span>
                       </th>
-                      <td>{feature.free ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                       <td>{feature.basic ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                       <td>{feature.advance ? <AiOutlineCheck /> : <RxCross2 className="cross_icon" />}</td>
                     </tr>

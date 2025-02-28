@@ -55,17 +55,17 @@ const Footer = () => {
               <li><Link to='/#testimonial' onClick={handleSectionClick}>Reviews</Link></li>
             </ul>
           </div> */}
-          <div className="footer_links">
+          {/* <div className="footer_links">
             <h4 className='heading'>Legal</h4>
             <ul className='large-text'>
               <li><Link to='/terms-of-service' onClick={scrollToTop}> Terms of Service </Link></li>
               <li><Link to='/privacy-policy' onClick={scrollToTop}> Privacy Policy </Link></li>
             </ul>
-          </div>
+          </div> */}
           <div className="footer_links">
-            <h4 className='heading'>Contact With Us</h4>
+            <h4 className='heading'>Contact Us</h4>
             <ul className='large-text'>
-              <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
+              {/* <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li> */}
               {/* <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li> */}
               <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Messsage%20Broadcaster" target='_blank' >Chat on WhatsApp</a></li>
             </ul>
