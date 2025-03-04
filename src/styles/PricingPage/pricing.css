@@ -679,6 +679,7 @@
 
 .feature_info_class{
   color: #009a88;
+  display: inline;
   font-size: 20px;
 }
 
@@ -687,20 +688,29 @@
 }
 
 .pricing_feature_info_container{
+  display: inline !important;
   position: relative;
   cursor: pointer;
-  margin-left: 5px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
 }
 
+.pricing_feature_name {
+  display: inline;
+  margin-right: 5px;
+}
+
 .navigation_outer_box_down{
   position: absolute;
-  bottom: 15px;
-  left: -10px;
+  left: 50%;
+  bottom: 95%;
   z-index: 10000000;
+}
+
+.advance_navigation_box{
+  left: 10%;
 }
 
 .navigation_outer_box_down .msg-box-down {
@@ -732,11 +742,6 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #009a88;
-}
-
-.advance_navigation_box{
-  right: 50%; 
-  left: unset;
 }
 
 .pricing_calculator_section{
@@ -1109,6 +1114,9 @@
   .multiple_user_card .pricing_card_button{
     width: min(80%,150px);
   }
+  .advance_navigation_box {
+    left: -50px;
+  }
 }
 
 
@@ -1120,6 +1128,9 @@
 
     .pricing_card_price_div .marginTop3 {
         margin-top: 0px;
+    }
+    .advance_navigation_box {
+        left: -100px;
     }
 }
 
@@ -1133,15 +1144,6 @@
   .pricing_card_feature .pricing_feature_info_container{
     position: static;
   }
-
-  .pricing_card_feature .navigation_outer_box_down{
-    bottom: 20px;
-  }
-
-  .advance_navigation_box{
-    right: unset;
-    left: -10px;
-  }  
 
   .top-pricing-slider .pricing_country_switch {
     gap: 50px !important;
@@ -1169,6 +1171,9 @@
   }
   .pricing_card{
     width: min(100%,375px);
+  }
+  .navigation_outer_box_down {
+    left: -10px !important;
   }
 }
 
@@ -1227,10 +1232,6 @@
 
   .pricing_table tbody th{
     position: relative;
-  }
-
-  .pricing_table .navigation_outer_box_down {
-    bottom: 25px;
   }
 }
 

@@ -64,7 +64,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer_links">
-            <h4 className='heading'>Contact With Us</h4>
+            <h4 className='heading'>Contact Us</h4>
             <ul className='large-text'>
               <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
               <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
