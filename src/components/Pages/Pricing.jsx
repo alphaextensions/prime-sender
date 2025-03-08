@@ -91,6 +91,7 @@ const Pricing = () => {
         pricing_country_name: "international",
         country_code: "US",
         country_currency: "USD" ,
+        countryCallingCode:'+1',
         isSuccess: false,
   });
   const [flagIconSrc, setFlagIconSrc] = useState('');
@@ -431,6 +432,7 @@ const Pricing = () => {
                     pricing_country_name: country,
                     country_code: data.country_code,
                     country_currency: currency,
+                    countryCallingCode:data.country_calling_code,
                     isSuccess: true,
                 });
                 setLoading(false);
@@ -601,6 +603,7 @@ const Pricing = () => {
           amount = {multAccountPrice}
           country_currency = {myLocation.country_currency}
           multCountry = {currentCountry}
+          currentCountry={myLocation.countryCallingCode}
         />
       }
       {showUPIPopup.show && 
@@ -681,11 +684,9 @@ const Pricing = () => {
                 </span>
                 </div>
               </div>
-              {planPeriod !== 'monthly' &&
-                <div className="pricing_card_heading">
-                  /user/month billed annually
-                </div>
-              }
+              <div className="pricing_card_heading">
+                {`/user/month ${planPeriod !== 'monthly' ? `billed ${planPeriod}` : ''}`}
+              </div>
               <div className="pricing_card_button">
                 <button>
                   <a
@@ -703,10 +704,8 @@ const Pricing = () => {
                   FreeCardFeatures.map((item, index) => {
                     return <div className="pricing_card_feature" key={index}>
                       <AiOutlineCheck />
-                      <div className="pricing_card_feature_text">
-                        {item.name}
-                      </div>
                       <span className={`pricing_feature_info_container`} onMouseEnter={() => setFreeCardDetailHover(index)} onMouseLeave={() => setFreeCardDetailHover(-1)}>
+                        <span className="pricing_feature_name">{item.name}</span>
                         <IoIosInformationCircleOutline className="feature_info_class" />
                         <div className="navigation_outer_box_down navigation_container" hidden={!(freeCardDetailHover == index)}>
                           <div className="msg-box-down">
@@ -741,11 +740,9 @@ const Pricing = () => {
                 </span>
                 </div>
               </div>
-              {planPeriod !== 'monthly' &&
-                <div className="pricing_card_heading">
-                  /user/month billed {planPeriod == "annually" ? "annually" : "biannually"}
-                </div>
-              }
+              <div className="pricing_card_heading">
+                {`/user/month ${planPeriod !== 'monthly' ? `billed ${planPeriod}` : ''}`}
+              </div>
               <div className="pricing_card_button">
                 <button onClick={() => handleGaButtonClick("basic")}>
                   {showButton(false, 'basic')}
@@ -768,10 +765,8 @@ const Pricing = () => {
                   basicCardFeatures.map((item, index) => {
                     return <div key={index} className="pricing_card_feature">
                       <AiOutlineCheck />
-                      <div className="pricing_card_feature_text">
-                        {item.name}
-                      </div>
                       <span className={`pricing_feature_info_container`} onMouseEnter={() => setBasicCardDetailHover(index)} onMouseLeave={() => setBasicCardDetailHover(-1)}>
+                        <span className="pricing_feature_name">{item.name}</span>
                         <IoIosInformationCircleOutline className="feature_info_class" />
                         <div className="navigation_outer_box_down navigation_container" hidden={!(basicCardDetailHover == index)}>
                           <div className="msg-box-down">
@@ -807,11 +802,9 @@ const Pricing = () => {
                 </span>
                 </div>
               </div>
-              {planPeriod !== 'monthly' &&
-                <div className="pricing_card_heading">
-                  /user/month billed {planPeriod == "annually" ? "annually" : "biannually"}
-                </div>
-              }
+              <div className="pricing_card_heading">
+                {`/user/month ${planPeriod !== 'monthly' ? `billed ${planPeriod}` : ''}`}
+              </div>
               <div className="pricing_card_button">
                 <button onClick={() => handleGaButtonClick("advance")}>
                   {showButton(false, 'advance')}
@@ -834,10 +827,8 @@ const Pricing = () => {
                   advanceCardFeatures.map((item, index) => {
                     return <div key={index} className="pricing_card_feature">
                       <AiOutlineCheck />
-                      <div className="pricing_card_feature_text">
-                        {item.name}
-                      </div>
                       <span className={`pricing_feature_info_container`} onMouseEnter={() => setAdvanceCardDetailHover(index)} onMouseLeave={() => setAdvanceCardDetailHover(-1)}>
+                        <span className="pricing_feature_name">{item.name}</span>
                         <IoIosInformationCircleOutline className="feature_info_class" />
                         <div className="navigation_outer_box_down navigation_container advance_navigation_box" hidden={!(advanceCardDetailHover == index)}>
                           <div className="msg-box-down">
@@ -998,8 +989,8 @@ const Pricing = () => {
                   {pricingFeatures.map((feature, index) => (
                     <tr key={index}>
                       <th>
-                        {feature.name}
                         <span className={`pricing_feature_info_container`} onMouseEnter={() => setFeatureDetailHover(index)} onMouseLeave={() => setFeatureDetailHover(-1)}>
+                          <span className="pricing_feature_name">{feature.name}</span>
                           <IoIosInformationCircleOutline className="feature_info_class" />
                           <div className="navigation_outer_box_down navigation_container" hidden={!(featureDetailHover == index)}>
                             <div className="msg-box-down">
