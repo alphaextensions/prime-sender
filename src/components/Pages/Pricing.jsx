@@ -14,6 +14,8 @@ import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
 import NotificationBox from "../common/NotificationBox";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
   const overlayRef = useRef(null);
@@ -444,6 +446,52 @@ const Pricing = () => {
             });
     }
 
+    function startTour(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const isTour = urlParams.get('isTour') === 'true';
+      const accountObj = {
+        showProgress: true,
+        popoverClass: "driverjs-theme",
+        steps: [
+          {
+            element: ".pricing_country.background-royal",
+            popover: {
+              title: "Choose Plan Type",
+              description:
+                "Please select the desired plan type from the available options.",
+            },
+          },
+          {
+            element: ".pricing-slider.pricing_calculator_slider",
+            popover: {
+              title: "Choose Plan Duration",
+              description:
+                "Select whether you prefer monthly or annual billing for the chosen plan.",
+            },
+          },
+          {
+            element: ".num_accounts_section",
+            popover: {
+              title: "Specify Number of Accounts",
+              description:
+                "Enter the number of accounts you'd like to purchase.",
+            },
+          },
+          {
+            element: ".pricing_card_button.background-royal",
+            popover: {
+              title: "Proceed to Purchase",
+              description:
+                "Once all selections are made, click 'Buy' to proceed."
+            },
+          }
+        ],
+      };
+      if(isTour){
+        driver(accountObj).drive()
+      }
+    }
+
     function getPricingDataFromDatabase() {
         fetch('https://hpm53jwusnnb4vmbpmyzjppecy0omfxw.lambda-url.ap-south-1.on.aws/?operation=get-all-config-data').
             then(res => res.json()).
@@ -511,6 +559,7 @@ const Pricing = () => {
         getParams();
         getUserLocation();
         getPricingDataFromDatabase();
+        startTour();
     }, [])
 
     useEffect(() => {
