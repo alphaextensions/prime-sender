@@ -1,4 +1,5 @@
 export const countryCodesPresent = ["IN", "ID", "AE", "EG", "GB", "SA", "KW", "SG", "IL"]
+export const countryPresent = ["india", "indonesia", "uae", "egypt", "uk", "saudi_arabia", "kuwait", "singapore", "israel", "international" ];
 export const countryCodeToName = {
 	"IN": 'india',
 	"ID": 'indonesia',
@@ -676,3 +677,242 @@ export const countrySwitchObject2 = [
 
 export const pricing_popup_trial_features = ['Export Group Contacts', "Translate Conversation", "Quick Replies", "Customizable Time Gap", "Random Time Gap", 'Chat Support', "Batching", "Caption", "Save Message Template", "Detailed Delivery report", "Stop Campaign", "Group Message"];
 export const pricing_popup_premium_features = ["Schedule", 'Business Chat Link', 'Meet/Zoom Support', "Multiple Attachments", "Pause Campaign", "Export Unsaved Contacts"]
+
+export const notification_country_data = {
+    brazil: {
+        data: [
+            { city: 'São Paulo', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Rio de Janeiro', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Curitiba', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Salvador', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Fortaleza', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Belo Horizonte', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Manaus', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Recife', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Porto Alegre', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Goiânia', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Campinas', country: 'Brazil', country_code_name: 'brazil' },
+            { city: 'Florianópolis', country: 'Brazil', country_code_name: 'brazil' }
+        ],
+        size: 12
+    },
+    mexico: {
+        data: [
+            { city: 'Mexico City', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Monterrey', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Guadalajara', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Puebla', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Tijuana', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'León', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Querétaro', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Mérida', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Cancún', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Toluca', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Aguascalientes', country: 'Mexico', country_code_name: 'mexico' },
+            { city: 'Zapopan', country: 'Mexico', country_code_name: 'mexico' }
+        ],
+        size: 12
+    },
+    argentina: {
+        data: [
+            { city: 'Buenos Aires', country: 'Argentina', country_code_name: 'argentina' }
+        ],
+        size: 1
+    },
+    chile: {
+        data: [
+            { city: 'Santiago', country: 'Chile', country_code_name: 'chile' }
+        ],
+        size: 1
+    },
+    colombia: {
+        data: [
+            { city: 'Bogotá', country: 'Colombia', country_code_name: 'colombia' }
+        ],
+        size: 1
+    },
+    peru: {
+        data: [
+            { city: 'Lima', country: 'Peru', country_code_name: 'peru' }
+        ],
+        size: 1
+    },
+    ecuador: {
+        data: [
+            { city: 'Quito', country: 'Ecuador', country_code_name: 'ecuador' }
+        ],
+        size: 1
+    },
+    venezuela: {
+        data: [
+            { city: 'Caracas', country: 'Venezuela', country_code_name: 'venezuela' }
+        ],
+        size: 1
+    },
+    india: {
+        data: [
+            { city: 'Mumbai', country: 'India', country_code_name: 'india' },
+            { city: 'Delhi', country: 'India', country_code_name: 'india' },
+            { city: 'Bangalore', country: 'India', country_code_name: 'india' },
+            { city: 'Chennai', country: 'India', country_code_name: 'india' },
+            { city: 'Pune', country: 'India', country_code_name: 'india' },
+            { city: 'Hyderabad', country: 'India', country_code_name: 'india' },
+            { city: 'Kolkata', country: 'India', country_code_name: 'india' },
+            { city: 'Ahmedabad', country: 'India', country_code_name: 'india' },
+            { city: 'Jaipur', country: 'India', country_code_name: 'india' },
+            { city: 'Lucknow', country: 'India', country_code_name: 'india' },
+            { city: 'Nagpur', country: 'India', country_code_name: 'india' },
+            { city: 'Indore', country: 'India', country_code_name: 'india' },
+            { city: 'Thane', country: 'India', country_code_name: 'india' },
+            { city: 'Gurugram', country: 'India', country_code_name: 'india' }
+        ],
+        size: 14
+    },
+    indonesia: {
+        data: [
+            { city: 'Jakarta', country: 'Indonesia', country_code_name: 'indonesia' },
+            { city: 'Surabaya', country: 'Indonesia', country_code_name: 'indonesia' }
+        ],
+        size: 2
+    },
+    singapore: {
+        data: [
+            { city: 'Singapore', country: '', country_code_name: 'singapore' }
+        ],
+        size: 1
+    },
+    malaysia: {
+        data: [
+            { city: 'Kuala Lumpur', country: 'Malaysia', country_code_name: 'malaysia' }
+        ],
+        size: 1
+    },
+    thailand: {
+        data: [
+            { city: 'Bangkok', country: 'Thailand', country_code_name: 'thailand' }
+        ],
+        size: 1
+    },
+    china: {
+        data: [
+            { city: 'Shenzhen', country: 'China', country_code_name: 'china' }
+        ],
+        size: 1
+    },
+    uae: {
+        data: [
+            { city: 'Dubai', country: 'UAE', country_code_name: 'uae' },
+            { city: 'Abu Dhabi', country: 'UAE', country_code_name: 'uae' }
+        ],
+        size: 2
+    },
+    saudi_arabia: {
+        data: [
+            { city: 'Riyadh', country: 'Saudi Arabia', country_code_name: 'saudi_arabia' },
+            { city: 'Jeddah', country: 'Saudi Arabia', country_code_name: 'saudi_arabia' },
+            { city: 'Mecca', country: 'Saudi Arabia', country_code_name: 'saudi_arabia' },
+            { city: 'Medina', country: 'Saudi Arabia', country_code_name: 'saudi_arabia' }
+        ],
+        size: 4
+    },
+    kuwait: {
+        data: [
+            { city: 'Kuwait City', country: 'Kuwait', country_code_name: 'kuwait' }
+        ],
+        size: 1
+    },
+    oman: {
+        data: [
+            { city: 'Muscat', country: 'Oman', country_code_name: 'oman' }
+        ],
+        size: 1
+    },
+    qatar: {
+        data: [
+            { city: 'Doha', country: 'Qatar', country_code_name: 'qatar' }
+        ],
+        size: 1
+    },
+    uk: {
+        data: [
+            { city: 'London', country: 'UK', country_code_name: 'uk' }
+        ],
+        size: 1
+    },
+    france: {
+        data: [
+            { city: 'Paris', country: 'France', country_code_name: 'france' }
+        ],
+        size: 1
+    },
+    spain: {
+        data: [
+            { city: 'Madrid', country: 'Spain', country_code_name: 'spain' },
+            { city: 'Barcelona', country: 'Spain', country_code_name: 'spain' }
+        ],
+        size: 2
+    },
+    italy: {
+        data: [
+            { city: 'Rome', country: 'Italy', country_code_name: 'italy' }
+        ],
+        size: 1
+    },
+    netherlands: {
+        data: [
+            { city: 'Amsterdam', country: 'Netherlands', country_code_name: 'netherlands' }
+        ],
+        size: 1
+    },
+    germany: {
+        data: [
+            { city: 'Berlin', country: 'Germany', country_code_name: 'germany' }
+        ],
+        size: 1
+    },
+    poland: {
+        data: [
+            { city: 'Warsaw', country: 'Poland', country_code_name: 'poland' }
+        ],
+        size: 1
+    },
+    portugal: {
+        data: [
+            { city: 'Lisbon', country: 'Portugal', country_code_name: 'portugal' }
+        ],
+        size: 1
+    },
+    egypt: {
+        data: [
+            { city: 'Cairo', country: 'Egypt', country_code_name: 'egypt' },
+            { city: 'Alexandria', country: 'Egypt', country_code_name: 'egypt' }
+        ],
+        size: 2
+    },
+    morocco: {
+        data: [
+            { city: 'Casablanca', country: 'Morocco', country_code_name: 'morocco' }
+        ],
+        size: 1
+    },
+    south_africa: {
+        data: [
+            { city: 'Johannesburg', country: 'South Africa', country_code_name: 'south africa' },
+            { city: 'Cape Town', country: 'South Africa', country_code_name: 'south africa' }
+        ],
+        size: 2
+    },
+    kenya: {
+        data: [
+            { city: 'Nairobi', country: 'Kenya', country_code_name: 'kenya' }
+        ],
+        size: 1
+    },
+    nigeria: {
+        data: [
+            { city: 'Lagos', country: 'Nigeria', country_code_name: 'nigeria' }
+        ],
+        size: 1
+    }
+};
+;
