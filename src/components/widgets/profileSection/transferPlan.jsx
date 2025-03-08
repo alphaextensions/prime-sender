@@ -62,6 +62,41 @@ function TransferPlan() {
         return phone;
     }
 
+    const addTransferLogInSheet = async (old_phone, new_phone, user) => {
+        try {
+            // Log the transfer details in Google Sheet / SheetDB
+            let sheet_db_api = import.meta.env.VITE_PROD_TRANSFER_LOGS_SHEET_DB_API;
+            let today_str = convert_date_str(new Date());
+            let transfer_log = {
+                old_phone: old_phone,
+                new_phone: new_phone,
+                plan_type: user.plan_type,
+                name: user?.name || "",
+                email: user?.email || "NULL",
+                parent_email: user?.parent_email || "NULL",
+                subscribed_date: user.subscribed_date,
+                transfer_date: today_str,
+                is_stripe_updated: "NO",
+            }
+
+            const response = await fetch(sheet_db_api, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{
+                    source: 'website',
+                    ...transfer_log
+                },
+                ]),
+            });
+
+            await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const sendReq = (newNumber, countryCode) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
         let oldNumber = controller.credentials.data[0].phone;
@@ -98,7 +133,7 @@ function TransferPlan() {
                     );
                     infoShowCase()
                     setPhoneNumber(localNumber)
-
+                    addTransferLogInSheet(oldNumber, newNumber, res.data.userData);
                 }
                 else {
                     throw new Error(`Unexpected status code: ${data.statusCode}`);
@@ -165,6 +200,12 @@ function TransferPlan() {
         if (!date)
             return null;
         return new Date(date);
+    }
+    
+    function convert_date_str(date = null) {
+        if (!date)
+            return null;
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     }
 
     const get_days_diff = (date1, date2) => {
