@@ -502,7 +502,7 @@ const Pricing = () => {
       if(isTour){
         driver(accountObj).drive()
       }
-
+    }
 
     function changeNotificationData() {
         let current_country_data = notification_country_data[myLocation.pricing_country_name.toLowerCase()]?.data;
