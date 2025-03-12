@@ -291,17 +291,17 @@ function TransferPlan() {
 
     return (
         <div className="mt-4 mb-4 px-4 flex-col flex justify-start ">
-            <Typography variant="h5" color="blue-gray">
+            <Typography variant="h5" color="blue-gray" className='max-xs:text-3xl'>
                 Transfer your Premium plan to another number
             </Typography>
 
             {isMultipleAccountAdmin() ? (
                 <>
-                    <p className="mt-2 mb-2 font-light text-xs px-1">
+                    <p className="mt-2 mb-2 font-light text-xs px-1 max-xs:text-base">
                         {info}
                     </p>
-                    <div className="mb-4 mt-2 px-1 flex items-center w-max">
-                        <span className="ml-3 mr-3 text-lg font-semibold">From</span>
+                    <div className="mb-4 mt-2 px-1 flex items-center w-max max-xs:flex-col max-xs:items-start">
+                        <span className="ml-3 mr-3 text-lg font-semibold max-xs:mx-0 max-xs:my-3 max-xs:font-bold">From</span>
                         <div className="flex justify-center">
                             {formattedPhoneNumbers && formattedPhoneNumbers.length > 0 ? (
                                 <PhoneNumberSelect
@@ -313,17 +313,17 @@ function TransferPlan() {
                             )}
                         </div>
 
-                        <span className="ml-3 mr-3 text-lg font-semibold">To</span>
+                        <span className="ml-3 mr-3 text-lg font-semibold max-xs:mx-0 max-xs:my-3 max-xs:font-bold">To</span>
 
 
-                        <div className="relative flex w-full max-w-[17rem] mr-3">
+                        <div className="relative flex w-full max-w-[17rem] mr-3 max-xs:mr-0">
                             <Menu placement="bottom-start">
                                 <MenuHandler>
                                     <Button
                                         ripple={false}
                                         variant="text"
                                         color="blue-gray"
-                                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3 max-xs:h-[50px] max-xs:py-3 max-xs:px-[10px] max-xs:w-[82px]"
                                     >
                                         <img
                                             src={currentCountry.flags.svg}
@@ -356,7 +356,7 @@ function TransferPlan() {
                                 placeholder="Mobile Number"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900"
+                                className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900 max-xs:h-max max-xs:px-[10px] max-xs:py-3 max-xs:text-base"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -369,7 +369,7 @@ function TransferPlan() {
                         <Button
                             variant="filled"
                             disabled={!is_transfer_allowed() ? true : false}
-                            className="bg-[#009a88] !overflow-visible"
+                            className="bg-[#009a88] !overflow-visible max-xs:my-4 max-xs:self-end"
                             onClick={handleMultipleAccTransfer}
                         >
                             {selectedUser?.plan_type ? "Transfer" : "Loading..."}
