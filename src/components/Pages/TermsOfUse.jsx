@@ -102,6 +102,12 @@ function TermsOfUse() {
             We do not provide refunds unless the service has not been properly functional from our side for 7 days continuously
             </div>
           </div>
+          <div className="term">
+            <div className="term-title sub-heading">Account Suspension and Banning</div>
+            <div className="term-content text">
+            We do not guarantee or promise any specific outcome regarding account bans, suspensions, or reinstatements. Any bans imposed by the source platform are beyond our control, and we are not responsible for such actions. Decisions related to banning are made solely by the source platform based on their policies and regulations.
+            </div>
+          </div>
         </div>
       </div>
     </>

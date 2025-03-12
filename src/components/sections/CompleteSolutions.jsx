@@ -25,7 +25,7 @@ const CompleteSolutions = () => {
               <h1 className="heading">Highly Trusted</h1>
             </div>
             <div className="solutions_card_lower">
-              <p className="text">More than 1,00,000 businesses use our chrome extension to connect with their customers</p>
+              <p className="text">More than 15,000 businesses use our chrome extension to connect with their customers</p>
             </div>
           </div>{" "}
           <div className="solutions_card">
