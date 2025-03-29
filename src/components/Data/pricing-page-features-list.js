@@ -25,7 +25,7 @@ export default [
     free: true,
     basic: true,
     advance: true,
-    description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
+    description: "You can click on 'Chat Support' on the extension to get your queries resolved.",
   },
   {
     name: 'Caption',
@@ -69,13 +69,13 @@ export default [
     advance: true,
     description: "We provide priority support to our premium customers, to help them with their queries",
   },
-  {
-    name: 'Call Support',
-    free: false,
-    basic: true,
-    advance: true,
-    description:"We also provide call support, to help you with your queries",
-  },
+//   {
+//     name: 'Call Support',
+//     free: false,
+//     basic: true,
+//     advance: true,
+//     description:"We also provide call support, to help you with your queries",
+//   },
   {
     name: 'No minimum time gap',
     free: false,
@@ -139,13 +139,13 @@ export default [
     advance: true,
     description: "You can schedule at what time to send your messages to users and your messages would be sent automatically at the set time",
   },
-  {
-    name: 'Zoom Call Support',
-    free: false,
-    basic: false,
-    advance: true,
-    description: "We also provide zoom call support, to help you with your queries",
-  },
+//   {
+//     name: 'Zoom Call Support',
+//     free: false,
+//     basic: false,
+//     advance: true,
+//     description: "We also provide zoom call support, to help you with your queries",
+//   },
   {
     name: 'Business Chat Link',
     free: false,
