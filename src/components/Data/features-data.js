@@ -37,7 +37,7 @@ export default [
   {
     logo: '/gifs/customer-support.gif',
     name: "Active support",
-    desc: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
+    desc: "You can click on 'Chat Support' on the extension to get your queries resolved.",
   },
   {
     logo: '/gifs/upload-excel.gif',

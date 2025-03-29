@@ -13,7 +13,7 @@ export const FreeCardFeatures = [
   },
   {
     name: 'Chat Support',
-    description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
+    description: "You can click on 'Chat Support' on the extension to get your queries resolved.",
   },
   {
     name: 'Save Message Template',
@@ -26,10 +26,10 @@ export const FreeCardFeatures = [
 ]
 
 export const basicCardFeatures = [
-  {
-    name: "Call Support",
-    description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
-  },
+//   {
+//     name: "Call Support",
+//     description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
+//   },
   {
     name: "No minimum time gap",
     description: "Save time and quickly send messages by reducing the time gap between messages."

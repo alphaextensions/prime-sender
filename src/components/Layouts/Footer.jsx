@@ -68,7 +68,7 @@ const Footer = () => {
             <ul className='large-text'>
               <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
               <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
-              <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender" target='_blank' >Chat on WhatsApp</a></li>
+              <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender" target='_blank' className="whatsapp_contact" ><img src="/images/whatsapp.png" alt="" /><span>+91-7058067789</span></a></li>
             </ul>
           </div>
         </div>

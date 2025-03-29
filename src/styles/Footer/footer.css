@@ -83,6 +83,17 @@
   line-height: 16px;
 }
 
+.whatsapp_contact{
+  display: flex;
+  align-items: center;
+}
+
+.whatsapp_contact img{
+  width: 25px;
+  margin-right: 10px;
+  height: auto;
+}
+
 @media (max-width: 1080px) {
   .footer_row {
     grid-template-columns: 1fr 1fr 1fr 1.2fr;
