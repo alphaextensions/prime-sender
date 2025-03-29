@@ -1,11 +1,13 @@
 import { useLocation, Link } from "react-router-dom";
-import { Navbar, Typography, Breadcrumbs } from "@material-tailwind/react";
-import { primeSenderController } from "../../context";
+import { Navbar, Typography, Breadcrumbs, IconButton } from "@material-tailwind/react";
+import { RiMenu4Fill } from "react-icons/ri";
 import { AvatarMenu } from "../profileSection/switchAccounts";
+import { primeSenderController, setOpenSidenav, clearCredentials } from "../../context";
+import { IoClose } from "react-icons/io5";
 
 export function DashboardNavbar() {
-  const [controller] = primeSenderController();
-  const { fixedNavbar } = controller;
+  const [controller, dispatch] = primeSenderController();
+  const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   let adminLength = controller.credentials.data.filter(user => user.phone && (!user.parent_email || user.parent_email === "" || user.parent_email === "NULL"))
@@ -20,7 +22,7 @@ export function DashboardNavbar() {
       fullWidth
       blurred={fixedNavbar}
     >
-      <div className="mr-10 flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
+      <div className="mx-3 flex justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
           <Breadcrumbs
             className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""}`}
@@ -49,6 +51,9 @@ export function DashboardNavbar() {
             {page}
           </Typography>
         </div>
+        <IconButton className="bg-[#009a88] w-30px h-30px rounded-[50%] hidden max-xs:block" onClick={() => setOpenSidenav(dispatch, !openSidenav)}>
+          {!openSidenav ? <RiMenu4Fill color="white" fontSize={"24px"} /> : <IoClose color="white" fontSize={"24px"} />}
+        </IconButton>
         {controller.credentials.data.length > 1 && adminLength.length > 1 ? <AvatarMenu /> : ""}
       </div>
     </Navbar>

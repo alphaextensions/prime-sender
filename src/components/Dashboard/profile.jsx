@@ -142,7 +142,7 @@ export function Profile() {
               </div>
             </div>
           </div>
-          <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3 max-xs:gap-0">
             <ProfileInfoCard
               title="Profile Information"
               details={{
@@ -150,7 +150,7 @@ export function Profile() {
                 "Current Plan": `${data?.plan_type ? data.plan_type : "-"}`,
               }}
             />
-            <div className="mt-5">
+            <div className="mt-5 max-xs:mt-0">
               <ProfileInfoCard
                 title=""
                 details={{
@@ -164,9 +164,9 @@ export function Profile() {
       </Card>
       <Card className="mx-3 mb-6 lg:mx-4 border border-blue-gray-100">
         <CardBody className="p-4">
-          <div className="px-3 py-[10px] flex items-center">
-            <Typography className="font-bold text-lg text-blue-gray-900">Download your receipt : </Typography>
-            <div className="w-[300px] ml-5">
+          <div className="px-3 py-[10px] flex items-center max-xs:flex-col max-xs:items-start">
+            <Typography className="font-bold text-lg text-blue-gray-900 max-xs:mb-2">Download your receipt : </Typography>
+            <div className="w-[300px] ml-5 max-xs:ml-0 max-xs:mb-3">
               <Select
                 onChange={(date) => setSelectedDate(date)}
                 variant="outlined"
@@ -183,7 +183,7 @@ export function Profile() {
             </div>
             <Button
               onClick={redirectInvoice}
-              className="ml-3 bg-[#009a88]"
+              className="ml-3 bg-[#009a88] max-xs:ml-0 max-xs:self-end"
             >
               Download
             </Button>

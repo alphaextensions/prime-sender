@@ -33,7 +33,7 @@ export function PhoneNumberSelect({ phoneNumbers, onSelectNumber }) {
           ripple={false}
           variant="outlined"
           color="blue-gray"
-          className="flex items-center gap-2 rounded-md border border-blue-gray-200 pl-3 pr-3 w-full justify-start h-[40px]"
+          className="flex items-center gap-2 rounded-md border border-blue-gray-200 pl-3 pr-3 w-full justify-start h-[40px] max-xs:h-max max-xs:py-3 max-xs:px-[10px]"
         >
           {selectedCountryInfo.flags ? (
             <img
@@ -42,7 +42,7 @@ export function PhoneNumberSelect({ phoneNumbers, onSelectNumber }) {
               className="h-5 w-5 rounded-full object-cover"
             />
           ) : null}
-          <span className="flex items-center gap-2 text-sm text-blue-gray-800">
+          <span className="flex items-center gap-2 text-sm text-blue-gray-800 max-xs:text-base">
             {selectedNumber.countryCode} {selectedNumber.number}
           </span>
         </Button>
