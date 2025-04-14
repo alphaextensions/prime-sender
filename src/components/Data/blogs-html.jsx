@@ -173,10 +173,10 @@ export const blogHtml = {
             Here is a link to the template excel:{" "}
             <a
               target="_blank"
-              href="https://docs.google.com/spreadsheets/d/1xCZr8e0wKO8bsQdrVZdXrmfijgO-zgLXLzFjAjaX8eQ/edit?usp=sharing"
+              href="https://docs.google.com/spreadsheets/d/1eKBHsE1WKDjktk2eFDS3DaeSeX-8QW9D940RLbRASf8/edit?usp=sharing"
               className="blog_text_blue"
             >
-              prime-sender.com/temp-excel-file
+              Template Excel
             </a>
           </p>
         </div>
