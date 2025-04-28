@@ -14,18 +14,28 @@ const validateUserEmail = (email) => {
 	return pattern.test(email);
 }
 
-const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers,countryCallingCode }) => {
-	const [countryCode, setCountryCode] = useState(countryCallingCode.split('+')[1] || "91");
+const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers,myLocation }) => {
+    const [dialCode, setDialCode] = useState(() => {
+        let existingPhone = phoneNumbers[index] || "";
+        if (existingPhone.length > 0) {
+            const match = existingPhone.match(/\+(\d+)-/);
+            if (match) return match[1];
+        }
+        return (myLocation.countryCallingCode?.split('+')[1]) || "1";
+    });
+	const [countryCode, setCountryCode] = useState(() => {
+        return (dialCode == "1") ? "us" :  myLocation.country_code.toLowerCase();
+    });
 	const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
 
 	const handleNumberChange = (e) => {
 		let temp = [...phoneNumbers];
-		temp[index] = `+${countryCode}-${e.target.value}`;
+		temp[index] = `+${dialCode}-${e.target.value}`;
 		setPhoneNumbers(temp);
 	}
 
 	const handleCountryCodeChange = ({ code }) => {
-		setCountryCode(code);
+		setDialCode(code);
 		let number = phoneNumbers[index]?.split('-')[1] || "";
 		let temp = [...phoneNumbers];
 		temp[index] = `+${code}-${number}`;
@@ -38,8 +48,8 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 			<div className='number_component_circle'>{index + 1}</div>
 			<div className='numer_component_number_input'>
 				<PhoneInput
-					country={'in'}
-					value={countryCode}
+					country={countryCode}
+					value={dialCode}
 					onChange={code => handleCountryCodeChange({ code })}
 				/>
 				<input type="number" className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
@@ -62,7 +72,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 		</div>
 	</div>
 }
-const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry,currentCountry }) => {
+const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry,currentCountry, myLocation }) => {
 	const { setCheckoutData } = useContext(CheckoutContext);
 	const numbersContainerRef = useRef(null);
 	const navigate = useNavigate();
@@ -337,7 +347,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 												valueChangeHandler={valueChangeHandler}
 												numberInputError={numberInputError}
 												inputErrorNumbers={inputErrorNumbers}
-												countryCallingCode={currentCountry}
+                                                myLocation={myLocation}
 											/>
 										})
 									}
