@@ -45,7 +45,7 @@
   width: 62%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: 10px auto;
   padding: 10px 0;
 }
@@ -54,7 +54,7 @@
 }
 .pricing-popup-logo{
   gap: 10px;
-  width: 300px;
+  width: 238px;
   display: grid;
   grid-template-columns: 1fr 3fr;
   place-items: center;
@@ -149,6 +149,8 @@
 }
 .pricing-popup-offer-price{
   color: var(--color-purple);
+  display: inline-block;
+  margin-top: 10px;
 }
 
 .hideMonthlyPopupPriceClass {
@@ -250,7 +252,7 @@
 .pricing-popup-footer{
   padding: 0 1rem;
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   margin: 2rem auto 0.3rem;
   display: flex;
   align-items: center;

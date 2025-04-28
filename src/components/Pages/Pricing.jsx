@@ -246,7 +246,6 @@ const Pricing = () => {
                             <div className="font14">/user/month</div>
                         </div>
                     }
-                  <br />
                   {popupLastPlan === 'freeTrial' && (
                     <span className="pricing-popup-offer-price">
                       {
@@ -310,7 +309,7 @@ const Pricing = () => {
 
             <div className="pricing-popup-footer">
               <div className="pricing-popup-footer-icon"><span>i</span></div>
-              <div className="pricing-popup-footer-content">
+              <div className="pricing-popup-footer-content" style={{fontSize:popupPlanPeriod === 'monthly' && popupLastPlan === 'freeTrial' ?  "10px" : "11px"}}>
                 <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan === 'freeTrial' ? "*Discount applicable for the first month" : ""}</span>
                 {
                   popupPlanPeriod === 'monthly' ?
