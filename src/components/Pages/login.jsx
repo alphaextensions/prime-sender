@@ -250,7 +250,7 @@ function Login() {
           <div className="main_box">
             <div className="intro_text">
               <h1>Welcome!</h1>
-              <h3>Let's make whatsApp work smarter for You with Prime Sender.</h3>
+              <h3>Let's make whatsApp work smarter for you with Prime Sender.</h3>
             </div>
             <div id="signInGoogle">
             </div>

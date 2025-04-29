@@ -28,6 +28,10 @@
   left: 0;
 }
 
+.slider_stick .switch-container{
+  bottom: initial;
+}
+
 .switch {
   position: absolute;
   cursor: pointer;

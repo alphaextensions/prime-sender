@@ -408,7 +408,13 @@ const Pricing = () => {
             setIsMultipleAccountPage(true);
             setTimeout(() => {
                 if (scrollToPricingPopupRef.current) {
-                    scrollToPricingPopupRef.current.scrollIntoView({ behavior: 'smooth' });
+                    const element = scrollToPricingPopupRef.current;
+                    const offset = window.innerHeight * 0.25;
+                    const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                      top: topPosition,
+                      behavior: 'smooth'
+                  });
                 } 
             }, 400);
         }
@@ -559,6 +565,7 @@ const Pricing = () => {
         getUserLocation();
         getPricingDataFromDatabase();
         startTour();
+        console.log(isMultipleAccountPage)
     }, [])
 
     useEffect(() => {
@@ -891,7 +898,7 @@ const Pricing = () => {
                 }
               </div>
             </div>
-            <div className={`pricing_card multiple_user_card premium_card_purple ${isMultipleAccountPage && 'multiple_card_hover_style'} ${isPricingCardHovered == "multiple" && !isMultipleAccountPage && "pricing_card_hover"}`} onMouseEnter={() => setIsPricingCardHovered("multiple")} onMouseLeave={() => setIsPricingCardHovered("")}>
+            <div className={`pricing_card multiple_user_card premium_card_purple ${isMultipleAccountPage && 'multiple_card_hover_style slider_stick'} ${isPricingCardHovered == "multiple" && !isMultipleAccountPage && "pricing_card_hover"}`} onMouseEnter={() => setIsPricingCardHovered("multiple")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="multiple_card_type">
                 <p>Need multiple accounts?</p>
               </div>
