@@ -261,6 +261,7 @@
 	cursor: pointer;
 	border: none;
 	width: 155px !important;
+    height: 45px !important;
 	border: 2px solid var(--color-primary1);
 	font-weight: bold;
 	display: flex;

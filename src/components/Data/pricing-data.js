@@ -36,6 +36,18 @@ export const countryCodeToCurrency = {
 	"IL": "ILS",
 }
 
+export const countryCodeToDialCode = {
+    "IN": "+91",
+	"ID": "+62",
+	"AED": "+971",
+	"EG": "+20",
+	"GB": "+44",
+	"SA": "+966",
+	"KW": "+965",
+	"SG": "+65",
+	"IL": "+972",
+}
+
 export const pricing_data = {
 	"kuwait": {
 		"monthly": {

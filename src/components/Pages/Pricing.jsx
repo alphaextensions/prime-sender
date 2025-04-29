@@ -12,7 +12,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FreeCardFeatures, advanceCardFeatures, basicCardFeatures } from "../Data/pricing-page-cards-list";
 import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
-import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
+import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countryCodeToDialCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
 import NotificationBox from "../common/NotificationBox";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
@@ -342,49 +342,15 @@ const Pricing = () => {
     }
 
   const countrySwitchComponent = () => {
-    if (myLocation && myLocation.isSuccess) {
-      return <div className="pricing_country_text">
-        <p className="heading">Pricing curated just for you,
-          <img src={flagIconSrc} alt="flag" />
-          <span className="country_name">{myLocation.country_name}!</span>
+    return <div className="pricing_country_text">
+        <p className="heading">
+            Pricing curated just for you
+            {(myLocation && myLocation.isSuccess) 
+                ? <><span>,</span><img src={flagIconSrc} alt="flag" /><span className="country_name">{myLocation.country_name}!</span></> 
+                : '!'
+            }
         </p>
       </div>
-    }
-    return <>
-      <div className="pricing_country">
-        <div className="pricing_country_switch">
-          {
-            countrySwitchObject1.map((obj, ind) => (
-              <div key={ind} className={`country_switch ${currentCountry === obj.currentCountryName && "active_country_class"}`} onClick={() => handleCountrySwitchClick(obj.currentCountryName)}>
-                <p className="country_current_switch heading">
-                  <img src={`https://flagcdn.com/160x120/${obj.countryCode}.webp`} alt={`${obj.name}`} />
-                  {obj.name}
-                </p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-      <div className="pricing_country">
-        <div className="pricing_country_switch">
-          {
-            countrySwitchObject2.map((obj, ind) => {
-              if (obj.name === 'International') {
-                return <div key={ind} className={`country_switch ${currentCountry === "international" && "active_country_class"}`} onClick={() => setCurrentCountry("international")}>
-                  <p className="country_current_switch heading">🌎 International</p>
-                </div>
-              }
-              return <div key={ind} className={`country_switch ${currentCountry === obj.currentCountryName && "active_country_class"}`} onClick={() => setCurrentCountry(obj.currentCountryName)}>
-                <p className="country_current_switch heading">
-                  <img src={`https://flagcdn.com/160x120/${obj.countryCode}.webp`} alt={`${obj.name}`} />
-                  {obj.name}
-                </p>
-              </div>
-            })
-          }
-        </div>
-      </div>
-    </>;
   }
 
   const getWhatsappLink = (type, plan_type) => {
@@ -418,32 +384,47 @@ const Pricing = () => {
     function getUserLocation() {
         setLoading(true);
         fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then((data) => {
-                let country, currency;
-                if (!countryCodesPresent.includes(data.country_code)) {
-                    country = 'international';
-                    currency = "USD";
-                }
-                else {
-                    country = countryCodeToName[data.country_code];
-                    currency = countryCodeToCurrency[data.country_code];
-                }
-                setMyLocation({
-                    country_name: data.country_name,
-                    pricing_country_name: country,
-                    country_code: data.country_code,
-                    country_currency: currency,
-                    countryCallingCode:data.country_calling_code,
-                    isSuccess: true,
-                });
-                setLoading(false);
+            .then(res => {
+                if (!res.ok) throw new Error('Primary API failed');
+                return res.json();
             })
-            .catch(err => {
-                setLoading(false);
-                
-                console.log(err)
+            .then((data) => handleLocationResponse(data.country_code, data.country_name))
+            .catch((err) => {
+                fetch('https://get.geojs.io/v1/ip/geo.json')
+                    .then(res => {
+                        if (!res.ok) throw new Error('Fallback API failed');
+                        return res.json();
+                    })
+                    .then((data) => handleLocationResponse(data.country_code, data.country))
+                    .catch(fallbackErr => {
+                        console.error('Both APIs failed.', fallbackErr);
+                        setLoading(false);
+                    });
             });
+    }
+
+    function handleLocationResponse(country_code, country_name) {
+        let country, currency, dialCode;
+        if (!countryCodesPresent.includes(country_code)) {
+            country = "international";
+            currency = "USD";
+            dialCode = "+1";
+        } else {
+            country = countryCodeToName[country_code];
+            currency = countryCodeToCurrency[country_code];
+            dialCode = countryCodeToDialCode[country_code];
+        }
+
+        console.log(country, currency, dialCode);
+        setMyLocation({
+            country_name: country_name,
+            pricing_country_name: country,
+            country_code: country_code,
+            country_currency: currency,
+            countryCallingCode: dialCode,
+            isSuccess: true,
+        });
+        setLoading(false);
     }
 
     function startTour(){
@@ -650,6 +631,7 @@ const Pricing = () => {
           plan_duration = {pricingCalculatorPeriod}
           plan_type = {pricingCalculatorPlan}
           amount = {multAccountPrice}
+          myLocation = {myLocation}
           country_currency = {myLocation.country_currency}
           multCountry = {currentCountry}
           currentCountry={myLocation.countryCallingCode}
