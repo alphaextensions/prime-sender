@@ -6,7 +6,7 @@ export function Footer({ brandName, brandLink, routes }) {
 
   return (
     <footer className="py-2 mr-10">
-      <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
+      <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 max-xs:flex-col-reverse md:justify-between">
         <Typography variant="small" className="font-normal text-inherit">
           &copy; {year}, made by{" "}
           <a
@@ -17,7 +17,7 @@ export function Footer({ brandName, brandLink, routes }) {
             {brandName}
           </a>{" "}
         </Typography>
-        <ul className="flex items-center gap-4">
+        <ul className="flex items-center gap-4 max-xs:flex-col">
           {routes.map(({ name, path }) => (
             <li key={name}>
               <Typography
