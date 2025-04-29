@@ -14,8 +14,8 @@ import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
 import NotificationBox from "../common/NotificationBox";
-import { driver } from "driver.js";
-import "driver.js/dist/driver.css";
+// import { driver } from "driver.js";
+// import "driver.js/dist/driver.css";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
   const overlayRef = useRef(null);
@@ -680,7 +680,7 @@ const Pricing = () => {
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
               {!loading && countrySwitchComponent()}
-              <div className={`pricing-slider top-pricing-slider`} ref={scrollToPricingPopupRef}>
+              <div className={`pricing-slider top-pricing-slider`}>
                 <div className={`pricing_country ${isMultipleAccountPage?"display_none":""}`}>
                   <div className="pricing_country_switch">
                     <div className={`country_switch ${planPeriod == 'monthly' && 'active_country_class'}`} onClick={()=> setPlanPeriod("monthly")}>
@@ -898,7 +898,7 @@ const Pricing = () => {
                 }
               </div>
             </div>
-            <div className={`pricing_card multiple_user_card premium_card_purple ${isMultipleAccountPage && 'multiple_card_hover_style slider_stick'} ${isPricingCardHovered == "multiple" && !isMultipleAccountPage && "pricing_card_hover"}`} onMouseEnter={() => setIsPricingCardHovered("multiple")} onMouseLeave={() => setIsPricingCardHovered("")}>
+            <div className={`pricing_card multiple_user_card premium_card_purple ${isMultipleAccountPage && 'multiple_card_hover_style slider_stick'} ${isPricingCardHovered == "multiple" && !isMultipleAccountPage && "pricing_card_hover"}`} ref={scrollToPricingPopupRef} onMouseEnter={() => setIsPricingCardHovered("multiple")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="multiple_card_type">
                 <p>Need multiple accounts?</p>
               </div>
