@@ -109,10 +109,10 @@ function Login() {
       let isSecondOrMoreVisit = supportCount >= 1;
 
       showPopup(
-        "Email ID Already Linked",
-        `Hi ${userName ?? ''}${userName ? ', ' : ''}this email is already linked to an account registered using ${maskedEmail}. To view the full email address, please check the profile section in your extension.`,
+        "Email Doesn't Match WhatsApp Account",
+        `Hi ${userName ?? ''}${userName ? ', ' : ''}it looks like your WhatsApp number is already linked to a different email address (${maskedEmail}). To see the full email, please visit the profile section in your extension. Make sure you're signing in with the correct Google account.`,
         isSecondOrMoreVisit
-      );
+      );      
       return;
     }
   };
@@ -250,7 +250,7 @@ function Login() {
           <div className="main_box">
             <div className="intro_text">
               <h1>Welcome!</h1>
-              <h3>Let's make whatsApp work smarter for You with Prime Sender.</h3>
+              <h3>Let's make whatsApp work smarter for you with Prime Sender.</h3>
             </div>
             <div id="signInGoogle">
             </div>
