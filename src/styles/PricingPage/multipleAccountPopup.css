@@ -5,7 +5,8 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: min(90%, 600px);
-	height: fit-content;
+	max-height: 90vh;
+	overflow-y: auto;
 	background: white;
 	border: 3px solid var(--color-primary1);
 	z-index: 10000000000000;
@@ -433,5 +434,80 @@
     to {
         transform: translateX(-100%);
         opacity: 0;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .multiple_account_popup {
+        width: 95%;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .mult_account_num {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    .mult_account_email_input {
+        width: 100% !important;
+        max-width: 250px;
+    }
+
+    .mult_account_body_heading p {
+        width: 90%;
+        font-size: 15px;
+    }
+
+    .number_component_line {
+        width: 30px;
+    }
+
+    .numer_component_number_input {
+        margin-left: 10px;
+        flex-wrap: wrap;
+    }
+
+    .react-tel-input .form-control {
+        width: 80px !important;
+    }
+
+    .numer_component_number_input {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-right: 15px;
+        box-sizing: border-box;
+    }
+    
+    .numer_component_number_input input {
+        width: calc(100% - 90px);
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .mult_account_add_more {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .mult_popup_button_section {
+        flex-direction: column;
+    }
+
+    .auto_renew_container {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .mult_account_heading_text {
+        font-size: 14px;
+    }
+
+    .mult_account_logo_text {
+        font-size: 18px;
     }
 }
