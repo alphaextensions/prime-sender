@@ -17,7 +17,7 @@ function RefundAndCancellation() {
     return (
         <>
             <HelmetHeader
-                title={'Refund Policy | Prime Sender - Best Web Sender Extension'}
+                title={'Refund Policy | Prime Sender - Free AI Web Message Sender'}
                 description={'Refund Policy for Prime Sender'}
                 keywords={'prime sender refund policy, refund policy,refund policy and cancelation'}
             />

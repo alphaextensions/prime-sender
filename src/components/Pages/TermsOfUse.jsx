@@ -17,7 +17,7 @@ function TermsOfUse() {
   return (
     <>
       <HelmetHeader 
-        title={'Terms Of Service | Prime Sender - Best Web Sender Extension'}
+        title={'Terms Of Service | Prime Sender - Free AI Web Message Sender'}
         description={'Terms Of Service for Prime Sender'}
         keywords={'prime sender terms of use, terms and conditions, privacy policy and terms&conditions'}
       />

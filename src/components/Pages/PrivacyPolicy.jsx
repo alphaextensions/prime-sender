@@ -18,7 +18,7 @@ function PrivacyPolicy() {
   return (
     <>
       <HelmetHeader
-        title={'Privacy Policy | Prime Sender - Best Web Sender Extension'}
+        title={'Privacy Policy | Prime Sender - Free AI Web Message Sender'}
         description={'Privacy Policy for Prime Sender'}
         keywords={'prime sender privacy policy, privacy policy,privacy policy and terms&conditions'}
       />

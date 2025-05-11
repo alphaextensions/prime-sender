@@ -623,7 +623,7 @@ const Pricing = () => {
   return (
     <>
       <HelmetHeader
-        title={'Pricing | Prime Sender - Best Web Sender Extension'}
+        title={'Pricing | Prime Sender - Free AI Web Message Sender'}
         description={'Pricing for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
         keywords={'pricing, prime sender pricing, affordable pricing, Simple, cheap, prime sender pricing plans'}
       />

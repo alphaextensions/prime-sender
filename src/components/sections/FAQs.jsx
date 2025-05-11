@@ -29,7 +29,7 @@ const FAQs = () => {
   return (
     <>
       <Helmet
-        title={'FAQs | Prime Sender - Best Web Sender Extension'}
+        title={'FAQs | Prime Sender - Free AI Web Message Sender'}
         description={'FAQs of Prime Sender'}
         keywords={'prime sender frequently asked questions, FAQs, prime sender faqs, most frequently asked questions'}
       />

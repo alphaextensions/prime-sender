@@ -15,6 +15,7 @@ import { primeSenderController, setOpenConfigurator } from "../context";
 export function Dashboard() {
   const [controller, dispatch] = primeSenderController();
   const { sidenavType } = controller;
+  document.title = "Dashboard | Prime Sender - Free AI Web Message Sender"
 
   return (
     <div className="min-h-screen bg-blue-gray-50/50">

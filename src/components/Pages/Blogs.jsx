@@ -19,7 +19,7 @@ const Blogs = () => {
   return (
     <>
       <HelmetHeader
-        title={'Blogs | Prime Sender - Best Web Sender Extension'}
+        title={'Blogs | Prime Sender - Free AI Web Message Sender'}
         description={'Blogs of Prime Sender'}
         keywords={'Blogs,prime sender blog page, prime sender blogs,Chat Productivity, WhatsApp Sender Extension'}
       />

@@ -132,7 +132,7 @@ const ContactUs = () => {
   return (
     <>
       <HelmetHeader
-        title={'Contact Us | Prime Sender - Best Web Sender Extension'}
+        title={'Contact Us | Prime Sender - Free AI Web Message Sender'}
         description={'Contact Us at Prime Sender'}
         keywords={'contact,prime sender contact page, prime sender support'}
       />      
