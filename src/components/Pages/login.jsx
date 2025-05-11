@@ -21,6 +21,7 @@ function Login() {
   const url = import.meta.env.VITE_PROD_LOGIN_API;
 
   const navigate = useNavigate();
+  document.title = "Login | Prime Sender - Free AI Web Message Sender"
 
   const handleLogin = (cred, data) => {
     setCredentials(dispatch, { cred, data });

@@ -7,7 +7,7 @@ const Error = () => {
   return (
     <>
     <HelmetHeader 
-        title={'404 - Page Not Found | Prime Sender - Best Web Sender Extension'}
+        title={'404 - Page Not Found | Prime Sender - Free AI Web Message Sender'}
         description={'The page you are trying to vis'}
       />
       <div id='error' className='error'>

@@ -18,7 +18,7 @@ const HowToUse = () => {
     <>
       {showMetaData &&
         <HelmetHeader
-          title={'How To Use | Prime Sender - Best Web Sender Extension'}
+          title={'How To Use | Prime Sender - Free AI Web Message Sender'}
           description={'How to use page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
           keywords={'how to use , prime sender how to use, how to use prime sender, Simple, cheap, prime sender'}
         />

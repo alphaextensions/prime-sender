@@ -48,7 +48,7 @@ const HelpUsImprove = () => {
   return (
     <>
       <HelmetHeader
-        title={'Help Us Improve | Prime Sender - Best Web Sender Extension'}
+        title={'Help Us Improve | Prime Sender - Free AI Web Message Sender'}
         description={'Submit your feedback to help us improve Prime Sender'}
         keywords={'help-us-improve,prime sender help, prime sender feedback'}
       />
