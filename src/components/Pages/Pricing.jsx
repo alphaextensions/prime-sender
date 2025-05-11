@@ -14,8 +14,8 @@ import {Oval} from "react-loader-spinner";
 import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countryCodeToDialCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
 import NotificationBox from "../common/NotificationBox";
-// import { driver } from "driver.js";
-// import "driver.js/dist/driver.css";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
   const overlayRef = useRef(null);
