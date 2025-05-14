@@ -374,16 +374,19 @@ const Pricing = () => {
             setIsMultipleAccountPage(true);
             setTimeout(() => {
                 if (scrollToPricingPopupRef.current) {
-                    const element = scrollToPricingPopupRef.current;
-                    const offset = window.innerHeight * 0.25;
-                    const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-                    window.scrollTo({
+                  const element = scrollToPricingPopupRef.current;
+                  const offset = 400;
+                  const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+                  console.log(element.getBoundingClientRect().top)
+                  console.log(window.pageYOffset)
+                  window.scrollTo({
                       top: topPosition,
                       behavior: 'smooth'
                   });
                 } 
-            }, 400);
+            }, 10);
         }
+
     }
 
     function getUserLocation() {
