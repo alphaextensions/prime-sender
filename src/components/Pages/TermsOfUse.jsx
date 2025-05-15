@@ -108,6 +108,12 @@ function TermsOfUse() {
             We do not guarantee or promise any specific outcome regarding account bans, suspensions, or reinstatements. Any bans imposed by the source platform are beyond our control, and we are not responsible for such actions. Decisions related to banning are made solely by the source platform based on their policies and regulations.
             </div>
           </div>
+          <div className="term">
+            <div className="term-title sub-heading">Plan Transfer Policy</div>
+            <div className="term-content text">
+            If a user has entered the wrong number during purchase, they can transfer their premium plan to a different number within 7 days of purchase via the <a href="https://prime-sender.com/login">dashboard</a>. Each plan is eligible for a one-time transfer only. Transfers are not allowed after 7 days or if the plan has already been transferred.
+            </div>
+          </div>
         </div>
       </div>
     </>
