@@ -97,7 +97,6 @@ const Pricing = () => {
         isSuccess: false,
   });
   const [flagIconSrc, setFlagIconSrc] = useState('');
-  const [loading, setLoading] = useState(false);
   const [featureDetailHover, setFeatureDetailHover] = useState(-1);
   const [freeCardDetailHover, setFreeCardDetailHover] = useState(-1);
   const [basicCardDetailHover, setBasicCardDetailHover] = useState(-1);
@@ -377,8 +376,6 @@ const Pricing = () => {
                   const element = scrollToPricingPopupRef.current;
                   const offset = 400;
                   const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-                  console.log(element.getBoundingClientRect().top)
-                  console.log(window.pageYOffset)
                   window.scrollTo({
                       top: topPosition,
                       behavior: 'smooth'
@@ -390,7 +387,6 @@ const Pricing = () => {
     }
 
     function getUserLocation() {
-        setLoading(true);
         fetch('https://ipapi.co/json/')
             .then(res => {
                 if (!res.ok) throw new Error('Primary API failed');
@@ -406,7 +402,6 @@ const Pricing = () => {
                     .then((data) => handleLocationResponse(data.country_code, data.country))
                     .catch(fallbackErr => {
                         console.error('Both APIs failed.', fallbackErr);
-                        setLoading(false);
                     });
             });
     }
@@ -423,7 +418,6 @@ const Pricing = () => {
             dialCode = countryCodeToDialCode[country_code];
         }
 
-        console.log(country, currency, dialCode);
         setMyLocation({
             country_name: country_name,
             pricing_country_name: country,
@@ -432,7 +426,6 @@ const Pricing = () => {
             countryCallingCode: dialCode,
             isSuccess: true,
         });
-        setLoading(false);
     }
 
     function startTour(){
@@ -548,12 +541,10 @@ const Pricing = () => {
 
     useEffect(() => {
         checkIfMultipleAccountPage();
-        setLoading(true);
         getParams();
         getUserLocation();
         getPricingDataFromDatabase();
         startTour();
-        console.log(isMultipleAccountPage)
     }, [])
 
     useEffect(() => {
@@ -668,7 +659,19 @@ const Pricing = () => {
           <div className="pricing_top_section">
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
-              {!loading && countrySwitchComponent()}
+              <div className="pricing_country_text">
+                <p className="heading">
+                  Pricing curated just for you
+                  {(myLocation && myLocation.isSuccess) &&
+                    <>
+                      <span>,</span>
+                      <img src={flagIconSrc} alt="flag" />
+                      <span className="country_name">{myLocation.country_name}</span>
+                    </>   
+                  }
+                  !
+                </p>
+              </div>
               <div className={`pricing-slider top-pricing-slider`}>
                 <div className={`pricing_country ${isMultipleAccountPage?"display_none":""}`}>
                   <div className="pricing_country_switch">
