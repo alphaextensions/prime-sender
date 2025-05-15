@@ -1335,6 +1335,7 @@
 .driver-popover.driverjs-theme {
   background-color: #009a88;
   color: #fff;
+  font-family: 'PT Sans Caption';
 }
 
 .driver-popover.driverjs-theme button {

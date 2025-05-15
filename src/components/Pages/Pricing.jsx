@@ -477,6 +477,10 @@ const Pricing = () => {
         ],
       };
       if(isTour){
+        window.scrollTo({
+          top: "1px",
+          behavior: 'smooth'
+        });
         driver(accountObj).drive()
       }
     }
