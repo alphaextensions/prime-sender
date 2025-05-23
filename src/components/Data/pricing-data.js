@@ -10,6 +10,7 @@ export const countryCodeToName = {
 	"KW": 'kuwait',
 	"SG": 'singapore',
 	"IL": 'israel',
+	"BR"  : 'brazil',
 }
 
 export const countryNameToCode = {
@@ -22,6 +23,7 @@ export const countryNameToCode = {
     'kuwait': "KW",
     'singapore': "SG",
     'israel': "IL",
+	'brazil': "BR"
 }
 
 export const countryCodeToCurrency = {
@@ -34,6 +36,7 @@ export const countryCodeToCurrency = {
 	"KW": "USD",
 	"SG": "SGD",
 	"IL": "ILS",
+	"BR": "BRL",
 }
 
 export const countryCodeToDialCode = {
@@ -46,6 +49,7 @@ export const countryCodeToDialCode = {
 	"KW": "+965",
 	"SG": "+65",
 	"IL": "+972",
+	"BR": "+55"
 }
 
 export const pricing_data = {
@@ -445,6 +449,36 @@ export const pricing_data = {
 			}
 		}
 	},
+	"brazil": {
+		"monthly": {
+			"basic_plan": {
+				"final": "47.94",
+				"discounted": "31.96",
+				"original": "79.90"
+			},
+			"advance_plan": {
+				"final": "59.94",
+				"discounted": "39.96",
+				"original": "99.90"
+			}
+		},
+		"currency": "BRL",
+		"currency_symbol": "R$",
+		"annually": {
+			"basic_plan": {
+				"final": "479.4",
+				"monthly_final": "39.95",
+				"original": "799",
+				"monthly_original": "66.58"
+			},
+			"advance_plan": {
+				"final": "599.4",
+				"monthly_final": "49.95",
+				"original": "999",
+				"monthly_original": "83.25"
+			}
+		},
+	},
 	"indonesia": {
 		"monthly": {
 			"basic_plan": {
@@ -632,6 +666,16 @@ export const pricing_links = {
 			basic: "28o00kfQC1Wweo83dj",
 			advance: "eVaeVe5bYat2eo8cO3"
 		}
+	},
+	brazil: {
+		monthly: {
+			basic: "9B600l22Q3Wmebk6L01B61l",
+			advance: "14A14p7naakK5EOd9o1B61k",
+		},
+		annually: {
+			basic: "dRm7sNazmfF40ku8T81B61m",
+			advance: "dRm14pfTGdwW7MW8T81B61n"
+		}
 	}
 };
 
@@ -678,6 +722,11 @@ export const countrySwitchObject2 = [
 		name: "Israel",
 		countryCode: "il",
 		currentCountryName: "israel"
+	},
+	{
+		name: "Brazil",
+		countryCode: "br",
+		currentCountryName: "brazil"
 	},
 	{
 		name: "International",

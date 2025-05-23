@@ -421,6 +421,15 @@ const Pricing = () => {
         }
 
         console.log(country, currency, dialCode);
+        // setMyLocation({
+        //     country_name: "Brazil",
+        //     pricing_country_name: "brazil",
+        //     country_code: "BR",
+        //     country_currency: "RBL",
+        //     countryCallingCode: "+55",
+        //     isSuccess: true,
+        // });
+        
         setMyLocation({
             country_name: country_name,
             pricing_country_name: country,
@@ -697,10 +706,18 @@ const Pricing = () => {
               planPeriod === 'monthly' &&
               <div className="pricing_discount_text ">
                 <div className="text">
-                  Early bird offer for new user - <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>Extra 30% OFF. &nbsp; </span>
+                  Early bird offer for new user - <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>{currentCountry === "brazil" ? "Extra 40% OFF." : "Extra 30% OFF."}&nbsp; </span>
                 </div>
                 <div className="discount-img text" >
-                  Use code <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
+                  Use code <img src={
+                                currentCountry === 'brazil'
+                                  ? "/images/brazil_coupon_code.png"
+                                  : (currentCountry === 'india' || currentCountry === 'indonesia' || currentCountry === 'international')
+                                    ? "/images/coupon.png"
+                                    : "/images/first_coupon.png"
+                              } 
+                              alt="Coupon icon" 
+                            />
                 </div>
               </div>
             }
