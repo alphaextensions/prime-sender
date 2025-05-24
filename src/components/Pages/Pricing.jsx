@@ -1004,7 +1004,7 @@ const Pricing = () => {
             </div>
           </div>
           </div>
-          <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
+          <div className="sub-text" colSpan="4" style={{ color: '#C64A23', fontSize: '12px', textDecoration: 'underline', paddingBottom: 24, textAlign: 'center', marginTop: '30px' }}>By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month.</div>
           <div className="sub-text" style={{ fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>By purchasing the premium plan, you agree to our Terms and Service and Privacy Policy.</div>
           <div className="pricing_lower_section">
             <SectionTitle
