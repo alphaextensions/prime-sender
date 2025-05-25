@@ -452,32 +452,46 @@ export const pricing_data = {
 	"brazil": {
 		"monthly": {
 			"basic_plan": {
-				"final": "47.94",
-				"discounted": "31.96",
-				"original": "79.90"
+				"final": "79.90",
+				"discounted": "39.1",
+				"original": "119"
 			},
 			"advance_plan": {
-				"final": "59.94",
-				"discounted": "39.96",
-				"original": "99.90"
+				"final": "99.90",
+				"discounted": "49.1",
+				"original": "149"
 			}
 		},
 		"currency": "BRL",
 		"currency_symbol": "R$",
 		"annually": {
 			"basic_plan": {
-				"final": "479.4",
-				"monthly_final": "39.95",
-				"original": "799",
-				"monthly_original": "66.58"
+				"final": "799",
+				"monthly_final": "67",
+				"original": "1428",
+				"monthly_original": "119"
 			},
 			"advance_plan": {
-				"final": "599.4",
-				"monthly_final": "49.95",
-				"original": "999",
-				"monthly_original": "83.25"
+				"final": "999",
+				"monthly_final": "84",
+				"original": "1788",
+				"monthly_original": "149"
 			}
 		},
+		"biannually":{
+			"basic_plan": {
+				"final": "1199",
+				"monthly_final": "100",
+				"original": "1428",
+				"monthly_original": "119"
+			},
+			"advance_plan": {
+				"final": "1499",
+				"monthly_final": "125",
+				"original": "1788",
+				"monthly_original": "149"
+			}
+		}
 	},
 	"indonesia": {
 		"monthly": {
@@ -675,6 +689,10 @@ export const pricing_links = {
 		annually: {
 			basic: "dRm7sNazmfF40ku8T81B61m",
 			advance: "dRm14pfTGdwW7MW8T81B61n"
+		},
+		biannually: {
+			basic: "8x2cN7bDq1Oe2sCeds1B61o",
+			advance: "00w3cx36U50qgjsfhw1B61p"
 		}
 	}
 };

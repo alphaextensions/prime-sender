@@ -746,6 +746,15 @@
   border-top: 10px solid #009a88;
 }
 
+.msg-box-down.multiple-card{
+  width: 200px;
+  padding: 10px 12px;
+}
+
+.msg-box-down.multiple-card p{
+  font-size: 12px;
+}
+
 .pricing_calculator_section{
   display: flex;
   flex-direction: column;
@@ -1406,4 +1415,9 @@
 
 .driver-popover-footer button{
   font-family: 'PT Sans Caption' !important;
+}
+
+.indonesia_pricing_card{
+  grid-template-columns: repeat(3, 340px);
+  justify-content: center;
 }
