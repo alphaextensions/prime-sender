@@ -421,6 +421,7 @@ const Pricing = () => {
         }
 
         console.log(country, currency, dialCode);
+        
         setMyLocation({
             country_name: country_name,
             pricing_country_name: country,
@@ -697,15 +698,23 @@ const Pricing = () => {
               planPeriod === 'monthly' &&
               <div className="pricing_discount_text ">
                 <div className="text">
-                  Early bird offer for new user - <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>Extra 30% OFF. &nbsp; </span>
+                  Early bird offer for new user - <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>{currentCountry === "brazil" ? "Extra 40% OFF." : "Extra 30% OFF."}&nbsp; </span>
                 </div>
                 <div className="discount-img text" >
-                  Use code <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
+                  Use code <img src={
+                                currentCountry === 'brazil'
+                                  ? "/images/brazil_coupon_code.png"
+                                  : (currentCountry === 'india' || currentCountry === 'indonesia' || currentCountry === 'international')
+                                    ? "/images/coupon.png"
+                                    : "/images/first_coupon.png"
+                              } 
+                              alt="Coupon icon" 
+                            />
                 </div>
               </div>
             }
           </div>
-          <div className={`pricing_cards_container ${isMultipleAccountPage && 'multiple_acc_pricing_cards_container'}`}>
+          <div className={`pricing_cards_container ${isMultipleAccountPage && 'multiple_acc_pricing_cards_container'} ${currentCountry === "indonesia" && 'indonesia_pricing_card'}`}>
             {isMultipleAccountPage && <div className="pricing_card_container_overlay"></div>}
             {/* free card */}
             <div className={`pricing_card ${isPricingCardHovered == "free" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("free")} onMouseLeave={() => setIsPricingCardHovered("")}>
@@ -758,7 +767,7 @@ const Pricing = () => {
               </div>
             </div>
             {/* basic card */}
-            <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
+            <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")} style={{display:`${currentCountry === "indonesia" ? "none" : "flex" }`}}>
               <div className="pricing_card_type">
                 <img src="/images/signal-basic.png" alt="Basic plan icon" />
                 <p>Basic</p>
@@ -907,7 +916,7 @@ const Pricing = () => {
                 {/* basic/advance switch */}
                 <div className="pricing_country background-royal">
                   <div className="pricing_country_switch">
-                    <div className={`country_switch ${pricingCalculatorPlan == 'basic' && 'active_country_class'}`} onClick={()=> setPricingCalculatorPlan("basic")}>
+                    <div className={`country_switch ${pricingCalculatorPlan == 'basic' && 'active_country_class'}`} style={{display:`${currentCountry === "indonesia" ? "none" : "flex" }`}} onClick={()=> setPricingCalculatorPlan("basic")}>
                       <p className="country_current_switch plan_switch">
                         Basic
                       </p>
