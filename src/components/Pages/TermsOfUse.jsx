@@ -103,6 +103,12 @@ function TermsOfUse() {
             </div>
           </div>
           <div className="term">
+            <div className="term-title sub-heading">Free Trial Policy </div>
+            <div className="term-content text">
+            Customers can use the free trial for a particular duration which allows them access to majority features. Once the customer has purchased a premium plan, they would have access to more features depending on the type of plan. Once the premium plan expires, customer cannot access any features unless the purchase the premium plan again
+            </div>
+          </div>
+          <div className="term">
             <div className="term-title sub-heading">Account Suspension and Banning</div>
             <div className="term-content text">
             We do not guarantee or promise any specific outcome regarding account bans, suspensions, or reinstatements. Any bans imposed by the source platform are beyond our control, and we are not responsible for such actions. Decisions related to banning are made solely by the source platform based on their policies and regulations.
