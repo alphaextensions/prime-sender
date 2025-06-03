@@ -99,7 +99,7 @@ function TermsOfUse() {
           <div className="term">
             <div className="term-title sub-heading">Refund Policy </div>
             <div className="term-content text">
-            We do not provide refunds unless the service has not been properly functional from our side for 7 days continuously
+            We do not provide refunds unless the broadcasting feature has not been properly functional from our side for 7 days continuously
             </div>
           </div>
           <div className="term">
