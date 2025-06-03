@@ -10,6 +10,7 @@ export const countryCodeToName = {
 	"KW": 'kuwait',
 	"SG": 'singapore',
 	"IL": 'israel',
+	"BR"  : 'brazil',
 }
 
 export const countryNameToCode = {
@@ -22,6 +23,7 @@ export const countryNameToCode = {
     'kuwait': "KW",
     'singapore': "SG",
     'israel': "IL",
+	'brazil': "BR"
 }
 
 export const countryCodeToCurrency = {
@@ -34,6 +36,7 @@ export const countryCodeToCurrency = {
 	"KW": "USD",
 	"SG": "SGD",
 	"IL": "ILS",
+	"BR": "BRL",
 }
 
 export const countryCodeToDialCode = {
@@ -46,6 +49,7 @@ export const countryCodeToDialCode = {
 	"KW": "+965",
 	"SG": "+65",
 	"IL": "+972",
+	"BR": "+55"
 }
 
 export const pricing_data = {
@@ -445,6 +449,50 @@ export const pricing_data = {
 			}
 		}
 	},
+	"brazil": {
+		"monthly": {
+			"basic_plan": {
+				"final": "79.90",
+				"discounted": "39.1",
+				"original": "119"
+			},
+			"advance_plan": {
+				"final": "99.90",
+				"discounted": "49.1",
+				"original": "149"
+			}
+		},
+		"currency": "BRL",
+		"currency_symbol": "R$",
+		"annually": {
+			"basic_plan": {
+				"final": "799",
+				"monthly_final": "67",
+				"original": "1428",
+				"monthly_original": "119"
+			},
+			"advance_plan": {
+				"final": "999",
+				"monthly_final": "84",
+				"original": "1788",
+				"monthly_original": "149"
+			}
+		},
+		"biannually":{
+			"basic_plan": {
+				"final": "1199",
+				"monthly_final": "100",
+				"original": "1428",
+				"monthly_original": "119"
+			},
+			"advance_plan": {
+				"final": "1499",
+				"monthly_final": "125",
+				"original": "1788",
+				"monthly_original": "149"
+			}
+		}
+	},
 	"indonesia": {
 		"monthly": {
 			"basic_plan": {
@@ -632,6 +680,20 @@ export const pricing_links = {
 			basic: "28o00kfQC1Wweo83dj",
 			advance: "eVaeVe5bYat2eo8cO3"
 		}
+	},
+	brazil: {
+		monthly: {
+			basic: "9B600l22Q3Wmebk6L01B61l",
+			advance: "14A14p7naakK5EOd9o1B61k",
+		},
+		annually: {
+			basic: "dRm7sNazmfF40ku8T81B61m",
+			advance: "dRm14pfTGdwW7MW8T81B61n"
+		},
+		biannually: {
+			basic: "8x2cN7bDq1Oe2sCeds1B61o",
+			advance: "00w3cx36U50qgjsfhw1B61p"
+		}
 	}
 };
 
@@ -678,6 +740,11 @@ export const countrySwitchObject2 = [
 		name: "Israel",
 		countryCode: "il",
 		currentCountryName: "israel"
+	},
+	{
+		name: "Brazil",
+		countryCode: "br",
+		currentCountryName: "brazil"
 	},
 	{
 		name: "International",
