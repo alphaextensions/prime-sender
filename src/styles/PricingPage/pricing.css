@@ -708,7 +708,7 @@
   position: absolute;
   left: 50%;
   bottom: 95%;
-  z-index: 10000000;
+  z-index: 1000000;
 }
 
 .advance_navigation_box{
@@ -867,12 +867,11 @@
 
 .pricing_card_container_overlay {
   position: absolute;
-    top: 20px;
-    left: 0;
-    height: 97%;
-    width: 100%;
-    z-index: 1000000;
-    backdrop-filter: blur(10px);
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .top-pricing-slider {
@@ -1335,6 +1334,7 @@
 .driver-popover.driverjs-theme {
   background-color: #009a88;
   color: #fff;
+  font-family: 'PT Sans Caption';
 }
 
 .driver-popover.driverjs-theme button {
@@ -1359,7 +1359,7 @@
 .driver-popover.driverjs-theme .driver-popover-close-btn {
   display: block;
   font-size: 25px;
-  padding: 5px 10px;
+  padding: 1px !important;
   height: max-content;
   color: #fff;
 }
@@ -1400,7 +1400,18 @@
   color: #fff !important;
   zoom: 1;
 }
-.driver-popover {
-  z-index: 100000000000000 !important;
+
+.driver-overlay {
+  z-index: 100000000 !important;
 }
 
+.driver-popover {
+  z-index: 1000000000 !important;
+}
+
+#driver-popover-title,
+#driver-popover-description,
+.driver-popover-next-btn,
+.driver-popover-progress-text {
+  font-family: 'PT Sans Caption', sans-serif !important;
+}
