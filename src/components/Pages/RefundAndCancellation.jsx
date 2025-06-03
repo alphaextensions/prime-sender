@@ -32,7 +32,7 @@ function RefundAndCancellation() {
                                 When you subscribe for a monthly plan, you yourself authorize to payment deduction each month. The service gets automatically and immediately enabled on the number you enter while purchasing.
                             </p>
                             <p>
-                                Our service has features which often are one time use so therefore, we do not provide refunds unless the service has not been properly functional from our side for 7 days continuously. Upon cancellation post purchase, the policy remains the same.
+                                Our service has features which often are one time use so therefore, we do not provide refunds unless the broadcasting feature has not been properly functional from our side for 7 days continuously. Upon cancellation post purchase, the policy remains the same.
                             </p>
                         </div>
                     </div>
