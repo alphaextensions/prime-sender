@@ -138,6 +138,16 @@ const Pricing = () => {
       if (lastPlan || country || currentPlan) {
         window.history.replaceState(null, '', window.location.pathname);
       }
+
+      // Just for testing :: Remove before Prod release
+      const countryCode = params.get('countryCode') || null;
+      if (countryCode) {
+        let country_name = countryCodeToName[countryCode] || "unkown_country";
+        country_name = country_name.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        handleLocationResponse(countryCode, country_name);
+      } else {
+        handleLocationResponse("US", "United States");
+      }
     }
   };
 
@@ -544,7 +554,7 @@ const Pricing = () => {
         checkIfMultipleAccountPage();
         setLoading(true);
         getParams();
-        getUserLocation();
+        // getUserLocation(); Just for testing :: Remove before Prod release
         getPricingDataFromDatabase();
         startTour();
         console.log(isMultipleAccountPage)

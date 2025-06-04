@@ -1,5 +1,5 @@
-export const countryCodesPresent = ["IN", "ID", "AE", "EG", "GB", "SA", "KW", "SG", "IL"]
-export const countryPresent = ["india", "indonesia", "uae", "egypt", "uk", "saudi_arabia", "kuwait", "singapore", "israel", "international" ];
+export const countryCodesPresent = ["IN", "ID", "AE", "EG", "GB", "SA", "KW", "SG", "IL","BR"]
+export const countryPresent = ["india", "indonesia", "uae", "egypt", "uk", "saudi_arabia", "kuwait", "singapore", "israel","brazil", "international" ];
 export const countryCodeToName = {
 	"IN": 'india',
 	"ID": 'indonesia',
