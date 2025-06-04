@@ -15,6 +15,7 @@ import MultipleAccountPopup from "../sections/MultipleAccountPopup";
 import { countryCodeToCurrency, countryCodeToName, countryCodesPresent, countryNameToCode, countryCodeToDialCode, countrySwitchObject1, countrySwitchObject2, pricing_data, pricing_links, pricing_popup_premium_features, pricing_popup_trial_features, notification_country_data, countryPresent } from "../Data/pricing-data";
 import NotificationBox from "../common/NotificationBox";
 import { driver } from "driver.js";
+import NoTranslate from "../common/NoTranslate";
 import "driver.js/dist/driver.css";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
@@ -721,7 +722,7 @@ const Pricing = () => {
             <div className={`pricing_card ${isPricingCardHovered == "free" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("free")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-free.png" alt="Free plan icon" />
-                <p>Free</p>
+                <NoTranslate><p>Free</p></NoTranslate>
               </div>
               <div className="pricing_card_price">
                 <div className="pricing_card_price_div">
@@ -771,7 +772,7 @@ const Pricing = () => {
             <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-basic.png" alt="Basic plan icon" />
-                <p>Basic</p>
+                <NoTranslate><p>Basic</p></NoTranslate>
               </div>
               <div className="pricing_card_price">
                 <div className="pricing_card_price_div">
@@ -791,9 +792,11 @@ const Pricing = () => {
                 {`/user/month ${planPeriod !== 'monthly' ? `billed ${planPeriod}` : ''}`}
               </div>
               <div className="pricing_card_button">
+                <NoTranslate>
                 <button onClick={() => handleGaButtonClick("basic")}>
                   {showButton(false, 'basic')}
                 </button>
+                </NoTranslate>
               </div>
               {
                 currentCountry == 'india' && planPeriod != 'monthly' && 
@@ -833,7 +836,7 @@ const Pricing = () => {
               <img className="recommended_tag" src="/images/recommended_tag.png" alt="Recommended tag" />
               <div className="pricing_card_type">
                 <img src="/images/signal-advance.png" alt="Advance plan icon" />
-                <p>Advance</p>
+                <NoTranslate><p>Advance</p></NoTranslate>
               </div>
                 <div className="pricing_card_price">
                 <div className="pricing_card_price_div">
@@ -853,9 +856,11 @@ const Pricing = () => {
                 {`/user/month ${planPeriod !== 'monthly' ? `billed ${planPeriod}` : ''}`}
               </div>
               <div className="pricing_card_button">
+                <NoTranslate>
                 <button onClick={() => handleGaButtonClick("advance")}>
                   {showButton(false, 'advance')}
                 </button>
+                </NoTranslate>
               </div>
               {
                 currentCountry == 'india' && planPeriod != 'monthly' &&
@@ -1027,9 +1032,9 @@ const Pricing = () => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Free</th>
-                    <th>Basic</th>
-                    <th>Advance</th>
+                    <th> <NoTranslate>Free</NoTranslate></th>
+                    <th> <NoTranslate>Basic</NoTranslate></th>
+                    <th> <NoTranslate>Advance</NoTranslate></th>
                   </tr>
                 </thead>
                 <tbody>
