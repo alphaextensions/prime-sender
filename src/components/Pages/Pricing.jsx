@@ -555,7 +555,7 @@ const Pricing = () => {
         setLoading(true);
         getParams();
         // getUserLocation(); Just for testing :: Remove before Prod release
-        getPricingDataFromDatabase();
+        // getPricingDataFromDatabase(); Just for testing :: Remove before Prod release
         startTour();
         console.log(isMultipleAccountPage)
     }, [])
