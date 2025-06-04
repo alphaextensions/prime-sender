@@ -4,6 +4,7 @@ import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 import { FaArrowRightLong } from 'react-icons/fa6' 
 import SectionTitle from "../common/SectionTitle";
+import NoTranslate from "../common/NoTranslate";
 import ReactGA from "react-ga4";
 import TestimonialCard from "../common/TestimonialCard";
 import Slider from "react-slick";
@@ -30,6 +31,7 @@ const Testimonial = () => {
       <div className="testimonial_container">
         <div className="testimonial_upper">
           <SectionTitle gif="/gifs/testimonials-1.gif" title="Our Numbers Speak For Themselves" white/>
+          <NoTranslate>
           <div className="testimonial_stats">
             <div className="testimonial_rating">
               <h1 className="large-heading">
@@ -55,6 +57,7 @@ const Testimonial = () => {
               <p className="large-text">Sender on Web Store</p>
             </div>
           </div>
+          </NoTranslate>
         </div>
         <div className="testimonial_line_break" />
         <div className="testimonial_lower">
@@ -149,7 +152,7 @@ const Testimonial = () => {
         </div>
       </div>
       <div className="view-more">
-        <a href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia/reviews?hl=en" target="_blank" className="button-round view-more-btn" onClick={handleViewMoreBtnClick}><span>View All</span> <FaArrowRightLong/></a>
+        <a href="https://chromewebstore.google.com/detail/prime-sender-best-web-ext/klfaghfflijdgoljefdlofkoinndmpia/reviews?hl=en" target="_blank" rel="noreferrer" className="button-round view-more-btn" onClick={handleViewMoreBtnClick}><span>View All</span> <FaArrowRightLong/></a>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { MdFileDownload, MdClose, MdMenu } from "react-icons/md";
 import '../../styles/Navbar/navbar.css'
 import DownloadBtn from '../common/DownloadBtn'
+import NoTranslate from '../common/NoTranslate'
 import ReactGA from "react-ga4";
 
 function NavLinks({ onClick }) {
@@ -132,7 +133,9 @@ function Navbar() {
           </div>
 
           <div className='nav-download-btn'>
-            <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />} />
+            <NoTranslate>
+              <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />} />
+            </NoTranslate>
             {showMenu ? (
               <MdClose className='menu-icon' onClick={closeMenu} />
             ) : (

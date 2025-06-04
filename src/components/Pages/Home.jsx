@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/HomePage/homepage.css';
 import DownloadBtn from '../common/DownloadBtn';
 import { Link } from 'react-router-dom';
@@ -99,13 +99,16 @@ const Home = () => {
         description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'}
         keywords={'prime sender, prime sender home, home page'}
       />
+
       <div className="home-container">
         <div className="home-content">
           <div className="left-col">
             <h1 className="title large-heading">
               Best Chrome Extension for Messaging and Productivity
             </h1>
-            <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
+            <p className="sub_title sub-heading">
+              Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension
+            </p>
             <div className="home-btns">
               <DownloadBtn />
               <Link to="/pricing" onClick={() => { buyNowButtonClickHandle() }} className="howtousebtn button-round large-text btn">
