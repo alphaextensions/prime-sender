@@ -481,13 +481,13 @@ export const pricing_data = {
 		"biannually":{
 			"basic_plan": {
 				"final": "1199",
-				"monthly_final": "100",
+				"monthly_final": "50",
 				"original": "1428",
 				"monthly_original": "119"
 			},
 			"advance_plan": {
 				"final": "1499",
-				"monthly_final": "125",
+				"monthly_final": "63",
 				"original": "1788",
 				"monthly_original": "149"
 			}
