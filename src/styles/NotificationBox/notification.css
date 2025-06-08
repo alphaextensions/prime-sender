@@ -2,7 +2,7 @@
     position: fixed;
     bottom: 20px;
     left: 20px;
-    z-index: 100000000;
+    z-index: 1000;
     background: var(--color-primary1);
     display: flex;
     max-width: 450px;

@@ -843,9 +843,10 @@
 
 .mult_error_message {
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 80px;
   color: red;
   text-align: center;
+  padding: 15px 0;
 }
 
 .multiple_acc_pricing_cards_container {
@@ -1070,6 +1071,13 @@
     left: 0;
     gap: 10px;
     width: 100%;
+}
+
+@media (max-width: 895px) {
+    .multiple_user_card {
+        position: relative;
+        padding-bottom: 80px;
+    }
 }
 .mult_account_buy_button{
     width: 70%;
