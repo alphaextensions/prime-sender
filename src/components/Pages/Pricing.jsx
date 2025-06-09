@@ -858,10 +858,31 @@ const Pricing = () => {
                 <div className="pay_via_bank_text">Bank Transfer and PayPal also available - <a href={getWhatsappLink("bank", "Basic")} target="_blank">Click here</a></div>
               }
               <div className="pricing_card_features">
-                <div className="pricing_card_feature">
+                {currentCountry !== "indonesia" && <div className="pricing_card_feature">
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text" style={{ fontWeight: "bold" }}>All Free Features</p>
-                </div>
+                </div>}
+                {currentCountry === "indonesia" && FreeCardFeatures.map((item, index) => (
+                    <div className="pricing_card_feature" key={`free-${index}`}>
+                      <AiOutlineCheck />
+                      <span
+                        className="pricing_feature_info_container"
+                        onMouseEnter={() => setFreeCardDetailHover(index)}
+                        onMouseLeave={() => setFreeCardDetailHover(-1)}
+                      >
+                        <span className="pricing_feature_name">{item.name}</span>
+                        <IoIosInformationCircleOutline className="feature_info_class" />
+                        <div
+                          className="navigation_outer_box_down navigation_container"
+                          hidden={freeCardDetailHover !== index}
+                        >
+                          <div className="msg-box-down">
+                            <p>{item.description}</p>
+                          </div>
+                        </div>
+                      </span>
+                    </div>
+                  ))}
                 {
                   basicCardFeatures.map((item, index) => {
                     return <div key={index} className="pricing_card_feature">
@@ -922,7 +943,7 @@ const Pricing = () => {
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
                   <AiOutlineCheck />
-                  <p className="pricing_card_feature_text" style={{ fontWeight: "bold" }}>All Basic Features</p>
+                  <p className="pricing_card_feature_text" style={{ fontWeight: "bold" }}>{ currentCountry === "indonesia" ?'All Free Features' : 'All Basic Features'}</p>
                 </div>
                 {
                   advanceCardFeatures.map((item, index) => {
