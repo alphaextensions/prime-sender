@@ -780,7 +780,7 @@ const Pricing = () => {
             <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
                 <img src="/images/signal-basic.png" alt="Basic plan icon" />
-                <p>Basic</p>
+                <p>{ currentCountry !== "indonesia" ? 'Basic' : 'Free'}</p>
               </div>
               <div className="pricing_card_price">
                 <div className="pricing_card_price_div">
@@ -1082,7 +1082,7 @@ const Pricing = () => {
                   <tr>
                     <th></th>
                     {currentCountry !== "indonesia" && <th>Free</th>}
-                    <th>Basic</th>
+                    <th> {currentCountry !== "indonesia" ? "Basic" : "Free"}</th>
                     <th>Advance</th>
                   </tr>
                 </thead>
