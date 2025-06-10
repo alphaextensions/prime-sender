@@ -364,11 +364,13 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 5px;
+    margin: 10px 0;
+    padding: 5px 0;
 }
 
 .slider_discount_text img {
-    width: 25px;
+    width: 30px;
+    margin: 0 10px;
 }
 
 .top-pricing-slider .country_switch {

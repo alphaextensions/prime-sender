@@ -33,9 +33,70 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 		temp[index] = `+${dialCode}-${e.target.value}`;
 		setPhoneNumbers(temp);
 	}
+	
+	const getCountryPlaceholder = (countryCode) => {
+		const placeholders = {
+			'in': '9876543210', // India
+			'us': '2025550123', // United States
+			'gb': '7911123456', // United Kingdom
+			'eg': '1001234567', // Egypt (with extra zero)
+			'sa': '512345678', // Saudi Arabia
+			'ae': '501234567', // UAE
+			'sg': '81234567', // Singapore
+			'my': '123456789', // Malaysia
+			'id': '812345678', // Indonesia
+			'ca': '2042345678', // Canada
+			'au': '412345678', // Australia
+			'de': '15112345678', // Germany
+			'fr': '612345678', // France
+			'it': '3123456789', // Italy
+			'es': '612345678', // Spain
+			'ru': '9123456789', // Russia
+			'br': '11987654321', // Brazil
+			'mx': '5512345678', // Mexico
+			'za': '711234567', // South Africa
+			'ng': '8012345678', // Nigeria
+			'ke': '712345678', // Kenya
+		};
+		return placeholders[countryCode?.toLowerCase()] || '1234567890';
+	}
 
 	const handleCountryCodeChange = ({ code }) => {
 		setDialCode(code);
+		const phoneInput = document.querySelector('.selected-flag');
+		if (phoneInput) {
+			const title = phoneInput.getAttribute('title');
+			if (title) {
+				const countryName = title.split(':')[0].trim().toLowerCase();
+				const countryMap = {
+					'india': 'in',
+					'united states': 'us',
+					'united kingdom': 'gb',
+					'egypt': 'eg',
+					'saudi arabia': 'sa',
+					'united arab emirates': 'ae',
+					'singapore': 'sg',
+					'malaysia': 'my',
+					'indonesia': 'id',
+					'canada': 'ca',
+					'australia': 'au',
+					'germany': 'de',
+					'france': 'fr',
+					'italy': 'it',
+					'spain': 'es',
+					'russia': 'ru',
+					'brazil': 'br',
+					'mexico': 'mx',
+					'south africa': 'za',
+					'nigeria': 'ng',
+					'kenya': 'ke'
+				};
+				if (countryMap[countryName]) {
+					setCountryCode(countryMap[countryName]);
+				}
+			}
+		}
+		
 		let number = phoneNumbers[index]?.split('-')[1] || "";
 		let temp = [...phoneNumbers];
 		temp[index] = `+${code}-${number}`;
@@ -52,7 +113,13 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 					value={dialCode}
 					onChange={code => handleCountryCodeChange({ code })}
 				/>
-				<input type="number" className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
+				<input 
+					type="number" 
+					className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} 
+					value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} 
+					placeholder={getCountryPlaceholder(countryCode)}
+					onChange={handleNumberChange} 
+				/>
 				{
 					value > 2 &&
 					<div 

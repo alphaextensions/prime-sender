@@ -735,6 +735,7 @@ const Pricing = () => {
                   </a>
                 </button>
               </div>
+              <div className="pay_via_upi_text" style={{ visibility: 'hidden' }}> <span>C</span></div>
 
               <div className="pricing_card_features">
                 {
