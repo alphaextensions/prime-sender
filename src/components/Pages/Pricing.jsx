@@ -777,9 +777,9 @@ const Pricing = () => {
               </div>
             </div>
             {/* basic card */}
-            <div className={`pricing_card premium_card ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
+            <div className={`pricing_card ${currentCountry !== "indonesia" && 'premium_card'} ${isPricingCardHovered == "basic" && 'pricing_card_hover'}`} onMouseEnter={() => setIsPricingCardHovered("basic")} onMouseLeave={() => setIsPricingCardHovered("")}>
               <div className="pricing_card_type">
-                <img src="/images/signal-basic.png" alt="Basic plan icon" />
+                {currentCountry === "indonesia" ?  <img src="/images/signal-free.png" alt="Free plan icon" /> : <img src="/images/signal-basic.png" alt="Basic plan icon" />}
                 <p>{ currentCountry !== "indonesia" ? 'Basic' : 'Free'}</p>
               </div>
               <div className="pricing_card_price">
@@ -862,7 +862,7 @@ const Pricing = () => {
                   <AiOutlineCheck />
                   <p className="pricing_card_feature_text" style={{ fontWeight: "bold" }}>All Free Features</p>
                 </div>}
-                {currentCountry === "indonesia" && FreeCardFeatures.map((item, index) => (
+                {currentCountry === "indonesia" && FreeCardFeatures.filter(item => item.name !== 'Save Message Template').map((item, index) => (
                     <div className="pricing_card_feature" key={`free-${index}`}>
                       <AiOutlineCheck />
                       <span
@@ -882,9 +882,9 @@ const Pricing = () => {
                         </div>
                       </span>
                     </div>
-                  ))}
+                ))}
                 {
-                  basicCardFeatures.map((item, index) => {
+                  basicCardFeatures.filter(item => (item.name !== "No minimum time gap" && currentCountry === "indonesia") || currentCountry !== "indonesia").map((item, index) => {
                     return <div key={index} className="pricing_card_feature">
                       <AiOutlineCheck />
                       <span className={`pricing_feature_info_container`} onMouseEnter={() => setBasicCardDetailHover(index)} onMouseLeave={() => setBasicCardDetailHover(-1)}>
@@ -990,9 +990,9 @@ const Pricing = () => {
                   <div className="right_line"></div>
                 </div>
                 {/* basic/advance switch */}
-                <div className="pricing_country background-royal">
+                <div className="pricing_country background-royal" style={{display:`${currentCountry === "indonesia" ? "none" : "flex" }`}}>
                   <div className="pricing_country_switch">
-                    <div className={`country_switch ${pricingCalculatorPlan == 'basic' && 'active_country_class'}`} style={{display:`${currentCountry === "indonesia" ? "none" : "flex" }`}} onClick={()=> setPricingCalculatorPlan("basic")}>
+                    <div className={`country_switch ${pricingCalculatorPlan == 'basic' && 'active_country_class'}`} onClick={()=> setPricingCalculatorPlan("basic")}>
                       <p className="country_current_switch plan_switch">
                         Basic
                       </p>
@@ -1108,7 +1108,12 @@ const Pricing = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {pricingFeatures.map((feature, index) => (
+                  {pricingFeatures.filter(item => {
+                      if (currentCountry === "indonesia") {
+                        return item.name !== "Save Message Template" && item.name !== "No minimum time gap";
+                      }
+                      return true;
+                    }).map((feature, index) => (
                     <tr key={index}>
                       <th>
                         <span className={`pricing_feature_info_container`} onMouseEnter={() => setFeatureDetailHover(index)} onMouseLeave={() => setFeatureDetailHover(-1)}>

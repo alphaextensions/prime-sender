@@ -660,6 +660,7 @@
 .pricing_table thead td {
   color: var(--color-secondary3);
   font-size: 22px;
+  text-align: left;
   font-weight: 600 !important;
 }
 
@@ -1113,6 +1114,11 @@
     font-weight: bold;
 }
 
+.indonesia_pricing_card{
+  grid-template-columns: repeat(3, 340px);
+  justify-content: center;
+}
+
 
 @media (max-width: 1280px) {
   .pricing_cards_container{
@@ -1417,7 +1423,3 @@
   font-family: 'PT Sans Caption' !important;
 }
 
-.indonesia_pricing_card{
-  grid-template-columns: repeat(3, 340px);
-  justify-content: center;
-}
