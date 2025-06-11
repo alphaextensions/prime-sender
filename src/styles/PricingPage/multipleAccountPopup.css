@@ -207,6 +207,12 @@
 	-webkit-appearance: none;
 	margin: 0;
 }
+
+.mult_number_input::placeholder {
+    color: #4b4b4b;
+    opacity: 0.8;
+}
+
 .number_input_remov_button{
 	display: flex;
 	justify-content: center;
@@ -424,6 +430,15 @@
     background: #d9d9d9;
     border-color: #d9d9d9;
     pointer-events: none;
+}
+
+/* Hide search bar of intl-tel-input dropdown */
+.iti__search-input {
+    display: none !important;
+}
+/* Remove extra top padding introduced by hidden search */
+.iti__country-list {
+    padding-top: 0 !important;
 }
 
 @keyframes slideOut {
