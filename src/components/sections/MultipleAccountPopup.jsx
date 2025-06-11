@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../styles/PricingPage/multipleAccountPopup.css';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input/build/css/intlTelInput.css'
+import intlTelInputUtils from 'intl-tel-input/build/js/utils';
+if (typeof window !== 'undefined' && intlTelInputUtils) {
+  window.intlTelInputUtils = intlTelInputUtils;
+}
 import { Oval } from 'react-loader-spinner';
 import { IoIosInformationCircleOutline, IoIosRemoveCircleOutline, IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,62 +19,147 @@ const validateUserEmail = (email) => {
 }
 
 const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers,myLocation }) => {
-    const [dialCode, setDialCode] = useState(() => {
-        let existingPhone = phoneNumbers[index] || "";
-        if (existingPhone.length > 0) {
-            const match = existingPhone.match(/\+(\d+)-/);
-            if (match) return match[1];
+    const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
+    const telRef = useRef(null);
+    const prevScrollRef = useRef(null);
+
+    useEffect(() => {
+        const iti = intlTelInput(telRef.current, {
+            separateDialCode: true,
+            autoHideDialCode: true,
+            initialCountry: (myLocation?.country_code || 'auto').toLowerCase(),
+            geoIpLookup: (success) => success((myLocation?.country_code || 'us').toLowerCase()),
+            autoPlaceholder: 'aggressive',
+            placeholderNumberType: 'MOBILE',
+        });
+
+        const setPlaceholder = () => {
+            const data = iti.getSelectedCountryData();
+            const utils = window.intlTelInputUtils;
+            let placeholder = '';
+
+            if (utils && data?.iso2) {
+                try {
+                    const exampleNumber = utils.getExampleNumber(
+                        data.iso2.toUpperCase(),
+                        true,
+                        utils.numberType.MOBILE
+                    );
+                    placeholder = utils.formatNumber(
+                        exampleNumber,
+                        data.iso2.toUpperCase(),
+                        utils.numberFormat.NATIONAL
+                    );
+                } catch (e) { console.error(e) }
+            }
+
+            if (!placeholder && typeof iti.getNumberPlaceholder === 'function') {
+                try {
+                    placeholder = iti.getNumberPlaceholder('MOBILE');
+                } catch (e) { console.error(e) }
+            }
+
+            if (placeholder) {
+                placeholder = placeholder.replace(/\s+/g, '');
+                placeholder = placeholder.replace(/^0+/, '');    
+            }
+            telRef.current.setAttribute('placeholder', placeholder || '');
+        };
+        setPlaceholder();
+
+        if (iti.promise) {
+            iti.promise.then(setPlaceholder).catch(() => {});
         }
-        return (myLocation.countryCallingCode?.split('+')[1]) || "1";
-    });
-	const [countryCode, setCountryCode] = useState(() => {
-        return (dialCode == "1") ? "us" :  myLocation.country_code.toLowerCase();
-    });
-	const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
 
-	const handleNumberChange = (e) => {
-		let temp = [...phoneNumbers];
-		temp[index] = `+${dialCode}-${e.target.value}`;
-		setPhoneNumbers(temp);
-	}
+        const updateNumber = () => {
+            const data = iti.getSelectedCountryData();
+            const dial = data?.dialCode || '';
+            const digits = telRef.current.value.replace(/\D/g, '');
+            const national = digits.startsWith(dial) ? digits.slice(dial.length) : digits;
+            let temp = [...phoneNumbers];
+            temp[index] = `+${dial}-${national}`;
+            setPhoneNumbers(temp);
+        };
 
-	const handleCountryCodeChange = ({ code }) => {
-		setDialCode(code);
-		let number = phoneNumbers[index]?.split('-')[1] || "";
-		let temp = [...phoneNumbers];
-		temp[index] = `+${code}-${number}`;
-		setPhoneNumbers(temp);
-	}
+        const onCountryChange = () => setPlaceholder();
 
-	return <div className={`number_component_container ${removeNumberIndex==index ?'slide_out':''}`}>
-		<div className='number_component_number'>
-			<div className='number_component_line'></div>
-			<div className='number_component_circle'>{index + 1}</div>
-			<div className='numer_component_number_input'>
-				<PhoneInput
-					country={countryCode}
-					value={dialCode}
-					onChange={code => handleCountryCodeChange({ code })}
-				/>
-				<input type="number" className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
-				{
-					value > 2 &&
-					<div 
-						className='number_input_remov_button' 
-						onClick={() => {
-							setRemoveNumberIndex(index);
-							setTimeout(() => {
-								setRemoveNumberIndex(null);
-								valueChangeHandler(value - 1, index)
-							}, 500)
-						}}
-					>
-						<p><IoIosRemoveCircleOutline/></p>
-					</div>
-				}
-			</div>
-		</div>
-	</div>
+        telRef.current.addEventListener('input', updateNumber);
+        telRef.current.addEventListener('countrychange', onCountryChange);
+
+        const onDropdownOpen = () => {
+            const container = telRef.current.closest('.numbers_input_section');
+            if (!container) return;
+            if (prevScrollRef.current === null || prevScrollRef.current === undefined) {
+                prevScrollRef.current = container.scrollTop;
+            }
+
+            const contRect = container.getBoundingClientRect();
+            const inputRect = telRef.current.getBoundingClientRect();
+
+            const visibleOffset = inputRect.top - contRect.top; 
+            const desiredOffset = container.clientHeight / 2 - inputRect.height / 2;
+            const delta = visibleOffset - desiredOffset;
+
+            if (Math.abs(delta) > 2) { 
+                const newScroll = Math.min(
+                    Math.max(container.scrollTop + delta, 0),
+                    container.scrollHeight - container.clientHeight
+                );
+                container.scrollTop = newScroll;
+            }
+        };
+        const onDropdownClose = () => {
+            const container = telRef.current.closest('.numbers_input_section');
+            if (container && prevScrollRef.current !== null && prevScrollRef.current !== undefined) {
+                container.scrollTop = prevScrollRef.current;
+                prevScrollRef.current = null;
+            }
+        };
+
+        telRef.current.addEventListener('open:countrydropdown', onDropdownOpen);
+        telRef.current.addEventListener('close:countrydropdown', onDropdownClose);
+        telRef.current.addEventListener('focus', onDropdownOpen);
+        telRef.current.addEventListener('blur', onDropdownClose);
+
+        return () => {
+            telRef.current?.removeEventListener('input', updateNumber);
+            telRef.current?.removeEventListener('countrychange', onCountryChange);
+            telRef.current?.removeEventListener('open:countrydropdown', onDropdownOpen);
+            telRef.current?.removeEventListener('close:countrydropdown', onDropdownClose);
+            telRef.current?.removeEventListener('focus', onDropdownOpen);
+            telRef.current?.removeEventListener('blur', onDropdownClose);
+            iti.destroy();
+        };
+    }, []);
+
+    return <div className={`number_component_container ${removeNumberIndex==index ?'slide_out':''}`}>
+        <div className='number_component_number'>
+            <div className='number_component_line'></div>
+            <div className='number_component_circle'>{index + 1}</div>
+            <div className='numer_component_number_input'>
+                <input 
+                    type="tel" 
+                    ref={telRef}
+                    className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} 
+                />
+                {
+                    value > 2 &&
+                    <div 
+                        className='number_input_remov_button' 
+                        onClick={() => {
+                            setRemoveNumberIndex(index);
+                            setTimeout(() => {
+                                setRemoveNumberIndex(null);
+                                valueChangeHandler(value - 1, index)
+                            }, 500)
+                        }}
+                    >
+                        <p><IoIosRemoveCircleOutline/></p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 }
 const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry,currentCountry, myLocation }) => {
 	const { setCheckoutData } = useContext(CheckoutContext);
