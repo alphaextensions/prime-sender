@@ -19,9 +19,10 @@ const validateUserEmail = (email) => {
 }
 
 const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers,myLocation }) => {
-    const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
     const telRef = useRef(null);
     const prevScrollRef = useRef(null);
+    const itiRef = useRef(null);
+    const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
 
     useEffect(() => {
         const iti = intlTelInput(telRef.current, {
@@ -32,6 +33,13 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             autoPlaceholder: 'aggressive',
             placeholderNumberType: 'MOBILE',
         });
+        itiRef.current = iti;
+        if (phoneNumbers[index]) {
+            const stored = phoneNumbers[index].replace('-', ''); 
+            try {
+                iti.setNumber(stored);
+            } catch (e) { console.error(e) }
+        }
 
         const setPlaceholder = () => {
             const data = iti.getSelectedCountryData();
@@ -57,11 +65,15 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
                 try {
                     placeholder = iti.getNumberPlaceholder('MOBILE');
                 } catch (e) { console.error(e) }
+                if (placeholder) {
+                    placeholder = placeholder.replace(/[^0-9]+/g, '');
+                    placeholder = placeholder.replace(/^0+/, '');
+                }
             }
 
             if (placeholder) {
-                placeholder = placeholder.replace(/\s+/g, '');
-                placeholder = placeholder.replace(/^0+/, '');    
+                placeholder = placeholder.replace(/[^0-9]+/g, '');
+                    placeholder = placeholder.replace(/^0+/, '');
             }
             telRef.current.setAttribute('placeholder', placeholder || '');
         };
@@ -72,13 +84,17 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
         }
 
         const updateNumber = () => {
-            const data = iti.getSelectedCountryData();
+            if (!itiRef.current) return;
+            const data = itiRef.current.getSelectedCountryData();
             const dial = data?.dialCode || '';
             const digits = telRef.current.value.replace(/\D/g, '');
-            const national = digits.startsWith(dial) ? digits.slice(dial.length) : digits;
-            let temp = [...phoneNumbers];
-            temp[index] = `+${dial}-${national}`;
-            setPhoneNumbers(temp);
+            let national = digits.startsWith(dial) ? digits.slice(dial.length) : digits;
+            const formatted = national.length ? `+${dial}-${national}` : '';
+            setPhoneNumbers(prev => {
+                const arr = [...prev];
+                arr[index] = formatted;
+                return arr;
+            });
         };
 
         const onCountryChange = () => setPlaceholder();
@@ -137,10 +153,19 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             <div className='number_component_line'></div>
             <div className='number_component_circle'>{index + 1}</div>
             <div className='numer_component_number_input'>
-                <input 
-                    type="tel" 
+                <input
+                    type="number"
+                    inputMode="numeric"
+                    step="1"
+                    pattern="[0-9]*"
                     ref={telRef}
-                    className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} 
+                    className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`}
+                    onWheel={e => e.target.blur()}
+                    onKeyDown={e => {
+                        if (["e", "E", "+", "-", "."].includes(e.key)) {
+                            e.preventDefault();
+                        }
+                    }}
                 />
                 {
                     value > 2 &&
@@ -162,6 +187,14 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
     </div>
 }
 const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry,currentCountry, myLocation }) => {
+    useEffect(() => {
+        const saved = JSON.parse(localStorage.getItem("phoneNumbers"));
+        if (saved && Array.isArray(saved) && saved.length && (!phoneNumbers || phoneNumbers.length === 0 || phoneNumbers.every(n => !n))) {
+            setPhoneNumbers(saved);
+            setValue(saved.length);
+        }
+    }, []);
+
 	const { setCheckoutData } = useContext(CheckoutContext);
 	const numbersContainerRef = useRef(null);
 	const navigate = useNavigate();
@@ -260,23 +293,19 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			return false;
 		}
 
-		// validate user phone number
-		let isInputErrorPresent = false, errorNumbers = [];
-		for(let i=0; i<phoneNumbers.length; i++) {
-			if(!phoneNumbers[i] || phoneNumbers[i]=='') {
-				isInputErrorPresent = true;
-				setNumberInputError(true);
-				errorNumbers.push(i);
-			} else if(phoneNumbers[i].split('-')[1]=='') {
-				isInputErrorPresent = true;
-				setNumberInputError(true);
-				errorNumbers.push(i);
-			}
-		}
-		setInputErrorNumbers(errorNumbers);
+        const phoneRegex = /^\+\d+-\d+$/;
+        let isInputErrorPresent = false, errorNumbers = [];
+        for (let i = 0; i < value; i++) {
+            const entry = phoneNumbers[i];
+            if (!entry || !phoneRegex.test(entry)) {
+                isInputErrorPresent = true;
+                setNumberInputError(true);
+                errorNumbers.push(i);
+            }
+        }
+        setInputErrorNumbers(errorNumbers);
 		if(isInputErrorPresent) {
 			toast("Please enter a valid phone number", {theme: 'colored', type:'error', autoClose:3000 });
-			// scroll to the first number with error
 			let firstErrorInput = document.querySelectorAll('.mult_number_input')[errorNumbers[0]];
 			if(firstErrorInput) {
 				firstErrorInput.scrollIntoView({behavior:"smooth", block:"center"});
@@ -431,7 +460,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 												phoneNumbers={phoneNumbers}
 												setPhoneNumbers={setPhoneNumbers}
 												index={index}
-												key={index}
+												key={`num-${index}-${value}` }
 												value={value}
 												valueChangeHandler={valueChangeHandler}
 												numberInputError={numberInputError}
