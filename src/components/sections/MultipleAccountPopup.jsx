@@ -103,6 +103,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
         telRef.current.addEventListener('countrychange', onCountryChange);
 
         const onDropdownOpen = () => {
+            if (!telRef.current) return;
             const container = telRef.current.closest('.numbers_input_section');
             if (!container) return;
             if (prevScrollRef.current === null || prevScrollRef.current === undefined) {
@@ -125,6 +126,7 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             }
         };
         const onDropdownClose = () => {
+            if (!telRef.current) return;
             const container = telRef.current.closest('.numbers_input_section');
             if (container && prevScrollRef.current !== null && prevScrollRef.current !== undefined) {
                 container.scrollTop = prevScrollRef.current;
@@ -154,9 +156,8 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             <div className='number_component_circle'>{index + 1}</div>
             <div className='numer_component_number_input'>
                 <input
-                    type="number"
+                    type="tel"
                     inputMode="numeric"
-                    step="1"
                     pattern="[0-9]*"
                     ref={telRef}
                     className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`}
@@ -165,6 +166,10 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
                         if (["e", "E", "+", "-", "."].includes(e.key)) {
                             e.preventDefault();
                         }
+                    }}
+                    onInput={e => {
+                        // Remove any non-numeric characters
+                        e.target.value = e.target.value.replace(/[^0-9]/g, '');
                     }}
                 />
                 {
