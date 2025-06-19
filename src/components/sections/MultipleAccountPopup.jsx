@@ -32,6 +32,8 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             geoIpLookup: (success) => success((myLocation?.country_code || 'us').toLowerCase()),
             autoPlaceholder: 'aggressive',
             placeholderNumberType: 'MOBILE',
+            customContainer: 'iti',
+            dropdownContainer: document.body,
         });
         itiRef.current = iti;
         if (phoneNumbers[index]) {
@@ -109,21 +111,6 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             if (prevScrollRef.current === null || prevScrollRef.current === undefined) {
                 prevScrollRef.current = container.scrollTop;
             }
-
-            const contRect = container.getBoundingClientRect();
-            const inputRect = telRef.current.getBoundingClientRect();
-
-            const visibleOffset = inputRect.top - contRect.top; 
-            const desiredOffset = container.clientHeight / 2 - inputRect.height / 2;
-            const delta = visibleOffset - desiredOffset;
-
-            if (Math.abs(delta) > 2) { 
-                const newScroll = Math.min(
-                    Math.max(container.scrollTop + delta, 0),
-                    container.scrollHeight - container.clientHeight
-                );
-                container.scrollTop = newScroll;
-            }
         };
         const onDropdownClose = () => {
             if (!telRef.current) return;
@@ -136,16 +123,12 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
 
         telRef.current.addEventListener('open:countrydropdown', onDropdownOpen);
         telRef.current.addEventListener('close:countrydropdown', onDropdownClose);
-        telRef.current.addEventListener('focus', onDropdownOpen);
-        telRef.current.addEventListener('blur', onDropdownClose);
 
         return () => {
             telRef.current?.removeEventListener('input', updateNumber);
             telRef.current?.removeEventListener('countrychange', onCountryChange);
             telRef.current?.removeEventListener('open:countrydropdown', onDropdownOpen);
             telRef.current?.removeEventListener('close:countrydropdown', onDropdownClose);
-            telRef.current?.removeEventListener('focus', onDropdownOpen);
-            telRef.current?.removeEventListener('blur', onDropdownClose);
             iti.destroy();
         };
     }, []);
