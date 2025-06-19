@@ -7,7 +7,7 @@ export default [
     description: "Broadcast to multiple chats at once, effortlessly scaling your communication. No need for template approvals and extra fees.",
   },
   {
-    name: 'Attachment',
+    name: 'Send Attachments',
     free: true,
     basic: true,
     advance: true,
