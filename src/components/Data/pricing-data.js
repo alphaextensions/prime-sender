@@ -111,7 +111,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "SGD ",
-		"currency_symbol": "SGD ",
+		"currency_symbol": "S$",
 		"annually": {
 			"basic_plan": {
 				"final": "239.99",
@@ -155,7 +155,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "EGP ",
-		"currency_symbol": "EGP ",
+		"currency_symbol": "ج.م",
 		"annually": {
 			"basic_plan": {
 				"final": "4399.99",
@@ -199,7 +199,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "ILS ",
-		"currency_symbol": "ILS ",
+		"currency_symbol": "₪",
 		"annually": {
 			"basic_plan": {
 				"final": "629.99",
@@ -243,7 +243,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "GBP ",
-		"currency_symbol": "GBP ",
+		"currency_symbol": "£",
 		"annually": {
 			"basic_plan": {
 				"final": "139.99",
@@ -287,7 +287,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "AED ",
-		"currency_symbol": "AED ",
+		"currency_symbol": "د.إ",
 		"annually": {
 			"basic_plan": {
 				"final": "629.99",
@@ -331,7 +331,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "SAR ",
-		"currency_symbol": "SAR ",
+		"currency_symbol": 'ر.س',
 		"annually": {
 			"basic_plan": {
 				"final": "569.99",
@@ -507,7 +507,7 @@ export const pricing_data = {
 			}
 		},
 		"currency": "IDR ",
-		"currency_symbol": "IDR ",
+		"currency_symbol": "Rp",
 		"annually": {
 			"basic_plan": {
 				"final": "790000",
