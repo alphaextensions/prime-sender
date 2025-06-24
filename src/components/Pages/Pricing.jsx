@@ -744,7 +744,7 @@ const Pricing = () => {
               <div className="pricing_card_price">
                 <div className="pricing_card_price_div">
                 <span className="display_flex_align_start">
-                  <span className={`${currentCountry === 'india' ? 'rupee' : ''}font15 marginTop3`}>{currentPrice.currency_symbol}</span>
+                  <span className={`${currentCountry === 'india' ? 'rupee' : ''} font15 marginTop3`}>{currentPrice.currency_symbol}</span>
                   {<span className="pricing_card_price_text">{0}</span>}
                 </span>
                 </div>
@@ -797,7 +797,7 @@ const Pricing = () => {
                   {
                     currentCountry !== "indonesia" ? (
                       <>
-                        <span className={`${currentCountry === 'india' ? 'rupee' : ''}font15 marginTop3`}>
+                        <span className={`${currentCountry === 'india' ? 'rupee' : ''} font15 marginTop3`}>
                           {currentPrice.currency_symbol}
                         </span>
                         <span className="pricing_card_price_text">
@@ -922,7 +922,7 @@ const Pricing = () => {
                 <div className="pricing_card_price">
                 <div className="pricing_card_price_div">
                 <span className="display_flex_align_start">
-                  <span className={`${currentCountry === 'india' ? 'rupee' : ''}font15 marginTop3`}>{currentPrice.currency_symbol}</span>
+                  <span className={`${currentCountry === 'india' ? 'rupee' : ''} font15 marginTop3`}>{currentPrice.currency_symbol}</span>
                   {<span className="pricing_card_price_text">{planPeriod === 'monthly' ? currentPrice.advance_plan.final : currentPrice.advance_plan.monthly_final}</span>}
                 </span>
                     <span className="pricing_slashed_price black_color_faded">
