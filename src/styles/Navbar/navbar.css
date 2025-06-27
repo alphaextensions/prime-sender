@@ -274,3 +274,109 @@
     width: 130px;
   }
 }
+
+/* Language Selector Styles */
+.language-selector {
+  position: relative;
+  margin-right: 15px;
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: rgba(0, 154, 136, 0.1);
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+  background-color: rgba(0, 154, 136, 0.2);
+}
+
+.language-icon {
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 120px;
+}
+
+.language-option {
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-option:hover {
+  background-color: rgba(0, 154, 136, 0.1);
+}
+
+.language-option.active {
+  background-color: rgba(0, 154, 136, 0.2);
+  font-weight: 600;
+}
+
+/* Mobile Language Selector */
+.mobile-language-selector {
+  padding: 15px 0;
+  border-top: 1px solid rgba(0, 154, 136, 0.2);
+  margin-top: 15px;
+}
+
+.mobile-language-selector h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.mobile-language-options {
+  display: flex;
+  gap: 10px;
+}
+
+.mobile-language-btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--color-primary);
+  background-color: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-language-btn.active {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 520px) {
+  .language-selector {
+    margin-right: 10px;
+  }
+  
+  .language-btn {
+    padding: 5px 8px;
+  }
+  
+  .language-btn span {
+    display: none;
+  }
+  
+  .language-icon {
+    margin-right: 0;
+  }
+}
