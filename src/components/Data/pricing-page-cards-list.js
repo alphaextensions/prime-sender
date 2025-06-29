@@ -4,7 +4,7 @@ export const FreeCardFeatures = [
     description: "Broadcast to multiple chats at once, effortlessly scaling your communication. No need for template approvals and extra fees.",
   },
   {
-    name: 'Attachment',
+    name: 'Send Attachments',
     description: "You can attach and send images, documents, videos, etc. along with your message to users",
   },
   {
