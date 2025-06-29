@@ -662,6 +662,7 @@
 .pricing_table thead td {
   color: var(--color-secondary3);
   font-size: 22px;
+  text-align: left;
   font-weight: 600 !important;
 }
 
@@ -746,6 +747,15 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #009a88;
+}
+
+.msg-box-down.multiple-card{
+  width: 200px;
+  padding: 10px 12px;
+}
+
+.msg-box-down.multiple-card p{
+  font-size: 12px;
 }
 
 .pricing_calculator_section{
@@ -1113,6 +1123,11 @@
     font-weight: bold;
 }
 
+.indonesia_pricing_card{
+  grid-template-columns: repeat(3, 340px);
+  justify-content: center;
+}
+
 
 @media (max-width: 1280px) {
   .pricing_cards_container{
@@ -1417,6 +1432,10 @@
 
 .driver-popover {
   z-index: 1000000000 !important;
+}
+
+.driver-popover-footer button{
+  font-family: 'PT Sans Caption' !important;
 }
 
 #driver-popover-title,

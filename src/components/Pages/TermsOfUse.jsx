@@ -99,7 +99,7 @@ function TermsOfUse() {
           <div className="term">
             <div className="term-title sub-heading">Refund Policy </div>
             <div className="term-content text">
-            We do not provide refunds unless the broadcasting feature has not been properly functional from our side for 7 days continuously
+            When you subscribe for a monthly plan, you yourself authorize to payment deduction each month. The service gets automatically and immediately enabled on the number you enter while purchasing. Our service has features which often are one time use so therefore, we do not provide refunds unless the broadcasting feature has not been properly functional from our side for 7 days continuously. Upon cancellation post purchase, the policy remains the same.
             </div>
           </div>
           <div className="term">
