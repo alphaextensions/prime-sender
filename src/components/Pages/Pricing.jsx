@@ -97,7 +97,6 @@ const Pricing = () => {
         isSuccess: false,
   });
   const [flagIconSrc, setFlagIconSrc] = useState('');
-  const [loading, setLoading] = useState(false);
   const [featureDetailHover, setFeatureDetailHover] = useState(-1);
   const [freeCardDetailHover, setFreeCardDetailHover] = useState(-1);
   const [basicCardDetailHover, setBasicCardDetailHover] = useState(-1);
@@ -106,7 +105,7 @@ const Pricing = () => {
   const [pricingCalculatorPeriod, setPricingCalculatorPeriod] = useState("annually");
   const [numAccounts, setNumAccounts] = useState(() => {
     const phoneNumbers = JSON.parse(localStorage.getItem('phoneNumbers')) || [];
-    return phoneNumbers.length || 2;
+    return phoneNumbers.length || 10;
   });
   const [multAccountPrice, setMultAccountPrice] = useState({ currency:'', price: '', totalPrice: '', cutPrice: ''});
   const [priceCalculatorLoader, setPriceCalculatorLoader] = useState(false);
@@ -374,20 +373,20 @@ const Pricing = () => {
             setIsMultipleAccountPage(true);
             setTimeout(() => {
                 if (scrollToPricingPopupRef.current) {
-                    const element = scrollToPricingPopupRef.current;
-                    const offset = window.innerHeight * 0.25;
-                    const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-                    window.scrollTo({
+                  const element = scrollToPricingPopupRef.current;
+                  const offset = 400;
+                  const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+                  window.scrollTo({
                       top: topPosition,
                       behavior: 'smooth'
                   });
                 } 
-            }, 400);
+            }, 10);
         }
+
     }
 
     function getUserLocation() {
-        setLoading(true);
         fetch('https://ipapi.co/json/')
             .then(res => {
                 if (!res.ok) throw new Error('Primary API failed');
@@ -403,7 +402,6 @@ const Pricing = () => {
                     .then((data) => handleLocationResponse(data.country_code, data.country))
                     .catch(fallbackErr => {
                         console.error('Both APIs failed.', fallbackErr);
-                        setLoading(false);
                     });
             });
     }
@@ -420,7 +418,6 @@ const Pricing = () => {
             dialCode = countryCodeToDialCode[country_code];
         }
 
-        console.log(country, currency, dialCode);
         setMyLocation({
             country_name: country_name,
             pricing_country_name: country,
@@ -429,7 +426,6 @@ const Pricing = () => {
             countryCallingCode: dialCode,
             isSuccess: true,
         });
-        setLoading(false);
     }
 
     function startTour(){
@@ -474,6 +470,10 @@ const Pricing = () => {
         ],
       };
       if(isTour){
+        window.scrollTo({
+          top: "1px",
+          behavior: 'smooth'
+        });
         driver(accountObj).drive()
       }
     }
@@ -541,12 +541,10 @@ const Pricing = () => {
 
     useEffect(() => {
         checkIfMultipleAccountPage();
-        setLoading(true);
         getParams();
         getUserLocation();
         getPricingDataFromDatabase();
         startTour();
-        console.log(isMultipleAccountPage)
     }, [])
 
     useEffect(() => {
@@ -661,7 +659,19 @@ const Pricing = () => {
           <div className="pricing_top_section">
             <SectionTitle gif="/gifs/pricing-title.gif" title="Simple, Affordable Pricing" />
             <div className="pricing_switches">
-              {!loading && countrySwitchComponent()}
+              <div className="pricing_country_text">
+                <p className="heading">
+                  Pricing curated just for you
+                  {(myLocation && myLocation.isSuccess) &&
+                    <>
+                      <span>,</span>
+                      <img src={flagIconSrc} alt="flag" />
+                      <span className="country_name">{myLocation.country_name}</span>
+                    </>   
+                  }
+                  !
+                </p>
+              </div>
               <div className={`pricing-slider top-pricing-slider`}>
                 <div className={`pricing_country ${isMultipleAccountPage?"display_none":""}`}>
                   <div className="pricing_country_switch">
