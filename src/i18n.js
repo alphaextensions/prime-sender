@@ -147,9 +147,9 @@ const resources = {
               "Replicating Content",
               "Using a browser or border environment around the Content",
               "Implying in any fashion that <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> or any of its affiliates endorse it or its products",
-              "Misrepresenting any state of facts, including its relationship with <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> or any of the <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> affiliates",
-              "Presenting false information about <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> products or services",
-              "Using any logo or mark of <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> or any of its affiliates, without express written permission from <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>"
+              "Deturpar qualquer estado de fatos, incluindo seu relacionamento com o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou qualquer uma das afiliadas do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>",
+              "Apresentar informações falsas sobre os produtos ou serviços do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>",
+              "Usar qualquer logotipo ou marca do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou de qualquer uma de suas afiliadas, sem permissão por escrito expressa do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>"
             ]
           }
         },
@@ -197,6 +197,16 @@ const resources = {
         planTransferPolicy: {
           title: "Plan Transfer Policy",
           content: "If a user has entered the wrong number during purchase, they can transfer their premium plan to a different number within 7 days of purchase via the dashboard. Each plan is eligible for a one-time transfer only. Transfers are not allowed after 7 days or if the plan has already been transferred."
+        },
+        customersTitle: 'What Customers Are Saying',
+        viewAll: 'View All',
+        reviews: {
+          r1: { heading: 'This is crazy', review: 'The best application, really helps my work, the application is simple, easy to use, admin respond quickly when there are problems. The monthly subscription fee is affordable, thank you Prime Sender team.', name: 'EKO WICAKSONO' },
+          r2: { heading: 'Very Helpful', review: 'I run a small business in Indonesia and this helped me a lot to get new customers. Not many chrome extensions are useful but this one is very good, Thank You!', name: 'David' },
+          r3: { heading: 'Amazing', review: 'Very easy to understand and use, unlike other complicated software. What surprised me is that during operation I wanted to know more, messaged their support team, and got a very quick reply.', name: 'Joel Peterson' },
+          r4: { heading: 'Highly Recommended!', review: 'So far, seems to be completely free. You can send a bulk message to hundreds of contacts very easily and quickly. Saves a ton of time!! Especially the function for importing contacts from a spreadsheet.', name: 'Phillipe Kenny' },
+          r5: { heading: 'Thanks Prime Sender!', review: 'This extension is helping our company a lot to get in touch with many leads. Really helpful in mass messaging and offers announcement. Overall it is a perfect tool for mass sending messages, I love it.', name: 'Alexandre Farias' },
+          r6: { heading: 'Thank you Alpha', review: 'Premium features are great, the admin is very helpful. Emails get responses within 24hrs. Adjustment request was done within few hours after sending an email to Alpha extensions.', name: 'Danush Rao' }
         }
       },
       navbar: {
@@ -207,6 +217,7 @@ const resources = {
         blogs: 'Blogs',
         login: 'Login',
         language: 'Language',
+        freeDownload: 'Free Download',
       },
       blogs: {
         sectionTitle: 'Blogs',
@@ -395,9 +406,18 @@ const resources = {
         numbersTitle: 'Our Numbers Speak For Themselves',
         userRatings: 'User Ratings',
         users: 'Users',
+        rank: 'Rank',
         rankText: 'Sender on Web Store',
         customersTitle: 'What Customers Are Saying',
-        viewAll: 'View All'
+        viewAll: 'View All',
+        reviews: {
+          r1: { heading: 'This is crazy', review: 'The best application, really helps my work, the application is simple, easy to use, admin respond quickly when there are problems. The monthly subscription fee is affordable, thank you Prime Sender team.', name: 'EKO WICAKSONO' },
+          r2: { heading: 'Very Helpful', review: 'I run a small business in Indonesia and this helped me a lot to get new customers. Not many chrome extensions are useful but this one is very good, Thank You!', name: 'David' },
+          r3: { heading: 'Amazing', review: 'Very easy to understand and use, unlike other complicated software. What surprised me is that during operation I wanted to know more, messaged their support team, and got a very quick reply.', name: 'Joel Peterson' },
+          r4: { heading: 'Highly Recommended!', review: 'So far, seems to be completely free. You can send a bulk message to hundreds of contacts very easily and quickly. Saves a ton of time!! Especially the function for importing contacts from a spreadsheet.', name: 'Phillipe Kenny' },
+          r5: { heading: 'Thanks Prime Sender!', review: 'This extension is helping our company a lot to get in touch with many leads. Really helpful in mass messaging and offers announcement. Overall it is a perfect tool for mass sending messages, I love it.', name: 'Alexandre Farias' },
+          r6: { heading: 'Thank you Alpha', review: 'Premium features are great, the admin is very helpful. Emails get responses within 24hrs. Adjustment request was done within few hours after sending an email to Alpha extensions.', name: 'Danush Rao' }
+        }
       },
       solutions: {
         sectionTitle: 'Supercharge your communication for your business',
@@ -416,6 +436,7 @@ const resources = {
         sectionSubtitle: 'Choose the plan that works best for you',
         save: 'Save',
         buy: 'Buy',
+        subscribe: 'Subscribe',
         billedFor12Months: 'Billed for 12 months',
         upiTransferOnlyAvailableForAnnualPlans: 'UPI transfer only available for annual plans',
         userPerMonth: '/user/month',
@@ -434,6 +455,11 @@ const resources = {
         '24Months': '24 Months',
         purchasePlanToSave: 'Purchase a {{months}} months plan to save <bold>{{percentage}}</bold> for the whole year',
         tryNow: 'Try Now',
+        earlyBird: {
+          prefix: 'Early bird offer for new user -',
+          bold: 'Extra 30% OFF.',
+          useCode: 'Use code'
+        },
         allFreeFeatures: 'All Free Features',
         allBasicFeatures: 'All Basic Features',
         wantToPayViaUPI: 'Want to pay via UPI?',
@@ -648,7 +674,22 @@ const resources = {
         }
      
       
-      }
+      },
+      contact: {
+        pageTitle: 'Contact Us | Prime Sender - Free AI Web Message Sender',
+        pageDescription: 'Contact Us at Prime Sender',
+        pageKeywords: 'contact,prime sender contact page, prime sender support',
+        sectionTitle: 'Contact Us',
+        nameLabel: 'Name',
+        emailLabel: 'Email',
+        contactNoLabel: 'Contact No',
+        messageLabel: 'Message',
+        phoneError: 'Phone number must be at least 10 characters long',
+        sendMessage: 'Send Message'
+      },
+      chatSupport: {
+        tooltip: 'Hey! Can I help you?'
+      },
     },
   },
   pt: {
@@ -766,11 +807,11 @@ const resources = {
         },
         modifications: {
           title: "Modificações",
-          content: "O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode revisar e atualizar estes Termos de Uso a qualquer momento. O seu uso contínuo do Prime Sender após quaisquer alterações nestes Termos de Uso será considerado como aceitação de tais alterações. Qualquer aspecto do Prime Sender pode ser alterado, complementado, excluído ou atualizado sem aviso prévio, a critério exclusivo do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> também pode alterar ou impor taxas para produtos e serviços fornecidos através do Prime Sender a qualquer momento, a seu exclusivo critério. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode estabelecer ou alterar, a qualquer momento, práticas e restrições gerais relativas a outros produtos e serviços do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> a seu exclusivo critério. Aviso de Privacidade do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> Com relação a qualquer indivíduo cujas informações pessoais sejam fornecidas por Você ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, Você declara ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> que obteve todos os consentimentos necessários para o processamento de tais informações pessoais previstas pelos Serviços."
+          content: "O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode revisar e atualizar estes Termos de Uso a qualquer momento. O seu uso contínuo do Prime Sender após quaisquer alterações nestes Termos de Uso será considerado como aceitação de tais alterações. Qualquer aspecto do Prime Sender pode ser alterado, complementado, excluído ou atualizado sem aviso prévio, a critério exclusivo do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> também pode alterar ou impor taxas para produtos e serviços fornecidos através do Prime Sender a qualquer momento, a seu exclusivo critério. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode estabelecer ou alterar, a qualquer momento, práticas e restrições gerais relativas a outros produtos e serviços do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> a seu exclusivo critério. Aviso de Privacidade do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> Com relação a qualquer indivíduo cujas informações pessoais sejam fornecidas por Você ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, Você declara ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> que You have obtained all necessary consents for the processing of such personal information contemplated by the Services."
         },
         licenseAndOwnership: {
           title: "Licença e Propriedade",
-          content: "Quaisquer e todos os direitos de propriedade intelectual (\"Propriedade Intelectual\") associados ao Prime Sender e seus conteúdos (o \"Conteúdo\") são de propriedade exclusiva do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, suas afiliadas ou terceiros. O Conteúdo é protegido por leis de Propriedade Intelectual e outras leis tanto na Índia quanto em outros países. Elementos do Prime Sender também são protegidos por nome comercial, segredo comercial, concorrência desleal e outras leis e não podem ser copiados ou imitidos no todo ou em parte. Todos os gráficos personalizados, ícones e outros itens que aparecem no Prime Sender são marcas registradas, marcas de serviço ou nomes comerciais (\"Marcas\") do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, suas afiliadas ou outras entidades que concederam ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> o direito e a licença de usar tais Marcas e não podem ser usados ​​ou interferidos de qualquer forma sem o consentimento por escrito expresso do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. Exceto conforme expressamente autorizado por estes Termos de Uso, Você não pode copiar, reproduzir, modificar, alterar, arrendar, emprestar, vender e/ou criar trabalhos derivados, fazer upload, transmitir e/ou distribuir a Propriedade Intelectual do Prime Sender de qualquer forma sem a permissão prévia por escrito do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou de um terceiro apropriado. Exceto conforme expressamente previsto nestes Termos, o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> não concede a Você quaisquer direitos expressos ou implícitos sobre a Propriedade Intelectual do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou de qualquer terceiro. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> concede a Você, por meio destes, uma licença limitada, pessoal, intransferível, não sublicenciável e revogável para: (a) acessar e usar apenas o Prime Sender, Conteúdo e Serviços da maneira apresentada pelo <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>; e (b) acessar e usar os serviços de computador e rede do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> oferecidos no âmbito do Prime Sender (os \"Sistemas <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>\") apenas da maneira expressamente permitida pelo <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. Com exceção desta licença limitada, o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> não concede qualquer direito ou interesse nos ou sobre os Sistemas <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, informações ou dados disponíveis por meio dos Sistemas <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> (as \"Informações\"), Conteúdo, Serviços, Site ou qualquer outra propriedade do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ao permitir que Você acesse o Prime Sender. Exceto na medida exigida por lei ou conforme expressamente previsto nestes Termos, nenhum Conteúdo e/ou Informação pode ser submetido a engenharia reversa, modificado, alterado, reproduzido, republicado, traduzido para qualquer idioma ou linguagem de computador, retransmitido sob qualquer forma ou por qualquer meio, revendido ou redistribuído sem o consentimento prévio por escrito. Você não pode fabricar, vender, oferecer à venda, modificar, alterar, reproduzir, exibir, executar publicamente, importar, distribuir, retransmitir ou de outra forma usar o Conteúdo de qualquer forma, a menos que expressamente autorizado a fazê-lo pelo <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>."
+          content: "Quaisquer e todos os direitos de propriedade intelectual (\"Propriedade Intelectual\") associados ao Prime Sender e seus conteúdos (o \"Conteúdo\") são de propriedade exclusiva do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, suas afiliadas ou terceiros. O Conteúdo é protegido por leis de Propriedade Intelectual e outras leis tanto na Índia quanto em outros países. Elementos do Prime Sender também são protegidos por nome comercial, segredo comercial, concorrência desleal e outras leis e não podem ser copiados ou imitidos no todo ou em parte. Todos os gráficos personalizados, ícones e outros itens que aparecem no Prime Sender são marcas registradas, marcas de serviço ou nomes comerciais (\"Marcas\") do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, suas afiliadas ou outras entidades que concederam ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> o direito e a licença de usar tais Marcas e não podem ser usados ​​ou interferidos de qualquer forma sem o consentimento por escrito expresso do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. Exceto conforme expressamente autorizado por estes Termos de Uso, Você não pode copiar, reproduzir, modificar, alterar, arrendar, emprestar, vender e/ou criar trabalhos derivados, fazer upload, transmitir e/ou distribuir a Propriedade Intelectual do Prime Sender de qualquer forma sem a permissão prévia por escrito do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou de um terceiro apropriado. Exceto conforme expressamente previsto nestes Termos, o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> não concede a Você quaisquer direitos expressos ou implícitos sobre a Propriedade Intelectual do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou de qualquer terceiro. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> concede a Você, por meio destes, uma licença limitada, pessoal, intransferível, não sublicenciável e revogável para: (a) acessar e usar apenas o Prime Sender, Conteúdo e Serviços da maneira apresentada pelo <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>; e (b) acessar e usar os serviços de computador e rede do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> oferecidos no âmbito do Prime Sender (os \"Sistemas <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>\") apenas da maneira expressamente permitida pelo <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. Except for this limited license, <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> does not convey any interest in or to the <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> Systems, information or data available via the <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> Systems (the \"Information\"), Content, Services, Web Site or any other <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> property by permitting You to access Prime Sender. Except to the extent required by law or as expressly provided herein, none of the Content and/or Information may be reverse-engineered, modified, amended, reproduced, republished, translated into any language or computer language, re-transmitted in any form or by any means, resold or redistributed without the prior written consent of. You may not make, sell, offer for sale, modify, amend, reproduce, display, publicly perform, import, distribute, retransmit or otherwise use the Content in any way unless expressly permitted to do so by <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>."
         },
         restrictions: {
           title: "Restrições ao Uso do Site",
@@ -791,11 +832,11 @@ const resources = {
           },
           inbound: {
             title: "Links de Entrada",
-            content: "É estritamente proibido vincular a qualquer página do Prime Sender que não seja <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> através de um link de texto simples na ausência de um acordo de vinculação separado com o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. Qualquer site ou outro dispositivo que vincule ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou a qualquer página disponível nele está proibido de:",
+            content: "É estritamente proibido vincular a qualquer página do Prime Sender que não seja <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> através de um link de texto simples na ausência de um acordo de vinculação separado com o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. Any website or other devices that link to <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> or any page available therein is prohibited from:",
             restrictions: [
-              "Replicar o Conteúdo",
-              "Usar um navegador ou ambiente de borda ao redor do Conteúdo",
-              "Sugerir de qualquer forma que o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou qualquer uma de suas afiliadas endossem você ou seus produtos",
+              "Replicating Content",
+              "Using a browser or border environment around the Content",
+              "Implying in any fashion that <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> or any of its affiliates endorse it or its products",
               "Deturpar qualquer estado de fatos, incluindo seu relacionamento com o <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou qualquer uma das afiliadas do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>",
               "Apresentar informações falsas sobre os produtos ou serviços do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>",
               "Usar qualquer logotipo ou marca do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> ou de qualquer uma de suas afiliadas, sem permissão por escrito expressa do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>"
@@ -846,6 +887,16 @@ const resources = {
         planTransferPolicy: {
           title: "Política de Transferência de Plano",
           content: "Se um usuário digitou o número errado durante a compra, ele pode transferir seu plano premium para um número diferente dentro de 7 dias após a compra através do painel. Cada plano tem direito a apenas uma transferência. Transferências não são permitidas após 7 dias ou se o plano já tiver sido transferido anteriormente."
+        },
+        customersTitle: 'O que os Clientes Estão Dizendo',
+        viewAll: 'Ver Todos',
+        reviews: {
+          r1: { heading: 'Isso é incrível', review: 'O melhor aplicativo, realmente ajuda no meu trabalho. O aplicativo é simples, fácil de usar e o suporte responde rapidamente quando há problemas. A assinatura mensal é acessível. Obrigado equipe Prime Sender.', name: 'EKO WICAKSONO' },
+          r2: { heading: 'Muito Útil', review: 'Tenho um pequeno negócio na Indonésia e isso me ajudou muito a conseguir novos clientes. Poucas extensões do Chrome são úteis, mas esta é muito boa. Obrigado!', name: 'David' },
+          r3: { heading: 'Espetacular', review: 'Muito fácil de entender e usar, diferente de outros softwares complicados. E o que me surpreendeu foi que, durante o uso, enviei mensagem ao suporte e obtive resposta muito rápida.', name: 'Joel Peterson' },
+          r4: { heading: 'Altamente Recomendado!', review: 'Até agora parece ser totalmente grátis. Você pode enviar mensagens em massa para centenas de contatos de forma muito fácil e rápida. Economiza muito tempo! Especialmente a função de importar contatos de uma planilha.', name: 'Phillipe Kenny' },
+          r5: { heading: 'Obrigado Prime Sender!', review: 'Esta extensão está ajudando muito nossa empresa a entrar em contato com muitos leads. Muito útil para mensagens em massa e anúncios de ofertas. No geral, é uma ferramenta perfeita para envio em massa, eu adoro.', name: 'Alexandre Farias' },
+          r6: { heading: 'Obrigado Alpha', review: 'Os recursos premium são excelentes, o suporte é muito prestativo. E-mails são respondidos dentro de 24h. Solicitações de ajuste foram atendidas poucas horas após o envio do e-mail para a equipe.', name: 'Danush Rao' }
         }
       },
       navbar: {
@@ -854,8 +905,9 @@ const resources = {
         features: 'Recursos',
         pricing: 'Preços',
         blogs: 'Blogs',
-        login: 'Login',
-        language: 'Idioma'
+        login: 'Entrar',
+        language: 'Idioma',
+        freeDownload: 'Download Grátis',
       },
       blogs: {
         sectionTitle: 'Blogs',
@@ -1044,9 +1096,18 @@ const resources = {
         numbersTitle: 'Nossos Números Falam por Si',
         userRatings: 'Avaliações de Usuários',
         users: 'Usuários',
+        rank: 'Classificação',
         rankText: 'Remetente na Web Store',
         customersTitle: 'O que os Clientes Estão Dizendo',
-        viewAll: 'Ver Todos'
+        viewAll: 'Ver Todos',
+        reviews: {
+          r1: { heading: 'Isso é incrível', review: 'O melhor aplicativo, realmente ajuda no meu trabalho. O aplicativo é simples, fácil de usar e o suporte responde rapidamente quando há problemas. A assinatura mensal é acessível. Obrigado equipe Prime Sender.', name: 'EKO WICAKSONO' },
+          r2: { heading: 'Muito Útil', review: 'Tenho um pequeno negócio na Indonésia e isso me ajudou muito a conseguir novos clientes. Poucas extensões do Chrome são úteis, mas esta é muito boa. Obrigado!', name: 'David' },
+          r3: { heading: 'Espetacular', review: 'Muito fácil de entender e usar, diferente de outros softwares complicados. E o que me surpreendeu foi que, durante o uso, enviei mensagem ao suporte e obtive resposta muito rápida.', name: 'Joel Peterson' },
+          r4: { heading: 'Altamente Recomendado!', review: 'Até agora parece ser totalmente grátis. Você pode enviar mensagens em massa para centenas de contatos de forma muito fácil e rápida. Economiza muito tempo! Especialmente a função de importar contatos de uma planilha.', name: 'Phillipe Kenny' },
+          r5: { heading: 'Obrigado Prime Sender!', review: 'Esta extensão está ajudando muito nossa empresa a entrar em contato com muitos leads. Muito útil para mensagens em massa e anúncios de ofertas. No geral, é uma ferramenta perfeita para envio em massa, eu adoro.', name: 'Alexandre Farias' },
+          r6: { heading: 'Obrigado Alpha', review: 'Os recursos premium são excelentes, o suporte é muito prestativo. E-mails são respondidos dentro de 24h. Solicitações de ajuste foram atendidas poucas horas após o envio do e-mail para a equipe.', name: 'Danush Rao' }
+        }
       },
       solutions: {
         sectionTitle: 'Impulsione sua comunicação para o seu negócio',
@@ -1065,6 +1126,7 @@ const resources = {
         sectionSubtitle: 'Escolha o plano que funciona melhor para você',
         save: 'Economize',
         buy: 'Comprar',
+        subscribe: 'Assinar',
         billedFor12Months: 'Cobrado por 12 meses',
         upiTransferOnlyAvailableForAnnualPlans: 'Transferência UPI disponível apenas para planos anuais',
         userPerMonth: '/usuário/mês',
@@ -1083,6 +1145,11 @@ const resources = {
         '24Months': '24 Meses',
         purchasePlanToSave: 'Compre um plano de {{months}} meses para economizar <bold>{{percentage}}</bold> durante todo o ano',
         tryNow: 'Experimente agora',
+        earlyBird: {
+          prefix: 'Oferta antecipada para novos usuários -',
+          bold: '30% de DESCONTO Extra.',
+          useCode: 'Use o código'
+        },
         allFreeFeatures: 'Todos os recursos Free',
         allBasicFeatures: 'Todos os recursos Basic',
         wantToPayViaUPI: 'Deseja pagar via UPI?',
@@ -1102,7 +1169,7 @@ const resources = {
           },
           customization: {
             name: 'Personalização',
-            description: 'Você pode personalizar sua mensagem de acordo com o cliente com seu nome, e-mail, número do pedido, etc.'
+            description: 'Você pode personalizar sua mensagem de acordo com o cliente com seu nome, e-mail, número do pedido, etc'
           },
           chatSupport: {
             name: 'Suporte por Chat',
@@ -1297,7 +1364,22 @@ const resources = {
         }
      
       
-      }
+      },
+      contact: {
+        pageTitle: 'Contate-Nos | Prime Sender - Enviador de Mensagens Web AI Gratuito',
+        pageDescription: 'Entre em contato com o Prime Sender',
+        pageKeywords: 'contato,página de contato prime sender, suporte prime sender',
+        sectionTitle: 'Contate-Nos',
+        nameLabel: 'Nome',
+        emailLabel: 'Email',
+        contactNoLabel: 'Contato',
+        messageLabel: 'Mensagem',
+        phoneError: 'O número de telefone deve ter pelo menos 10 dígitos',
+        sendMessage: 'Enviar Mensagem'
+      },
+      chatSupport: {
+        tooltip: 'Ei! Posso ajudar você?'
+      },
     },
   },
 };

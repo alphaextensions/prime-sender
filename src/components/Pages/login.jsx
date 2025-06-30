@@ -12,7 +12,7 @@ import "../../styles/login/login.css";
 
 
 function Login() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [controller, dispatch] = primeSenderController();
   const [headline, setHeadline] = useState("");
   const [subHeadline, setSubHeadline] = useState("");
@@ -198,6 +198,7 @@ function Login() {
           size: "large",
           text: "signin_with",
           shape: "pill",
+          locale: i18n.language,
           logo_alignment: "left",
           click_listener: () => {
             ReactGA.event({
@@ -222,7 +223,7 @@ function Login() {
         }
       }, 100);
     }
-  }, [controller, navigate, url, handleLogin, handlePopups]);
+  }, [controller, navigate, url, handleLogin, handlePopups, i18n.language]);
 
   return (
     <div className="page">

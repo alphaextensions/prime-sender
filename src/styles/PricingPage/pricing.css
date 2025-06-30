@@ -654,6 +654,7 @@
   border-bottom: 2px solid var(--color-light-grey);
   padding: 10px 40px;
   font-size: 20px;
+  vertical-align: middle;
 }
 
 .pricing_table thead th,
@@ -661,6 +662,7 @@
   color: var(--color-secondary3);
   font-size: 22px;
   font-weight: 600 !important;
+  text-align: center !important;
 }
 
 .pricing_table tbody th {
@@ -673,6 +675,15 @@
   font-size: 25px;
   color: var(--color-primary1) !important;
   text-align: center !important;
+  vertical-align: middle;
+}
+
+.pricing_table tbody td svg {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .cross_icon {
@@ -1162,9 +1173,6 @@
   .pricing_table thead th{
     padding: 8px 15px;
   }
-  .pricing_table thead th:nth-child(4){
-    padding: 8px 5px;
-  }
   .pricing_cards_container{
     padding: 10px;
     grid-template-columns: auto;
@@ -1200,6 +1208,12 @@
     padding: 6px 5px;
     font-size: 20px;
   }
+
+  .pricing_table tbody td svg {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1212,9 +1226,6 @@
   .pricing_table thead th{
     font-size: 18px;
     padding: 3px 5px;
-  }
-  .pricing_table thead th:nth-child(4){
-    padding: 3px 0;
   }
   .pricing_table tbody th{
     padding: 6px;
@@ -1298,6 +1309,12 @@
   .pricing_table tbody td{
     padding: 4px 0px;
     font-size: 16px;
+  }
+
+  .pricing_table tbody td svg {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
   }
 
   .navigation_outer_box_down .msg-box-down{

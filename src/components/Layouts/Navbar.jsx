@@ -165,8 +165,13 @@ function Navbar() {
           <div className='nav-download-btn'>
             {/* Language selector dropdown - Only show if browser language is not English */}
             {browserLang !== 'en' && (
-              <div className="language-selector" ref={dropdownRef}>
-                <div className="language-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+              <div 
+                className="language-selector" 
+                ref={dropdownRef}
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
+                <div className="language-btn">
                   <MdLanguage className="language-icon" />
                   <span>{i18n.language === 'pt' ? 'PT' : 'EN'}</span>
                 </div>

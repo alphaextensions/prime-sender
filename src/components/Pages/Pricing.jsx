@@ -235,12 +235,14 @@ const Pricing = () => {
   }
 
   function showButton(isPopup, planType) {
+    const buyLabel = t('pricing.buy');
+    const subscribeLabel = t('pricing.subscribe');
     const button_link = !isPopup ?
       planType === 'basic' ? getButtonLink(currentCountry, planPeriod, 'basic') : getButtonLink(currentCountry, planPeriod, 'advance') :
       popupPlan === 'basic' ? getButtonLink(popupCountry, popupPlanPeriod, 'basic') : getButtonLink(popupCountry, popupPlanPeriod, 'advance');
     const button_text = !isPopup ?
-      planPeriod === 'monthly' ? 'Subscribe' : planType === 'basic' ? 'Buy Basic' : 'Buy Advance' :
-      popupPlanPeriod === 'annually' ? 'Buy' : 'Subscribe'
+      (planPeriod === 'monthly' ? subscribeLabel : planType === 'basic' ? `${buyLabel} Basic` : `${buyLabel} Advance`) :
+      (popupPlanPeriod === 'annually' ? buyLabel : subscribeLabel)
     return (
       <a
         href={button_link}
@@ -792,10 +794,10 @@ const Pricing = () => {
               planPeriod === 'monthly' &&
               <div className="pricing_discount_text ">
                 <div className="text">
-                  Early bird offer for new user - <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>Extra 30% OFF. &nbsp; </span>
+                  {t('pricing.earlyBird.prefix')} <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>{t('pricing.earlyBird.bold')}&nbsp;</span>
                 </div>
                 <div className="discount-img text" >
-                  Use code <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
+                  {t('pricing.earlyBird.useCode')} <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
                 </div>
               </div>
             }
@@ -1090,7 +1092,7 @@ const Pricing = () => {
             <div className="mult_card_bottom_container">
                 <div className={`pricing_card_button mult_account_buy_button background-royal ${isMultipleAccountPage?"pricing_card_button_width":""}`}>
                     <button onClick={() => handleGaButtonClick("multiple_user")}>
-                      <a target="_blank" rel="noreferrer" className="buy_button">Buy</a>
+                      <a target="_blank" rel="noreferrer" className="buy_button">{t('pricing.buy')}</a>
                     </button>
                 </div>
                 <div className="pricing_calculator_support">

@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
 import { CheckoutContext } from '../context/CheckoutContext';
+import { useTranslation } from 'react-i18next';
 
 const validateUserEmail = (email) => {
 	const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -86,6 +87,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const [autorenewChecked, setAutorenewChecked] = useState(false);
 	const [autoRenewHover, setAutoRenewHover] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
+	const { t } = useTranslation();
 
 	const valueChangeHandler = (val, ind) => {
 		if (val < 2) {
@@ -396,7 +398,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								// </button>
                             }
 								<button className={`mult_popup_buy_button ${autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
-                                    {((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>Buy now</a>}
+                                    {((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>{t('pricing.buy')}</a>}
 								</button>
                             {
                                 plan_duration == "monthly" && 
