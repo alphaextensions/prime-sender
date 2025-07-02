@@ -984,15 +984,14 @@ const Pricing = () => {
 
               <div className="pricing_card_heading">
                 <div>
-                {t('pricing.purchasePremiumPlanForMultipleUsers')}
+                  <Trans
+                    i18nKey="pricing.purchasePremiumPlanForMultipleUsers"
+                    components={{
+                      bold: <span className="text-bold text-royal" />,
+                      star: <img className="discount_star_image" src="/images/yellow-stars.png" alt="stars" />
+                    }}
+                  />
                 </div>
-                {/* {
-                  planPeriod === 'annually' && (
-                    <div style={{visibility:'hidden'}}>
-                      This is dummy text
-                    </div>
-                  )
-                } */}
               </div>
               <div className="pricing_calculator_section">
                 {/* heading section */}

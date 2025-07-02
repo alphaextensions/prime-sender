@@ -31,7 +31,7 @@ const resources = {
           "Click on the icon of 📎 Attachment inside the text box inside the extension",
           "Select files you'd like to send. You can select multiple files.",
           "You can click on Add Caption to add caption to your attachment",
-          "Click on Send button inside the extension."
+          "Click on Send button inside the extension"
         ]
       },
       faqs: {
@@ -451,6 +451,7 @@ const resources = {
         mainTitle: 'Simple, Affordable Pricing',
         curatedForYou: 'Pricing curated just for you',
         monthly: 'Monthly',
+        annual: 'Annual',
         '12Months': '12 Months',
         '24Months': '24 Months',
         purchasePlanToSave: 'Purchase a {{months}} months plan to save <bold>{{percentage}}</bold> for the whole year',
@@ -465,9 +466,26 @@ const resources = {
         wantToPayViaUPI: 'Want to pay via UPI?',
         bankTransferAndPayPal: 'Bank Transfer and PayPal also available',
         needMultipleAccounts: 'Need multiple accounts?',
-        purchasePremiumPlanForMultipleUsers: 'Purchase premium plan for multiple users for your organization at a discounted rate upto 70%',
+        purchasePremiumPlanForMultipleUsers: 'Purchase premium plan for multiple users for your organization at a <bold>discounted rate upto <star/> 70%</bold>',
         pricingCalculator: 'Pricing Calculator',
         billedAnnually: 'billed annually',
+        popup: {
+          buyMultipleAccounts: 'Buy Multiple Accounts',
+          email: 'Email :',
+          numberHeading: 'Number {{index}} :',
+          goBack: 'Go Back',
+          numberOfAccounts: 'Number of accounts:',
+          emailAddress: 'Email address:',
+          addWhatsAppNumbersHeading: 'Add the <highlight>WhatsApp numbers</highlight> on which the premium needs to be enabled',
+          showNumbers: 'Show numbers',
+          addMore: 'Add More',
+          enableAutoRenew: 'Enable auto-renew',
+          autoRenewInfo: 'Premium amount will be deducted every month on checking this box.',
+          pleaseWait: 'Please wait...',
+          validEmailError: 'Please enter a valid email id',
+          validPhoneNumberError: 'Please enter a valid phone number',
+          somethingWentWrong: 'Something went wrong. Please try again.'
+        },
         features: {
           unlimitedBroadcasting: {
             name: 'Unlimited Broadcasting',
@@ -807,7 +825,7 @@ const resources = {
         },
         modifications: {
           title: "Modificações",
-          content: "O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode revisar e atualizar estes Termos de Uso a qualquer momento. O seu uso contínuo do Prime Sender após quaisquer alterações nestes Termos de Uso será considerado como aceitação de tais alterações. Qualquer aspecto do Prime Sender pode ser alterado, complementado, excluído ou atualizado sem aviso prévio, a critério exclusivo do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> também pode alterar ou impor taxas para produtos e serviços fornecidos através do Prime Sender a qualquer momento, a seu exclusivo critério. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode estabelecer ou alterar, a qualquer momento, práticas e restrições gerais relativas a outros produtos e serviços do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> a seu exclusivo critério. Aviso de Privacidade do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> Com relação a qualquer indivíduo cujas informações pessoais sejam fornecidas por Você ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, Você declara ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> que You have obtained all necessary consents for the processing of such personal information contemplated by the Services."
+          content: "O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode revisar e atualizar estes Termos de Uso a qualquer momento. O seu uso contínuo do Prime Sender após quaisquer alterações nestes Termos de Uso será considerado como aceitação de tais alterações. Qualquer aspecto do Prime Sender pode ser alterado, complementado, excluído ou atualizado sem aviso prévio, a critério exclusivo do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> também pode alterar ou impor taxas para produtos e serviços fornecidos através do Prime Sender a qualquer momento, a seu exclusivo critério. O <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> pode estabelecer ou alterar, a qualquer momento, práticas e restrições gerais relativas a outros produtos e serviços do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> a seu exclusivo critério. Aviso de Privacidade do <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> Com relação a qualquer indivíduo cujas informações pessoais sejam fornecidas por Você ao <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a>, You represent to <a href='https://www.prime-sender.com' className='link'>www.prime-sender.com</a> that You have obtained all necessary consents for the processing of such personal information contemplated by the Services."
         },
         licenseAndOwnership: {
           title: "Licença e Propriedade",
@@ -1141,6 +1159,7 @@ const resources = {
         mainTitle: 'Preços simples e acessíveis',
         curatedForYou: 'Preços personalizados para você',
         monthly: 'Mensal',
+        annual: 'Anual',
         '12Months': '12 Meses',
         '24Months': '24 Meses',
         purchasePlanToSave: 'Compre um plano de {{months}} meses para economizar <bold>{{percentage}}</bold> durante todo o ano',
@@ -1155,9 +1174,26 @@ const resources = {
         wantToPayViaUPI: 'Deseja pagar via UPI?',
         bankTransferAndPayPal: 'Transferência bancária e PayPal também disponíveis',
         needMultipleAccounts: 'Precisa de várias contas?',
-        purchasePremiumPlanForMultipleUsers: 'Compre o plano premium para vários usuários de sua organização com desconto de até 70%',
+        purchasePremiumPlanForMultipleUsers: 'Compre o plano premium para vários usuários de sua organização com <bold>desconto de até <star/> 70%</bold>',
         pricingCalculator: 'Calculadora de preços',
         billedAnnually: 'cobrado anualmente',
+        popup: {
+          buyMultipleAccounts: 'Comprar múltiplas contas',
+          email: 'Email :',
+          numberHeading: 'Número {{index}} :',
+          goBack: 'Voltar',
+          numberOfAccounts: 'Número de contas:',
+          emailAddress: 'Endereço de email:',
+          addWhatsAppNumbersHeading: 'Adicione os <highlight>números do WhatsApp</highlight> nos quais o premium precisa ser ativado',
+          showNumbers: 'Mostrar números',
+          addMore: 'Adicionar mais',
+          enableAutoRenew: 'Ativar renovação automática',
+          autoRenewInfo: 'O valor do premium será deduzido todos os meses ao marcar esta opção.',
+          pleaseWait: 'Por favor, aguarde...',
+          validEmailError: 'Por favor, insira um email válido',
+          validPhoneNumberError: 'Por favor, insira um número de telefone válido',
+          somethingWentWrong: 'Algo deu errado. Por favor, tente novamente.'
+        },
         features: {
           unlimitedBroadcasting: {
             name: 'Transmissão Ilimitada',

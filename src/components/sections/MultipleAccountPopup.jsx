@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react';
 import '../../styles/PricingPage/multipleAccountPopup.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
 import { CheckoutContext } from '../context/CheckoutContext';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 const validateUserEmail = (email) => {
 	const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -152,7 +152,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		} catch (error) {
 			setIsPageGenerating(false);
 			console.log("error from setting data in database ", error);
-			toast("Something went wrong. Please try again.", { theme: 'colored', type: 'error', autoClose: 5000 });
+			toast(t('pricing.popup.somethingWentWrong'), { theme: 'colored', type: 'error', autoClose: 5000 });
 		}
 	}
 
@@ -163,13 +163,13 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			setTimeout(() => {
 				setEmailInputError(false);	
 			}, 3000);
-			toast("Please enter a valid email id", { theme: "colored", type: "error", autoClose:3000 });
+			toast(t('pricing.popup.validEmailError'), { theme: "colored", type: "error", autoClose:3000 });
 			return false;
 		};
 
 		// check for the number of accounts 
 		if(value<2) {
-			toast("Number of accounts cannot be less than 2", {theme: 'colored', type:'error', autoClose:3000 });
+			toast(t('pricing.numberOfAccountsCannotBeLessThan2'), {theme: 'colored', type:'error', autoClose:3000 });
 			return false;
 		}
 
@@ -188,7 +188,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		}
 		setInputErrorNumbers(errorNumbers);
 		if(isInputErrorPresent) {
-			toast("Please enter a valid phone number", {theme: 'colored', type:'error', autoClose:3000 });
+			toast(t('pricing.popup.validPhoneNumberError'), {theme: 'colored', type:'error', autoClose:3000 });
 			// scroll to the first number with error
 			let firstErrorInput = document.querySelectorAll('.mult_number_input')[errorNumbers[0]];
 			if(firstErrorInput) {
@@ -267,7 +267,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const NumberListComponent = () => {
 		return <>
 			<div className='numbers_list_email'>
-				<p className='number_list_email_heading'>Email : </p>
+				<p className='number_list_email_heading'>{t('pricing.popup.email')}</p>
 				<p className='number_list_email_text'>{userEmail}</p>
 			</div>
 			<div className='numbers_list_list'>
@@ -280,7 +280,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							currNumber = list[0] + list[1];
 						}
 						return <div className='number_div' key={index}>
-							<p className='number_heading'>Number {index + 1} :</p>
+							<p className='number_heading'>{t('pricing.popup.numberHeading', {index: index + 1})}</p>
 							<p className='number_number'>{currNumber}</p>
 						</div>
 					})}
@@ -288,7 +288,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			</div>
 			<div className='mult_popup_button_section number_list_button_section'>
 				<button className='mult_popup_buy_button mult_review_button' onClick={() => setShowNumbersList(false)}>
-					<a>Go Back</a>
+					<a>{t('pricing.popup.goBack')}</a>
 				</button>
 			</div>
 		</>
@@ -308,34 +308,34 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							</div>
 							<div className='mult_account_heading'>
 								<div className='left_line'></div>
-								<div className='mult_account_heading_text'>Buy Multiple Accounts</div>
+								<div className='mult_account_heading_text'>{t('pricing.popup.buyMultipleAccounts')}</div>
 								<div className="right_line"></div>
 							</div>
 							<div className="mult_account_logo">
 								<div className="mult_account_image">
 									<img src="images/logo-large.png" alt="" />
 								</div>
-								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} {plan_duration=='annually'?'Annual':'Monthly'}</div>
+								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} {plan_duration=='annually'?t('pricing.annual'):t('pricing.monthly')}</div>
 							</div>
 						</div>
 						{/* popup body */}
 						<div className='mult_account_body'>
 							<div className='mult_account_num'>
-								<p className='mult_account_num_text'>Number of accounts: </p>
+								<p className='mult_account_num_text'>{t('pricing.popup.numberOfAccounts')}</p>
 								<input type="number" value={value} onChange={(e) => valueChangeHandler(e.target.value)} />
 							</div>
 							<div className='mult_account_num'>
-								<p className='mult_account_num_text'>Email address: </p>
+								<p className='mult_account_num_text'>{t('pricing.popup.emailAddress')}</p>
 								<input type="email" className={`mult_account_email_input ${emailInputError?'input_error_border':''}`} value={userEmail} onChange={(e) => {
 									setUserEmail(e.target.value)
 									localStorage.setItem("userEmail", JSON.stringify(e.target.value))
 								}} />
 							</div>
 							<div className='mult_account_body_heading'>
-								<p>Add the <span>WhatsApp numbers</span> on which the premium needs to be enabled</p>
+								<p><Trans i18nKey='pricing.popup.addWhatsAppNumbersHeading' components={{highlight: <span/>}}/></p>
 							</div>
 							{value < 2 ? <div className="mult_error_message">
-								Number of accounts cannot be less than 2
+								{t('pricing.numberOfAccountsCannotBeLessThan2')}
 							</div> :
 								<div className={`numbers_input_section ${value > 2 ? 'overflow_class' : ''}`} ref={numbersContainerRef}>
 									{
@@ -357,11 +357,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							}
 							<div className='mult_account_add_more'>
                                 <p className='mult_account_show_more' disabled={value<2} onClick={() => setShowNumbersList(true)}>
-                                    Show numbers
+                                    {t('pricing.popup.showNumbers')}
                                 </p>
 								<p onClick={() => {
 									valueChangeHandler(Number(value) + 1)
-                                }}><b>+</b> Add More</p>
+                                }}><b>+</b> {t('pricing.popup.addMore')}</p>
                             </div>
                             {
 								plan_duration == 'monthly' &&
@@ -380,12 +380,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
                                             }, 2000);
                                         }}
                                     />
-                                    <label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">Enable auto-renew</label>
+                                    <label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">{t('pricing.popup.enableAutoRenew')}</label>
 									<span className={`pricing_feature_info_container`} onMouseEnter={() => setAutoRenewHover(true)} onMouseLeave={() => setAutoRenewHover(false)}>
 										<IoIosInformationCircleOutline className="feature_info_class" />
 										<div className="navigation_outer_box_down navigation_container" hidden={!autoRenewHover} >
 											<div className="msg-box-down">
-												<p>Premium amount will be deducted every month on checking this box.</p>
+												<p>{t('pricing.popup.autoRenewInfo')}</p>
 											</div>
 										</div>
 									</span>
@@ -403,11 +403,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
                             {
                                 plan_duration == "monthly" && 
                                 <button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
-                                    {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>Subscribe</a>}
+                                    {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>{t('pricing.subscribe')}</a>}
                                 </button>
                             }
 							</div>
-							{isPageGenerating && <div className='please_wait_text'>Please wait...</div>}
+							{isPageGenerating && <div className='please_wait_text'>{t('pricing.popup.pleaseWait')}</div>}
 						</div>
 					</>
 				}

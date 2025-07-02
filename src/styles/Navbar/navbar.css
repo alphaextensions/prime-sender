@@ -75,7 +75,7 @@
 }
 
 .nav-elements ul li {
-  margin-right: 2.5rem;
+  margin-right: 1.8rem;
   text-align: center;
   position: relative;
   cursor: pointer;
@@ -119,7 +119,7 @@
 
 @media (max-width: 1280px) {
   .nav-elements ul li {
-    margin-right: 1.5rem;
+    margin-right: 1.2rem;
   }
   .nav-elements ul a {
       font-size: 1rem;
