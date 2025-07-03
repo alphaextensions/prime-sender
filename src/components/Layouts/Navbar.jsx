@@ -166,7 +166,7 @@ function Navbar() {
             {/* Language selector dropdown - Only show if browser language is not English */}
             {browserLang !== 'en' && (
               <div 
-                className="language-selector" 
+                className={`language-selector${dropdownOpen ? ' open' : ''}`} 
                 ref={dropdownRef}
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
@@ -175,22 +175,20 @@ function Navbar() {
                   <MdLanguage className="language-icon" />
                   <span>{i18n.language === 'pt' ? 'PT' : 'EN'}</span>
                 </div>
-                {dropdownOpen && (
-                  <div className="language-dropdown">
-                    <div 
-                      className={`language-option ${i18n.language === 'en' ? 'active' : ''}`}
-                      onClick={() => handleLanguageChange('en')}
-                    >
-                      English
-                    </div>
-                    <div 
-                      className={`language-option ${i18n.language === 'pt' ? 'active' : ''}`}
-                      onClick={() => handleLanguageChange('pt')}
-                    >
-                      Português
-                    </div>
+                <div className="language-dropdown">
+                  <div 
+                    className={`language-option ${i18n.language === 'en' ? 'active' : ''}`}  
+                    onClick={() => handleLanguageChange('en')}
+                  >
+                    English
                   </div>
-                )}
+                  <div 
+                    className={`language-option ${i18n.language === 'pt' ? 'active' : ''}`}  
+                    onClick={() => handleLanguageChange('pt')}
+                  >
+                    Português
+                  </div>
+                </div>
               </div>
             )}
             <DownloadBtn downloadIcon={<MdFileDownload className='download-icon' />} />

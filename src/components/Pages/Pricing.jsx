@@ -46,7 +46,7 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
         <div className="ui_popup_title_img">
           <img src="/images/logo-large.png" alt="" />
         </div>
-        <p className="ui_popup_title_title">{plan_type=='Advance'?'Advance':'Basic'} Annual</p>
+        <p className="ui_popup_title_title">{plan_type=='Advance'?t('pricing.popup.advancePlan'):t('pricing.popup.basicPlan')} {t('pricing.annual')}</p>
       </div>
       <div className="upi_popup_price rupee">
         <span className="upi_annual_price"><span className="rupee">{currency}</span>{price}</span>
@@ -54,7 +54,7 @@ const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) 
         <br />
         <span className="upi_billed_text">{t('pricing.billedFor12Months')}</span>
         <a className="upi_buy_button" href={whatsappRedirectUrl} target="_blank" rel="noreferrer">
-          Buy {plan_type} Annual
+          {t('pricing.buy')} {plan_type=='Advance'?t('pricing.popup.advancePlan'):t('pricing.popup.basicPlan')} {t('pricing.annual')}
         </a>
         <span className="upi_last_text">{t('pricing.upiTransferOnlyAvailableForAnnualPlans')}</span>
       </div>
@@ -92,19 +92,26 @@ const Pricing = () => {
       'Save Campaign Details': 'pricing.features.saveCampaignDetails.name',
       'Save Message Template': 'pricing.features.saveMessageTemplate.name',
       'Detailed Delivery Report': 'pricing.features.detailedDeliveryReport.name',
+      'Detailed Delivery report': 'pricing.features.detailedDeliveryReport.name',
       'Translate Conversation': 'pricing.features.translateConversation.name',
       'Priority Support': 'pricing.features.prioritySupport.name',
       'No minimum time gap': 'pricing.features.noMinimumTimeGap.name',
       'Random time gap': 'pricing.features.randomTimeGap.name',
+      'Random Time Gap': 'pricing.features.randomTimeGap.name',
       'Batching': 'pricing.features.batching.name',
       'Stop Campaign': 'pricing.features.stopCampaign.name',
       'Group Contacts Export': 'pricing.features.groupContactsExport.name',
+      'Export Group Contacts': 'pricing.features.groupContactsExport.name',
       'Quick Replies': 'pricing.features.quickReplies.name',
       'Pause Campaign': 'pricing.features.pauseCampaign.name',
       'Multiple Attachments': 'pricing.features.multipleAttachments.name',
       'Schedule': 'pricing.features.schedule.name',
       'Business Chat Link': 'pricing.features.businessChatLink.name',
-      'Export Unsaved Chat Contacts': 'pricing.features.exportUnsavedChatContacts.name'
+      'Export Unsaved Chat Contacts': 'pricing.features.exportUnsavedChatContacts.name',
+      'Meet/Zoom Support': 'pricing.features.meetZoomSupport.name',
+      'Export Unsaved Contacts': 'pricing.features.exportUnsavedContacts.name',
+      'Group Message': 'pricing.features.groupMessage.name',
+      'Customizable Time Gap': 'pricing.features.customizableTimeGap.name'
     };
     
     // Return translation if available, otherwise return the original name
@@ -268,7 +275,7 @@ const Pricing = () => {
 
   function generatePricingPopup() {
     ReactGA.send({ hitType: "popupview", page: "/pricing", title: "Pricing Page Popup, Redirected from extension" });
-    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1);
+    const planNameKey = popupPlan === 'basic' ? 'pricing.popup.basicPlan' : 'pricing.popup.advancePlan';
     const handlePopupGaButtonClick = () => {
       ReactGA.event({
         category: "Button Click",
@@ -286,7 +293,7 @@ const Pricing = () => {
               <img src="/images/logo-img.png" alt="logo" />
               <img src="/images/logo-text.png" alt="logo" />
             </div>
-            <h1> <b>{capitalPlanName} Plan</b></h1>
+            <h1> <b>{t(planNameKey)} {t('pricing.popup.plan')}</b></h1>
           </div>
           <hr />
         {
@@ -299,8 +306,8 @@ const Pricing = () => {
           <div className={`pricing-popup-slider ${!showPopupMonthly?"marginTop30":""}`}>
             {
               popupPlan === 'basic' ?
-                <Slider onTextValue="Monthly" offTextValue="Annual" onTextHeader="Basic" offTextHeader="Basic" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
-                <Slider onTextValue="Monthly" offTextValue="Annual" onTextHeader="Advance" offTextHeader="Advance" setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
+                <Slider onTextValue={t('pricing.monthly')} offTextValue={t('pricing.annual')} onTextHeader={t('pricing.popup.basicPlan')} offTextHeader={t('pricing.popup.basicPlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
+                <Slider onTextValue={t('pricing.monthly')} offTextValue={t('pricing.annual')} onTextHeader={t('pricing.popup.advancePlan')} offTextHeader={t('pricing.popup.advancePlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
             }
           </div>
           <div className={`pricing-popup-content ${!showPopupMonthly?"hideMonthlyPopupPriceClass":""}`}>
@@ -317,7 +324,7 @@ const Pricing = () => {
                                     {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic_plan.final : pricing[popupCountry].monthly.advance_plan.final}
                                 </span>
                             </div>
-                            <div className="font14">{t('pricing.userPerMonthBilledAnnually')}</div>
+                            <div className="font14">{t('pricing.userPerMonth')}</div>
                         </div>
                     }
                   {popupLastPlan === 'freeTrial' && (
@@ -344,7 +351,7 @@ const Pricing = () => {
                         {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final}
                       </span>
                     </div>
-                    <div className="font14">/user/month billed annually</div>
+                    <div className="font14" dangerouslySetInnerHTML={{ __html: t('pricing.popup.userPerMonthBilledAnnually') }}></div>
                 </div>
                 </div> :
                 <div className={`${showPopupMonthly?"annual-price":"hideMonthlyPopupAnnualPriceClass"} ${popupPlanPeriod=='monthly'?'primary_color_faded':''}`} >
@@ -357,26 +364,26 @@ const Pricing = () => {
                             {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final}
                         </span>
                     </div>
-                    <div className="font14">/user/month billed annually</div>
+                    <div className="font14" dangerouslySetInnerHTML={{ __html: t('pricing.popup.userPerMonthBilledAnnually') }}></div>
                   </div>
                 </div>
             }
           </div>
           <div className="pricing-popup-btn">
             <button onClick={handlePopupGaButtonClick}>{showButton(true, popupPlan)}</button>
-            <span className="font20 marginTop10">or</span>
+            <span className="font20 marginTop10">{t('pricing.popup.or')}</span>
             <a target="_blank" href={'/pricing/multiple-account'} rel="noreferrer" className="multiple-accounts-btn"><img src="/images/mult_user.png"/><span>{t('pricing.buyMultipleUsers')}</span></a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
               {
                 pricing_popup_premium_features.map((item, index) => {
-                  return <div className="feature-item" key={index}><img src={`/images/${popupPlan=="basic"?"circle_cross":"check"}.png`} className="check_icon" alt="✔"></img>{item} <span className="text-bold">&nbsp;(Advance)</span></div>
+                  return <div className="feature-item" key={index}><img src={`/images/${popupPlan=="basic"?"circle_cross":"check"}.png`} className="check_icon" alt="✔"></img>{getFeatureTranslation(item)} <span className="text-bold">&nbsp;{t('pricing.popup.advance')}</span></div>
                 })
               }
               {
                 pricing_popup_trial_features.map((item, index) => {
-                  return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{item}</div>
+                  return <div className="feature-item" key={index}><img src='/images/check.png' className="check_icon" alt="✔"></img>{getFeatureTranslation(item)}</div>
                 })
               }
             </div>
@@ -384,15 +391,23 @@ const Pricing = () => {
             <div className="pricing-popup-footer">
               <div className="pricing-popup-footer-icon"><span>i</span></div>
               <div className="pricing-popup-footer-content" style={{fontSize:popupPlanPeriod === 'monthly' && popupLastPlan === 'freeTrial' ?  "10px" : "11px"}}>
-                <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan === 'freeTrial' ? "*Discount applicable for the first month" : ""}</span>
+                <span className='footer-instruction'>{popupPlanPeriod === 'monthly' && popupLastPlan === 'freeTrial' ? t('pricing.popup.discountFirstMonth') : ""}</span>
                 {
                   popupPlanPeriod === 'monthly' ?
-                    <span>
-                      By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
-                    </span> :
-                    <span>
-                      By purchasing the premium plan, you agree to our <u><a href="https://prime-sender.com/terms-of-service/" target='_blank'>Terms of Service</a> </u> and <u><a href="https://prime-sender.com/privacy-policy/" target='_blank'>Privacy Policy</a> </u>.
-                    </span>
+                    <Trans 
+                      i18nKey="pricing.popup.autoDeductionDisclaimer"
+                      components={{
+                        termsLink: <u><a href="https://prime-sender.com/terms-of-service/" target='_blank' rel='noreferrer' /></u>,
+                        privacyLink: <u><a href="https://prime-sender.com/privacy-policy/" target='_blank' rel='noreferrer' /></u>
+                      }}
+                    /> :
+                    <Trans 
+                      i18nKey="pricing.popup.purchaseDisclaimer"
+                      components={{
+                        termsLink: <u><a href="https://prime-sender.com/terms-of-service/" target='_blank' rel='noreferrer' /></u>,
+                        privacyLink: <u><a href="https://prime-sender.com/privacy-policy/" target='_blank' rel='noreferrer' /></u>
+                      }}
+                    />
                 }
               </div>
             </div>

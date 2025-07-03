@@ -134,15 +134,12 @@
   left: 25%;
   color: var(--color-black);
 }
-.pricing-popup-content .annual-price{
+.pricing-popup-content .annual-price,
+.pricing-popup-content .annual-price-indonesia {
   position: absolute;
   top: 0%;
-  right: 6%;
-}
-.pricing-popup-content .annual-price-indonesia{
-  position: absolute;
-  top: 0%;
-  right: 6%;
+  left: 75%;
+  transform: translateX(-50%);
 }
 .pricing-popup-slash-price{
   text-decoration: line-through;
