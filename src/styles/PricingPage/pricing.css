@@ -45,7 +45,8 @@
   width: 62%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10px;
   margin: 10px auto;
   padding: 10px 0;
 }
@@ -63,7 +64,7 @@
   font-size: 25px;
   font-weight: 400;
   color: var(--color-primary1);
-  margin-left: 15px;
+  margin-left: 0;
   min-width: fit-content;
 }
 .pricing-popup hr{
@@ -605,7 +606,7 @@
 .pricing_card_features {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
