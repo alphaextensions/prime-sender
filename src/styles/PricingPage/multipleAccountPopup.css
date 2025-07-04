@@ -489,7 +489,6 @@
     }
 
     .mult_account_num {
-        flex-direction: column;
         gap: 10px;
         padding: 0 15px;
     }
@@ -513,6 +512,7 @@
         flex-wrap: nowrap !important;
         justify-content: flex-start;
         padding-right: 15px;
+        margin-left: 20px;
         box-sizing: border-box;
     }
     
@@ -520,6 +520,10 @@
         width: calc(100% - 130px) !important;
         flex: 1;
         min-width: 100px !important;
+    }
+
+    .number_component_circle {
+        height: 28px;
     }
 
     .number_input_remov_button {
@@ -530,10 +534,6 @@
     .mult_account_add_more {
         flex-direction: column;
         gap: 10px;
-    }
-
-    .mult_popup_button_section {
-        flex-direction: column;
     }
 
     .auto_renew_container {
@@ -552,7 +552,6 @@
     }
 
     .mult_account_logo {
-        flex-direction: column !important;
         gap: 10px !important;
         margin: 10px 0 !important;
     }
@@ -573,7 +572,7 @@
     z-index: 9999 !important;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 460px) {
     .multiple_account_popup {
         width: 98%;
         max-height: 90vh;
@@ -595,6 +594,7 @@
         width: 24px !important;
     }
     .mult_account_num {
+        flex-direction: column;
         padding: 0 10px;
     }
     .mult_account_num_text {
@@ -618,7 +618,7 @@
     }
     .number_component_circle {
         width: 28px;
-        height: 28px;
+        height: 23px;
         font-size: 16px;
     }
     .number_component_line {
@@ -641,7 +641,8 @@
         font-size: 14px;
         padding: 6px 16px;
     }
-}
-.mult_popup_corss_section{
-    top: 15px;
+    .mult_popup_corss_section{
+        top: 3px;
+        right: 5px;
+    }
 }
