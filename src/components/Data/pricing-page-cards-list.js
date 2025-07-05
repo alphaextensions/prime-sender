@@ -4,7 +4,7 @@ export const FreeCardFeatures = [
     description: "Broadcast to multiple chats at once, effortlessly scaling your communication. No need for template approvals and extra fees.",
   },
   {
-    name: 'Attachment',
+    name: 'Send Attachments',
     description: "You can attach and send images, documents, videos, etc. along with your message to users",
   },
   {
@@ -22,6 +22,14 @@ export const FreeCardFeatures = [
   {
     name: 'Detailed Delivery Report',
     description: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
+  },
+  {
+    name: 'Translate Conversation',
+    description: "Automatically translate conversations into different languages for seamless communication.",
+  },
+  {
+    name: 'Blur Conversations',
+    description: "Blur conversations to protect sensitive information.",
   }
 ]
 
