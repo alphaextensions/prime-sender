@@ -1,45 +1,72 @@
-import React from 'react';
-import PrivacyPolicyData from '../Data/privacy-policy-data.js';
+import { useTranslation } from 'react-i18next';
 import '../../styles/PrivacyPolicyPage/privacyPolicy.css';
 import SectionTitle from "../common/SectionTitle";
 import HelmetHeader from "../common/HelmetHeader";
 import { promoText } from '../Data/seo-data.js';
 
 function PrivacyPolicy() {
+  const { t } = useTranslation();
+  
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
       return <span key={index} className='white_promo_text pro'>{text}</span>
     })
   }
 
-  const promoTextComponent = <div className='promo_text_container'>
-    {...promoTextComponentGenerator()}
-  </div>
+  const promoTextComponent = (
+    <div className='promo_text_container'>
+      {promoTextComponentGenerator()}
+    </div>
+  )
+  
   return (
     <>
       <HelmetHeader
-        title={'Privacy Policy | Prime Sender - Free AI Web Message Sender'}
-        description={'Privacy Policy for Prime Sender'}
-        keywords={'prime sender privacy policy, privacy policy,privacy policy and terms&conditions'}
+        title={`${t('privacyPolicy.title')} | Prime Sender - Free AI Web Message Sender`}
+        description={t('privacyPolicy.title')}
+        keywords={'prime sender privacy policy, privacy policy, privacy policy and terms&conditions'}
       />
       <div className="main-section privacy-policy">
         {promoTextComponent}
-      <SectionTitle gif="/gifs/privacy-policy.gif" title="Privacy Policy" />    
-      <div className="main-container policy-container">
-        {PrivacyPolicyData.map((item, index) => (
-          <div className="policy" key={index}>
-            <p className="policy-title sub-heading">{item.title}</p>
+        <SectionTitle gif="/gifs/privacy-policy.gif" title={t('privacyPolicy.title')} />    
+        <div className="main-container policy-container">
+          {/* Safety Section */}
+          <div className="policy">
+            <h2 className="policy-title sub-heading">{t('privacyPolicy.safety.title')}</h2>
             <div className="policy-content text">
-              {Array.isArray(item.content) ? (
-                item.content.map((subItem, subIndex) => <p key={subIndex}>{subItem}</p>)
-              ) : (
-                <p>{item.content}</p>
-              )}
+              <p>{t('privacyPolicy.safety.content')}</p>
             </div>
           </div>
-        ))}
+          
+          {/* Data Sharing Section */}
+          <div className="policy">
+            <h2 className="policy-title sub-heading">{t('privacyPolicy.dataSharing.title')}</h2>
+            <div className="policy-content text">
+              <ul>
+                {t('privacyPolicy.dataSharing.items', { returnObjects: true }).map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          {/* Conversations Section */}
+          <div className="policy">
+            <h2 className="policy-title sub-heading">{t('privacyPolicy.conversations.title')}</h2>
+            <div className="policy-content text">
+              <p>{t('privacyPolicy.conversations.content')}</p>
+            </div>
+          </div>
+          
+          {/* Data Collection Section */}
+          <div className="policy">
+            <h2 className="policy-title sub-heading">{t('privacyPolicy.dataCollection.title')}</h2>
+            <div className="policy-content text">
+              <p>{t('privacyPolicy.dataCollection.content')}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 }

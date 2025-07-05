@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../sections/CheckoutForm";
 import "../../styles/Checkout/checkout.css";
 import { CheckoutContext } from "../context/CheckoutContext";
+import { Trans, useTranslation } from 'react-i18next';
 
 const stripePromise = loadStripe("pk_live_51JNhQYSGarUwHS3uNvHHbJOwhN57mB86SaotpjxomSIQkHzmqfu2I60xZT478pN9mKivmwPvzIAOJI3sitFCJYKn00n1XqvxZX");
 
@@ -12,6 +13,7 @@ const Checkout = () => {
   const { checkoutData } = useContext(CheckoutContext);
   const [clientSecret, setClientSecret] = useState(null);
   const [planDetails, setPlanDetails] = useState(null);
+  const { i18n } = useTranslation();
 
   const appearance = {
     theme: "stripe",
@@ -54,7 +56,19 @@ const Checkout = () => {
             </div>
           </div>
           <div className="checkout_title_section">
-            <p>{planDetails.title}</p>
+            <p>
+              {i18n.language === 'pt' ? (
+                <Trans
+                  i18nKey="checkout.primeSenderPlan"
+                  values={{
+                    planTitle: planDetails.title.replace(/^Prime Sender\s*/i,'').replace(/\s*plan.*$/i,'').trim(),
+                    users: planDetails.numbers.length
+                  }}
+                />
+              ) : (
+                planDetails.title
+              )}
+            </p>
           </div>
           <div className="checkout_price_section">
             <p className={`${planDetails.currency == 'INR'&&'rupee'} checkout_price`}>{formatPrice(planDetails.currency, planDetails.totalPrice)}</p>

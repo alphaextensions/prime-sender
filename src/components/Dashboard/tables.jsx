@@ -8,23 +8,32 @@ import {
   Tooltip,
   Progress,
 } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
 // import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 // import { authorsTableData, projectsTableData } from "@/data";
 
 export function Tables() {
+  const { t } = useTranslation();
+  
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
         <CardHeader variant="gradient" color="green" className="mb-8 p-6">
           <Typography variant="h6" color="white">
-            Last 2 Campaign Details
+            {t('dashboard.tables.lastCampaignsTitle')}
           </Typography>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["Campaign Name","Time", "Download Campaign","Download Delivery Report","Delete"].map((el) => (
+                {[
+                  t('dashboard.tables.tableHeaders.campaignName'),
+                  t('dashboard.tables.tableHeaders.time'), 
+                  t('dashboard.tables.tableHeaders.downloadCampaign'),
+                  t('dashboard.tables.tableHeaders.downloadReport'),
+                  t('dashboard.tables.tableHeaders.delete')
+                ].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -108,14 +117,20 @@ export function Tables() {
       <Card>
         <CardHeader variant="gradient" color="green" className="mb-8 p-6">
           <Typography variant="h6" color="white">
-            Recent Campaigns Details
+            {t('dashboard.tables.recentCampaignsTitle')}
           </Typography>
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["Campaign Name","Time", "Download Campaign","Download Delivery Report","Delete"].map(
+                {[
+                  t('dashboard.tables.tableHeaders.campaignName'),
+                  t('dashboard.tables.tableHeaders.time'), 
+                  t('dashboard.tables.tableHeaders.downloadCampaign'),
+                  t('dashboard.tables.tableHeaders.downloadReport'),
+                  t('dashboard.tables.tableHeaders.delete')
+                ].map(
                   (el) => (
                     <th
                       key={el}

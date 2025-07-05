@@ -22,6 +22,14 @@ export const FreeCardFeatures = [
   {
     name: 'Detailed Delivery Report',
     description: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
+  },
+  {
+    name: 'Translate Conversation',
+    description: "Automatically translate conversations into different languages for seamless communication.",
+  },
+  {
+    name: 'Blur Conversations',
+    description: "Blur conversations to protect sensitive information.",
   }
 ]
 

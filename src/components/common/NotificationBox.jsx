@@ -1,8 +1,10 @@
 import "../../styles/NotificationBox/notification.css";
 import { RxCross1 } from "react-icons/rx";
 import { MdVerified } from "react-icons/md";
+import { useTranslation, Trans } from 'react-i18next';
 
 const NotificationBox = ({ notificationData, isShowingNotification, setShowNotification, setIsShowingNotification }) => {
+    const { t } = useTranslation();
 
     const handleCloseNotification = () => {
         setIsShowingNotification(false);
@@ -18,12 +20,29 @@ const NotificationBox = ({ notificationData, isShowingNotification, setShowNotif
                 </div>
             </div>
             <div className="notification_text_container">
-                <p className="notification_bought_text">Someone from <span className="notification_location_text">{notificationData.city}, {notificationData.country}</span> <br/>bought <span className="notification_price_text"><span className={`${notificationData.country.toLowerCase()=='india'?"rupee":""}`}>{notificationData.currency}</span>{notificationData.price} (billed yearly)</span> plan!</p>
+                <p className="notification_bought_text">
+                    <Trans i18nKey="notification.boughtPlan"
+                        values={{
+                            city: notificationData.city,
+                            country: notificationData.country,
+                            price: notificationData.price,
+                            currency: notificationData.currency,
+                        }}
+                        components={{
+                            location: <span className="notification_location_text" />,
+                            price: <span className="notification_price_text" />,
+                            currency: <span className={`${notificationData.country.toLowerCase()=='india'?"rupee":""}`}/>,
+                            br: <br/>,
+                        }}
+                    >
+                        {`Someone from <location>{{city}}, {{country}}</location><br/>bought <price><currency>{{currency}}</currency>{{price}} (billed yearly)</price> plan!`}
+                    </Trans>
+                </p>
                 <div className="notification_bottom_container">
-                    <p className="notification_time_text">{notificationData.time} hours ago</p>
+                    <p className="notification_time_text">{t('notification.hoursAgo', { time: notificationData.time })}</p>
                     <p className="notification_stripe_verified">
                         <MdVerified />
-                        <span>Verified by <span className="notification_stripe_text">Stripe</span></span>
+                        <span>{t('notification.verifiedBy')} <span className="notification_stripe_text">Stripe</span></span>
                     </p>
                 </div>
             </div>

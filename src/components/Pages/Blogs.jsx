@@ -4,9 +4,12 @@ import BlogCard from "../common/BlogCard";
 import '../../styles/blog/blog.css';
 import { BlogCardData } from "../Data/blogCard-data";
 import { promoText } from "../Data/seo-data";
+import { useTranslation } from 'react-i18next';
 
 
 const Blogs = () => {
+  const { t } = useTranslation();
+  
   const promoTextComponentGenerator = () => {
     return promoText.map((text, index) => {
       return <span key={index} className='white_promo_text pro'>{text}</span>
@@ -14,17 +17,17 @@ const Blogs = () => {
   }
 
   const promoTextComponent = <div className='promo_text_container'>
-    {...promoTextComponentGenerator()}
+    {promoTextComponentGenerator()}
   </div>
   return (
     <>
       <HelmetHeader
-        title={'Blogs | Prime Sender - Free AI Web Message Sender'}
-        description={'Blogs of Prime Sender'}
-        keywords={'Blogs,prime sender blog page, prime sender blogs,Chat Productivity, WhatsApp Sender Extension'}
+        title={t('blogs.pageTitle')}
+        description={t('blogs.pageDescription')}
+        keywords={t('blogs.pageKeywords')}
       />
       <div className="main-section blog_section">
-        <SectionTitle gif="/gifs/blogs.gif" title="Blogs" />
+        <SectionTitle gif="/gifs/blogs.gif" title={t('blogs.sectionTitle')} />
       </div>
       <div className="blog_container">
         {

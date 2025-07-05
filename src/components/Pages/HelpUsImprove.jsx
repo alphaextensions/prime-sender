@@ -1,18 +1,24 @@
+import { useTranslation } from 'react-i18next';
 import SectionTitle from '../common/SectionTitle';
 import HelmetHeader from "../common/HelmetHeader";
 import '../../styles/HelpUsImprovePage/helpusimprove.css';
 import { promoText } from '../Data/seo-data';
 import { useEffect } from 'react';
+
 const HelpUsImprove = () => {
+  const { t } = useTranslation();
+  
   const promoTextComponentGenerator = () => {
-    return promoText.map((text, index) => {
-      return <span key={index} className='white_promo_text pro'>{text}</span>
-    })
+    return promoText.map((text, index) => (
+      <span key={index} className='white_promo_text pro'>{text}</span>
+    ));
   }
 
-  const promoTextComponent = <div className='promo_text_container'>
-    {...promoTextComponentGenerator()}
-  </div>
+  const promoTextComponent = (
+    <div className='promo_text_container'>
+      {promoTextComponentGenerator()}
+    </div>
+  );
 
   useEffect(() => {
     async function unInstallExtension() {
@@ -48,16 +54,16 @@ const HelpUsImprove = () => {
   return (
     <>
       <HelmetHeader
-        title={'Help Us Improve | Prime Sender - Free AI Web Message Sender'}
-        description={'Submit your feedback to help us improve Prime Sender'}
-        keywords={'help-us-improve,prime sender help, prime sender feedback'}
+        title={t('helpUsImprove.pageTitle')}
+        description={t('helpUsImprove.pageDescription')}
+        keywords={t('helpUsImprove.pageKeywords')}
       />
       <div className='main-section'>
         {promoTextComponent}
         <SectionTitle
           gif="/gifs/help-us-improve.gif"
-          title="Help us Improve"
-          subtitle="We strive to give you the best service possible but maybe there are certain things we need to catch up on."
+          title={t('helpUsImprove.title')}
+          subtitle={t('helpUsImprove.subtitle')}
         />
         <div className="main-container improve_container">
           <iframe
@@ -67,25 +73,23 @@ const HelpUsImprove = () => {
             frameBorder="0"
             marginHeight="0"
             marginWidth="0"
+            title={t('helpUsImprove.title')}
           >
-            Loading…
+            {t('helpUsImprove.loading')}
           </iframe>
           <div className='improve_para_2'>
-            <p className='sub-heading'>If you had a change of heart somehow and want to know how Prime Sender
-              works quickly in 3 steps, here :</p>
+            <p className='sub-heading'>{t('helpUsImprove.stepsTitle')}</p>
             <br />
-            <p className='text'>1. Enter the numbers you want to send the message to, separated by comma.</p>
-            <p className='text'>2. Enter the message you'd like to send. You could also add attachments 📁.</p>
+            {t('helpUsImprove.steps', { returnObjects: true }).map((step, index) => (
+              <p key={index} className='text'>{step}</p>
+            ))}
             <div className='text' style={{ marginLeft: '2rem' }}>
               <ul>
-                <li>Click on the icon of 📎 Attachment inside the text box inside the extension</li>
-                <li>Select files you'd like to send. You can select multiple files.</li>
-                <li>You can click on Add Caption to add caption to your attachment</li>
-                <li> Click on Send button inside the extension.</li>
+                {t('helpUsImprove.attachmentSteps', { returnObjects: true }).map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
               </ul>
             </div>
-            <p className='text'>3. Download the delivery report by clicking on Delivery Report to view the delivery status of the messages and the attachment sent.
-            </p>
           </div>
         </div>
       </div>

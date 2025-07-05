@@ -71,7 +71,8 @@
   font-size: 16px;
   transition: .3s;
   outline: none;
-  width: min(180px,90%);
+  max-width: 100%;
+  white-space: nowrap;
   margin: auto;
 }
 .form-btn button:hover{

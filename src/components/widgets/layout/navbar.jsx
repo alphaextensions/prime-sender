@@ -6,12 +6,25 @@ import {
   Collapse,
   Typography,
   IconButton,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
 } from "@material-tailwind/react";
 import { IoClose } from "react-icons/io5";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { MdLanguage } from "react-icons/md";
+import { useTranslation } from "react-i18next";
+import { changeLanguage } from "../../../i18n";
 
 export function Navbar({ brandName, routes, action }) {
   const [openNav, setOpenNav] = React.useState(false);
+  const { i18n, t } = useTranslation();
+
+  const handleLanguageChange = (lang) => {
+    changeLanguage(lang);
+  };
 
   React.useEffect(() => {
     window.addEventListener(
@@ -54,6 +67,27 @@ export function Navbar({ brandName, routes, action }) {
           </Typography>
         </Link>
         <div className="hidden lg:block">{navList}</div>
+        
+        {/* Language Dropdown */}
+        <div className="hidden lg:block mr-2">
+          <Menu>
+            <MenuHandler>
+              <Button variant="text" className="flex items-center gap-1 p-1 rounded-full">
+                <MdLanguage className="w-5 h-5" />
+                <span className="text-sm">{i18n.language === 'pt' ? 'PT' : 'EN'}</span>
+              </Button>
+            </MenuHandler>
+            <MenuList>
+              <MenuItem onClick={() => handleLanguageChange('en')} className={i18n.language === 'en' ? 'bg-blue-50' : ''}>
+                English
+              </MenuItem>
+              <MenuItem onClick={() => handleLanguageChange('pt')} className={i18n.language === 'pt' ? 'bg-blue-50' : ''}>
+                Português
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+        
         {React.cloneElement(action, {
           className: "hidden lg:inline-block",
         })}
@@ -73,6 +107,32 @@ export function Navbar({ brandName, routes, action }) {
       <Collapse open={openNav}>
         <div className="container mx-auto">
           {navList}
+          
+          {/* Mobile Language Selector */}
+          <div className="mb-4 block lg:hidden">
+            <Typography variant="small" color="blue-gray" className="mb-2 font-bold">
+              {t('navbar.language')}
+            </Typography>
+            <div className="flex gap-2">
+              <Button 
+                variant={i18n.language === 'en' ? 'filled' : 'outlined'}
+                size="sm" 
+                className={i18n.language === 'en' ? 'bg-blue-500' : 'border-blue-500 text-blue-500'}
+                onClick={() => handleLanguageChange('en')}
+              >
+                English
+              </Button>
+              <Button 
+                variant={i18n.language === 'pt' ? 'filled' : 'outlined'}
+                size="sm" 
+                className={i18n.language === 'pt' ? 'bg-blue-500' : 'border-blue-500 text-blue-500'}
+                onClick={() => handleLanguageChange('pt')}
+              >
+                Português
+              </Button>
+            </div>
+          </div>
+          
           {React.cloneElement(action, {
             className: "w-full block lg:hidden",
           })}
