@@ -546,6 +546,10 @@ const resources = {
             name: 'Translate Conversation',
             description: 'Now you can translate your messages to any language with just a single click'
           },
+          blurConversations: {
+            name: 'Blur Conversations',
+            description: 'Blur conversations to protect sensitive information.'
+          },
           prioritySupport: {
             name: 'Priority Support',
             description: 'We provide priority support to our premium customers, to help them with their queries'
@@ -1310,6 +1314,10 @@ const resources = {
           translateConversation: {
             name: 'Traduzir Conversa',
             description: 'Agora você pode traduzir suas mensagens para qualquer idioma com apenas um clique'
+          },
+          blurConversations: {
+            name: 'Desfocar conversas',
+            description: 'Desfoque conversas para proteger informações confidenciais.'
           },
           prioritySupport: {
             name: 'Suporte Prioritário',

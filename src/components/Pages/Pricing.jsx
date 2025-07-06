@@ -131,6 +131,7 @@ const Pricing = () => {
       'Save Message Template': 'pricing.features.saveMessageTemplate.description',
       'Detailed Delivery Report': 'pricing.features.detailedDeliveryReport.description',
       'Translate Conversation': 'pricing.features.translateConversation.description',
+      'Blur Conversations': 'pricing.features.blurConversations.description',
       'Priority Support': 'pricing.features.prioritySupport.description',
       'No minimum time gap': 'pricing.features.noMinimumTimeGap.description',
       'Random time gap': 'pricing.features.randomTimeGap.description',
