@@ -100,7 +100,10 @@ const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueCha
             });
         };
 
-        const onCountryChange = () => setPlaceholder();
+        const onCountryChange = () => {
+            setPlaceholder();
+            updateNumber();
+        };
 
         telRef.current.addEventListener('input', updateNumber);
         telRef.current.addEventListener('countrychange', onCountryChange);
