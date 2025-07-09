@@ -53,7 +53,11 @@ export const basicCardFeatures = [
   {
     name: "Group Contacts Export",
     description: "Download unsaved contacts from groups"
-  }
+  },
+  {
+    name: "Stop Campaign",
+    description: "Ability to stop messaging mid-campaign"
+  },
 ]
 
 export const advanceCardFeatures = [
