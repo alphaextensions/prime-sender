@@ -73,7 +73,7 @@ const HowToUse = () => {
         {/* right container */}
         <div className="use_right" data-aos="flip-right" >
           <div className="use_right_container">
-            <img src="/images/how-to-use.png" alt="How to use" />
+            <img src={t('howto.howtoimg')} alt="How to use" />
           </div>
         </div>
       </div>

@@ -732,7 +732,8 @@ const resources = {
           sendDesc5: '4. Click on Send button inside the extension',
           downloadTitle: 'Download Report',
           downloadDesc: 'Download the delivery report by clicking on Delivery Report to view the delivery status of the messages and the attachment sent.'
-        }
+        },
+        howtoimg: '/images/how-to-use.png',
      
       
       },
@@ -1501,7 +1502,8 @@ const resources = {
           sendDesc5: '4. Clique no botão Enviar dentro da extensão',
           downloadTitle: 'Baixar Relatório',
           downloadDesc: 'Baixe o relatório de entrega clicando em Relatório de Entrega para ver o status de entrega das mensagens e do anexo enviados.'
-        }
+        },
+        howtoimg: '/images/Portuguese_how_to.png',
      
       
       },
