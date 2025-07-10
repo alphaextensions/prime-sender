@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../styles/PricingPage/multipleAccountPopup.css';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input/build/css/intlTelInput.css'
+import intlTelInputUtils from 'intl-tel-input/build/js/utils';
+if (typeof window !== 'undefined' && intlTelInputUtils) {
+  window.intlTelInputUtils = intlTelInputUtils;
+}
 import { Oval } from 'react-loader-spinner';
 import { IoIosInformationCircleOutline, IoIosRemoveCircleOutline, IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
 import { CheckoutContext } from '../context/CheckoutContext';
+import { useTranslation, Trans } from 'react-i18next';
 
 const validateUserEmail = (email) => {
 	const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -15,64 +20,194 @@ const validateUserEmail = (email) => {
 }
 
 const NumberComponent = ({ phoneNumbers, setPhoneNumbers, index, value, valueChangeHandler, numberInputError, inputErrorNumbers,myLocation }) => {
-    const [dialCode, setDialCode] = useState(() => {
-        let existingPhone = phoneNumbers[index] || "";
-        if (existingPhone.length > 0) {
-            const match = existingPhone.match(/\+(\d+)-/);
-            if (match) return match[1];
+    const telRef = useRef(null);
+    const prevScrollRef = useRef(null);
+    const itiRef = useRef(null);
+    const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
+
+    useEffect(() => {
+        const iti = intlTelInput(telRef.current, {
+            separateDialCode: true,
+            autoHideDialCode: true,
+            initialCountry: (myLocation?.country_code || 'auto').toLowerCase(),
+            geoIpLookup: (success) => success((myLocation?.country_code || 'us').toLowerCase()),
+            autoPlaceholder: 'aggressive',
+            placeholderNumberType: 'MOBILE',
+            customContainer: 'iti',
+            dropdownContainer: document.body,
+        });
+        itiRef.current = iti;
+        if (phoneNumbers[index]) {
+            const stored = phoneNumbers[index].replace('-', ''); 
+            try {
+                iti.setNumber(stored);
+            } catch (e) { console.error(e) }
         }
-        return (myLocation.countryCallingCode?.split('+')[1]) || "1";
-    });
-	const [countryCode, setCountryCode] = useState(() => {
-        return (dialCode == "1") ? "us" :  myLocation.country_code.toLowerCase();
-    });
-	const [removeNumberIndex, setRemoveNumberIndex] = useState(null);
 
-	const handleNumberChange = (e) => {
-		let temp = [...phoneNumbers];
-		temp[index] = `+${dialCode}-${e.target.value}`;
-		setPhoneNumbers(temp);
-	}
+        const setPlaceholder = () => {
+            const data = iti.getSelectedCountryData();
+            const utils = window.intlTelInputUtils;
+            let placeholder = '';
 
-	const handleCountryCodeChange = ({ code }) => {
-		setDialCode(code);
-		let number = phoneNumbers[index]?.split('-')[1] || "";
-		let temp = [...phoneNumbers];
-		temp[index] = `+${code}-${number}`;
-		setPhoneNumbers(temp);
-	}
+            if (utils && data?.iso2) {
+                try {
+                    const exampleNumber = utils.getExampleNumber(
+                        data.iso2.toUpperCase(),
+                        true,
+                        utils.numberType.MOBILE
+                    );
+                    placeholder = utils.formatNumber(
+                        exampleNumber,
+                        data.iso2.toUpperCase(),
+                        utils.numberFormat.NATIONAL
+                    );
+                } catch (e) { console.error(e) }
+            }
 
-	return <div className={`number_component_container ${removeNumberIndex==index ?'slide_out':''}`}>
-		<div className='number_component_number'>
-			<div className='number_component_line'></div>
-			<div className='number_component_circle'>{index + 1}</div>
-			<div className='numer_component_number_input'>
-				<PhoneInput
-					country={countryCode}
-					value={dialCode}
-					onChange={code => handleCountryCodeChange({ code })}
-				/>
-				<input type="number" className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`} value={phoneNumbers[index]?.split('-').length > 1 ? phoneNumbers[index].split('-')[1] : ""} onChange={handleNumberChange} />
-				{
-					value > 2 &&
-					<div 
-						className='number_input_remov_button' 
-						onClick={() => {
-							setRemoveNumberIndex(index);
-							setTimeout(() => {
-								setRemoveNumberIndex(null);
-								valueChangeHandler(value - 1, index)
-							}, 500)
-						}}
-					>
-						<p><IoIosRemoveCircleOutline/></p>
-					</div>
-				}
-			</div>
-		</div>
-	</div>
+            if (!placeholder && typeof iti.getNumberPlaceholder === 'function') {
+                try {
+                    placeholder = iti.getNumberPlaceholder('MOBILE');
+                } catch (e) { console.error(e) }
+                if (placeholder) {
+                    placeholder = placeholder.replace(/[^0-9]+/g, '');
+                    placeholder = placeholder.replace(/^0+/, '');
+                }
+            }
+
+            if (placeholder) {
+                placeholder = placeholder.replace(/[^0-9]+/g, '');
+                    placeholder = placeholder.replace(/^0+/, '');
+            }
+            telRef.current.setAttribute('placeholder', placeholder || '');
+        };
+        setPlaceholder();
+
+        if (iti.promise) {
+            iti.promise.then(setPlaceholder).catch(() => {});
+        }
+
+        const updateNumber = () => {
+            if (!itiRef.current) return;
+            const data = itiRef.current.getSelectedCountryData();
+            const dial = data?.dialCode || '';
+            const digits = telRef.current.value.replace(/\D/g, '');
+            let national = digits.startsWith(dial) ? digits.slice(dial.length) : digits;
+            const formatted = national.length ? `+${dial}-${national}` : '';
+            setPhoneNumbers(prev => {
+                const arr = [...prev];
+                arr[index] = formatted;
+                return arr;
+            });
+        };
+
+        const onCountryChange = () => {
+            setPlaceholder();
+            updateNumber();
+        };
+
+        telRef.current.addEventListener('input', updateNumber);
+        telRef.current.addEventListener('countrychange', onCountryChange);
+
+        const onDropdownOpen = () => {
+            if (!telRef.current) return;
+            const container = telRef.current.closest('.numbers_input_section');
+            if (!container) return;
+            if (prevScrollRef.current === null || prevScrollRef.current === undefined) {
+                prevScrollRef.current = container.scrollTop;
+            }
+        };
+        const onDropdownClose = () => {
+            if (!telRef.current) return;
+            const container = telRef.current.closest('.numbers_input_section');
+            if (container && prevScrollRef.current !== null && prevScrollRef.current !== undefined) {
+                container.scrollTop = prevScrollRef.current;
+                prevScrollRef.current = null;
+            }
+        };
+
+        telRef.current.addEventListener('open:countrydropdown', onDropdownOpen);
+        telRef.current.addEventListener('close:countrydropdown', onDropdownClose);
+
+        return () => {
+            telRef.current?.removeEventListener('input', updateNumber);
+            telRef.current?.removeEventListener('countrychange', onCountryChange);
+            telRef.current?.removeEventListener('open:countrydropdown', onDropdownOpen);
+            telRef.current?.removeEventListener('close:countrydropdown', onDropdownClose);
+            iti.destroy();
+        };
+    }, []);
+
+    return <div className={`number_component_container ${removeNumberIndex==index ?'slide_out':''}`}>
+        <div className='number_component_number'>
+            <div className='number_component_line'></div>
+            <div className='number_component_circle'>{index + 1}</div>
+            <div className='numer_component_number_input'>
+                <input
+                    type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    ref={telRef}
+                    className={`${(numberInputError && inputErrorNumbers.includes(index))?"input_error_border":""} mult_number_input`}
+                    onWheel={e => e.target.blur()}
+                    onKeyDown={e => {
+                        if (["e", "E", "+", "-", "."].includes(e.key)) {
+                            e.preventDefault();
+                        }
+                    }}
+                    onInput={e => {
+                        // Remove any non-numeric characters
+                        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                    }}
+                />
+                {
+                    value > 2 &&
+                    <div 
+                        className='number_input_remov_button' 
+                        onClick={() => {
+                            setRemoveNumberIndex(index);
+                            setTimeout(() => {
+                                setRemoveNumberIndex(null);
+                                valueChangeHandler(value - 1, index)
+                            }, 500)
+                        }}
+                    >
+                        <p><IoIosRemoveCircleOutline/></p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 }
 const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, setShowMultipleAccountPopup, plan_duration, plan_type, amount, country_currency, multCountry,currentCountry, myLocation }) => {
+    useEffect(() => {
+        const saved = JSON.parse(localStorage.getItem("phoneNumbers"));
+        if (saved && Array.isArray(saved) && saved.length && (!phoneNumbers || phoneNumbers.length === 0 || phoneNumbers.every(n => !n))) {
+            setPhoneNumbers(saved);
+            setValue(saved.length);
+        }
+    }, []);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
+		const scrollY = window.scrollY || window.pageYOffset;
+		const originalOverflow = document.body.style.overflow;
+		const originalPosition = document.body.style.position;
+		const originalTop = document.body.style.top;
+
+		document.body.style.overflow = 'hidden';
+		document.body.style.position = 'fixed';
+		document.body.style.top = `-${scrollY}px`;
+		document.body.style.width = '100%';
+
+		return () => {
+			document.body.style.overflow = originalOverflow;
+			document.body.style.position = originalPosition;
+			document.body.style.top = originalTop;
+			window.scrollTo(0, scrollY);
+		};
+	}, []);
+
 	const { setCheckoutData } = useContext(CheckoutContext);
 	const numbersContainerRef = useRef(null);
 	const navigate = useNavigate();
@@ -86,6 +221,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const [autorenewChecked, setAutorenewChecked] = useState(false);
 	const [autoRenewHover, setAutoRenewHover] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
+	const { t } = useTranslation();
 
 	const valueChangeHandler = (val, ind) => {
 		if (val < 2) {
@@ -150,7 +286,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		} catch (error) {
 			setIsPageGenerating(false);
 			console.log("error from setting data in database ", error);
-			toast("Something went wrong. Please try again.", { theme: 'colored', type: 'error', autoClose: 5000 });
+			toast(t('pricing.popup.somethingWentWrong'), { theme: 'colored', type: 'error', autoClose: 5000 });
 		}
 	}
 
@@ -161,33 +297,29 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			setTimeout(() => {
 				setEmailInputError(false);	
 			}, 3000);
-			toast("Please enter a valid email id", { theme: "colored", type: "error", autoClose:3000 });
+			toast(t('pricing.popup.validEmailError'), { theme: "colored", type: "error", autoClose:3000 });
 			return false;
 		};
 
 		// check for the number of accounts 
 		if(value<2) {
-			toast("Number of accounts cannot be less than 2", {theme: 'colored', type:'error', autoClose:3000 });
+			toast(t('pricing.popup.accountsLessThan2Error'), {theme: 'colored', type:'error', autoClose:3000 });
 			return false;
 		}
 
-		// validate user phone number
-		let isInputErrorPresent = false, errorNumbers = [];
-		for(let i=0; i<phoneNumbers.length; i++) {
-			if(!phoneNumbers[i] || phoneNumbers[i]=='') {
-				isInputErrorPresent = true;
-				setNumberInputError(true);
-				errorNumbers.push(i);
-			} else if(phoneNumbers[i].split('-')[1]=='') {
-				isInputErrorPresent = true;
-				setNumberInputError(true);
-				errorNumbers.push(i);
-			}
-		}
-		setInputErrorNumbers(errorNumbers);
+        const phoneRegex = /^\+\d+-\d+$/;
+        let isInputErrorPresent = false, errorNumbers = [];
+        for (let i = 0; i < value; i++) {
+            const entry = phoneNumbers[i];
+            if (!entry || !phoneRegex.test(entry)) {
+                isInputErrorPresent = true;
+                setNumberInputError(true);
+                errorNumbers.push(i);
+            }
+        }
+        setInputErrorNumbers(errorNumbers);
 		if(isInputErrorPresent) {
-			toast("Please enter a valid phone number", {theme: 'colored', type:'error', autoClose:3000 });
-			// scroll to the first number with error
+			toast(t('pricing.popup.validPhoneNumberError'), {theme: 'colored', type:'error', autoClose:3000 });
 			let firstErrorInput = document.querySelectorAll('.mult_number_input')[errorNumbers[0]];
 			if(firstErrorInput) {
 				firstErrorInput.scrollIntoView({behavior:"smooth", block:"center"});
@@ -265,7 +397,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const NumberListComponent = () => {
 		return <>
 			<div className='numbers_list_email'>
-				<p className='number_list_email_heading'>Email : </p>
+				<p className='number_list_email_heading'>{t('pricing.popup.email')}</p>
 				<p className='number_list_email_text'>{userEmail}</p>
 			</div>
 			<div className='numbers_list_list'>
@@ -278,7 +410,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							currNumber = list[0] + list[1];
 						}
 						return <div className='number_div' key={index}>
-							<p className='number_heading'>Number {index + 1} :</p>
+							<p className='number_heading'>{t('pricing.popup.numberHeading', {index: index + 1})}</p>
 							<p className='number_number'>{currNumber}</p>
 						</div>
 					})}
@@ -286,7 +418,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			</div>
 			<div className='mult_popup_button_section number_list_button_section'>
 				<button className='mult_popup_buy_button mult_review_button' onClick={() => setShowNumbersList(false)}>
-					<a>Go Back</a>
+					<a>{t('pricing.popup.goBack')}</a>
 				</button>
 			</div>
 		</>
@@ -306,34 +438,34 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							</div>
 							<div className='mult_account_heading'>
 								<div className='left_line'></div>
-								<div className='mult_account_heading_text'>Buy Multiple Accounts</div>
+								<div className='mult_account_heading_text'>{t('pricing.popup.buyMultipleAccounts')}</div>
 								<div className="right_line"></div>
 							</div>
 							<div className="mult_account_logo">
 								<div className="mult_account_image">
 									<img src="images/logo-large.png" alt="" />
 								</div>
-								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} {plan_duration=='annually'?'Annual':'Monthly'}</div>
+								<div className="mult_account_logo_text">{plan_type=='basic'?'Basic':'Advance'} {plan_duration=='annually'?t('pricing.annual'):t('pricing.monthly')}</div>
 							</div>
 						</div>
 						{/* popup body */}
 						<div className='mult_account_body'>
 							<div className='mult_account_num'>
-								<p className='mult_account_num_text'>Number of accounts: </p>
+								<p className='mult_account_num_text'>{t('pricing.popup.numberOfAccounts')}</p>
 								<input type="number" value={value} onChange={(e) => valueChangeHandler(e.target.value)} />
 							</div>
 							<div className='mult_account_num'>
-								<p className='mult_account_num_text'>Email address: </p>
+								<p className='mult_account_num_text'>{t('pricing.popup.emailAddress')}</p>
 								<input type="email" className={`mult_account_email_input ${emailInputError?'input_error_border':''}`} value={userEmail} onChange={(e) => {
 									setUserEmail(e.target.value)
 									localStorage.setItem("userEmail", JSON.stringify(e.target.value))
 								}} />
 							</div>
 							<div className='mult_account_body_heading'>
-								<p>Add the <span>WhatsApp numbers</span> on which the premium needs to be enabled</p>
+								<p><Trans i18nKey='pricing.popup.addWhatsAppNumbersHeading' components={{highlight: <span/>}}/></p>
 							</div>
 							{value < 2 ? <div className="mult_error_message">
-								Number of accounts cannot be less than 2
+								{t('pricing.numberOfAccountsCannotBeLessThan2')}
 							</div> :
 								<div className={`numbers_input_section ${value > 2 ? 'overflow_class' : ''}`} ref={numbersContainerRef}>
 									{
@@ -342,7 +474,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 												phoneNumbers={phoneNumbers}
 												setPhoneNumbers={setPhoneNumbers}
 												index={index}
-												key={index}
+												key={`num-${index}-${value}` }
 												value={value}
 												valueChangeHandler={valueChangeHandler}
 												numberInputError={numberInputError}
@@ -355,11 +487,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 							}
 							<div className='mult_account_add_more'>
                                 <p className='mult_account_show_more' disabled={value<2} onClick={() => setShowNumbersList(true)}>
-                                    Show numbers
+                                    {t('pricing.popup.showNumbers')}
                                 </p>
 								<p onClick={() => {
 									valueChangeHandler(Number(value) + 1)
-                                }}><b>+</b> Add More</p>
+                                }}><b>+</b> {t('pricing.popup.addMore')}</p>
                             </div>
                             {
 								plan_duration == 'monthly' &&
@@ -378,12 +510,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
                                             }, 2000);
                                         }}
                                     />
-                                    <label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">Enable auto-renew</label>
+                                    <label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">{t('pricing.popup.enableAutoRenew')}</label>
 									<span className={`pricing_feature_info_container`} onMouseEnter={() => setAutoRenewHover(true)} onMouseLeave={() => setAutoRenewHover(false)}>
 										<IoIosInformationCircleOutline className="feature_info_class" />
 										<div className="navigation_outer_box_down navigation_container" hidden={!autoRenewHover} >
-											<div className="msg-box-down multiple-card">
-												<p>Premium amount will be deducted every month on checking this box.</p>
+											<div className="msg-box-down">
+												<p>{t('pricing.popup.autoRenewInfo')}</p>
 											</div>
 										</div>
 									</span>
@@ -396,16 +528,16 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 								// </button>
                             }
 								<button className={`mult_popup_buy_button ${autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
-                                    {((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>Buy now</a>}
+                                    {((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>{t('pricing.buy')}</a>}
 								</button>
                             {
                                 plan_duration == "monthly" && 
                                 <button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
-                                    {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>Subscribe</a>}
+                                    {((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>{t('pricing.subscribe')}</a>}
                                 </button>
                             }
 							</div>
-							{isPageGenerating && <div className='please_wait_text'>Please wait...</div>}
+							{isPageGenerating && <div className='please_wait_text'>{t('pricing.popup.pleaseWait')}</div>}
 						</div>
 					</>
 				}
