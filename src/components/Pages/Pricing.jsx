@@ -1063,7 +1063,7 @@ const Pricing = () => {
                     <>
                       <div className="pricing_card_price">
                         <div className="pricing_card_price_div">
-                            <span style={{ "fontWeight": "bold", "marginRight": "5px" }} className="text-royal">~</span>
+                            {/* <span style={{ "fontWeight": "bold", "marginRight": "5px" }} className="text-royal">~</span> */}
                             <span className="display_flex_align_start">
                                 <span className={`${currentCountry === 'india' ? 'rupee font15' : ' font15'} ${isCountryWithCurrency()?"marginTop3":""} text-royal`}>{multAccountPrice.currency}</span>
                                 <span className="pricing_card_price_text text-royal">{Math.ceil(multAccountPrice.price/numAccounts)}</span>
