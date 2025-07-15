@@ -135,12 +135,20 @@
   left: 25%;
   color: var(--color-black);
 }
-.pricing-popup-content .annual-price,
-.pricing-popup-content .annual-price-indonesia {
+.pricing-popup-content .annual-price{
+/* .pricing-popup-content .annual-price,
+.pricing-popup-content .annual-price-indonesia { */
   position: absolute;
   top: 0%;
-  left: 75%;
-  transform: translateX(-50%);
+  right: 6%;
+}
+.pricing-popup-content .annual-price-indonesia{
+  position: absolute;
+  top: 0%;
+  right: 6%;
+  /* left: 75%;
+  transform: translateX(-50%); */
+
 }
 .pricing-popup-slash-price{
   text-decoration: line-through;
@@ -1458,4 +1466,41 @@
 .driver-popover-next-btn,
 .driver-popover-progress-text {
   font-family: 'PT Sans Caption', sans-serif !important;
+}
+
+.pricing-popup-price-container {
+    text-align: start;
+}
+
+.pricing-popup-price-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+.pricing-popup-price-unit {
+    margin-top: 0.25rem;
+}
+
+.pricing-popup-slash-price::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: red;
+    transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+}
+.pricing-popup-offer-price {
+    position: relative;
+    font-size: 20px;
+    bottom: -1px;
+    color: #4CAF50;
+    font-weight: 500;
+}
+.pricing-popup-offer-price span{
+    margin: 0 5px;
 }
