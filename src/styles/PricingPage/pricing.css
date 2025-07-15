@@ -1361,6 +1361,12 @@
   }
 }
 
+@media (max-width: 420px) {
+    .pricing_country_text p {
+        flex-wrap: wrap;
+    }
+}
+
 @media (max-width: 380px) {
   .pricing_country_text img {
     width: 20px !important;
