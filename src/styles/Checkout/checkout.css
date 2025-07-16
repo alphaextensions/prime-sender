@@ -67,6 +67,10 @@
 	align-items: flex-start;
 	gap: 5px;
 }
+.checkout_price_section{
+	flex-direction: row;
+	align-items: center;
+}
 
 .checkout_email_label,
 .checkout_number_label {
@@ -101,13 +105,14 @@
 	background: #fff3;
 	color: #fff;
 	border-radius: 8px;
-	padding: 5px;
+	padding: 10px;
 	border: 2px solid var(--color-primary2);
 }
 
 .checkout_price {
 	color: var(--color-white);
 	font-weight: bold;
+	font-family: 'PT Sans Caption', sans-serif;
 	font-size: 30px;
 }
 
@@ -144,4 +149,19 @@
 	width: 22px;
 	height: 22px;
 	stroke: #fff;
+}
+
+.slashed_price{
+	font-size: 15px;
+	font-weight: normal;
+    text-decoration-line: line-through;
+}
+
+.currency-symbol{
+	font-size: 15px;
+    margin-top: 8px;
+}
+.total_checkout_price{
+	display: flex;
+	align-items: flex-start;
 }

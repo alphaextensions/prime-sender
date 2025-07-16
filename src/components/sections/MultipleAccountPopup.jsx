@@ -7,6 +7,7 @@ import { IoIosInformationCircleOutline, IoIosRemoveCircleOutline, IoMdClose } fr
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
+import { pricing_data } from '../Data/pricing-data';
 import { CheckoutContext } from '../context/CheckoutContext';
 
 const validateUserEmail = (email) => {
@@ -209,7 +210,11 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		plan_type = plan_type == 'basic' ? "Basic" : "Advance";
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
-		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
+		let productDescription = `${plan_type} ${bodyDuration} Plan for ${phoneNumbers.length} users`
+
+		let slashedPrice = pricing_data[myLocation.pricing_country_name][plan_duration][`${plan_type.toLowerCase()}_plan`]["monthly_original"]
+		slashedPrice = slashedPrice*(phoneNumbers.length)*(plan_duration == 'monthly' ?1:12)
+
         if(autorenewChecked) {
             const stripe_checkout_url = await setDataInDatabase(productName, productDescription, country_currency, true);
             window.open(stripe_checkout_url, '_blank');
@@ -226,10 +231,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			currency: country_currency,
 			totalPrice: amount.totalPrice,
 			title: productDescription,
-			plan_type: plan_type
+			plan_type: plan_type,
+			slashedPrice: slashedPrice
 		}
-		setCheckoutData(reqQuery);
-		navigate(`/checkout`);
+		// Store in sessionStorage so the new tab can read it
+		sessionStorage.setItem("checkoutData", JSON.stringify(reqQuery));
+		window.open("/checkout", "_blank");
 
 	}
 

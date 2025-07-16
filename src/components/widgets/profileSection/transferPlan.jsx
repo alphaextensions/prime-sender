@@ -405,6 +405,7 @@ function TransferPlan() {
                                 <MenuHandler>
                                     <Button
                                         ripple={false}
+                                        disabled={true}
                                         variant="text"
                                         color="blue-gray"
                                         className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3 max-xs:h-[50px] max-xs:py-3 max-xs:px-[10px] max-xs:w-[82px]"
@@ -438,8 +439,12 @@ function TransferPlan() {
                             <Input
                                 type="tel"
                                 placeholder="Mobile Number"
+                                inputMode="numeric"
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                 onChange={(e) => {
+                                    const onlyNum = e.target.value.replace(/\D/g, "");
+                                    setPhoneNumber(onlyNum);
+                                }}
                                 className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900 max-xs:h-max max-xs:px-[10px] max-xs:py-3 max-xs:text-base"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -555,8 +560,12 @@ function TransferPlan() {
                             <Input
                                 type="tel"
                                 placeholder="Mobile Number"
+                                inputMode="numeric"
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                 onChange={(e) => {
+                                    const onlyNum = e.target.value.replace(/\D/g, "");
+                                    setPhoneNumber(onlyNum);
+                                }}
                                 className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
