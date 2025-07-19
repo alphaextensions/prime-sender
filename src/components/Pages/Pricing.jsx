@@ -461,7 +461,7 @@ const Pricing = () => {
     let whatsappRedirectUrl = "https://web.whatsapp.com/send?phone=917058067789&text="
     let whatsappText = '';
     if (type == 'bank') {
-      whatsappText = plan_type == 'Basic' ? 'Hi, I want to buy Basic Annual via Bank Transfer or PayPal' : 'Hi, I want to buy Advance Annual via Bank Transfer or PayPal';
+      whatsappText = plan_type == 'Basic' ? 'Hi, I want to buy Basic Annual via PayPal' : 'Hi, I want to buy Advance Annual via PayPal';
       whatsappRedirectUrl += encodeURIComponent(whatsappText);
     }
     return whatsappRedirectUrl;
@@ -966,7 +966,7 @@ const Pricing = () => {
               }
               {
                 currentCountry !='india' && planPeriod != 'monthly' && currentCountry !== "indonesia" &&
-                <div className="pay_via_bank_text">{t('pricing.bankTransferAndPayPal')} - <a href={getWhatsappLink("bank", "Basic")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
+                <div className="pay_via_bank_text">{t('pricing.payPal')} - <a href={getWhatsappLink("bank", "Basic")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
               }
               <div className="pricing_card_features">
                 {currentCountry !== "indonesia" && <div className="pricing_card_feature">
@@ -1028,7 +1028,7 @@ const Pricing = () => {
               }
               {
                 currentCountry !='india' && planPeriod != 'montly' &&
-                <div className="pay_via_bank_text">{t('pricing.bankTransferAndPayPal')} - <a href={getWhatsappLink("bank", "Advance")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
+                <div className="pay_via_bank_text">{t('pricing.payPal')} - <a href={getWhatsappLink("bank", "Advance")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
               }
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">
