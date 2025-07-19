@@ -61,7 +61,7 @@ const Checkout = () => {
     return parts;
   };
   const totalPriceParts = formatPriceParts(currency, totalPrice);
-  const slashedPriceParts =formatPriceParts(currency,slashedPrice)
+  const slashedPriceParts = slashedPrice !== null ? formatPriceParts(currency,slashedPrice) : [];
 
 
   return (
@@ -101,7 +101,7 @@ const Checkout = () => {
               })}
             </p>
             <p className="checkout_price slashed_price">
-              {slashedPriceParts.map((part, idx) => {
+              {slashedPriceParts.length > 0 && slashedPriceParts.map((part, idx) => {
                 if (part.type === 'currency') {
                   return <span key={idx} className={`${currency === 'INR' ? 'rupee' : ''} currency-symbol`}>{part.value}</span>;
                 }

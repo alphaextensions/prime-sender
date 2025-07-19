@@ -231,22 +231,39 @@ function TransferPlan() {
 
     /////// Multiple Accounts Function ///////
 
-    const formatPhoneNumbers = (phoneNumbers) => {
-        const formatted = phoneNumbers.map(phoneNumber => {
-            let number;
-            number = phoneNumber.startsWith(currentCountry.countryCallingCode.split("+")[1]) ? phoneNumber.slice(currentCountry.countryCallingCode.length - 1) : phoneNumber;
-            return { countryCode: `${currentCountry.countryCallingCode}`, number: number };
-        });
-
-        setFormattedPhoneNumbers(formatted);
-    };
-
-    const getPhoneNumbers = () => {
+    const formatPhoneNumbers = () => {
         const data = controller.credentials.data;
-        const phoneNumbers = data.filter(user => !user.phone || (user.parent_email && user.parent_email !== "" && user.parent_email !== "NULL")).map((item) => (item.phone));
-        formatPhoneNumbers(phoneNumbers)
-        fetchUserInfo(phoneNumbers[0])
+    
+        const rawNumbers = data
+            .filter(user => !user.phone || (user.parent_email && user.parent_email !== "" && user.parent_email !== "NULL"))
+            .map(item => item.phone)
+            .filter(Boolean);
+    
+        const cleanedSet = new Set();
+    
+        const formatted = [];
+    
+        for (const phoneNumber of rawNumbers) {
+            if (!phoneNumber) continue;
+    
+            const cc = currentCountry.countryCallingCode.replace("+", "");
+            const normalized = phoneNumber.startsWith(cc) ? phoneNumber.slice(cc.length) : phoneNumber;
+    
+            if (!cleanedSet.has(normalized)) {
+                cleanedSet.add(normalized);
+                formatted.push({ countryCode: `+${cc}`, number: normalized });
+            }
+        }
+    
+        setFormattedPhoneNumbers(formatted);
+    
+        if (formatted.length > 0) {
+            fetchUserInfo(formatted[0].number);
+        }
+    
+        console.log("Unique formatted numbers:", formatted);
     };
+    
 
     const sendReqForMultipleAcc = (newNumber) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
@@ -280,7 +297,7 @@ function TransferPlan() {
                     });
 
                     setSelectedUser(res.data.userData)
-                    getPhoneNumbers()
+                    formatPhoneNumbers()
                     toast(
                         <div>
                             <strong>Account Transferred Successfully!</strong>
@@ -351,7 +368,7 @@ function TransferPlan() {
     };
 
     useEffect(() => {
-        isMultipleAccountAdmin() ? getPhoneNumbers() : ""
+        isMultipleAccountAdmin() ? formatPhoneNumbers() : ""
     }, []);
 
     useEffect(() => {
@@ -514,6 +531,7 @@ function TransferPlan() {
                                         ripple={false}
                                         variant="text"
                                         color="blue-gray"
+                                        disabled
                                         className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
                                     >
                                         <img

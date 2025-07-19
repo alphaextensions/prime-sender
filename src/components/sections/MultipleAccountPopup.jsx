@@ -344,7 +344,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		productName += ' ' + plan_type + ' ' + bodyDuration;
 		let productDescription = `${plan_type} ${bodyDuration} Plan for ${phoneNumbers.length} users`
 
-		let slashedPrice = pricing_data[myLocation.pricing_country_name][plan_duration][`${plan_type.toLowerCase()}_plan`]["monthly_original"]
+		let slashedPrice = pricing_data[myLocation.pricing_country_name][plan_duration][`${plan_type.toLowerCase()}_plan`][plan_duration !== 'monthly' ? "monthly_original" : "original"]
 		slashedPrice = slashedPrice*(phoneNumbers.length)*(plan_duration == 'monthly' ?1:12)
 
         if(autorenewChecked) {
