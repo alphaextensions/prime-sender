@@ -379,6 +379,7 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 15px;
+	margin-bottom: 20px;
 }
 
 .number_div  .number_heading {
@@ -444,6 +445,48 @@
 
 .auto_renew_container .pricing_feature_info_container {
 	margin-left: 2px;
+}
+
+.multiple_account_popup .navigation_outer_box_down {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1000000;
+	bottom: 95%;
+}
+
+.multiple_account_popup .navigation_outer_box_down.navigation_container.tooltip-below {
+	bottom: auto;
+	top: 100%;
+	margin-top: 10px;
+}
+
+
+.multiple_account_popup .navigation_outer_box_down.navigation_container.tooltip-below .msg-box-down .arrow {
+	bottom: auto;
+	top: -10px;
+	border-top: none;
+	border-bottom: 10px solid #009a88;
+}
+
+.multiple_account_popup .navigation_outer_box_down .msg-box-down {
+	max-width: 300px;
+	word-wrap: break-word;
+	white-space: normal;
+	text-align: center;
+}
+
+.multiple_account_popup .pricing_feature_info_container {
+	position: relative;
+	overflow: visible;
+}
+
+@media screen and (max-width: 520px) {
+	.multiple_account_popup .navigation_outer_box_down .msg-box-down {
+		max-width: 250px;
+		font-size: 12px;
+		padding: 8px 15px;
+	}
 }
 
 .auto_renew_container input[type="checkbox" i] {
