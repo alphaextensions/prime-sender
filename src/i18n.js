@@ -484,7 +484,7 @@ const resources = {
         pricingCalculator: 'Pricing Calculator',
         billedAnnually: 'billed annually',
         popup: {
-          buyMultipleAccounts: 'Buy Multiple Accounts',
+          buyMultipleAccounts: 'Buy Multiple Accounts upto 70% discount',
           email: 'Email :',
           numberHeading: 'Number {{index}} :',
           goBack: 'Go Back',
@@ -499,7 +499,7 @@ const resources = {
           validEmailError: 'Please enter a valid email id',
           validPhoneNumberError: 'Please enter a valid phone number',
           somethingWentWrong: 'Something went wrong. Please try again.',
-          userPerMonthBilledAnnually: '/user/month<br/>billed annually',
+          userPerMonthBilledAnnually: '/user/month billed annually',
           plan: 'Plan',
           discountFirstMonth: '*Discount applicable for the first month',
           autoDeductionDisclaimer: 'By subscribing, you agree to auto-deductions every month according to your plan type which will extend your plan type by a month. By purchasing the premium plan, you agree to our <termsLink>Terms of Service</termsLink> and <privacyLink>Privacy Policy</privacyLink>.',
@@ -1172,7 +1172,7 @@ const resources = {
           },
           emailMismatch: {
             headline: 'Email Não Corresponde à Conta do WhatsApp',
-            subheadline: 'Olá {{userName}}{{comma}}parece que seu número do WhatsApp já está vinculado a um endereço de email diferente ({{maskedEmail}}). Para ver o email completo, visite a seção de perfil em sua extensão. Certifique-se de que está fazendo login com a conta Google correta.'
+            subheadline: 'Olá {{userName}}{{comma}}parece que seu número do WhatsApp já está vinculado a um endereço de email diferente ({{maskedEmail}}). Para ver o email completo, visite a seção de perfil em sua extensão. Make sure you\'re signing in with the correct Google account.'
           }
         },
         support: {
@@ -1254,7 +1254,7 @@ const resources = {
         pricingCalculator: 'Calculadora de preços',
         billedAnnually: 'cobrado anualmente',
         popup: {
-          buyMultipleAccounts: 'Comprar múltiplas contas',
+          buyMultipleAccounts: 'Comprar múltiplas contas com até 70% de desconto',
           email: 'Email :',
           numberHeading: 'Número {{index}} :',
           goBack: 'Voltar',
@@ -1269,9 +1269,9 @@ const resources = {
           validEmailError: 'Por favor, insira um email válido',
           validPhoneNumberError: 'Por favor, insira um número de telefone válido',
           somethingWentWrong: 'Algo deu errado. Por favor, tente novamente.',
-          userPerMonthBilledAnnually: '/usuário/mês<br/>cobrado anualmente',
+          userPerMonthBilledAnnually: '/usuário/mês anualmente <span style="opacity:0">m</span>',
           plan: 'Plano',
-          discountFirstMonth: '*Desconto aplicável para o primeiro mês',
+          discountFirstMonth: '*Desconto aplicável apenas no primeiro mês',
           autoDeductionDisclaimer: 'Ao assinar, você concorda com deduções automáticas todos os meses de acordo com seu tipo de plano, que estenderá seu tipo de plano por um mês. Ao comprar o plano premium, você concorda com nossos <termsLink>Termos de Serviço</termsLink> e <privacyLink>Política de Privacidade</privacyLink>.',
           purchaseDisclaimer: 'Ao comprar o plano premium, você concorda com nossos <termsLink>Termos de Serviço</termsLink> e <privacyLink>Política de Privacidade</privacyLink>.',
           or: 'ou',
