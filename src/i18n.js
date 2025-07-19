@@ -507,7 +507,9 @@ const resources = {
           or: 'or',
           advance: '(Advance)',
           basicPlan: 'Basic',
-          advancePlan: 'Advance'
+          advancePlan: 'Advance',
+          monthly: 'Monthly',
+          annual: 'Annual'
         },
         features: {
           unlimitedBroadcasting: {
@@ -1277,7 +1279,9 @@ const resources = {
           or: 'ou',
           advance: '(Advance)',
           basicPlan: 'Basic',
-          advancePlan: 'Advance'
+          advancePlan: 'Advance',
+          monthly: 'Mensal',
+          annual: 'Anual',
         },
         features: {
           unlimitedBroadcasting: {

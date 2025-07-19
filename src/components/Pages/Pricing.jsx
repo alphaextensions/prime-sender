@@ -317,8 +317,8 @@ const Pricing = () => {
           <div className={`pricing-popup-slider ${!showPopupMonthly?"marginTop30":""}`}>
             {
               popupPlan === 'basic' ?
-                <Slider onTextValue={t('pricing.monthly')} offTextValue={t('pricing.annual')} onTextHeader={t('pricing.popup.basicPlan')} offTextHeader={t('pricing.popup.basicPlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
-                <Slider onTextValue={t('pricing.monthly')} offTextValue={t('pricing.annual')} onTextHeader={t('pricing.popup.advancePlan')} offTextHeader={t('pricing.popup.advancePlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
+                <Slider onTextValue={t('pricing.popup.monthly')} offTextValue={t('pricing.popup.annual')} onTextHeader={t('pricing.popup.basicPlan')} offTextHeader={t('pricing.popup.basicPlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
+                <Slider onTextValue={t('pricing.popup.monthly')} offTextValue={t('pricing.popup.annual')} onTextHeader={t('pricing.popup.advancePlan')} offTextHeader={t('pricing.popup.advancePlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
             }
           </div>
           <div className={`pricing-popup-content ${!showPopupMonthly?"hideMonthlyPopupPriceClass":""}`}>
