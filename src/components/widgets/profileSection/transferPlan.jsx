@@ -17,14 +17,14 @@ import { useCountries } from "use-react-countries";
 function TransferPlan() {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
-    const [selectedCountry, setSelectedCountry] = useState(countries[0]?.name || "");
+    const [selectedCountry, setSelectedCountry] = useState(controller.location?.country_name || "");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedUser, setSelectedUser] = useState({})
     const [selectedOldNumber, setSelectedOldNumber] = useState("")
     const [info, setInfo] = useState("");
     const [data, setData] = useState(controller.credentials.data[controller.profile]);
-    const [userLocation, setUserLocation] = useState({})
     const [formattedPhoneNumbers, setFormattedPhoneNumbers] = useState(null);
+    const userLocation = controller.location;
 
     const sortedCountries = useMemo(
         () => countries.slice().sort((a, b) => a.name.localeCompare(b.name)).filter(a => a.countryCallingCode),
@@ -34,18 +34,6 @@ function TransferPlan() {
     const currentCountry = sortedCountries.find(
         (country) => country.name === selectedCountry
     );
-
-    const getUserLocation = () => {
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then((data) => {
-                setUserLocation(data);
-                setSelectedCountry(data.country_name);
-            })
-            .catch(err => {
-                console.error(err)
-            });
-    }
 
     const isPremiumUser = () => {
         return (data.plan_type === "Advance" || data.plan_type === "Basic")
@@ -363,11 +351,8 @@ function TransferPlan() {
     };
 
     useEffect(() => {
-        if (Object.keys(userLocation).length === 0) {
-            getUserLocation();
-        }
         isMultipleAccountAdmin() ? getPhoneNumbers() : ""
-    }, [userLocation]);
+    }, []);
 
     useEffect(() => {
         infoShowCase()

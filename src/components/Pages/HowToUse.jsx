@@ -3,9 +3,11 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect, useState} from "react";
 import SectionTitle from "../common/SectionTitle";
+import { useTranslation } from 'react-i18next';
 import HelmetHeader from "../common/HelmetHeader";
 
 const HowToUse = () => {
+  const { t } = useTranslation();
   const [showMetaData, setShowMetaData] = useState(false);
   useEffect(() => {
     AOS.init({duration: 1000});
@@ -24,7 +26,7 @@ const HowToUse = () => {
         />
       }
     <div className="use_main">
-      <SectionTitle id="how-to-use" gif="/images/lightbulb.png" title="How to Use" white/>
+      <SectionTitle id="how-to-use" gif="/images/lightbulb.png" title={t('howto.sectionTitle')} white/>
       <div className="use_container">
         {/* left container */}
         <div className="use_left" data-aos="fade-right" >
@@ -32,38 +34,37 @@ const HowToUse = () => {
             <div className="use_features">
               <h3 className="heading">01</h3>
               <div className="use_feature_text">
-                <h3 className="heading">Upload</h3>
-                <p className="text">Enter the numbers you want to send the message to, separated by comma.</p>
+                <h3 className="heading">{t('howto.steps.uploadTitle')}</h3>
+                <p className="text">{t('howto.steps.uploadDesc')}</p>
               </div>
             </div>
             <div className="use_feature_divider" />
             <div className="use_features">
               <h3 className="heading">02</h3>
               <div className="use_feature_text">
-                <h3 className="heading">Send Message</h3>
+                <h3 className="heading">{t('howto.steps.sendTitle')}</h3>
                 <p className="text">
-                  Enter the message you'd like to send. You could also add attachments 📁
+                  {t('howto.steps.sendDesc1')}
                 </p>
                 <p className="text">
-                  1. Click on the icon of <span className="text-white">📎 Attachment</span>  inside the text box inside the extension
+                  {t('howto.steps.sendDesc2')}
                 </p>
                 <p className="text">
-                  2. Select files you would like to send. You can select multiple
+                  {t('howto.steps.sendDesc3')}
                 </p>
                 <p className="text">
-                  3. You can click on<span className="text-white"> Add Caption</span> to add caption to your attachment
+                  {t('howto.steps.sendDesc4')}
                 </p>
-                <p className="text">4. Click on <span className="text-white">Send button</span> inside the extension</p>
+                <p className="text">{t('howto.steps.sendDesc5')}</p>
               </div>
             </div>
             <div className="use_feature_divider" />
             <div className="use_features">
               <h3 className="heading">03</h3>
               <div className="use_feature_text">
-                <h3 className="heading">Download Report</h3>
+                <h3 className="heading">{t('howto.steps.downloadTitle')}</h3>
                 <p className="text">
-                  Download the delivery report by clicking on<span className="text-white"> Delivery Report</span> to view the delivery status of the messages and the attachment
-                  sent.
+                  {t('howto.steps.downloadDesc')}
                 </p>
               </div>
             </div>
@@ -72,7 +73,7 @@ const HowToUse = () => {
         {/* right container */}
         <div className="use_right" data-aos="flip-right" >
           <div className="use_right_container">
-            <img src="/images/how-to-use.png" alt="How to use" />
+            <img src={t('howto.howtoimg')} alt="How to use" />
           </div>
         </div>
       </div>

@@ -60,6 +60,10 @@ export function reducer(state, action) {
       newState = { ...state, credentials: null };
       break;
 
+    case "SET_LOCATION":
+      newState = { ...state, location: action.value };
+      break;
+
     case "RESET_APP_STATE":
       newState = defaultState;
       break;
@@ -86,6 +90,7 @@ export function PrimeSenderControllerProvider({ children }) {
       cred: "",
       data: [],
     },
+    location: null,
     profile: 0
   };
 
@@ -146,6 +151,8 @@ export const replaceDataObject = (dispatch, value) =>
   dispatch({ type: "REPLACE_DATA_OBJECT", value });
 export const setProfile = (dispatch, value) =>
   dispatch({ type: "SET_PROFILE", value });
+export const setLocation = (dispatch, value) =>
+  dispatch({ type: "SET_LOCATION", value });
 export const clearCredentials = (dispatch) =>
   dispatch({ type: "CLEAR_CREDENTIALS" });
 export const resetAppState = (dispatch) => {

@@ -45,7 +45,8 @@
   width: 62%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10px;
   margin: 10px auto;
   padding: 10px 0;
 }
@@ -63,7 +64,7 @@
   font-size: 25px;
   font-weight: 400;
   color: var(--color-primary1);
-  margin-left: 15px;
+  margin-left: 0;
   min-width: fit-content;
 }
 .pricing-popup hr{
@@ -134,15 +135,12 @@
   left: 25%;
   color: var(--color-black);
 }
-.pricing-popup-content .annual-price{
+.pricing-popup-content .annual-price,
+.pricing-popup-content .annual-price-indonesia {
   position: absolute;
   top: 0%;
-  right: 6%;
-}
-.pricing-popup-content .annual-price-indonesia{
-  position: absolute;
-  top: 0%;
-  right: 6%;
+  left: 75%;
+  transform: translateX(-50%);
 }
 .pricing-popup-slash-price{
   text-decoration: line-through;
@@ -364,11 +362,13 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 5px;
+    margin: 10px 0;
+    padding: 5px 0;
 }
 
 .slider_discount_text img {
-    width: 25px;
+    width: 30px;
+    margin: 0 10px;
 }
 
 .top-pricing-slider .country_switch {
@@ -603,7 +603,7 @@
 .pricing_card_features {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
@@ -654,13 +654,16 @@
   border-bottom: 2px solid var(--color-light-grey);
   padding: 10px 40px;
   font-size: 20px;
+  vertical-align: middle;
 }
 
 .pricing_table thead th,
 .pricing_table thead td {
   color: var(--color-secondary3);
   font-size: 22px;
+  text-align: left;
   font-weight: 600 !important;
+  text-align: center !important;
 }
 
 .pricing_table tbody th {
@@ -673,6 +676,15 @@
   font-size: 25px;
   color: var(--color-primary1) !important;
   text-align: center !important;
+  vertical-align: middle;
+}
+
+.pricing_table tbody td svg {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .cross_icon {
@@ -708,7 +720,7 @@
   position: absolute;
   left: 50%;
   bottom: 95%;
-  z-index: 10000000;
+  z-index: 1000000;
 }
 
 .advance_navigation_box{
@@ -744,6 +756,15 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #009a88;
+}
+
+.msg-box-down.multiple-card{
+  width: 200px;
+  padding: 10px 12px;
+}
+
+.msg-box-down.multiple-card p{
+  font-size: 12px;
 }
 
 .pricing_calculator_section{
@@ -843,9 +864,10 @@
 
 .mult_error_message {
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 80px;
   color: red;
   text-align: center;
+  padding: 15px 0;
 }
 
 .multiple_acc_pricing_cards_container {
@@ -867,12 +889,11 @@
 
 .pricing_card_container_overlay {
   position: absolute;
-    top: 20px;
-    left: 0;
-    height: 97%;
-    width: 100%;
-    z-index: 1000000;
-    backdrop-filter: blur(10px);
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .top-pricing-slider {
@@ -1071,6 +1092,13 @@
     gap: 10px;
     width: 100%;
 }
+
+@media (max-width: 895px) {
+    .multiple_user_card {
+        position: relative;
+        padding-bottom: 80px;
+    }
+}
 .mult_account_buy_button{
     width: 70%;
 }
@@ -1102,6 +1130,11 @@
     font-size: 40px;
     line-height: 1;
     font-weight: bold;
+}
+
+.indonesia_pricing_card{
+  grid-template-columns: repeat(3, 340px);
+  justify-content: center;
 }
 
 
@@ -1163,9 +1196,6 @@
   .pricing_table thead th{
     padding: 8px 15px;
   }
-  .pricing_table thead th:nth-child(4){
-    padding: 8px 5px;
-  }
   .pricing_cards_container{
     padding: 10px;
     grid-template-columns: auto;
@@ -1201,6 +1231,12 @@
     padding: 6px 5px;
     font-size: 20px;
   }
+
+  .pricing_table tbody td svg {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1213,9 +1249,6 @@
   .pricing_table thead th{
     font-size: 18px;
     padding: 3px 5px;
-  }
-  .pricing_table thead th:nth-child(4){
-    padding: 3px 0;
   }
   .pricing_table tbody th{
     padding: 6px;
@@ -1301,6 +1334,12 @@
     font-size: 16px;
   }
 
+  .pricing_table tbody td svg {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
   .navigation_outer_box_down .msg-box-down{
     max-width: 320px;
   }
@@ -1335,6 +1374,7 @@
 .driver-popover.driverjs-theme {
   background-color: #009a88;
   color: #fff;
+  font-family: 'PT Sans Caption';
 }
 
 .driver-popover.driverjs-theme button {
@@ -1359,7 +1399,7 @@
 .driver-popover.driverjs-theme .driver-popover-close-btn {
   display: block;
   font-size: 25px;
-  padding: 5px 10px;
+  padding: 1px !important;
   height: max-content;
   color: #fff;
 }
@@ -1400,7 +1440,22 @@
   color: #fff !important;
   zoom: 1;
 }
-.driver-popover {
-  z-index: 100000000000000 !important;
+
+.driver-overlay {
+  z-index: 100000000 !important;
 }
 
+.driver-popover {
+  z-index: 1000000000 !important;
+}
+
+.driver-popover-footer button{
+  font-family: 'PT Sans Caption' !important;
+}
+
+#driver-popover-title,
+#driver-popover-description,
+.driver-popover-next-btn,
+.driver-popover-progress-text {
+  font-family: 'PT Sans Caption', sans-serif !important;
+}

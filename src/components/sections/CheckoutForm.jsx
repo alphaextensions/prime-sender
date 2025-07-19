@@ -9,11 +9,13 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Oval } from 'react-loader-spinner';
+import { useTranslation } from 'react-i18next';
 
 const CheckoutForm = ({ checkoutData }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!stripe || !elements) return;
@@ -66,7 +68,7 @@ const CheckoutForm = ({ checkoutData }) => {
       <PaymentElement options={paymentElementOptions} />
       <AddressElement options={{ mode: "billing" }} />
       <button className="checkout_payment_button">
-        {isSubmitting ? <Oval /> : "Pay now"}
+        {isSubmitting ? <Oval /> : t('checkout.payNow')}
       </button>
     </form>
   );

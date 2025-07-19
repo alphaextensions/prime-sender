@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../sections/CheckoutForm";
 import "../../styles/Checkout/checkout.css";
 import { CheckoutContext } from "../context/CheckoutContext";
+import { Trans, useTranslation } from 'react-i18next';
 
 const stripePromise = loadStripe("pk_live_51JNhQYSGarUwHS3uNvHHbJOwhN57mB86SaotpjxomSIQkHzmqfu2I60xZT478pN9mKivmwPvzIAOJI3sitFCJYKn00n1XqvxZX");
 
@@ -14,30 +15,31 @@ const Checkout = () => {
   const [checkoutData, setLocalCheckoutData] = useState(contextData);
   const [loading, setLoading] = useState(!contextData);
 
+  const { i18n } = useTranslation(); 
+
   useEffect(() => {
     if (!contextData) {
-      // Try sessionStorage rehydrate
       const stored = sessionStorage.getItem("checkoutData");
       if (stored) {
         const parsed = JSON.parse(stored);
         setLocalCheckoutData(parsed);
         if (setCheckoutData) setCheckoutData(parsed);
       } else {
-        // No data found
         window.location.href = "/pricing";
       }
       setLoading(false);
     }
   }, [contextData, setCheckoutData]);
 
-  // If still loading, show a spinner or message
-  if (loading) return (
-    <div className="main-section checkout-section">
-      <div className="checkout_loading">Loading checkout details...</div>
-    </div>
-  );
+  if (loading) {
+    return (
+      <div className="main-section checkout-section">
+        <div className="checkout_loading">Loading checkout details...</div>
+      </div>
+    );
+  }
 
-  if (!checkoutData) return null; // Defensive guard, should never happen
+  if (!checkoutData) return null;
 
   const { clientSecret, email, numbers, currency, totalPrice, title, slashedPrice } = checkoutData;
 
@@ -75,7 +77,19 @@ const Checkout = () => {
             </div>
           </div>
           <div className="checkout_title_section">
-            <p>{title}</p>
+            <p>
+              {i18n.language === 'pt' ? (
+                <Trans
+                  i18nKey="checkout.primeSenderPlan"
+                  values={{
+                    planTitle: title.replace(/^Prime Sender\s*/i,'').replace(/\s*plan.*$/i,'').trim(),
+                    users: numbers.length
+                  }}
+                />
+              ) : (
+                title
+              )}
+            </p>
           </div>
           <div className="checkout_price_section">
             <p className="checkout_price total_checkout_price">
