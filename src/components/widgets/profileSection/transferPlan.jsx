@@ -17,7 +17,7 @@ import { useCountries } from "use-react-countries";
 function TransferPlan() {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
-    const [selectedCountry, setSelectedCountry] = useState(controller.location?.country_name || "");
+    const [selectedCountry, setSelectedCountry] = useState(controller.location?.country_name || "India");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedUser, setSelectedUser] = useState({})
     const [selectedOldNumber, setSelectedOldNumber] = useState("")

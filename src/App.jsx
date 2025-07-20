@@ -39,7 +39,10 @@ const App = () => {
             if (!res.ok) throw new Error('Fallback API failed');
             return res.json();
           })
-          .then((data) =>  handleLocationResponse(data))
+          .then((data) => {
+            data.country_name = data.country;
+            handleLocationResponse(data);
+          })
           .catch(fallbackErr => {
             console.error('Both APIs failed.', fallbackErr);
           });
