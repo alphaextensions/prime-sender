@@ -7,7 +7,7 @@ if (typeof window !== 'undefined' && intlTelInputUtils) {
   window.intlTelInputUtils = intlTelInputUtils;
 }
 import { Oval } from 'react-loader-spinner';
-import { IoIosInformationCircleOutline, IoIosRemoveCircleOutline, IoMdClose } from 'react-icons/io';
+import { IoIosArrowBack, IoIosInformationCircleOutline, IoIosRemoveCircleOutline, IoMdClose } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
@@ -221,7 +221,27 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 	const [autorenewChecked, setAutorenewChecked] = useState(false);
 	const [autoRenewHover, setAutoRenewHover] = useState(false);
 	const [showLoader, setShowLoader] = useState(false);
+	const [tooltipPosition, setTooltipPosition] = useState('above');
 	const { t } = useTranslation();
+
+	const checkTooltipPosition = (element) => {
+		if (!element) return 'above';
+		
+		const rect = element.getBoundingClientRect();
+		const popupRect = document.querySelector('.multiple_account_popup')?.getBoundingClientRect();
+		
+		if (!popupRect) return 'above';
+
+		const spaceAbove = rect.top - popupRect.top;
+		const spaceBelow = popupRect.bottom - rect.bottom;
+		
+		
+		if (spaceBelow > spaceAbove || spaceAbove < 100) {
+			return 'below';
+		}
+		
+		return 'above';
+	};
 
 	const valueChangeHandler = (val, ind) => {
 		if (val < 2) {
@@ -396,6 +416,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 
 	const NumberListComponent = () => {
 		return <>
+            <div className='numbers_list_header' style={{display: 'flex', justifyContent: 'flex-start', padding: '15px 10px', width: '100%'}}>
+                <IoIosArrowBack 
+                    style={{cursor: 'pointer', color: '#009a89', fontSize: '1.5rem'}}
+                    onClick={() => setShowNumbersList(false)}
+                />
+            </div>
 			<div className='numbers_list_email'>
 				<p className='number_list_email_heading'>{t('pricing.popup.email')}</p>
 				<p className='number_list_email_text'>{userEmail}</p>
@@ -416,10 +442,55 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 					})}
 				</div>
 			</div>
-			<div className='mult_popup_button_section number_list_button_section'>
-				<button className='mult_popup_buy_button mult_review_button' onClick={() => setShowNumbersList(false)}>
-					<a>{t('pricing.popup.goBack')}</a>
-				</button>
+			
+			<div className='mult_account_body'>
+				{
+					plan_duration == 'monthly' &&
+					<div className='auto_renew_container'>
+						<input
+							type="checkbox"
+							id="auto_renew_checkbox"
+							checked={autorenewChecked}
+							name="auto_renew_checkbox"
+							className="cursor-pointer"
+							onChange={() => {
+								setAutorenewChecked(!autorenewChecked);
+								setShowLoader(true);
+								setTimeout(() => {
+									setShowLoader(false);
+								}, 2000);
+							}}
+						/>
+						<label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">{t('pricing.popup.enableAutoRenew')}</label>
+						<span 
+							className={`pricing_feature_info_container`} 
+							onMouseEnter={(e) => {
+								setAutoRenewHover(true);
+								setTooltipPosition(checkTooltipPosition(e.currentTarget));
+							}} 
+							onMouseLeave={() => setAutoRenewHover(false)}
+						>
+							<IoIosInformationCircleOutline className="feature_info_class" />
+							<div className={`navigation_outer_box_down navigation_container ${tooltipPosition === 'below' ? 'tooltip-below' : ''}`} hidden={!autoRenewHover} >
+								<div className="msg-box-down">
+									<p>{t('pricing.popup.autoRenewInfo')}</p>
+								</div>
+							</div>
+						</span>
+					</div>
+				}
+				<div className='mult_popup_button_section'>
+					<button className={`mult_popup_buy_button ${autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
+						{((isPageGenerating || showLoader) && !autorenewChecked) ? <Oval /> : <a>{t('pricing.buy')}</a>}
+					</button>
+					{
+						plan_duration == "monthly" && 
+						<button className={`mult_popup_buy_button ${!autorenewChecked?'disable_button_class':''}`} onClick={handleBuyPlan} disabled={isPageGenerating}>
+							{((isPageGenerating || showLoader) && autorenewChecked) ? <Oval /> : <a>{t('pricing.subscribe')}</a>}
+						</button>
+					}
+				</div>
+				{isPageGenerating && <div className='please_wait_text'>{t('pricing.popup.pleaseWait')}</div>}
 			</div>
 		</>
 	}
@@ -511,9 +582,16 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
                                         }}
                                     />
                                     <label className="auto_renew_text cursor-pointer" htmlFor="auto_renew_checkbox">{t('pricing.popup.enableAutoRenew')}</label>
-									<span className={`pricing_feature_info_container`} onMouseEnter={() => setAutoRenewHover(true)} onMouseLeave={() => setAutoRenewHover(false)}>
+									<span 
+										className={`pricing_feature_info_container`} 
+										onMouseEnter={(e) => {
+											setAutoRenewHover(true);
+											setTooltipPosition(checkTooltipPosition(e.currentTarget));
+										}} 
+										onMouseLeave={() => setAutoRenewHover(false)}
+									>
 										<IoIosInformationCircleOutline className="feature_info_class" />
-										<div className="navigation_outer_box_down navigation_container" hidden={!autoRenewHover} >
+										<div className={`navigation_outer_box_down navigation_container ${tooltipPosition === 'below' ? 'tooltip-below' : ''}`} hidden={!autoRenewHover} >
 											<div className="msg-box-down">
 												<p>{t('pricing.popup.autoRenewInfo')}</p>
 											</div>
