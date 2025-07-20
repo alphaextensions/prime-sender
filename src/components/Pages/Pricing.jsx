@@ -286,7 +286,7 @@ const Pricing = () => {
 
   function generatePricingPopup() {
     ReactGA.send({ hitType: "popupview", page: "/pricing", title: "Pricing Page Popup, Redirected from extension" });
-    const planNameKey = popupPlan === 'basic' ? 'pricing.popup.basicPlan' : 'pricing.popup.advancePlan';
+    let capitalPlanName = popupPlan.charAt(0).toUpperCase() + popupPlan.slice(1);
     const handlePopupGaButtonClick = () => {
       ReactGA.event({
         category: "Button Click",
@@ -304,7 +304,7 @@ const Pricing = () => {
               <img src="/images/logo-img.png" alt="logo" />
               <img src="/images/logo-text.png" alt="logo" />
             </div>
-            <h1> <b>{t(planNameKey)} {t('pricing.popup.plan')}</b></h1>
+            <h1> <b>{capitalPlanName} Plan</b></h1>
           </div>
           <hr />
         {
@@ -317,8 +317,8 @@ const Pricing = () => {
           <div className={`pricing-popup-slider ${!showPopupMonthly?"marginTop30":""}`}>
             {
               popupPlan === 'basic' ?
-                <Slider onTextValue={t('pricing.monthly')} offTextValue={t('pricing.annual')} onTextHeader={t('pricing.popup.basicPlan')} offTextHeader={t('pricing.popup.basicPlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
-                <Slider onTextValue={t('pricing.monthly')} offTextValue={t('pricing.annual')} onTextHeader={t('pricing.popup.advancePlan')} offTextHeader={t('pricing.popup.advancePlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
+                <Slider onTextValue={t('pricing.popup.monthly')} offTextValue={t('pricing.popup.annual')} onTextHeader={t('pricing.popup.basicPlan')} offTextHeader={t('pricing.popup.basicPlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod}  /> :
+                <Slider onTextValue={t('pricing.popup.monthly')} offTextValue={t('pricing.popup.annual')} onTextHeader={t('pricing.popup.advancePlan')} offTextHeader={t('pricing.popup.advancePlan')} setValue={togglePopupPlanPeriod} showPopupMonthly={showPopupMonthly} planPeriod={popupPlanPeriod} />
             }
           </div>
           <div className={`pricing-popup-content ${!showPopupMonthly?"hideMonthlyPopupPriceClass":""}`}>
@@ -326,8 +326,8 @@ const Pricing = () => {
                 showPopupMonthly &&
                 <div className={`monthly-price ${popupPlanPeriod=='monthly'?'':'black_color_faded'}`}>
                     {
-                        <div>
-                            <div className={`${popupLastPlan==='freeTrial'?'pricing-popup-slash-price':''} display_flex`}>
+                        <div className='pricing-popup-price-container'>
+                            <div className={`${popupLastPlan==='freeTrial'?'pricing-popup-slash-price':''} display_flex pricing-popup-price-value`}>
                                 <span className={popupCountry=='india'?"rupee":""}>
                                     {pricing[popupCountry].currency_symbol}
                                 </span>
@@ -335,7 +335,7 @@ const Pricing = () => {
                                     {popupPlan === 'basic' ? pricing[popupCountry].monthly.basic_plan.final : pricing[popupCountry].monthly.advance_plan.final}
                                 </span>
                             </div>
-                            <div className="font14">{t('pricing.userPerMonth')}</div>
+                            <div className="font14 pricing-popup-price-unit">{t('pricing.userPerMonth')}</div>
                         </div>
                     }
                   {popupLastPlan === 'freeTrial' && (
@@ -353,8 +353,8 @@ const Pricing = () => {
             {
               popupCountry !== 'india' && popupCountry !== 'international' && popupCountry !== 'kuwait' ?
                 <div className={`${showPopupMonthly?"annual-price-indonesia":"hideMonthlyPopupAnnualPriceClass"} ${popupPlanPeriod=='monthly'?'primary_color_faded':''}`} >
-                <div>
-                    <div className="display_flex">
+                <div className='pricing-popup-price-container'>
+                    <div className="display_flex pricing-popup-price-value">
                       <span className={popupCountry === 'india' ? 'rupee' : ''}>
                         {pricing[popupCountry].currency_symbol}
                       </span>
@@ -362,12 +362,12 @@ const Pricing = () => {
                         {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final}
                       </span>
                     </div>
-                    <div className="font14" dangerouslySetInnerHTML={{ __html: t('pricing.popup.userPerMonthBilledAnnually') }}></div>
+                    <div className="font14 pricing-popup-price-unit" dangerouslySetInnerHTML={{ __html: t('pricing.popup.userPerMonthBilledAnnually') }}></div>
                 </div>
                 </div> :
                 <div className={`${showPopupMonthly?"annual-price":"hideMonthlyPopupAnnualPriceClass"} ${popupPlanPeriod=='monthly'?'primary_color_faded':''}`} >
-                  <div>
-                    <div className="display_flex">
+                  <div className='pricing-popup-price-container'>
+                    <div className="display_flex pricing-popup-price-value">
                         <span className={popupCountry === 'india' ? 'rupee' : ''}>
                             {pricing[popupCountry].currency_symbol}
                         </span>
@@ -375,7 +375,7 @@ const Pricing = () => {
                             {popupPlan === 'basic' ? pricing[popupCountry].annually.basic_plan.monthly_final : pricing[popupCountry].annually.advance_plan.monthly_final}
                         </span>
                     </div>
-                    <div className="font14" dangerouslySetInnerHTML={{ __html: t('pricing.popup.userPerMonthBilledAnnually') }}></div>
+                    <div className="font14 pricing-popup-price-unit" dangerouslySetInnerHTML={{ __html: t('pricing.popup.userPerMonthBilledAnnually') }}></div>
                   </div>
                 </div>
             }
@@ -383,13 +383,13 @@ const Pricing = () => {
           <div className="pricing-popup-btn">
             <button onClick={handlePopupGaButtonClick}>{showButton(true, popupPlan)}</button>
             <span className="font20 marginTop10">{t('pricing.popup.or')}</span>
-            <a target="_blank" href={'/pricing/multiple-account'} rel="noreferrer" className="multiple-accounts-btn"><img src="/images/mult_user.png"/><span>{t('pricing.buyMultipleUsers')}</span></a>
+            <a target="_blank" href={'/pricing/multiple-account'} rel="noreferrer" className="multiple-accounts-btn"><img src="/images/mult_user.png"/><span>{t('pricing.popup.buyMultipleAccounts')}</span></a>
           </div>
           <div className="pricing-popup-bottom">
             <div className="pricing-popup-features">
               {
                 pricing_popup_premium_features.map((item, index) => {
-                  return <div className="feature-item" key={index}><img src={`/images/${popupPlan=="basic"?"circle_cross":"check"}.png`} className="check_icon" alt="✔"></img>{getFeatureTranslation(item)} <span className="text-bold">&nbsp;{t('pricing.popup.advance')}</span></div>
+                  return <div className="feature-item" key={index}><img src={`/images/${popupPlan=="basic"?"circle_cross":"check"}.png`} className="check_icon" alt="✔"></img>{getFeatureTranslation(item)} <span className="text-bold">&nbsp;(Advance)</span></div>
                 })
               }
               {
@@ -1137,7 +1137,6 @@ const Pricing = () => {
                     <>
                       <div className="pricing_card_price">
                         <div className="pricing_card_price_div">
-                            <span style={{ "fontWeight": "bold", "marginRight": "5px" }} className="text-royal">~</span>
                             <span className="display_flex_align_start">
                                 <span className={`${currentCountry === 'india' ? 'rupee font15' : ' font15'} ${isCountryWithCurrency()?"marginTop3":""} text-royal`}>{multAccountPrice.currency}</span>
                                 <span className="pricing_card_price_text text-royal">{Math.ceil(multAccountPrice.price/numAccounts)}</span>
