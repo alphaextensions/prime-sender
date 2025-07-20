@@ -353,6 +353,15 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		return true;
 	}
 
+    const isIOS = () => {
+        try {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            return /iPad|iPhone|iPod/.test(ua) || (navigator.userAgent.includes("Macintosh") && 'ontouchend' in document); 
+        } catch (e) {
+            return false;
+        }
+    };
+
 	const handleBuyPlan = async () => {
 		const isUserDataValid = validateUserData();
 		if(!isUserDataValid) 
@@ -369,7 +378,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 
         if(autorenewChecked) {
             const stripe_checkout_url = await setDataInDatabase(productName, productDescription, country_currency, true);
-            window.open(stripe_checkout_url, '_blank');
+            isIOS() ? window.location.href = stripe_checkout_url : window.open(stripe_checkout_url, '_blank');
             return;
         }
 		const client_secret = await setDataInDatabase(productName, productDescription, country_currency, false);
@@ -388,8 +397,7 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		}
 		// Store in sessionStorage so the new tab can read it
 		sessionStorage.setItem("checkoutData", JSON.stringify(reqQuery));
-		window.open("/checkout", "_blank");
-
+        isIOS() ? window.location.href = "/checkout" : window.open("/checkout", "_blank");
 	}
 
 	const overlayRef = useRef(null);
