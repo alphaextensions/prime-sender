@@ -197,6 +197,11 @@
 		font-size: 18px;
 		padding: 8px 16px;
 	}
+
+    .checkout_price.slashed_price,
+    .checkout_price.slashed_price .currency-symbol {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -210,7 +215,6 @@
 	}
 
 	.checkout_heading_section {
-		flex-direction: column;
 		gap: 5px;
 	}
 
@@ -229,6 +233,11 @@
 	.checkout_price {
 		font-size: 22px;
 	}
+
+    .checkout_price.slashed_price,
+    .checkout_price.slashed_price .currency-symbol {
+        font-size: 12px;
+    }
 
 	.checkout_numbers_div {
 		max-height: 200px;
