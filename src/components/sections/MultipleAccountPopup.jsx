@@ -11,6 +11,7 @@ import { IoIosArrowBack, IoIosInformationCircleOutline, IoIosRemoveCircleOutline
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
+import { pricing_data } from '../Data/pricing-data';
 import { CheckoutContext } from '../context/CheckoutContext';
 import { useTranslation, Trans } from 'react-i18next';
 
@@ -352,6 +353,15 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		return true;
 	}
 
+    const isIOS = () => {
+        try {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            return /iPad|iPhone|iPod/.test(ua) || (navigator.userAgent.includes("Macintosh") && 'ontouchend' in document); 
+        } catch (e) {
+            return false;
+        }
+    };
+
 	const handleBuyPlan = async () => {
 		const isUserDataValid = validateUserData();
 		if(!isUserDataValid) 
@@ -361,10 +371,14 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 		plan_type = plan_type == 'basic' ? "Basic" : "Advance";
 		let bodyDuration = plan_duration == 'monthly' ? 'Monthly' : 'Annual';
 		productName += ' ' + plan_type + ' ' + bodyDuration;
-		let productDescription = `Prime Sender ${plan_type} ${bodyDuration} plan for ${phoneNumbers.length} users.`
+		let productDescription = `${plan_type} ${bodyDuration} Plan for ${phoneNumbers.length} users`
+
+		let slashedPrice = pricing_data[myLocation.pricing_country_name][plan_duration][`${plan_type.toLowerCase()}_plan`][plan_duration !== 'monthly' ? "monthly_original" : "original"]
+		slashedPrice = slashedPrice*(phoneNumbers.length)*(plan_duration == 'monthly' ?1:12)
+
         if(autorenewChecked) {
             const stripe_checkout_url = await setDataInDatabase(productName, productDescription, country_currency, true);
-            window.open(stripe_checkout_url, '_blank');
+            isIOS() ? window.location.href = stripe_checkout_url : window.open(stripe_checkout_url, '_blank');
             return;
         }
 		const client_secret = await setDataInDatabase(productName, productDescription, country_currency, false);
@@ -378,11 +392,12 @@ const MultipleAccountPopup = ({ value, setValue, phoneNumbers, setPhoneNumbers, 
 			currency: country_currency,
 			totalPrice: amount.totalPrice,
 			title: productDescription,
-			plan_type: plan_type
+			plan_type: plan_type,
+			slashedPrice: slashedPrice
 		}
-		setCheckoutData(reqQuery);
-		navigate(`/checkout`);
-
+		// Store in sessionStorage so the new tab can read it
+		sessionStorage.setItem("checkoutData", JSON.stringify(reqQuery));
+        isIOS() ? window.location.href = "/checkout" : window.open("/checkout", "_blank");
 	}
 
 	const overlayRef = useRef(null);

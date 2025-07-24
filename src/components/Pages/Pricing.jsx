@@ -17,6 +17,7 @@ import NotificationBox from "../common/NotificationBox";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import { useTranslation, Trans } from 'react-i18next';
+import { primeSenderController } from "../context";
 
 const UPIPopup = ({plan_type, price, currency, monthly_price, setShowUPIPopup}) => {
   const { t } = useTranslation();
@@ -198,6 +199,9 @@ const Pricing = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [isShowingNotification, setIsShowingNotification] = useState(false);
   const [notificationData, setNotificationData] = useState({ prevIndex: -1, city: "Delhi", country: "India", time: "16", currency: "INR", prince:"699"});
+  const [controller] = primeSenderController();
+  const locationData = controller.location;
+
     
   const scrollToPricingPopupRef = useRef(null);
   
@@ -457,7 +461,7 @@ const Pricing = () => {
     let whatsappRedirectUrl = "https://web.whatsapp.com/send?phone=917058067789&text="
     let whatsappText = '';
     if (type == 'bank') {
-      whatsappText = plan_type == 'Basic' ? 'Hi, I want to buy Basic Annual via Bank Transfer or PayPal' : 'Hi, I want to buy Advance Annual via Bank Transfer or PayPal';
+      whatsappText = plan_type == 'Basic' ? 'Hi, I want to buy Basic Annual via PayPal' : 'Hi, I want to buy Advance Annual via PayPal';
       whatsappRedirectUrl += encodeURIComponent(whatsappText);
     }
     return whatsappRedirectUrl;
@@ -488,42 +492,43 @@ const Pricing = () => {
 
     }
 
-    function getUserLocation() {
-        fetch('https://ipapi.co/json/')
-            .then(res => {
-                if (!res.ok) throw new Error('Primary API failed');
-                return res.json();
-            })
-            .then((data) => handleLocationResponse(data.country_code, data.country_name))
-            .catch((err) => {
-                fetch('https://get.geojs.io/v1/ip/geo.json')
-                    .then(res => {
-                        if (!res.ok) throw new Error('Fallback API failed');
-                        return res.json();
-                    })
-                    .then((data) => handleLocationResponse(data.country_code, data.country))
-                    .catch(fallbackErr => {
-                        console.error('Both APIs failed.', fallbackErr);
-                    });
-            });
-    }
+    // Location is stored in context so this not needed now
+    // function getUserLocation() {
+    //     fetch('https://ipapi.co/json/')
+    //         .then(res => {
+    //             if (!res.ok) throw new Error('Primary API failed');
+    //             return res.json();
+    //         })
+    //         .then((data) => handleLocationResponse(data.country_code, data.country_name))
+    //         .catch((err) => {
+    //             fetch('https://get.geojs.io/v1/ip/geo.json')
+    //                 .then(res => {
+    //                     if (!res.ok) throw new Error('Fallback API failed');
+    //                     return res.json();
+    //                 })
+    //                 .then((data) => handleLocationResponse(data.country_code, data.country))
+    //                 .catch(fallbackErr => {
+    //                     console.error('Both APIs failed.', fallbackErr);
+    //                 });
+    //         });
+    // }
 
-    function handleLocationResponse(country_code, country_name) {
+    function handleLocationResponse() {
         let country, currency, dialCode;
-        if (!countryCodesPresent.includes(country_code)) {
+        if (!countryCodesPresent.includes(locationData.country_code)) {
             country = "international";
             currency = "USD";
             dialCode = "+1";
         } else {
-            country = countryCodeToName[country_code];
-            currency = countryCodeToCurrency[country_code];
-            dialCode = countryCodeToDialCode[country_code];
+            country = countryCodeToName[locationData.country_code];
+            currency = countryCodeToCurrency[locationData.country_code];
+            dialCode = countryCodeToDialCode[locationData.country_code];
         }
 
         setMyLocation({
-            country_name: country_name,
+            country_name: locationData.country_name,
             pricing_country_name: country,
-            country_code: country_code,
+            country_code: locationData.country_code,
             country_currency: currency,
             countryCallingCode: dialCode,
             isSuccess: true,
@@ -644,7 +649,8 @@ const Pricing = () => {
     useEffect(() => {
         checkIfMultipleAccountPage();
         getParams();
-        getUserLocation();
+        // getUserLocation();
+        handleLocationResponse();
         getPricingDataFromDatabase();
         startTour();
     }, [])
@@ -960,7 +966,7 @@ const Pricing = () => {
               }
               {
                 currentCountry !='india' && planPeriod != 'monthly' && currentCountry !== "indonesia" &&
-                <div className="pay_via_bank_text">{t('pricing.bankTransferAndPayPal')} - <a href={getWhatsappLink("bank", "Basic")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
+                <div className="pay_via_bank_text">{t('pricing.payPal')} - <a href={getWhatsappLink("bank", "Basic")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
               }
               <div className="pricing_card_features">
                 {currentCountry !== "indonesia" && <div className="pricing_card_feature">
@@ -1022,7 +1028,7 @@ const Pricing = () => {
               }
               {
                 currentCountry !='india' && planPeriod != 'montly' &&
-                <div className="pay_via_bank_text">{t('pricing.bankTransferAndPayPal')} - <a href={getWhatsappLink("bank", "Advance")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
+                <div className="pay_via_bank_text">{t('pricing.payPal')} - <a href={getWhatsappLink("bank", "Advance")} target="_blank" rel="noreferrer">{t('pricing.clickHere')}</a></div>
               }
               <div className="pricing_card_features">
                 <div className="pricing_card_feature">

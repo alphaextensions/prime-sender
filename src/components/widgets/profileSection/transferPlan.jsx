@@ -17,14 +17,14 @@ import { useCountries } from "use-react-countries";
 function TransferPlan() {
     const { countries } = useCountries();
     const [controller, dispatch] = primeSenderController();
-    const [selectedCountry, setSelectedCountry] = useState(countries[0]?.name || "");
+    const [selectedCountry, setSelectedCountry] = useState(controller.location?.country_name || "India");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedUser, setSelectedUser] = useState({})
     const [selectedOldNumber, setSelectedOldNumber] = useState("")
     const [info, setInfo] = useState("");
     const [data, setData] = useState(controller.credentials.data[controller.profile]);
-    const [userLocation, setUserLocation] = useState({})
     const [formattedPhoneNumbers, setFormattedPhoneNumbers] = useState(null);
+    const userLocation = controller.location;
 
     const sortedCountries = useMemo(
         () => countries.slice().sort((a, b) => a.name.localeCompare(b.name)).filter(a => a.countryCallingCode),
@@ -34,18 +34,6 @@ function TransferPlan() {
     const currentCountry = sortedCountries.find(
         (country) => country.name === selectedCountry
     );
-
-    const getUserLocation = () => {
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then((data) => {
-                setUserLocation(data);
-                setSelectedCountry(data.country_name);
-            })
-            .catch(err => {
-                console.error(err)
-            });
-    }
 
     const isPremiumUser = () => {
         return (data.plan_type === "Advance" || data.plan_type === "Basic")
@@ -243,22 +231,39 @@ function TransferPlan() {
 
     /////// Multiple Accounts Function ///////
 
-    const formatPhoneNumbers = (phoneNumbers) => {
-        const formatted = phoneNumbers.map(phoneNumber => {
-            let number;
-            number = phoneNumber.startsWith(currentCountry.countryCallingCode.split("+")[1]) ? phoneNumber.slice(currentCountry.countryCallingCode.length - 1) : phoneNumber;
-            return { countryCode: `${currentCountry.countryCallingCode}`, number: number };
-        });
-
-        setFormattedPhoneNumbers(formatted);
-    };
-
-    const getPhoneNumbers = () => {
+    const formatPhoneNumbers = () => {
         const data = controller.credentials.data;
-        const phoneNumbers = data.filter(user => !user.phone || (user.parent_email && user.parent_email !== "" && user.parent_email !== "NULL")).map((item) => (item.phone));
-        formatPhoneNumbers(phoneNumbers)
-        fetchUserInfo(phoneNumbers[0])
+    
+        const rawNumbers = data
+            .filter(user => !user.phone || (user.parent_email && user.parent_email !== "" && user.parent_email !== "NULL"))
+            .map(item => item.phone)
+            .filter(Boolean);
+    
+        const cleanedSet = new Set();
+    
+        const formatted = [];
+    
+        for (const phoneNumber of rawNumbers) {
+            if (!phoneNumber) continue;
+    
+            const cc = currentCountry.countryCallingCode.replace("+", "");
+            const normalized = phoneNumber.startsWith(cc) ? phoneNumber.slice(cc.length) : phoneNumber;
+    
+            if (!cleanedSet.has(normalized)) {
+                cleanedSet.add(normalized);
+                formatted.push({ countryCode: `+${cc}`, number: normalized });
+            }
+        }
+    
+        setFormattedPhoneNumbers(formatted);
+    
+        if (formatted.length > 0) {
+            fetchUserInfo(formatted[0].number);
+        }
+    
+        console.log("Unique formatted numbers:", formatted);
     };
+    
 
     const sendReqForMultipleAcc = (newNumber) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
@@ -292,7 +297,7 @@ function TransferPlan() {
                     });
 
                     setSelectedUser(res.data.userData)
-                    getPhoneNumbers()
+                    formatPhoneNumbers()
                     toast(
                         <div>
                             <strong>Account Transferred Successfully!</strong>
@@ -363,11 +368,8 @@ function TransferPlan() {
     };
 
     useEffect(() => {
-        if (Object.keys(userLocation).length === 0) {
-            getUserLocation();
-        }
-        isMultipleAccountAdmin() ? getPhoneNumbers() : ""
-    }, [userLocation]);
+        isMultipleAccountAdmin() ? formatPhoneNumbers() : ""
+    }, []);
 
     useEffect(() => {
         infoShowCase()
@@ -405,6 +407,7 @@ function TransferPlan() {
                                 <MenuHandler>
                                     <Button
                                         ripple={false}
+                                        disabled={true}
                                         variant="text"
                                         color="blue-gray"
                                         className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3 max-xs:h-[50px] max-xs:py-3 max-xs:px-[10px] max-xs:w-[82px]"
@@ -438,8 +441,12 @@ function TransferPlan() {
                             <Input
                                 type="tel"
                                 placeholder="Mobile Number"
+                                inputMode="numeric"
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                 onChange={(e) => {
+                                    const onlyNum = e.target.value.replace(/\D/g, "");
+                                    setPhoneNumber(onlyNum);
+                                }}
                                 className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900 max-xs:h-max max-xs:px-[10px] max-xs:py-3 max-xs:text-base"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
@@ -524,6 +531,7 @@ function TransferPlan() {
                                         ripple={false}
                                         variant="text"
                                         color="blue-gray"
+                                        disabled
                                         className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
                                     >
                                         <img
@@ -555,8 +563,12 @@ function TransferPlan() {
                             <Input
                                 type="tel"
                                 placeholder="Mobile Number"
+                                inputMode="numeric"
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                 onChange={(e) => {
+                                    const onlyNum = e.target.value.replace(/\D/g, "");
+                                    setPhoneNumber(onlyNum);
+                                }}
                                 className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
