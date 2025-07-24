@@ -1,4 +1,6 @@
-import React,{useEffect,useState} from 'react'
+import {useEffect,useState} from 'react'
+import { useTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import featuresData from '../Data/features-data'
 import FeatureCard from '../common/FeatureCard'
 import SectionTitle from '../common/SectionTitle'
@@ -12,6 +14,7 @@ import ScrollTrigger from 'react-scroll-trigger';
 import HelmetHeader from '../common/HelmetHeader'
 
 const MainFeatures = ({isSlider}) => {
+  const { t } = useTranslation();
   const [slidesPerView, setSlidePerView] = useState(3);
   const [autoplaySlider, setAutoplaySlider] = useState(false);
   const [showMetaData, setShowMetaData] = useState(false);
@@ -38,14 +41,14 @@ const MainFeatures = ({isSlider}) => {
     <>
       {showMetaData &&
         <HelmetHeader
-          title={'Main Features | Prime Sender - Best Web Sender Extension'}
+          title={'Main Features | Prime Sender - Free AI Web Message Sender'}
           description={'Main features page for Prime Sender, "Explore the future of messaging with our WhatsApp Sender Extension. Maximize productivity, enhance convenience, and simplify your communication tasks. Get started now!"'}
           keywords={'main features , prime sender main features, features prime sender, Simple, cheap, prime sender'}
         />
       }
 
      <section className="main-feature-section">
-      <SectionTitle id="main-features" gif="/gifs/main-features.gif" title="Main Features" />
+      <SectionTitle id="main-features" gif="/gifs/main-features.gif" title={t('features.sectionTitle')} />
       <div className="main-features-content">
           {
             isSlider=='true' ? 
@@ -69,7 +72,7 @@ const MainFeatures = ({isSlider}) => {
                     rows={2}
                     key={autoplaySlider}>
                     {featuresData.map((item, index) => (
-                      <FeatureCard key={index} imgSrc={item.logo} name={item.name} desc={item.desc} />
+                      <FeatureCard key={index} imgSrc={item.logo} index={item.index} />
                     ))}
                   </Slider>
               </ScrollTrigger>
@@ -77,7 +80,7 @@ const MainFeatures = ({isSlider}) => {
             :
             <div className="features-grid" data-aos="fade-up" >
               {featuresData.map((item, index) => (
-                <FeatureCard key={index} imgSrc={item.logo} name={item.name} desc={item.desc} />
+                <FeatureCard key={index} imgSrc={item.logo} index={item.index} />
               ))}
             </div>
           }
@@ -85,6 +88,10 @@ const MainFeatures = ({isSlider}) => {
       </section> 
     </>
   )
+}
+
+MainFeatures.propTypes = {
+  isSlider: PropTypes.string
 }
 
 export default MainFeatures

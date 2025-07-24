@@ -1,8 +1,10 @@
 import "../../styles/Footer/footer.css";
 import { Link , useNavigate} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
@@ -26,7 +28,7 @@ const Footer = () => {
     }
   }
 
-  function scrollToTop(e) {
+  function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -40,41 +42,42 @@ const Footer = () => {
             <img src="/images/logo-text.png" alt="Prime Sender"/>
           </div>
           <div className="footer_links">
-            <h4 className='heading'>Company</h4>
+            <h4 className='heading'>{t('footer.company')}</h4>
             <ul className='large-text'>
-              <li><Link to='/' onClick={scrollToTop}> Home </Link></li>
-              <li><Link to='/how-to-use' onClick={scrollToTop}> How to Use </Link></li>
-              <li><Link to='/blogs' onClick={scrollToTop}> Blogs </Link></li>
-              <li><Link to='/faqs' onClick={scrollToTop}> FAQs </Link></li>
+              <li><Link to='/' onClick={scrollToTop}> {t('footer.links.home')} </Link></li>
+              <li><Link to='/how-to-use' onClick={scrollToTop}> {t('footer.links.howToUse')} </Link></li>
+              <li><Link to='/blogs' onClick={scrollToTop}> {t('footer.links.blogs')} </Link></li>
+              <li><Link to='/faqs' onClick={scrollToTop}> {t('footer.links.faqs')} </Link></li>
             </ul>
           </div>
           <div className="footer_links">
-            <h4 className='heading'>Product</h4>
+            <h4 className='heading'>{t('footer.product')}</h4>
             <ul className='large-text'>
-              <li><Link to='/pricing' onClick={scrollToTop}>Pricing</Link></li>
-              <li><Link to='/feature-request' onClick={scrollToTop}> Request a Feature </Link></li>
-              <li><Link to='/#testimonial' onClick={handleSectionClick}>Reviews</Link></li>
+              <li><Link to='/pricing' onClick={scrollToTop}>{t('footer.links.pricing')}</Link></li>
+              <li><Link to='/feature-request' onClick={scrollToTop}> {t('footer.links.requestFeature')} </Link></li>
+              <li><Link to='/#testimonial' onClick={handleSectionClick}>{t('footer.links.reviews')}</Link></li>
             </ul>
           </div>
           <div className="footer_links">
-            <h4 className='heading'>Legal</h4>
+            <h4 className='heading'>{t('footer.legal')}</h4>
             <ul className='large-text'>
-              <li><Link to='/terms-of-service' onClick={scrollToTop}> Terms of Service </Link></li>
-              <li><Link to='/privacy-policy' onClick={scrollToTop}> Privacy Policy </Link></li>
+              <li><Link to='/terms-of-service' onClick={scrollToTop}> {t('footer.links.termsOfService')} </Link></li>
+              <li><Link to='/refund-policy' onClick={scrollToTop}> {t('footer.links.refundPolicy')} </Link></li>
+              <li><Link to='/privacy-policy' onClick={scrollToTop}> {t('footer.links.privacyPolicy')} </Link></li>
             </ul>
           </div>
           <div className="footer_links">
-            <h4 className='heading'>Contact With Us</h4>
+            <h4 className='heading'>{t('footer.contactUs')}</h4>
             <ul className='large-text'>
-              <li><Link to='/contactus' onClick={scrollToTop}>Contact Us</Link></li>
-              <li><a href="mailto:primesenderextension@gmail.com">Email Us</a></li>
-              <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender" target='_blank' >Chat on WhatsApp</a></li>
+              <li><Link to='/contact-us' onClick={scrollToTop}>{t('footer.links.contact')}</Link></li>
+              <li><a href="mailto:primesenderextension@gmail.com">{t('footer.links.emailUs')}</a></li>
+              <li><a href="https://web.whatsapp.com/send?phone=917058067789&text=Hi%2C%20I%20would%20like%20to%20request%20chat%20support%20for%20Prime%20Sender" target='_blank' rel="noreferrer" className="whatsapp_contact" ><img src="/images/whatsapp.png" alt="" /><span>+91-7058067789</span></a></li>
             </ul>
           </div>
         </div>
         
         <hr className='divider' />
-        <p className="footer_copyright text">&copy; {new Date().getFullYear() } Zero to Zee | All Rights Reserved</p>
+        <p className="footer_copyright text">{t('footer.copyright').replace('{year}', new Date().getFullYear())}</p>
       </div>
     </div>
   );

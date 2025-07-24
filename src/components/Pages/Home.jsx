@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import '../../styles/HomePage/homepage.css';
 import DownloadBtn from '../common/DownloadBtn';
 import { Link } from 'react-router-dom';
@@ -15,6 +16,7 @@ import HowToUse from './HowToUse';
 
 
 const Home = () => {
+  const { t } = useTranslation();
   // const [showChatSupportTooltip, setShowChatSupportTooltip] = useState(false);
 
   // const showTooltip = ()=>{
@@ -95,7 +97,7 @@ const Home = () => {
   return (
     <>
       <HelmetHeader
-        title={'Prime Sender - Best Web Sender Extension'}
+        title={'Prime Sender - Free AI Web Message Sender'}
         description={'The highest rated premium web sender extension on google chrome store to send messages, attachment, delivery report and much more...'}
         keywords={'prime sender, prime sender home, home page'}
       />
@@ -103,13 +105,13 @@ const Home = () => {
         <div className="home-content">
           <div className="left-col">
             <h1 className="title large-heading">
-              Best Chrome Extension for Messaging and Productivity
+              {t('home.title')}
             </h1>
-            <p className="sub_title sub-heading">Send personalized and unlimited broadcast messages using excel images with caption and more with our web sender extension</p>
+            <p className="sub_title sub-heading">{t('home.subtitle')}</p>
             <div className="home-btns">
               <DownloadBtn />
               <Link to="/pricing" onClick={() => { buyNowButtonClickHandle() }} className="howtousebtn button-round large-text btn">
-                Buy Now
+                {t('home.buyNow')}
               </Link>
             </div>
           </div>
@@ -117,7 +119,7 @@ const Home = () => {
             <img className='girl' src="/gifs/main-1.gif" alt="Main GIF" />
             <img className='objects' src="/svgs/main-2.svg" alt="Main icon" />
             <div className='free_forever_div'>
-              <p className='free_green'>IT'S FREE. FOREVER.</p>
+              <p className='free_green'>{t('home.freeForever')}</p>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ export const FreeCardFeatures = [
     description: "Broadcast to multiple chats at once, effortlessly scaling your communication. No need for template approvals and extra fees.",
   },
   {
-    name: 'Attachment',
+    name: 'Send Attachments',
     description: "You can attach and send images, documents, videos, etc. along with your message to users",
   },
   {
@@ -13,7 +13,7 @@ export const FreeCardFeatures = [
   },
   {
     name: 'Chat Support',
-    description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
+    description: "You can click on 'Chat Support' on the extension to get your queries resolved.",
   },
   {
     name: 'Save Message Template',
@@ -22,14 +22,22 @@ export const FreeCardFeatures = [
   {
     name: 'Detailed Delivery Report',
     description: "Get a detailed report of your campaigns to improve sales and utilize Prime Sender to the fullest",
+  },
+  {
+    name: 'Translate Conversation',
+    description: "Automatically translate conversations into different languages for seamless communication.",
+  },
+  {
+    name: 'Blur Conversations',
+    description: "Blur conversations to protect sensitive information.",
   }
 ]
 
 export const basicCardFeatures = [
-  {
-    name: "Call Support",
-    description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
-  },
+//   {
+//     name: "Call Support",
+//     description: "You can click on 'Chat Support' on the extension to get your queries resolved. We also provide call and video support.",
+//   },
   {
     name: "No minimum time gap",
     description: "Save time and quickly send messages by reducing the time gap between messages."
@@ -45,7 +53,11 @@ export const basicCardFeatures = [
   {
     name: "Group Contacts Export",
     description: "Download unsaved contacts from groups"
-  }
+  },
+  {
+    name: "Stop Campaign",
+    description: "Ability to stop messaging mid-campaign"
+  },
 ]
 
 export const advanceCardFeatures = [

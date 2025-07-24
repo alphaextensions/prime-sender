@@ -1,60 +1,97 @@
+import i18next from 'i18next';
+
+const t = (key) => i18next.t(key);
+
 export const BlogCardData = [
   {
-    title:
-      "How do I translate my chats into my local language",
-    date: "June 23, 2024",
+    get title() {
+      return t('blogs.translateChats.title');
+    },
+    get date() {
+      return t('blogs.translateChats.date');
+    },
     imageUrl: "/images/translate.png",
-    step: `1. Select your local language in the extension from the options
-            given below.  2. Open the chat that you want to translate. If the chat is already
-            open, please reopen it to see the translate option. 3. At the top of the chat, the option to translate the chat will be ...`,
+    get step() {
+      return t('blogs.translateChats.cardSummary');
+    },
     redirectLink: "/blogs/translate-chats",
   },
   {
-    title:
-      "How do I send individual captions for each of multiple attachments",
-    date: "June 23, 2024",
+    get title() {
+      return t('blogs.multipleCaption.title');
+    },
+    get date() {
+      return t('blogs.multipleCaption.date');
+    },
     imageUrl: "/images/attachments.png",
-    step: ` To add multiple attachments, click on the attachments icon and
-            select the files you want to send. To add another attachment, click
-            on the attachments icon again and select the next file. Now you can
-            send two attachments at once. You can add as many attachments as you
-            want...`,
+    get step() {
+      return t('blogs.multipleCaption.cardSummary');
+    },
     redirectLink: "/blogs/multiple-caption",
   },
   {
-    title: "How to send messages using excel - Prime Sender",
-    date: "May 13, 2023",
+    get title() {
+      return t('blogs.sendUsingExcel.title');
+    },
+    get date() {
+      return t('blogs.sendUsingExcel.date');
+    },
     imageUrl: "/images/excel-2.png",
-    step: "1. Upload the numbers in the first column you want to send the messages to. [Optional] You can add columns based on your requirement.  Template Excel 2. Open Prime Sender extension. You can click on Upload and upload the excel right away. 3. Uploaded numbers would be visible in the numbers area 4. The remaining process remains the same - You enter the message you want to send and click on Send Message",
+    get step() {
+      return t('blogs.sendUsingExcel.cardSummary');
+    },
     redirectLink: "/blogs/send-using-excel",
   },
   {
-    title: "How to schedule a message",
-    date: "December 22 2022",
+    get title() {
+      return t('blogs.scheduleMessage.title');
+    },
+    get date() {
+      return t('blogs.scheduleMessage.date');
+    },
     imageUrl: "/images/schedule.png",
-    step: "How to use Scheduler The option to schedule allows you to send messages to your contacts at a pre-set time. When you want to broadcast your message at a certain time during the day and you aren’t available during that time, you can choose to schedule your message. After entering the contacts and the message you want to send, enter the time you would want to send the message at. Once you enter the preferred time, click on Schedule...",
+    get step() {
+      return t('blogs.scheduleMessage.cardSummary');
+    },
     redirectLink: "/blogs/schedule-message",
   },
   {
-    title: "How to send customized message using Prime Sender",
-    date: "December 22, 2022",
+    get title() {
+      return t('blogs.customizeMessage.title');
+    },
+    get date() {
+      return t('blogs.customizeMessage.date');
+    },
     imageUrl: "/images/excel-ss.png",
-    step: "When you want to inform your customers about a promotional offer, it is always better if the message is personalized to the customer. It increases the probability of the customer replying to the message. Similarly, if you want to update your customer regarding their order, it is obvious to send the message custom to the user. Here's how you can send customized messages using Prime Sender  : Enter the details you'd like to send customized to the user along with their contact numbers...",
+    get step() {
+      return t('blogs.customizeMessage.cardSummary');
+    },
     redirectLink: "/blogs/customize-message",
   },
   {
-    title: "How to add country code to every number in excel?",
-    date: "December 22, 2022",
+    get title() {
+      return t('blogs.addCountryCode.title');
+    },
+    get date() {
+      return t('blogs.addCountryCode.date');
+    },
     imageUrl: "/images/country-code-ss.png",
-    step: "Everyone has faced this issue of adding country code in front of contact numbers. Suppose your country code is +62 and you would like to add that in front of all the contacts. The simplest way to do that in  excel or spreadsheets  is to use the function CONCATENATE. Here's how to use it : First, make another column and add +62( or whatever your country code is) in each cell of the column. You can do that by simply typing +62 in the first cell and dragging the pointer till the last cell...",
+    get step() {
+      return t('blogs.addCountryCode.cardSummary');
+    },
     redirectLink: "/blogs/add-country-code",
   },
   {
-    title:
-      "How to reply quickly to your customers using Quick Response using Prime Sender",
-    date: "December 17, 2022",
+    get title() {
+      return t('blogs.quickResponse.title');
+    },
+    get date() {
+      return t('blogs.quickResponse.date');
+    },
     imageUrl: "/images/mail.png",
-    step: ` Quick Response using Prime Sender There are phrases or sentences that businesses have to use often while interacting with their customers like "Hello!",or "How can we help you", or "Thank you for contacting". Quick Response on Prime Sender helps you to save such terms and use accordingly when needed quickly without having to type out the same again. Once you install Prime Sender you can see a strip of default...`,
+    get step() {
+      return t('blogs.quickResponse.cardSummary');
+    },
     redirectLink: "/blogs/quick-response",
   },
 ];

@@ -1,0 +1,95 @@
+.notification_box_container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100000000001;
+    background: var(--color-primary1);
+    display: flex;
+    max-width: 450px;
+    justify-content: center; 
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-right: 30px;
+    border-radius: 8px;
+    color: var(--color-white);
+}
+
+.notification_img {
+    background: var(--color-white);
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+}
+
+.notification_bought_text {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.notification_time_text {
+    font-size: 11px;
+}
+
+.notification_cross_icon {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.notification_slidein_animation {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.notification_slideout_animation {
+    animation: slideOut 0.5s ease-in-out;
+}
+
+.notification_bottom_container {
+    display: flex;
+    justify-content: space-between;
+    all: center;
+}
+
+.notification_stripe_verified {
+    display: flex;
+    justify-content: center;
+    all: center;
+    gap: 3px;
+    font-size: 13px;
+}
+
+.notification_stripe_verified svg {
+    font-size: 16px;
+}
+
+.notification_location_text,
+.notification_price_text, 
+.notification_stripe_text {
+    font-weight: bold;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-200%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-200%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

@@ -11,6 +11,7 @@ import {
 import { primeSenderController, replaceDataObject } from "../../context";
 import { toast } from 'react-toastify';
 import { PhoneNumberSelect } from "./countrySelector";
+import ReactGA from "react-ga4";
 import { useCountries } from "use-react-countries";
 
 function TransferPlan() {
@@ -62,6 +63,41 @@ function TransferPlan() {
         return phone;
     }
 
+    const addTransferLogInSheet = async (old_phone, new_phone, user) => {
+        try {
+            // Log the transfer details in Google Sheet / SheetDB
+            let sheet_db_api = import.meta.env.VITE_PROD_TRANSFER_LOGS_SHEET_DB_API;
+            let today_str = convert_date_str(new Date());
+            let transfer_log = {
+                old_phone: old_phone,
+                new_phone: new_phone,
+                plan_type: user.plan_type,
+                name: user?.name || "",
+                email: user?.email || "NULL",
+                parent_email: user?.parent_email || "NULL",
+                subscribed_date: user.subscribed_date,
+                transfer_date: today_str,
+                is_stripe_updated: "NO",
+            }
+
+            const response = await fetch(sheet_db_api, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{
+                    source: 'website',
+                    ...transfer_log
+                },
+                ]),
+            });
+
+            await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const sendReq = (newNumber, countryCode) => {
         let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
         let oldNumber = data.phone;
@@ -87,6 +123,13 @@ function TransferPlan() {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
+
+                    ReactGA.event({
+                        category: "Transfer Successfully",
+                        action: "Transfer number successfully",
+                        label: "transfer_successfully",
+                    });
+
                     const localNumber = newNumber.startsWith(countryCode) ? newNumber.slice(countryCode.length) : newNumber;
                     replaceDataObject(dispatch, res.data.userData)
                     toast(
@@ -98,7 +141,7 @@ function TransferPlan() {
                     );
                     infoShowCase()
                     setPhoneNumber(localNumber)
-
+                    addTransferLogInSheet(oldNumber, newNumber, res.data.userData);
                 }
                 else {
                     throw new Error(`Unexpected status code: ${data.statusCode}`);
@@ -106,6 +149,13 @@ function TransferPlan() {
             })
             .catch((error) => {
                 console.error(error);
+
+                ReactGA.event({
+                    category: "Transfer Unsuccessful",
+                    action: "Transfer number unsuccessful",
+                    label: error.error || "transfer_unsuccessful",
+                });
+
                 toast(
                     <div>
                         <strong>Transfer Failed</strong>
@@ -117,6 +167,13 @@ function TransferPlan() {
     };
 
     const handleTransfer = () => {
+
+        ReactGA.event({
+            category: "Button Click",
+            action: "Transfer Button Clicked",
+            label: "transfer_btn_clicked",
+        });
+
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
         if (confirm(`Are you sure you want to transfer your current plan from +${data.phone} to +${fullNumber}`)) {
@@ -166,6 +223,12 @@ function TransferPlan() {
             return null;
         return new Date(date);
     }
+    
+    function convert_date_str(date = null) {
+        if (!date)
+            return null;
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    }
 
     const get_days_diff = (date1, date2) => {
         date1 = convert_date(date1);
@@ -181,17 +244,11 @@ function TransferPlan() {
     /////// Multiple Accounts Function ///////
 
     const formatPhoneNumbers = (phoneNumbers) => {
-        const formatted = phoneNumbers
-            .map((phoneNumber) => {
-                let number = phoneNumber.startsWith(currentCountry.countryCallingCode.split("+")[1])
-                    ? phoneNumber.slice(currentCountry.countryCallingCode.length - 1)
-                    : phoneNumber;
-
-                return { countryCode: `${currentCountry.countryCallingCode}`, number: number };
-            })
-            .filter((item, index, self) =>
-                self.findIndex(i => i.number === item.number) === index
-            );
+        const formatted = phoneNumbers.map(phoneNumber => {
+            let number;
+            number = phoneNumber.startsWith(currentCountry.countryCallingCode.split("+")[1]) ? phoneNumber.slice(currentCountry.countryCallingCode.length - 1) : phoneNumber;
+            return { countryCode: `${currentCountry.countryCallingCode}`, number: number };
+        });
 
         setFormattedPhoneNumbers(formatted);
     };
@@ -227,6 +284,13 @@ function TransferPlan() {
             .then((data) => {
                 let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
+
+                    ReactGA.event({
+                        category: "Transfer Successfully",
+                        action: "Transfer multiple account number successfully",
+                        label: "transfer_multiple_acc_successfully",
+                    });
+
                     setSelectedUser(res.data.userData)
                     getPhoneNumbers()
                     toast(
@@ -243,6 +307,13 @@ function TransferPlan() {
             })
             .catch((error) => {
                 console.error(error);
+
+                ReactGA.event({
+                    category: "Transfer Unsuccessful",
+                    action: "Transfer multiple account number unsuccessful",
+                    label: error.error || "transfer_multiple_acc_unsuccessful",
+                });
+
                 toast(
                     <div>
                         <strong>Transfer Failed</strong>
@@ -272,6 +343,12 @@ function TransferPlan() {
 
     const handleMultipleAccTransfer = () => {
 
+        ReactGA.event({
+            category: "Button Click",
+            action: "Transfer Button Clicked",
+            label: "transfer_multiple_acc_btn_clicked",
+        });
+
         const countryCode = currentCountry.countryCallingCode.replace('+', '');
         const fullNumber = `${countryCode}${phoneNumber}`;
         if (confirm(`Are you sure you want to transfer your current plan from +${selectedOldNumber} to +${fullNumber}`)) {
@@ -298,17 +375,17 @@ function TransferPlan() {
 
     return (
         <div className="mt-4 mb-4 px-4 flex-col flex justify-start ">
-            <Typography variant="h5" color="blue-gray">
+            <Typography variant="h5" color="blue-gray" className='max-xs:text-3xl'>
                 Transfer your Premium plan to another number
             </Typography>
 
             {isMultipleAccountAdmin() ? (
                 <>
-                    <p className="mt-2 mb-2 font-light text-xs px-1">
+                    <p className="mt-2 mb-2 font-light text-xs px-1 max-xs:text-base">
                         {info}
                     </p>
-                    <div className="mb-4 mt-2 px-1 flex items-center w-max">
-                        <span className="ml-3 mr-3 text-lg font-semibold">From</span>
+                    <div className="mb-4 mt-2 px-1 flex items-center w-max max-xs:flex-col max-xs:items-start">
+                        <span className="ml-3 mr-3 text-lg font-semibold max-xs:mx-0 max-xs:my-3 max-xs:font-bold">From</span>
                         <div className="flex justify-center">
                             {formattedPhoneNumbers && formattedPhoneNumbers.length > 0 ? (
                                 <PhoneNumberSelect
@@ -320,17 +397,17 @@ function TransferPlan() {
                             )}
                         </div>
 
-                        <span className="ml-3 mr-3 text-lg font-semibold">To</span>
+                        <span className="ml-3 mr-3 text-lg font-semibold max-xs:mx-0 max-xs:my-3 max-xs:font-bold">To</span>
 
 
-                        <div className="relative flex w-full max-w-[17rem] mr-3">
+                        <div className="relative flex w-full max-w-[17rem] mr-3 max-xs:mr-0">
                             <Menu placement="bottom-start">
                                 <MenuHandler>
                                     <Button
                                         ripple={false}
                                         variant="text"
                                         color="blue-gray"
-                                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3 max-xs:h-[50px] max-xs:py-3 max-xs:px-[10px] max-xs:w-[82px]"
                                     >
                                         <img
                                             src={currentCountry.flags.svg}
@@ -363,7 +440,7 @@ function TransferPlan() {
                                 placeholder="Mobile Number"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900"
+                                className="rounded-l-none border border-solid border-blue-gray-200 focus:border-gray-900 focus:!border-t-gray-900 max-xs:h-max max-xs:px-[10px] max-xs:py-3 max-xs:text-base"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -376,7 +453,7 @@ function TransferPlan() {
                         <Button
                             variant="filled"
                             disabled={!is_transfer_allowed() ? true : false}
-                            className="bg-[#009a88] !overflow-visible"
+                            className="bg-[#009a88] !overflow-visible max-xs:my-4 max-xs:self-end"
                             onClick={handleMultipleAccTransfer}
                         >
                             {selectedUser?.plan_type ? "Transfer" : "Loading..."}

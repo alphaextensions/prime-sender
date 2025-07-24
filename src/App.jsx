@@ -10,33 +10,48 @@ import Login from "./components/Pages/login";
 import ContactUs from "./components/Pages/ContactUs";
 import BlogPage from "./components/Pages/BlogPage";
 import HowToUse from "./components/Pages/HowToUse";
-import Success from "./components/Pages/success";
+import Success from "./components/Pages/Success";
 import Error from "./components/Pages/Error";
 import MainLayout from "./components/Layouts/MainLayout";
 import DashboardLayout from "./components/Layouts/Dashboard";
 import ReactGA from "react-ga4";
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import FAQs from './components/sections/FAQs';
 import MainFeatures from './components/sections/MainFeatures';
 import Checkout from './components/Pages/Checkout';
 import { CheckoutProvider } from './components/context/CheckoutContext';
+import RefundAndCancellation from './components/Pages/RefundAndCancellation';
 
 const App = () => {
   const [showWebsite, setShowWebsite] = useState(true);
 
-  const checkForCountry = async () => {
-    try {
-      const res = await fetch("https://ipapi.co/json");
-      const data = await res.json();
-      if (data.country === "US" || data.country === "CN") {
-        setShowWebsite(false);
-      } else {
-        setShowWebsite(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const checkForCountry = () => {
+    fetch('https://ipapi.co/json/')
+      .then(res => {
+        if (!res.ok) throw new Error('Primary API failed');
+        return res.json();
+      })
+      .then((data) => handleLocationResponse(data.country_code, data.country_name))
+      .catch((err) => {
+        fetch('https://get.geojs.io/v1/ip/geo.json')
+          .then(res => {
+            if (!res.ok) throw new Error('Fallback API failed');
+            return res.json();
+          })
+          .then((data) =>  handleLocationResponse(data.country_code, data.country))
+          .catch(fallbackErr => {
+            console.error('Both APIs failed.', fallbackErr);
+          });
+      });
   };
+
+  function handleLocationResponse(country_code, country_name) {
+    if (country_code === "US" || country_code === "CN") {
+      setShowWebsite(false);
+    } else {
+      setShowWebsite(true);
+    }
+  }
 
   useEffect(() => {
     ReactGA.initialize("G-3KZPL7D3HB");
@@ -58,8 +73,9 @@ const App = () => {
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blogs/:id" element={<BlogPage />} />
               <Route path="/faqs" element={<FAQs />} />
-              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/terms-of-service" element={<TermsOfUse />} />
+              <Route path="/refund-policy" element={<RefundAndCancellation />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/basic-success" element={<Success plan="basic" />} />
               <Route path="/advance-success" element={<Success plan="advance" />} />
@@ -75,7 +91,7 @@ const App = () => {
         </Router>
         </CheckoutProvider> : ''}
 
-      
+
     </>
   );
 };

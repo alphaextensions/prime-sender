@@ -4,6 +4,8 @@
 	padding: 0 30px;
 	gap: 20px;
 	margin-bottom: 80px !important;
+	width: 100%;
+	flex-wrap: wrap;
 }
 
 .checkout_info_section {
@@ -16,6 +18,8 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	gap: 20px;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 .checkout_heading_section {
@@ -48,6 +52,8 @@
 
 .checkout_form_section {
 	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 .checkout_title_section {
@@ -80,7 +86,9 @@
 	border-radius: 8px;
 	background: #fff3;
 	color: #fff;
-	min-width: 300px;
+	width: 100%;
+	overflow-wrap: break-word;
+	word-break: break-all;
 }
 
 .checkout_numbers_div {
@@ -144,4 +152,69 @@
 	width: 22px;
 	height: 22px;
 	stroke: #fff;
+}
+
+@media screen and (max-width: 768px) {
+	.checkout-section {
+		padding: 0 15px;
+		flex-direction: column;
+	}
+
+	.checkout_info_section,
+	.checkout_form_section {
+		width: 100%;
+	}
+
+	.checkout_logo_text {
+		width: 180px;
+	}
+
+	.checkout_price {
+		font-size: 24px;
+	}
+
+	.checkout_payment_button {
+		font-size: 18px;
+		padding: 8px 16px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.checkout-section {
+		padding: 0 10px;
+		margin-bottom: 40px !important;
+	}
+
+	.checkout_info_section {
+		padding: 15px;
+	}
+
+	.checkout_heading_section {
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.checkout_logo {
+		width: 40px;
+	}
+
+	.checkout_logo_text {
+		width: 150px;
+	}
+
+	.checkout_title_section {
+		font-size: 18px;
+	}
+
+	.checkout_price {
+		font-size: 22px;
+	}
+
+	.checkout_numbers_div {
+		max-height: 200px;
+	}
+
+	.checkout_payment_button {
+		width: 100%;
+	}
 }

@@ -12,14 +12,17 @@ import { useNavigate } from "react-router-dom";
 import { ProfileInfoCard } from "../widgets/cards";
 import { primeSenderController } from "../context";
 import 'react-toastify/dist/ReactToastify.css';
+import ReactGA from "react-ga4";
 import { jwtDecode } from "jwt-decode";
+import { useTranslation } from "react-i18next";
 
 export function Profile() {
+  const { t } = useTranslation();
   const [controller, dispatch] = primeSenderController();
   const [data, setData] = useState({});
   const [cred, setCred] = useState({});
   const [invoiceObject, setInvoiceObject] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("---- Select date ----")
+  const [selectedDate, setSelectedDate] = useState(t('dashboard.profile.selectDatePlaceholder'))
   const navigate = useNavigate();
 
   const sortDatesDescending = (dateArray) => {
@@ -61,7 +64,7 @@ export function Profile() {
       const jsonData = await res.json();
 
       if (jsonData.length === 0) {
-        setSelectedDate("No Receipt Found");
+        setSelectedDate(t('dashboard.profile.noReceiptFound'));
         return;
       }
 
@@ -78,7 +81,14 @@ export function Profile() {
   };
 
   const redirectInvoice = () => {
-    if (selectedDate !== "---- Select date ----" && selectedDate !== "No Receipt Found") {
+    if (selectedDate !== t('dashboard.profile.selectDatePlaceholder') && selectedDate !== t('dashboard.profile.noReceiptFound')) {
+      
+      ReactGA.event({
+        category: "Button Click",
+        action: "Invoice Button Clicked",
+        label: "dashboard_invoice_btn_clicked",
+      });
+
       let invoice = invoiceObject.find((invoice) => {
         return invoice.date == selectedDate;
       })
@@ -134,20 +144,20 @@ export function Profile() {
               </div>
             </div>
           </div>
-          <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3 max-xs:gap-0">
             <ProfileInfoCard
-              title="Profile Information"
+              title={t('dashboard.profile.pageTitle')}
               details={{
-                "Name": `${data?.name ? data.name : cred.given_name}`,
-                "Current Plan": `${data?.plan_type ? data.plan_type : "-"}`,
+                [t('dashboard.profile.name')]: `${data?.name ? data.name : cred.given_name}`,
+                [t('dashboard.profile.currentPlan')]: `${data?.plan_type ? data.plan_type : "-"}`,
               }}
             />
-            <div className="mt-5">
+            <div className="mt-5 max-xs:mt-0">
               <ProfileInfoCard
                 title=""
                 details={{
-                  "Whatsapp Number": `+${data?.phone ? data.phone : "-"}`,
-                  "Email": `${data.email || data.parent_email}`,
+                  [t('dashboard.profile.whatsappNumber')]: `+${data?.phone ? data.phone : "-"}`,
+                  [t('dashboard.profile.email')]: `${data.email || data.parent_email}`,
                 }}
               />
             </div>
@@ -156,13 +166,13 @@ export function Profile() {
       </Card>
       <Card className="mx-3 mb-6 lg:mx-4 border border-blue-gray-100">
         <CardBody className="p-4">
-          <div className="px-3 py-[10px] flex items-center">
-            <Typography className="font-bold text-lg text-blue-gray-900">Download your receipt : </Typography>
-            <div className="w-[300px] ml-5">
+          <div className="px-3 py-[10px] flex items-center max-xs:flex-col max-xs:items-start">
+            <Typography className="font-bold text-lg text-blue-gray-900 max-xs:mb-2">{t('dashboard.profile.downloadReceipt')} </Typography>
+            <div className="w-[300px] ml-5 max-xs:ml-0 max-xs:mb-3">
               <Select
                 onChange={(date) => setSelectedDate(date)}
                 variant="outlined"
-                label="Select Date"
+                label={t('dashboard.profile.selectDate')}
               >
                 {
                   invoiceObject.length === 0 ? <Option value={selectedDate}>{selectedDate}</Option> :
@@ -175,9 +185,9 @@ export function Profile() {
             </div>
             <Button
               onClick={redirectInvoice}
-              className="ml-3 bg-[#009a88]"
+              className="ml-3 bg-[#009a88] max-xs:ml-0 max-xs:self-end"
             >
-              Download
+              {t('dashboard.profile.downloadButton')}
             </Button>
           </div>
         </CardBody>

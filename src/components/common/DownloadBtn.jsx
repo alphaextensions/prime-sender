@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/common/downloadbtn.css";
 import ReactGA from "react-ga4";
 import { trackConversion } from "../../utils/gtag";
+import { useTranslation } from "react-i18next";
 
 const DownloadBtn = (props) => {
   const handleDownloadBtnClick = () => {
@@ -15,6 +16,8 @@ const DownloadBtn = (props) => {
     trackConversion();
     return;
   };
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -31,7 +34,7 @@ const DownloadBtn = (props) => {
               : "download-text large-text"
           }
         >
-          Free Download
+          {t('navbar.freeDownload')}
         </p>
         {props.downloadIcon}
       </a>

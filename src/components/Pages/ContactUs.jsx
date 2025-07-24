@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { useTranslation } from 'react-i18next'
 import '../../styles/ContactPage/contactus.css'
 import HelmetHeader from '../common/HelmetHeader'
 import SectionTitle from '../common/SectionTitle'
@@ -9,6 +10,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 const ContactUs = () => {
+  const { t } = useTranslation();
   const [formSubmitted,setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name:'',
@@ -132,9 +134,9 @@ const ContactUs = () => {
   return (
     <>
       <HelmetHeader
-        title={'Contact Us | Prime Sender - Best Web Sender Extension'}
-        description={'Contact Us at Prime Sender'}
-        keywords={'contact,prime sender contact page, prime sender support'}
+        title={t('contact.pageTitle')}
+        description={t('contact.pageDescription')}
+        keywords={t('contact.pageKeywords')}
       />      
       {
           formSubmitted && !isLoading ? 
@@ -152,12 +154,12 @@ const ContactUs = () => {
               (
                 <div>
                   <div className="main-section contactus_section">
-                  <SectionTitle gif="/gifs/contact-us.gif" title="Contact Us" />
+                  <SectionTitle gif="/gifs/contact-us.gif" title={t('contact.sectionTitle')} />
                 </div>
                 <div className="contact-form">
                   <form onSubmit={handleSubmit}>
                   <div className="form-input">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">{t('contact.nameLabel')}</label>
                     <input 
                       type="text" 
                       name='name' 
@@ -168,7 +170,7 @@ const ContactUs = () => {
                       required/>
                   </div>
                   <div className="form-input">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('contact.emailLabel')}</label>
                     <input 
                       type="email" 
                       name='email' 
@@ -179,7 +181,7 @@ const ContactUs = () => {
                       required/>
                   </div>
                   <div className="form-input">
-                    <label htmlFor="phone">Contact No</label>
+                    <label htmlFor="phone">{t('contact.contactNoLabel')}</label>
                     <div className='phone_container'>
                       <div className="left">
                         <PhoneInput
@@ -205,10 +207,10 @@ const ContactUs = () => {
                   </div>
                   {
                     !isPhoneValid &&
-                    <span className='phone-error extra-small-tex'>{phoneError}</span>
+                    <span className='phone-error extra-small-tex'>{phoneError || t('contact.phoneError')}</span>
                   }
                   <div className="form-input">
-                    <label htmlFor="message">Message</label> 
+                    <label htmlFor="message">{t('contact.messageLabel')}</label> 
                     <textarea 
                       name='message' 
                       id="message" 
@@ -220,7 +222,7 @@ const ContactUs = () => {
                       required/>
                   </div>
                   <div className="form-btn">
-                    <button type="submit" className='button-round'>Send Message</button>
+                    <button type="submit" className='button-round'>{t('contact.sendMessage')}</button>
                   </div>
                   </form>
                 </div>

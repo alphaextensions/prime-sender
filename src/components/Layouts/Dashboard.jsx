@@ -9,42 +9,14 @@ import {
 } from "../widgets/layout";
 import routes from "../../routes";
 import "../../../public/css/index.css"
-import { primeSenderController, setOpenConfigurator, setCredentials } from "../context";
-import { apiFetch } from "../../utils/apiFetch";
-import { useEffect } from "react";
+import { primeSenderController, setOpenConfigurator } from "../context";
+
 
 export function Dashboard() {
   const [controller, dispatch] = primeSenderController();
   const { sidenavType } = controller;
-  const url = import.meta.env.VITE_PROD_LOGIN_API;
+  document.title = "Dashboard | Prime Sender - Free AI Web Message Sender"
 
-  const handleLogin = (cred, data) => {
-    setCredentials(dispatch, { cred, data });
-  };
-
-  useEffect(() => {
-    async function fetchData() {
-      const requestBody = {
-        authToken: controller.credentials.cred,
-        phoneNumber: controller.credentials.data[controller.profile]?.phone || ""
-      };
-  
-      try {
-        const data = await apiFetch(url, "POST", requestBody);
-  
-        let res = JSON.parse(data.body);
-  
-        if (data.statusCode === 200) {
-          handleLogin(res.data.authToken, res.data.userData);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  
-    fetchData();
-  }, []); 
-  
   return (
     <div className="min-h-screen bg-blue-gray-50/50">
       <Sidenav
