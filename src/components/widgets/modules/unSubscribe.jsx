@@ -3,6 +3,7 @@ import { useCountries } from "use-react-countries";
 import { primeSenderController } from "../../context";
 import { PhoneNumberSelect } from "../profileSection/countrySelector";
 import React, { useState, useEffect, useMemo } from 'react'
+import { toast } from 'react-toastify';
 
 function UnSubscribe() {
 
@@ -11,8 +12,7 @@ function UnSubscribe() {
     const data = controller.credentials.data[controller.profile]
     const [formattedPhoneNumbers, setFormattedPhoneNumbers] = useState(null);
     const [selectedNumber, setSelectedNumber] = useState("")
-    const [selectedCountry, setSelectedCountry] = useState(countries[0]?.name || "");
-    const [userLocation, setUserLocation] = useState({})
+    const [selectedCountry, setSelectedCountry] = useState(controller.location?.country_name || "India");
 
     const isPremiumUser = () => {
         return (data.plan_type === "Advance" || data.plan_type === "Basic")
@@ -31,18 +31,6 @@ function UnSubscribe() {
         (country) => country.name === selectedCountry
     );
 
-    const getUserLocation = () => {
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then((data) => {
-                setUserLocation(data);
-                setSelectedCountry(data.country_name);
-            })
-            .catch(err => {
-                console.error(err)
-            });
-    }
-
     const handleUnSubscribe = () => {
         if (confirm(`Are you sure you want to unsubscribe the number +${isMultipleAccountAdmin() ? selectedNumber : data.phone} from the premium account?`)) {
             isMultipleAccountAdmin() ? sendReq(selectedNumber, data.parent_email) : sendReq(data.phone, data.email)
@@ -50,27 +38,25 @@ function UnSubscribe() {
     }
 
     const sendReq = (number, email) => {
-        let transferUrl = import.meta.env.VITE_PROD_TRANSFER_API;
+        let transferUrl = import.meta.env.VITE_PROD_UNSUBSCRIBE_API;
         const headers = {
             "Content-Type": "application/json",
         };
         const body = JSON.stringify({
             authToken: controller.credentials.cred,
-            phoneNumber: number,
+            phone: number,
             email: email
         });
         fetch(transferUrl, {
             method: "POST",
             headers: headers,
             body: body,
-        })
-            .then((response) => {
+        }).then((response) => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok " + response.statusText);
                 }
                 return response.json();
-            })
-            .then((data) => {
+            }).then((data) => {
                 // let res = JSON.parse(data.body);
                 if (data.statusCode === 200) {
                     toast(
@@ -84,8 +70,7 @@ function UnSubscribe() {
                 else {
                     throw new Error(`Unexpected status code: ${data.statusCode}`);
                 }
-            })
-            .catch((error) => {
+            }).catch((error) => {
                 console.error(error);
                 toast(
                     <div>
@@ -129,11 +114,8 @@ function UnSubscribe() {
     };
 
     useEffect(() => {
-        if (Object.keys(userLocation).length === 0) {
-            getUserLocation();
-        }
         isMultipleAccountAdmin() ? getPhoneNumbers() : ""
-    }, [userLocation]);
+    }, []);
 
     return (
         <div className='mt-12 mb-4 px-4'>
