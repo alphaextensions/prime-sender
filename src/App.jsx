@@ -21,37 +21,40 @@ import MainFeatures from './components/sections/MainFeatures';
 import Checkout from './components/Pages/Checkout';
 import { CheckoutProvider } from './components/context/CheckoutContext';
 import RefundAndCancellation from './components/Pages/RefundAndCancellation';
+import { primeSenderController,setLocation } from './components/context';
 
 const App = () => {
   const [showWebsite, setShowWebsite] = useState(true);
-
+  const [, dispatch] = primeSenderController(); 
   const checkForCountry = () => {
     fetch('https://ipapi.co/json/')
       .then(res => {
         if (!res.ok) throw new Error('Primary API failed');
         return res.json();
       })
-      .then((data) => handleLocationResponse(data.country_code, data.country_name))
+      .then((data) => handleLocationResponse(data))
       .catch((err) => {
         fetch('https://get.geojs.io/v1/ip/geo.json')
           .then(res => {
             if (!res.ok) throw new Error('Fallback API failed');
             return res.json();
           })
-          .then((data) =>  handleLocationResponse(data.country_code, data.country))
+          .then((data) => {
+            data.country_name = data.country;
+            handleLocationResponse(data);
+          })
           .catch(fallbackErr => {
             console.error('Both APIs failed.', fallbackErr);
           });
       });
   };
 
-  function handleLocationResponse(country_code, country_name) {
-    if (country_code === "US" || country_code === "CN") {
+  const handleLocationResponse = (fullData) => {
+    setLocation(dispatch, fullData);
+    if (["US", "CN"].includes(fullData.country_code)) {
       setShowWebsite(false);
-    } else {
-      setShowWebsite(true);
     }
-  }
+  };
 
   useEffect(() => {
     ReactGA.initialize("G-3KZPL7D3HB");
