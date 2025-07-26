@@ -649,11 +649,10 @@ const Pricing = () => {
     useEffect(() => {
         checkIfMultipleAccountPage();
         getParams();
-        // getUserLocation();
         handleLocationResponse();
         getPricingDataFromDatabase();
         startTour();
-    }, [])
+    }, [locationData])
 
     useEffect(() => {
         if (myLocation && myLocation.country_code) {
