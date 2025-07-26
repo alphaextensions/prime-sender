@@ -39,46 +39,58 @@ function UnSubscribe() {
 
     const sendReq = (number, email) => {
         let transferUrl = import.meta.env.VITE_PROD_UNSUBSCRIBE_API;
-        const headers = {
-            "Content-Type": "application/json",
-        };
-        const body = JSON.stringify({
-            phone: number,
-            email: email
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "email": email,
+            "phone": number
         });
-        fetch(transferUrl, {
+
+        const requestOptions = {
             method: "POST",
-            headers: headers,
-            body: body,
-        }).then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok " + response.statusText);
-                }
-                return response.json();
-            }).then((data) => {
-                let res = JSON.parse(data.body);
-                if (data.statusCode === 200) {
-                    toast(
-                        <div>
-                            <strong>Unsubscribe Successfully!</strong>
-                            <p>Your premium account<strong>+{number}</strong> is now unsubscribe from our premium plans.</p>
-                        </div>,
-                        { theme: 'colored', type: 'success', autoClose: 4000 }
-                    );
-                }
-                else {
-                    throw new Error(`Unexpected status code: ${data.statusCode}`);
-                }
-            }).catch((error) => {
-                console.error(error);
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch(transferUrl, requestOptions).then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok " + response.statusText);
+            }
+            return response.json();
+        }).then((data) => {
+            let res = JSON.parse(data.body);
+            if (data.statusCode === 200) {
+                toast(
+                    <div>
+                        <strong>Unsubscribe Successfully!</strong>
+                        <p>Your premium account<strong>+{number}</strong> is now unsubscribe from our premium plans.</p>
+                    </div>,
+                    { theme: 'colored', type: 'success', autoClose: 4000 }
+                );
+            }else if(data.statusCode === 404){
                 toast(
                     <div>
                         <strong>Unsubscribe Failed</strong>
-                        <p>There was an issue in unsubscribing you. Please try again or contact support.</p>
+                        <p>Number not found. Please try again or contact support.</p>
                     </div>,
                     { theme: 'colored', type: 'error', autoClose: 5000 }
                 );
-            });
+            }
+            else {
+                throw new Error(`Unexpected status code: ${data.statusCode}`);
+            }
+        }).catch((error) => {
+            console.error(error);
+            toast(
+                <div>
+                    <strong>Unsubscribe Failed</strong>
+                    <p>There was an issue in unsubscribing you. Please try again or contact support.</p>
+                </div>,
+                { theme: 'colored', type: 'error', autoClose: 5000 }
+            );
+        });
     };
 
     //////// Multiple accounts scenario //////
