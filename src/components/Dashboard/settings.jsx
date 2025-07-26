@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { primeSenderController } from "../context";
+import UnSubscribe from "../widgets/profileSection/unSubscribe";
 
 export function Settings() {
     const [controller, dispatch] = primeSenderController();
@@ -27,6 +28,7 @@ export function Settings() {
             <Card className="mx-3 mt-8 mb-6 lg:mx-4 border border-blue-gray-100">
                 <CardBody className="p-4">
                     <TransferPlan />
+                    <UnSubscribe />
                 </CardBody>
             </Card>
         </>
