@@ -90,7 +90,21 @@ export function PrimeSenderControllerProvider({ children }) {
       cred: "",
       data: [],
     },
-    location: null,
+    location: {
+        "country": "IN",
+        "country_name": "India",
+        "country_code": "IN",
+        "country_code_iso3": "IND",
+        "country_capital": "New Delhi",
+        "country_tld": ".in",
+        "continent_code": "AS",
+        "timezone": "Asia/Kolkata",
+        "country_calling_code": "+91",
+        "currency": "INR",
+        "currency_name": "Rupee",
+        "languages": "en-IN,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,bh,sat,ks,ne,sd,kok,doi,mni,sit,sa,fr,lus,inc",
+        "is_default": true
+    },
     profile: 0
   };
 
