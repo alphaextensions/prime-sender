@@ -1562,7 +1562,7 @@
 
 .pricing-popup-price-value {
     display: flex;
-    align-items: baseline;
+    align-items: start;
     justify-content: flex-start;
 }
 

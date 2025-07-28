@@ -635,9 +635,7 @@
         -webkit-backdrop-filter: blur(10px) !important;
     }
 }
-.notification_box_container {
-    z-index: 10000 !important;
-}
+
 .chat-support{
     z-index: 9999 !important;
 }

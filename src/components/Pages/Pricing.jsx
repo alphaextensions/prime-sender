@@ -187,7 +187,7 @@ const Pricing = () => {
   const [pricingCalculatorPeriod, setPricingCalculatorPeriod] = useState("annually");
   const [numAccounts, setNumAccounts] = useState(() => {
     const phoneNumbers = JSON.parse(localStorage.getItem('phoneNumbers')) || [];
-    return phoneNumbers.length || 2;
+    return phoneNumbers.length || 10;
   });
   const [multAccountPrice, setMultAccountPrice] = useState({ currency:'', price: '', totalPrice: '', cutPrice: ''});
   const [priceCalculatorLoader, setPriceCalculatorLoader] = useState(false);
@@ -206,6 +206,7 @@ const Pricing = () => {
   const scrollToPricingPopupRef = useRef(null);
   
   const getParams = () => {
+    const url = window.location.href;
     const urlParams = typeof window !== 'undefined' ? window.location.search : '';
     const params = new URLSearchParams(urlParams);
     if (params.size > 0) {
@@ -222,7 +223,22 @@ const Pricing = () => {
       if (lastPlan || country || currentPlan) {
         window.history.replaceState(null, '', window.location.pathname);
       }
+    }
 
+    if (url.includes('multiple-account')) {
+      setIsMultipleAccountPage(true);
+      setTimeout(() => {
+        if (scrollToPricingPopupRef.current) {
+          const element = scrollToPricingPopupRef.current;
+          const offset = 400;
+          const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+              top: topPosition,
+              behavior: 'smooth'
+          });
+        } 
+    }, 100);
+    
     // Just for testing :: Remove before Prod release
     //   const countryCode = params.get('countryCode') || null;
     //   if (countryCode) {
@@ -467,31 +483,6 @@ const Pricing = () => {
     return whatsappRedirectUrl;
   }
 
-    function checkIfMultipleAccountPage() {
-        const url = window.location.href;
-        const params = new URLSearchParams(window.location.search);
-        const numberOfAccounts = params.get('numAccounts');
-        if(numberOfAccounts!=null && numberOfAccounts!=undefined && numberOfAccounts=='25'){
-          setNumAccounts(26);
-          localStorage.setItem('numAccounts', JSON.stringify(26));
-        }
-        if (url.includes('multiple-account')) {
-            setIsMultipleAccountPage(true);
-            setTimeout(() => {
-                if (scrollToPricingPopupRef.current) {
-                  const element = scrollToPricingPopupRef.current;
-                  const offset = 400;
-                  const topPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
-                  window.scrollTo({
-                      top: topPosition,
-                      behavior: 'smooth'
-                  });
-                } 
-            }, 10);
-        }
-
-    }
-
     // Location is stored in context so this not needed now
     // function getUserLocation() {
     //     fetch('https://ipapi.co/json/')
@@ -647,12 +638,14 @@ const Pricing = () => {
     }
 
     useEffect(() => {
-        checkIfMultipleAccountPage();
-        getParams();
+      getParams();
+      getPricingDataFromDatabase();
+      startTour();
+    }, []);
+
+    useEffect(() => {
         handleLocationResponse();
-        getPricingDataFromDatabase();
-        startTour();
-    }, [locationData])
+    }, [locationData]);
 
     useEffect(() => {
         if (myLocation && myLocation.country_code) {
