@@ -93,3 +93,9 @@
         opacity: 1;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .notification_box_container {
+        bottom: 70px !important;
+    }
+}
