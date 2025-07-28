@@ -187,7 +187,7 @@ const Pricing = () => {
   const [pricingCalculatorPeriod, setPricingCalculatorPeriod] = useState("annually");
   const [numAccounts, setNumAccounts] = useState(() => {
     const phoneNumbers = JSON.parse(localStorage.getItem('phoneNumbers')) || [];
-    return phoneNumbers.length || 10;
+    return phoneNumbers.length || 2;
   });
   const [multAccountPrice, setMultAccountPrice] = useState({ currency:'', price: '', totalPrice: '', cutPrice: ''});
   const [priceCalculatorLoader, setPriceCalculatorLoader] = useState(false);
@@ -769,14 +769,14 @@ const Pricing = () => {
               <div className="pricing_country_text">
                 <p className="heading">
                   {t('pricing.curatedForYou')}
-                  {(myLocation && myLocation.isSuccess) &&
-                    <>
-                      <span>,</span>
+                  {(myLocation && myLocation.isSuccess) ?
+                    <span className="country_block">
                       <img src={flagIconSrc} alt="flag" />
                       <span className="country_name">{myLocation.country_name}</span>
-                    </>   
+                      !
+                    </span> :
+                    <span>!</span>
                   }
-                  !
                 </p>
               </div>
               <div className={`pricing-slider top-pricing-slider`}>
