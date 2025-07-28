@@ -187,7 +187,7 @@ const Pricing = () => {
   const [pricingCalculatorPeriod, setPricingCalculatorPeriod] = useState("annually");
   const [numAccounts, setNumAccounts] = useState(() => {
     const phoneNumbers = JSON.parse(localStorage.getItem('phoneNumbers')) || [];
-    return phoneNumbers.length || 10;
+    return phoneNumbers.length || 2;
   });
   const [multAccountPrice, setMultAccountPrice] = useState({ currency:'', price: '', totalPrice: '', cutPrice: ''});
   const [priceCalculatorLoader, setPriceCalculatorLoader] = useState(false);

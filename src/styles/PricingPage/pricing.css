@@ -1300,12 +1300,6 @@
   .pricing_country{
     border-radius: 8px;
   }
-  .pricing_country_switch{
-    gap: 4px;
-  }
-  .country_current_switch {
-    gap: 5px;
-  }
   .country_switch{
     padding: 4px 14px;
     border-radius: 8px;
@@ -1314,9 +1308,6 @@
     flex-direction: column;
     gap: 10px;
   }
-}
-
-@media (max-width: 520px) {
   .pricing-popup{
     display: none;
   } 
@@ -1326,7 +1317,7 @@
   .pricing_country_switch{
     flex-direction: column;
     padding: 5px;
-    gap: 25px;
+    gap: 10px !important;
   }
   .pricing_switches .country_switch{
     width: 100%;
@@ -1334,6 +1325,7 @@
   }
   .country_current_switch{
     justify-content: left;
+    gap: 5px;
   }
   .pricing_country_text{
     width: 100% !important;
