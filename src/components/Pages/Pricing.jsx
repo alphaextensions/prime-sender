@@ -818,10 +818,18 @@ const Pricing = () => {
               planPeriod === 'monthly' &&
               <div className="pricing_discount_text ">
                 <div className="text">
-                  {t('pricing.earlyBird.prefix')} <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>{t('pricing.earlyBird.bold')}&nbsp;</span>
+                  {t('pricing.earlyBird.prefix')} 
+                  <span className="text" style={{ fontWeight: "bold", marginLeft: "4px" }}>
+                    {
+                      currentCountry === "brazil"
+                        ? t('pricing.earlyBird.bold').replace("30%", "40%")
+                        : t('pricing.earlyBird.bold')
+                    }
+                    &nbsp;
+                  </span>
                 </div>
                 <div className="discount-img text" >
-                  {t('pricing.earlyBird.useCode')} <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
+                  {t('pricing.earlyBird.useCode')} <img src={currentCountry == 'india' || currentCountry == 'indonesia' || currentCountry == 'international' ? "/images/coupon.png" : currentCountry == 'brazil' ? "/images/brazil_coupon.png" : "/images/first_coupon.png"} alt="Coupon icon" />
                 </div>
               </div>
             }

@@ -468,7 +468,7 @@ const resources = {
         annual: 'Annual',
         '12Months': '12 Months',
         '24Months': '24 Months',
-        purchasePlanToSave: 'Purchase a {{months}} months plan to save <bold>{{percentage}}</bold> for the whole year',
+        purchasePlanToSave: 'Purchase a {{months}} months plan to save <bold>{{percentage}}</bold>',
         tryNow: 'Try Now',
         earlyBird: {
           prefix: 'Early bird offer for new user -',
@@ -1240,7 +1240,7 @@ const resources = {
         annual: 'Anual',
         '12Months': '12 Meses',
         '24Months': '24 Meses',
-        purchasePlanToSave: 'Compre um plano de {{months}} meses para economizar <bold>{{percentage}}</bold> durante todo o ano',
+        purchasePlanToSave: 'Compre um plano de {{months}} meses para economizar <bold>{{percentage}}</bold>',
         tryNow: 'Experimente agora',
         earlyBird: {
           prefix: 'Oferta antecipada para novos usuários -',
